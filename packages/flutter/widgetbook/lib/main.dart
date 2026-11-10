@@ -114,7 +114,7 @@ class UuWidgetbook extends StatelessWidget {
           ]),
           WidgetbookComponent(name: 'Menu', useCases: [
             WidgetbookUseCase(name: 'Single', builder: (ctx) => SizedBox(width: 280, child: _Stateful<String>('hn', (v, set) => UuMenu<String>(value: v, onSelect: set, search: ctx.knobs.boolean(label: 'search'), options: _cities)))),
-            WidgetbookUseCase(name: 'Multiple + footer', builder: (ctx) => SizedBox(width: 280, child: _Stateful<Set<String>>(const {'hn'}, (v, set) => UuMenu<String>(
+            WidgetbookUseCase(name: 'Multiple và footer', builder: (ctx) => SizedBox(width: 280, child: _Stateful<Set<String>>(const {'hn'}, (v, set) => UuMenu<String>(
                   type: UuMenuItemType.multiple, values: v, onValuesChanged: set, footer: true, applyLabel: v.isEmpty ? 'Áp dụng' : 'Áp dụng (${v.length})', onApply: () {},
                   search: ctx.knobs.boolean(label: 'search'), options: _cities)))),
             WidgetbookUseCase(name: 'Section · Divider', builder: (ctx) => SizedBox(width: 280, child: UuMenuPanel(children: [
@@ -237,7 +237,7 @@ class UuWidgetbook extends StatelessWidget {
           WidgetbookComponent(name: 'BottomSheet', useCases: [
             WidgetbookUseCase(name: 'CardSheet', builder: (ctx) => SizedBox(width: 366, child: UuCardSheet(header: 'Header', onBack: ctx.knobs.boolean(label: 'Navigation=Back') ? () {} : null, cta: const UuButtonGroup(primary: UuGroupAction('Xác nhận'), secondary: UuGroupAction('Huỷ')), child: const Text('Nội dung đặt vào Slot.')))),
             WidgetbookUseCase(name: 'Mở sheet', builder: (ctx) => Builder(builder: (c) => UuTextButton(label: 'Mở sheet', onPressed: () => showUuBottomSheet(c, header: 'Xoá tài khoản', builder: (_) => const Text('Nội dung'), cta: const UuButtonGroup(primary: UuGroupAction('Xoá tài khoản'), secondary: UuGroupAction('Huỷ')))))),
-            WidgetbookUseCase(name: 'Vị trí (placement) + ô nhập', builder: (ctx) {
+            WidgetbookUseCase(name: 'Vị trí (placement) và ô nhập', builder: (ctx) {
               final p = ctx.knobs.object.dropdown<String>(label: 'placement', options: const ['theo density', 'bottom', 'center']);
               final placement = p == 'bottom' ? UuSheetPlacement.bottom : p == 'center' ? UuSheetPlacement.center : null;
               return Builder(builder: (c) => UuTextButton(label: 'Mở sheet', onPressed: () => showUuBottomSheet(c, header: 'Đổi tên', placement: placement, builder: (_) => const UuTextInput(label: 'Tên hiển thị'), cta: const UuButtonGroup(primary: UuGroupAction('Lưu'), secondary: UuGroupAction('Huỷ')))));
