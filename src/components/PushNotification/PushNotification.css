@@ -1,0 +1,35 @@
+/* CardPushNotification (6.31): H · g8 · p 8/16/8/8 · radius-lg · background-surface · elevation-medium · căn TRÊN.
+   Cả thẻ là một nút / liên kết; hover / pressed qua state layer nền sáng (object-primary 5 / 10). */
+.uu-push { width: 100%; }
+.uu-push__card {
+  box-sizing: border-box; display: flex; align-items: flex-start; gap: var(--gap-2);
+  width: 100%; padding: var(--gap-2) var(--gap-4) var(--gap-2) var(--gap-2);
+  border: 0; border-radius: var(--radius-lg); background: var(--background-surface); box-shadow: var(--elevation-medium);
+  color: var(--object-primary); /* = fill state layer (currentColor) và màu chữ */
+  text-align: left; text-decoration: none; cursor: pointer;
+  touch-action: pan-x; -webkit-tap-highlight-color: transparent; user-select: none;
+}
+.uu-push__card:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+/* Image: 48 (size-12) · radius-sm. */
+.uu-push__image { flex: 0 0 auto; display: block; width: var(--size-12); height: var(--size-12); border-radius: var(--radius-sm); object-fit: cover; }
+
+/* Text: V · g2 · FILL. Title body 600, Content body — cả hai tối đa 2 dòng. */
+.uu-push__text { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--gap-0-5); }
+.uu-push__title,
+.uu-push__content {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+  font-family: var(--font-family-body); font-size: var(--text-body-font-size); line-height: var(--text-body-line-height); letter-spacing: 0;
+}
+.uu-push__title { font-weight: var(--font-weight-semibold); }
+.uu-push__content { font-weight: var(--font-weight-normal); }
+
+/* Vị trí (prop placement). Bỏ trống = màn tự đặt. position: fixed — trong khung có transform thì bám khung. */
+/* top — template [Screen]PushNotification: cách đỉnh safe area 8, lề 12 hai bên. */
+.uu-push--top {
+  position: fixed; z-index: 100; width: auto;
+  top: calc(var(--gap-2) + env(safe-area-inset-top, 0px)); left: var(--gap-3); right: var(--gap-3);
+}
+/* top-end — desktop: góc trên phải, cách mép trên và mép phải 16, rộng 360 (size-90). Không vuốt. */
+.uu-push--top-end { position: fixed; z-index: 100; top: var(--gap-4); right: var(--gap-4); width: var(--size-90); max-width: calc(100% - 2 * var(--gap-4)); }
+.uu-push--top-end .uu-push__card { touch-action: auto; }

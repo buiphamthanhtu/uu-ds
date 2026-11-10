@@ -1,0 +1,139 @@
+{
+ "_doc": "Bộ UU icon — bản công khai. name → category, style có file trong src/icons/svg (outline / fill), tags tìm kiếm. Chỉ icon `public: true` của skill uu-design-system được đưa vào đây (docs/icons.md).",
+ "generatedAt": "2026-11-09",
+ "source": "UU icon · lưới 18 · bản công khai (bộ đầy đủ nằm trong skill uu-design-system)",
+ "icons": {
+  "arrow-down": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "arrow-trend-down": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "arrow-trend-up": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "arrow-up": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "calendar-days": {
+   "category": "time",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "check": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "chevron-down": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "chevron-left": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "chevron-right": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "chevron-up": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "circle-check": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "circle-info": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "circle-warning": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "circle-xmark": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "clock": {
+   "category": "time",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "dots": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "magnifier": {
+   "category": "filtering-sorting",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "sidebar-left": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": "sidenav, thu gọn, mở rộng"
+  },
+  "sort-vertical": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "texture": {
+   "category": "design-development",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "triangle-warning": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  },
+  "xmark": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "tags": ""
+  }
+ }
+}

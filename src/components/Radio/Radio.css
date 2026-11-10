@@ -1,0 +1,47 @@
+/* Radio (6.3d): 10 variant = Checked × State (Default/Hover/Pressed/Error) × Disabled. Vòng 32×32 viền 2px, chọn = viền border-interactive + chấm 20 object-interactive, nền VẪN trắng.
+   Bổ sung cho recipe .uu-radio có sẵn trong tokens.css (vòng, viền, chấm ::before). */
+.uu-radio {
+  position: relative; isolation: isolate; box-sizing: border-box; flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  --uu-bw: max(0px, calc(2px - var(--border-outer-width) * 1000));
+  width: var(--selection-size); height: var(--selection-size); padding: calc(2px - var(--uu-bw)); border-radius: var(--rounded-circle);
+  background: var(--background-surface); border: var(--uu-bw) solid var(--border); color: var(--object-secondary);
+  box-shadow: 0 0 0 var(--border-outer-width) var(--border-outer), var(--elevation-none); /* viền + bóng control theo DNA (spec 4.3) */
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+/* P33 (spec 4.3): bật vòng viền DNA thì bỏ viền trong ở trạng thái thường. --uu-bw về 0 khi border-outer-width > 0;
+   padding bù đúng phần viền bỏ đi nên kích thước không đổi. Trạng thái có viền riêng đặt lại --uu-bw. */
+.uu-radio:is(:not(:disabled):hover, [data-state="hover"], :not(:disabled):active, [data-state="pressed"], [data-error], :disabled, [aria-checked="true"]) { --uu-bw: 2px; }
+.uu-radio::after { content: ""; position: absolute; inset: calc(-1 * var(--uu-bw)); z-index: -1; border-radius: inherit; pointer-events: none; background: var(--object-secondary); opacity: 0; transition: opacity 120ms ease; }
+/* Chưa chọn: hover viền emphasized + lớp object-secondary 5% · pressed viền emphasized + lớp object-primary 10% */
+.uu-radio:not([aria-checked="true"]):not(:disabled):hover, .uu-radio:not([aria-checked="true"])[data-state="hover"],
+.uu-radio:not([aria-checked="true"]):not(:disabled):active, .uu-radio:not([aria-checked="true"])[data-state="pressed"] { border-color: var(--border-emphasized); }
+.uu-radio:not([aria-checked="true"]):not(:disabled):hover::after, .uu-radio:not([aria-checked="true"])[data-state="hover"]::after { opacity: var(--opacity-5); }
+.uu-radio:not([aria-checked="true"]):not(:disabled):active::after, .uu-radio:not([aria-checked="true"])[data-state="pressed"]::after { background: var(--object-primary); opacity: var(--opacity-10); }
+/* Đã chọn */
+.uu-radio[aria-checked="true"] { border-color: var(--border-interactive); color: var(--object-interactive); }
+.uu-radio[aria-checked="true"]::after { background: var(--object-interactive); }
+/* Vòng đã chọn: bậc 20/40 — 5% cùng màu object-interactive gần như không thấy. */
+.uu-radio[aria-checked="true"]:not(:disabled):hover::after, .uu-radio[aria-checked="true"][data-state="hover"]::after { opacity: var(--opacity-20); }
+.uu-radio[aria-checked="true"]:not(:disabled):active::after, .uu-radio[aria-checked="true"][data-state="pressed"]::after { opacity: var(--opacity-40); }
+/* Error (State=Error): viền border-negative; đã chọn thì chấm object-negative.
+   Bản thiết kế mới vẽ Error × Default; hover/pressed vẫn chạy luật state layer chung §6.0 (fill = màu ruột). */
+.uu-radio[data-error]:not(:disabled) { border-color: var(--border-negative); }
+.uu-radio[data-error]:not(:disabled)[aria-checked="true"] { color: var(--object-negative); }
+.uu-radio[data-error]:not(:disabled)[aria-checked="true"]::after { background: var(--object-negative); }
+/* Chấm 20 = ::before của recipe .uu-radio trong tokens.css (currentColor). Không vẽ thêm ở đây — hai chấm. */
+/* Disabled: không có state layer */
+.uu-radio:disabled { cursor: not-allowed; border-color: var(--border-muted); }
+.uu-radio:disabled:not([aria-checked="true"]) { background: var(--background-disabled); }
+.uu-radio:disabled[aria-checked="true"] { background: var(--background-surface); color: var(--object-disabled); }
+.uu-radio:disabled::after { opacity: 0 !important; }
+.uu-radio:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+/* Danh sách: hàng cách 8, giữa hai hàng một đường NÉT ĐỨT 6/6 border-muted (của danh sách, hàng cuối không kẻ).
+   Dùng gradient lặp 12px, không dùng border dashed vì nhịp gạch do trình duyệt chọn. */
+.uu-radiolist { display: flex; flex-direction: column; gap: var(--gap-2); }
+.uu-radiolist > * + * { position: relative; padding-top: calc(var(--gap-2) + 1px); }
+.uu-radiolist > * + *::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: repeating-linear-gradient(to right, var(--border-muted) 0 6px, transparent 6px 12px);
+}

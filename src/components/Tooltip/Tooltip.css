@@ -1,0 +1,35 @@
+/* Tooltip (6.30) — nhãn ngắn khi hover / focus. 4 variant: Placement Top · Bottom · Left · Right.
+   Bong bóng: padding 4/8 · radius-sm · nền background-inverted · max-width 240 (size-60).
+   Chữ: caption · object-primary-inverted. Mũi tên 8 × 4 cùng màu nền, giữa cạnh hướng về phần tử.
+   Khoảng cách bong bóng ↔ phần tử bản vẽ không ghi: code để 8 (size-2) = mũi tên 4 + hở 4. */
+.uu-tooltip-anchor { position: relative; display: inline-flex; }
+
+.uu-tooltip {
+  box-sizing: border-box; position: absolute; z-index: 200;
+  width: max-content; max-width: var(--size-60);
+  padding: var(--gap-1) var(--gap-2); border-radius: var(--radius-sm);
+  background: var(--background-inverted); color: var(--object-primary-inverted);
+  font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); /* style caption */
+  letter-spacing: 0; text-align: left; white-space: normal; overflow-wrap: break-word;
+  pointer-events: none; visibility: hidden;
+}
+/* Hiện / ẩn ngay, không mờ dần (§6.30). Độ trễ 500 ms khi hover do Tooltip.tsx đếm. */
+.uu-tooltip[data-open] { visibility: visible; }
+
+/* Mũi tên: tam giác 8 × 4 (size-2 × size-1), cắt bằng clip-path, kế thừa nền bong bóng. */
+.uu-tooltip::before {
+  content: ""; position: absolute; background: inherit;
+  width: var(--size-2); height: var(--size-1);
+}
+
+.uu-tooltip--top { bottom: calc(100% + var(--size-2)); left: 50%; transform: translateX(-50%); }
+.uu-tooltip--top::before { top: 100%; left: 50%; transform: translateX(-50%); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+
+.uu-tooltip--bottom { top: calc(100% + var(--size-2)); left: 50%; transform: translateX(-50%); }
+.uu-tooltip--bottom::before { bottom: 100%; left: 50%; transform: translateX(-50%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+
+.uu-tooltip--left { right: calc(100% + var(--size-2)); top: 50%; transform: translateY(-50%); }
+.uu-tooltip--left::before { left: 100%; top: 50%; transform: translateY(-50%); width: var(--size-1); height: var(--size-2); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+
+.uu-tooltip--right { left: calc(100% + var(--size-2)); top: 50%; transform: translateY(-50%); }
+.uu-tooltip--right::before { right: 100%; top: 50%; transform: translateY(-50%); width: var(--size-1); height: var(--size-2); clip-path: polygon(100% 0, 100% 100%, 0 50%); }

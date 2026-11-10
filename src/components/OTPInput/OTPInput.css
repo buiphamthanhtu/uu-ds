@@ -1,0 +1,31 @@
+/* OTPInput (6.3b): 6 ô 48 · gap 8 · ô rỗng "-" · con trỏ 2×24 object-accent · Masked → chấm 8. */
+.uu-otp { display: flex; flex-direction: column; gap: var(--gap-1); position: relative; }
+.uu-otp__cells { display: flex; gap: var(--gap-2); }
+.uu-otp__cell {
+  position: relative; box-sizing: border-box;
+  flex: 1 0 0; min-width: var(--field-otp-min-width); max-width: var(--field-height); height: var(--field-height); /* quy ước code: máy hẹp rút về 36 */
+  display: inline-flex; align-items: center; justify-content: center;
+  --uu-bw: max(0px, calc(1px - var(--border-outer-width) * 1000));
+  padding: calc(1px - var(--uu-bw));
+  border-radius: var(--field-radius); background: var(--background-surface); border: var(--uu-bw) solid var(--border-muted);
+  box-shadow: 0 0 0 var(--border-outer-width) var(--border-outer), var(--elevation-none); /* viền + bóng control theo DNA (spec 4.3) */
+  font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body);
+  color: var(--object-primary);
+}
+.uu-otp__cell--empty { color: var(--object-secondary); }
+/* P33 (spec 4.3): bật vòng viền DNA thì bỏ viền trong ở trạng thái thường. --uu-bw về 0 khi border-outer-width > 0;
+   padding bù đúng phần viền bỏ đi nên kích thước không đổi. Trạng thái có viền riêng đặt lại --uu-bw. */
+.uu-otp__cell--focus, .uu-otp[data-error] .uu-otp__cell, .uu-otp[data-disabled] .uu-otp__cell { --uu-bw: 1px; }
+.uu-otp__cell--focus { border-color: var(--border-emphasized); }
+.uu-otp__cell--focus::before { /* con trỏ 2×24 object-accent ở mép trái */
+  content: ""; position: absolute; left: var(--gap-3); top: 50%; width: var(--size-0-5); height: var(--size-6);
+  transform: translateY(-50%); background: var(--object-accent); animation: uu-caret 1s steps(2) infinite;
+}
+.uu-otp__dot { width: var(--size-2); height: var(--size-2); border-radius: var(--rounded-circle); background: currentColor; }
+.uu-otp[data-error] .uu-otp__cell { border-color: var(--border-negative); } /* cả 6 ô cùng lúc */
+.uu-otp[data-disabled] .uu-otp__cell { background: var(--background-disabled); }
+.uu-otp[data-disabled] .uu-otp__cell--empty { color: var(--object-disabled); }
+/* input thật, trong suốt, phủ lên cụm ô để nhận bàn phím số */
+.uu-otp__input { position: absolute; inset: 0; width: 100%; height: var(--field-height); opacity: 0; font-size: var(--text-body-font-size); caret-color: transparent; }
+.uu-otp:focus-within .uu-otp__cells { outline: 0; }
+@keyframes uu-caret { 50% { opacity: 0; } }

@@ -1,0 +1,5 @@
+/* Button group (6.9): ngang → phụ trái, chính phải · dọc → chính trên, phụ dưới. Cả hai flex 1 1 0 (KHÔNG auto). */
+.uu-btngroup { display: flex; gap: var(--gap-3); width: 100%; }
+.uu-btngroup--horizontal { flex-direction: row; }
+.uu-btngroup--vertical { flex-direction: column; }
+.uu-btngroup > .uu-btn { flex: 1 1 0; min-width: var(--size-14); }

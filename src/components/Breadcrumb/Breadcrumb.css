@@ -1,0 +1,32 @@
+/* Breadcrumb (6.25) — đường dẫn vị trí trong cây trang (desktop). 1 variant (+ .BreadcrumbItem 5).
+   Thanh HORIZONTAL · gap 4 · căn giữa dọc. Ngăn cách "/" body object-disabled, aria-hidden.
+   Mục: padding ngang 4 · radius-sm · body object-secondary · là link.
+   Hover: state layer object-primary opacity-5. Current=True: object-primary, không phải link, không Hover. */
+.uu-breadcrumb__list {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-1);
+  margin: 0; padding: 0; list-style: none;
+  font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body); /* style body */
+  letter-spacing: 0;
+}
+.uu-breadcrumb__entry { display: inline-flex; align-items: center; gap: var(--gap-1); }
+.uu-breadcrumb__separator { color: var(--object-disabled); }
+
+.uu-breadcrumb__item {
+  display: inline-flex; align-items: center;
+  padding: 0 var(--gap-1); border-radius: var(--radius-sm);
+  color: var(--object-secondary); text-decoration: none; white-space: nowrap;
+}
+.uu-breadcrumb__link { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+/* Fill của state layer là `object-primary`, không phải màu chữ `object-secondary` của mục. */
+.uu-breadcrumb__link.uu-interactive::after { background: var(--object-primary); }
+.uu-breadcrumb__link:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+.uu-breadcrumb__item[aria-current="page"] { color: var(--object-primary); }
+
+/* Type=Overflow: "…" body object-secondary, có Hover như mục thường. Là <button> nên xoá kiểu mặc định của nút. */
+.uu-breadcrumb__overflow { border: 0; background: transparent; font: inherit; letter-spacing: inherit; }
+/* Menu các mục ẩn: Menu Platform=Panel neo dưới "…", cách 4, canh mép trái, rộng tối thiểu 240 (spec 6.21). */
+.uu-breadcrumb__anchor { position: relative; display: inline-flex; }
+.uu-breadcrumb__menu {
+  position: absolute; top: calc(100% + var(--gap-1)); left: 0; z-index: 10;
+  min-width: var(--size-60);
+}

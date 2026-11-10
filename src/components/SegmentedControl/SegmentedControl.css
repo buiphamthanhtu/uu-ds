@@ -1,0 +1,29 @@
+/* SegmentedControl (6.13) — vỏ + item. Vỏ dùng background-emphasized (đổi theo brand).
+   Item HUG — đừng chia đều bề ngang trừ khi màn yêu cầu. Item: Active × State (Default/Hover/Pressed/Disabled), 8 variant. */
+.uu-segctl {
+  box-sizing: border-box; display: inline-flex; align-items: center; gap: var(--gap-0-5);
+  padding: var(--gap-1); border-radius: var(--radius-lg); background: var(--background-emphasized);
+}
+.uu-segctl--fill { display: flex; }
+.uu-segctl--fill .uu-segctl__item { flex: 1 1 0; }
+.uu-segctl__item {
+  box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-2);
+  min-width: var(--size-10); min-height: var(--size-10); padding: var(--gap-1) var(--gap-3);
+  position: relative; isolation: isolate;
+  border: 0; border-radius: var(--radius-base); background: transparent; color: var(--object-secondary);
+  font: var(--text-label-font-weight) var(--text-label-font-size)/var(--text-label-line-height) var(--font-family-body);
+  cursor: pointer; white-space: nowrap; -webkit-tap-highlight-color: transparent;
+}
+/* State layer của item: fill object-primary (không phải currentColor) · hover 5% · pressed 10%, cả hai giá trị Active */
+.uu-segctl__item::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: var(--object-primary); opacity: 0; transition: opacity 120ms ease; }
+.uu-segctl__item:not(:disabled):hover::after, .uu-segctl__item[data-state="hover"]::after { opacity: var(--opacity-5); }
+.uu-segctl__item:not(:disabled):active::after, .uu-segctl__item[data-state="pressed"]::after { opacity: var(--opacity-10); }
+.uu-segctl__item[aria-selected="true"] {
+  background: var(--background-surface); color: var(--object-primary); box-shadow: var(--elevation-low);
+  /* chữ 700 qua typography mode Active (.uu-is-active trong tokens.css) */
+}
+.uu-segctl__item:disabled { cursor: not-allowed; color: var(--object-disabled); }
+.uu-segctl__item:disabled::after { opacity: 0 !important; }
+.uu-segctl__item[aria-selected="true"]:disabled { background: var(--background-disabled); }
+.uu-segctl__item:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+.uu-segctl__suffix { display: inline-flex; width: calc(var(--size-4) + var(--size-0-5)); height: calc(var(--size-4) + var(--size-0-5)); align-items: center; justify-content: center; }

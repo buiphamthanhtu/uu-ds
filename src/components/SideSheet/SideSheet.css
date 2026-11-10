@@ -1,0 +1,36 @@
+/* SideSheet (6.28) — tấm trượt từ mép phải màn desktop. 4 variant: Type Standard · Modal × Width Base · Wide.
+   VERTICAL · rộng 384 (size-96) — Wide 480 (size-120) · cao FILL · background-surface.
+   Standard: viền TRÁI 1px border-muted, nằm cạnh nội dung, không scrim.
+   Modal: elevation-high, radius-lg ở HAI GÓC TRÁI, scrim như Sheet (.uu-scrim của BottomSheet). */
+.uu-sidesheet {
+  box-sizing: border-box; display: flex; flex-direction: column;
+  width: var(--size-96); max-width: 100%; height: 100%; flex: 0 0 auto;
+  background: var(--background-surface); color: var(--object-primary);
+}
+.uu-sidesheet--wide { width: var(--size-120); }
+.uu-sidesheet--standard { border-left: 1px solid var(--border-muted); }
+.uu-sidesheet--modal {
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  box-shadow: var(--elevation-high); overflow: hidden;
+}
+
+/* Header: padding card/padding · Title heading-sm + IconButtonNeutral Ghost Small xmark. */
+.uu-sidesheet__header { display: flex; align-items: center; gap: var(--gap-3); padding: var(--card-padding); }
+.uu-sidesheet__title {
+  flex: 1 1 0; min-width: 0; margin: 0; color: var(--object-primary);
+  font: var(--font-weight-semibold) var(--text-heading-sm-font-size)/var(--text-heading-sm-line-height) var(--font-family-body); /* style heading-sm */
+  letter-spacing: 0;
+}
+
+/* Body: padding ngang card/padding · gap 12 · cuộn khi dài. */
+.uu-sidesheet__body {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--gap-3);
+  padding: 0 var(--card-padding);
+}
+
+/* Footer: padding card/padding · Neutral Outline Base + Accent Solid Base, dồn phải. */
+.uu-sidesheet__footer { display: flex; justify-content: flex-end; align-items: center; gap: var(--gap-3); padding: var(--card-padding); }
+
+/* Scrim của Modal: dùng lại .uu-scrim (overlay + blur 16), tấm dính mép phải, cao FILL. */
+.uu-scrim--side { flex-direction: row; justify-content: flex-end; align-items: stretch; }

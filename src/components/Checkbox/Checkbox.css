@@ -1,0 +1,45 @@
+/* Checkbox (6.3f): 32×32 radius 12 · 15 variant: Value (Unchecked/Checked/Indeterminate) × State (Default/Hover/Pressed/Error) × Disabled. */
+.uu-checkbox {
+  position: relative; isolation: isolate; box-sizing: border-box; flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  --uu-bw: max(0px, calc(2px - var(--border-outer-width) * 1000));
+  width: var(--selection-size); height: var(--selection-size); padding: calc(2px - var(--uu-bw)); border-radius: var(--selection-radius);
+  background: var(--background-surface); border: var(--uu-bw) solid var(--border-muted); color: var(--object-on-interactive);
+  box-shadow: 0 0 0 var(--border-outer-width) var(--border-outer), var(--elevation-none); /* viền + bóng control theo DNA (spec 4.3) */
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+/* State layer: ô TRỐNG đi bậc nền sáng (object-secondary 5% / object-primary 10%);
+   ô ĐÃ CHỌN nền đặc nên đi bậc 20/40 với currentColor = object-on-interactive. */
+/* P33 (spec 4.3): bật vòng viền DNA thì bỏ viền trong ở trạng thái thường. --uu-bw về 0 khi border-outer-width > 0;
+   padding bù đúng phần viền bỏ đi nên kích thước không đổi. Trạng thái có viền riêng đặt lại --uu-bw. */
+.uu-checkbox:is(:not(:disabled):hover, [data-state="hover"], :not(:disabled):active, [data-state="pressed"], [data-error], :disabled, [data-disabled], [aria-checked="true"], [aria-checked="mixed"]) { --uu-bw: 2px; }
+.uu-checkbox::after { content: ""; position: absolute; inset: calc(-1 * var(--uu-bw)); z-index: -1; border-radius: var(--selection-radius); pointer-events: none; background: var(--object-secondary); opacity: 0; transition: opacity 120ms ease; }
+.uu-checkbox:not(:disabled):not([data-disabled]):hover, .uu-checkbox[data-state="hover"],
+.uu-checkbox:not(:disabled):not([data-disabled]):active, .uu-checkbox[data-state="pressed"] { border-color: var(--border-emphasized); }
+.uu-checkbox:not(:disabled):not([data-disabled]):hover::after, .uu-checkbox[data-state="hover"]::after { opacity: var(--opacity-5); }
+.uu-checkbox:not(:disabled):not([data-disabled]):active::after, .uu-checkbox[data-state="pressed"]::after { background: var(--object-primary); opacity: var(--opacity-10); }
+/* Vạch Indeterminate: 16×2, bo tròn hai đầu, currentColor. */
+.uu-checkbox__bar { width: var(--size-4); height: var(--size-0-5); border-radius: var(--rounded-circle); background: currentColor; }
+.uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"]) { background: var(--background-interactive); border-color: transparent; }
+.uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"])::after { inset: 0; background: currentColor; }
+.uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"]):not(:disabled):not([data-disabled]):hover, .uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"])[data-state="hover"],
+.uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"]):not(:disabled):not([data-disabled]):active, .uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"])[data-state="pressed"] { border-color: transparent; }
+.uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"]):not(:disabled):not([data-disabled]):hover::after, .uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"])[data-state="hover"]::after { background: currentColor; opacity: var(--opacity-20); }
+.uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"]):not(:disabled):not([data-disabled]):active::after, .uu-checkbox:is([aria-checked="true"], [aria-checked="mixed"])[data-state="pressed"]::after { background: currentColor; opacity: var(--opacity-40); }
+/* Error (State=Error): ô trống đổi viền, ô đã chọn đổi nền.
+   Bản thiết kế mới vẽ Error × Default; hover/pressed vẫn chạy theo luật state layer chung ở §6.0. */
+.uu-checkbox[data-error]:not(:disabled) { border-color: var(--border-negative); }
+.uu-checkbox[data-error]:not(:disabled):is([aria-checked="true"], [aria-checked="mixed"]) { background: var(--background-negative); border-color: transparent; color: var(--object-on-negative); }
+/* `[data-disabled]` = CheckboxMark (span) trong hàng Disabled. */
+.uu-checkbox:is(:disabled, [data-disabled]) { cursor: not-allowed; background: var(--background-disabled); border-color: var(--border-muted); color: var(--object-disabled); }
+.uu-checkbox:is(:disabled, [data-disabled])::after { opacity: 0 !important; }
+.uu-checkbox:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+/* Hàng Checkbox / Radio: ô + chữ, gap 12, canh MÉP TRÊN, cụm chữ đệm trên 4. Vùng chạm là CẢ HÀNG. */
+.uu-choicerow { display: flex; align-items: flex-start; gap: var(--gap-3); cursor: pointer; }
+.uu-choicerow__text { padding-top: var(--selection-label-offset); flex: 1 1 0; min-width: 0; font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body); color: var(--object-primary); }
+.uu-choicerow[data-disabled] { cursor: not-allowed; }
+.uu-choicerow[data-disabled] .uu-choicerow__text { color: var(--object-disabled); }
+
+/* Icon `check` fill trong ô: Touch 20 · Compact 16 (density). */
+.uu-checkbox .uu-icon { --uu-icon-size: var(--selection-check); }

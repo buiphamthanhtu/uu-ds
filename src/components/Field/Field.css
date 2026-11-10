@@ -1,0 +1,75 @@
+/* Shell dùng chung cho TextInput (6.3) · TextArea (6.3e) · DateInput (6.3c) · Dropdown (6.4) · OTPInput (6.3b).
+   Root VERTICAL gap 4: .label (h24) → Field (h48, radius 16, border 1px) → Error message (caption, h20). */
+.uu-fieldroot { display: flex; flex-direction: column; gap: var(--gap-1); min-width: 0; }
+.uu-fieldroot--fixed { width: 187px; } /* khổ master; instance trong form để FILL */
+
+/* .label */
+.uu-fieldlabel { display: flex; align-items: center; gap: var(--gap-2); height: var(--text-body-line-height); }
+.uu-fieldlabel__text { display: inline-flex; align-items: baseline; gap: var(--gap-1); min-width: 0; }
+.uu-fieldlabel__name { font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body); color: var(--object-primary); }
+.uu-fieldlabel__suffix { font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); color: var(--object-secondary); }
+.uu-fieldlabel__tip { display: inline-flex; color: var(--object-secondary); cursor: help; }
+.uu-fieldroot[data-error] .uu-fieldlabel__name { color: var(--object-negative); }
+.uu-fieldroot[data-disabled] .uu-fieldlabel__name { color: var(--object-disabled); }
+
+/* Field */
+.uu-field {
+  position: relative; isolation: isolate; box-sizing: border-box;
+  display: flex; align-items: center; gap: var(--gap-2);
+  --uu-bw: max(0px, calc(1px - var(--border-outer-width) * 1000));
+  height: var(--field-height); padding: 0 calc(var(--field-padding-x) + 1px - var(--uu-bw));
+  border-radius: var(--field-radius); background: var(--background-surface);
+  border: var(--uu-bw) solid var(--border-muted); color: var(--object-primary);
+  box-shadow: 0 0 0 var(--border-outer-width) var(--border-outer), var(--elevation-none); /* viền + bóng control theo DNA (spec 4.3) */
+  font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body);
+}
+/* Hover: state layer object-secondary 5% — chỉ khi chưa focus, chưa disabled */
+.uu-field::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: var(--object-secondary); opacity: 0; transition: opacity 120ms ease;
+}
+.uu-field:hover:not(:focus-within):not([data-disabled])::after,
+.uu-field[data-state="hover"]::after { opacity: var(--opacity-5); }
+/* P33 (spec 4.3): bật vòng viền DNA thì bỏ viền trong ở trạng thái thường. --uu-bw về 0 khi border-outer-width > 0;
+   padding bù đúng phần viền bỏ đi nên kích thước không đổi. Trạng thái có viền riêng đặt lại --uu-bw. */
+.uu-field:is(:focus-within, [data-state="focus"], [data-state="typing"], [data-error], [data-disabled]) { --uu-bw: 1px; }
+.uu-field:focus-within, .uu-field[data-state="focus"], .uu-field[data-state="typing"] { border-color: var(--border-emphasized); }
+.uu-field[data-error] { border-color: var(--border-negative); }
+.uu-field[data-disabled] { background: var(--background-disabled); }
+.uu-field:has(> .uu-field__input:focus-visible) { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+.uu-field__input {
+  flex: 1 1 0; min-width: 1px; height: 100%; padding: 0; margin: 0; border: 0; background: transparent; outline: none;
+  font: inherit; color: var(--object-primary); caret-color: var(--object-accent); /* con trỏ 1,5×24 object-accent */
+}
+.uu-field__input::placeholder { color: var(--object-secondary); opacity: 1; }
+.uu-field__input:disabled { color: var(--object-primary); -webkit-text-fill-color: var(--object-primary); } /* Filled+Disabled giữ object-primary — cố ý */
+.uu-field__input:disabled::placeholder { color: var(--object-disabled); -webkit-text-fill-color: var(--object-disabled); }
+
+.uu-field__prefix { display: inline-flex; align-items: center; color: var(--object-secondary); flex: 0 0 auto; }
+.uu-field__prefix--label { font: inherit; color: var(--object-primary); }
+.uu-field__suffix { display: inline-flex; align-items: flex-start; padding-left: var(--gap-2); flex: 0 0 auto; border-left: 1px solid var(--border-muted); align-self: stretch; }
+
+/* Ô "chọn": gợi ý rỗng body 400 secondary · giá trị Dropdown label 600 primary, DateInput body 400 primary · icon phải secondary */
+.uu-field--select { cursor: pointer; text-align: left; width: 100%; }
+.uu-field__hint  { flex: 1 1 0; min-width: 1px; color: var(--object-secondary); font-weight: var(--font-weight-normal); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.uu-field__value { flex: 1 1 0; min-width: 1px; color: var(--object-primary); font-weight: var(--text-label-font-weight); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.uu-field__value--body { font-weight: var(--font-weight-normal); }
+.uu-field__icon  { flex: 0 0 auto; display: inline-flex; color: var(--object-secondary); }
+.uu-field[data-disabled] .uu-field__hint, .uu-field[data-disabled] .uu-field__icon { color: var(--object-disabled); }
+
+/* Error message */
+.uu-fielderror { min-height: var(--text-caption-line-height); font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); color: var(--object-negative); }
+.uu-fielderror--center { text-align: center; }
+/* Dòng gợi ý (6.3, Helper text): dưới label, trên ô, caption object-secondary; có lỗi vẫn giữ (dòng lỗi ở dưới ô). */
+.uu-fieldhelper { font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); color: var(--object-secondary); }
+.uu-fieldroot[data-disabled] .uu-fieldhelper { color: var(--object-disabled); }
+
+/* TextArea: Field VERTICAL cao 112 = 12 + 3×24 + 12 + chỗ bộ đếm; padding 12 cả bốn phía; chữ bám mép trên */
+.uu-field--area { flex-direction: column; align-items: stretch; height: var(--size-28); padding: var(--gap-3) var(--field-padding-x); gap: var(--gap-2); }
+.uu-field--area .uu-field__input { flex: 1 1 auto; height: auto; resize: none; line-height: var(--text-body-line-height); }
+.uu-field__counter { align-self: flex-end; font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); color: var(--object-secondary); }
+.uu-fieldroot[data-disabled] .uu-field__counter { color: var(--object-disabled); }
+
+/* Icon 24 trong ô (prefix, suffix, calendar-days, magnifier) theo density: Touch 24 · Compact 16. Icon 16 giữ 16. */
+.uu-field .uu-icon--24 { --uu-icon-size: var(--field-icon); }

@@ -1,0 +1,12 @@
+/* Badge (§6.14): cao 24 · padding 4 trái / 8 phải · icon 16 fill + gap 4 · radius circle · title-sm 600. background-{status} chỉ đi với object-on-{status}. */
+.uu-badge {
+  box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+  height: var(--size-6); padding: 0 var(--gap-2) 0 var(--gap-1); gap: var(--gap-1); border-radius: var(--rounded-circle);
+  font: var(--font-weight-semibold) var(--text-title-sm-font-size)/var(--text-title-sm-line-height) var(--font-family-body);
+  white-space: nowrap; vertical-align: middle;
+}
+.uu-badge--neutral { background: var(--background-inverted); color: var(--object-primary-inverted); }
+.uu-badge--success { background: var(--background-positive);  color: var(--object-on-positive); }
+.uu-badge--warning { background: var(--background-warning);  color: var(--object-on-warning); }
+.uu-badge--error   { background: var(--background-negative);    color: var(--object-on-negative); }
+.uu-badge__icon { flex: 0 0 auto; }

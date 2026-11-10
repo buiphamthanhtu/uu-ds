@@ -1,0 +1,7 @@
+/* ToggleButton (6.7) — nút giữ trạng thái bật/tắt. Không border, không shadow ở mọi variant. */
+.uu-togglebtn { border: 0; }
+.uu-togglebtn--off { background: var(--background-surface); color: var(--object-primary); }
+.uu-togglebtn--on  { background: var(--background-interactive); color: var(--object-on-interactive); }
+/* Disabled: tắt → nền giữ surface, chữ disabled · bật → nền đổi disabled, chữ disabled */
+.uu-togglebtn--off:disabled { background: var(--background-surface); color: var(--object-disabled); }
+.uu-togglebtn--on:disabled  { background: var(--background-disabled); color: var(--object-disabled); }

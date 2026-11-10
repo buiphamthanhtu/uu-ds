@@ -1,0 +1,4 @@
+/* Pagination (6.10b): 5 gạch h2 · gap 4 · đang xem rộng 24 background-accent · còn lại 16 overlay. Tổng 104. */
+.uu-pagination { display: inline-flex; align-items: center; gap: var(--gap-1); height: var(--size-0-5); }
+.uu-pagination__slick { height: var(--size-0-5); width: var(--size-4); border-radius: var(--rounded-circle); background: var(--overlay); }
+.uu-pagination__slick--active { width: var(--size-6); background: var(--background-accent); }

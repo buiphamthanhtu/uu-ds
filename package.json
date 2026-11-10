@@ -1,0 +1,33 @@
+{
+  "name": "uu-ds",
+  "version": "1.0.0",
+  "description": "ÚÙ Design System cho web: component React + CSS thuần, token, UU icon (bản công khai: icon component dùng cố định + texture).",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/tokens/tokens.css",
+    "./tokens.json": "./src/tokens/tokens.json",
+    "./base.css": "./src/styles/base.css",
+    "./icons": "./src/icons/index.ts",
+    "./icons/svg/*": "./src/icons/svg/*"
+  },
+  "files": [
+    "src",
+    "docs",
+    "scripts/build-icons.mjs",
+    "README.md",
+    "AGENTS.md"
+  ],
+  "sideEffects": [
+    "**/*.css",
+    "./src/index.ts"
+  ],
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "prepare": "node scripts/build-icons.mjs"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
+  }
+}

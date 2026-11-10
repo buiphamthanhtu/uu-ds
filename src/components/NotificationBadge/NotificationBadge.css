@@ -1,0 +1,13 @@
+/* NotificationBadge (§6.16): Count cao 16 · min-width 16 · padding ngang 4 · chữ 11/16 600. Dot 8×8.
+   Họ attention (spec 2.2): badge báo "có mới, chưa xem" — không phải negative (lỗi), không phải warning (rủi ro). */
+.uu-notif {
+  box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--background-attention); color: var(--object-on-attention);
+  border-radius: var(--rounded-circle); vertical-align: middle; white-space: nowrap;
+}
+.uu-notif--count {
+  height: var(--size-4); min-width: var(--size-4); padding: 0 var(--gap-1);
+  font: var(--font-weight-semibold) var(--text-title-xs-font-size)/var(--text-title-xs-line-height) var(--font-family-body);
+  text-align: center;
+}
+.uu-notif--dot { width: var(--size-2); height: var(--size-2); padding: 0; }

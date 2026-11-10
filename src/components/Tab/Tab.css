@@ -1,0 +1,72 @@
+/* Tab (6.20) — mục tab điều hướng giữa các vùng nội dung. 5 variant: State = Default · Active · Hover · Pressed · Disabled.
+   Hug width, cao 48 (padding 12 mỗi phía + chữ 24). Không có vỏ, không nền, không viền.
+   Chữ Active dùng `object-interactive` (KHÔNG phải `object-accent`) để cùng đổi theo brand với
+   gạch chỉ báo `border-interactive`. */
+.uu-tab {
+  box-sizing: border-box; position: relative; isolation: isolate;
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  gap: var(--gap-3); padding: var(--tab-padding);
+  border: 0; background: transparent; color: var(--object-secondary);
+  font: var(--font-weight-semibold) var(--text-title-base-font-size)/var(--text-title-base-line-height) var(--font-family-body); /* style title-base */
+  letter-spacing: 0; white-space: nowrap;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.uu-tab[aria-selected="true"] { color: var(--object-interactive); cursor: default; }
+/* Hover / Pressed: state layer object-primary 5 / 10 phủ cả ô tab, radius-sm — chỉ tab KHÔNG Active, không Disabled. */
+.uu-tab::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: var(--radius-sm); pointer-events: none;
+  background: var(--object-primary); opacity: 0; transition: opacity 120ms ease;
+}
+.uu-tab:not([aria-selected="true"]):not(:disabled):hover::after, .uu-tab[data-state="hover"]::after { opacity: var(--opacity-5); }
+.uu-tab:not([aria-selected="true"]):not(:disabled):active::after, .uu-tab[data-state="pressed"]::after { opacity: var(--opacity-10); }
+/* Disabled: chữ object-disabled, không state layer. */
+.uu-tab:disabled { color: var(--object-disabled); cursor: not-allowed; }
+/* Gạch chỉ báo: 32 × 4 bo tròn hai đầu, canh giữa theo chiều ngang, tâm nằm ĐÚNG mép đáy
+   (Bản thiết kế: LINE stroke 4 strokeAlign CENTER tại y = 48) nên thò xuống 2px. Bề rộng CỐ ĐỊNH 32,
+   không giãn theo chữ — nhãn dài mấy thì gạch vẫn 32. */
+.uu-tab__indicator {
+  position: absolute; left: 50%; bottom: -2px; transform: translateX(-50%);
+  width: var(--size-8); height: var(--size-1);
+  border-radius: var(--rounded-circle); background: var(--border-interactive);
+}
+/* Icon và badge (tuỳ chọn): nội dung là hàng HORIZONTAL căn giữa — icon 16 trước chữ (gap 8), Dot sau chữ (gap 4).
+   Icon cùng màu chữ (currentColor) theo state, giữ 16 ở cả hai density; hàng cao bằng dòng chữ nên tab vẫn cao 48. */
+.uu-tab__content { display: inline-flex; flex-direction: row; align-items: center; justify-content: center; min-width: 0; }
+.uu-tab__icon { flex: 0 0 auto; --uu-icon-size: var(--size-4); margin-right: var(--gap-2); }
+.uu-tab__badge { flex: 0 0 auto; margin-left: var(--gap-1); }
+/* Chữ ẩn "có mới" cho screen reader — badge là thông tin phụ, không chỉ dựa vào chấm màu. */
+.uu-tab__sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.uu-tab:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+/* TabBar (6.20): HORIZONTAL · gap 0 · không nền · viền dưới 1px border-muted chạy suốt, gạch Active (4px) đè lên viền.
+   Viền vẽ bằng background ở mép dưới chứ không bằng `border`: Scrollable cần overflow-x nên cũng cắt overflow-y —
+   chừa 2px đệm dưới cho nửa dưới của gạch, đặt vạch 1px ngay dưới đáy tab (y = 48), rồi trả lại 1px bằng margin âm
+   để hàng chiếm đúng 48 + 1. */
+.uu-tabbar {
+  box-sizing: border-box; display: flex; align-items: stretch; gap: 0; width: 100%; min-width: 0;
+  padding-bottom: var(--gap-0-5); margin-bottom: calc(var(--gap-0-5) / -2);
+  background: linear-gradient(var(--border-muted), var(--border-muted)) left 0 bottom calc(var(--gap-0-5) / 2) / 100% 1px no-repeat;
+}
+/* Fixed: 2–4 tab nhãn ngắn — tab FILL chia đều. */
+.uu-tabbar[data-layout="fixed"] > .uu-tab { flex: 1 1 0; min-width: 0; }
+/* Scrollable: ≥ 5 tab hoặc nhãn dài — tab HUG, cuộn ngang, padding trái 16, cắt mép phải. */
+.uu-tabbar[data-layout="scrollable"] {
+  position: relative; overflow-x: auto; overflow-y: hidden; padding-left: var(--gap-4);
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.uu-tabbar[data-layout="scrollable"]::-webkit-scrollbar { display: none; }
+.uu-tabbar[data-layout="scrollable"] > .uu-tab { flex: 0 0 auto; }
+.uu-tabbar /* Icon và badge (tuỳ chọn): nội dung là hàng HORIZONTAL căn giữa — icon 16 trước chữ (gap 8), Dot sau chữ (gap 4).
+   Icon cùng màu chữ (currentColor) theo state, giữ 16 ở cả hai density; hàng cao bằng dòng chữ nên tab vẫn cao 48. */
+.uu-tab__content { display: inline-flex; flex-direction: row; align-items: center; justify-content: center; min-width: 0; }
+.uu-tab__icon { flex: 0 0 auto; --uu-icon-size: var(--size-4); margin-right: var(--gap-2); }
+.uu-tab__badge { flex: 0 0 auto; margin-left: var(--gap-1); }
+/* Chữ ẩn "có mới" cho screen reader — badge là thông tin phụ, không chỉ dựa vào chấm màu. */
+.uu-tab__sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.uu-tab:focus-visible { outline-offset: -2px; }
