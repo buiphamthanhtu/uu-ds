@@ -1,0 +1,40 @@
+/* Template màn / khối rỗng và lỗi (6.19): EmptySection · ErrorSection (khối nhúng) · ResultScreen · ErrorScreen · EmptyScreen (template màn).
+   Ảnh minh hoạ của MỌI màn / khối rỗng và lỗi: ô tròn 128 nền background-accent-muted. */
+.uu-state {
+  box-sizing: border-box; display: flex; flex-direction: column; align-items: center;
+  gap: var(--gap-3); padding: var(--gap-3); width: 100%;
+}
+.uu-state__content {
+  display: flex; flex-direction: column; align-items: center; gap: var(--gap-3);
+  width: 100%; text-align: center;
+}
+.uu-state__image {
+  flex: 0 0 auto; width: var(--size-32); height: var(--size-32);
+  border-radius: var(--rounded-circle); background: var(--background-accent-muted); overflow: hidden;
+}
+.uu-state__image > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* ResultScreen: ô vuông 128 KHÔNG nền, không cắt tròn — ảnh do màn quyết. */
+.uu-state__image--square { display: block; border-radius: 0; background: none; object-fit: contain; }
+.uu-state__title { margin: 0; color: var(--object-primary); font-family: var(--font-family-body); font-weight: var(--font-weight-semibold); letter-spacing: 0; }
+/* Khối nhúng: heading-sm (nhỏ hơn màn). */
+.uu-state__title--section { font-size: var(--text-heading-sm-font-size); line-height: var(--text-heading-sm-line-height); }
+/* Màn: heading-base. */
+.uu-state__title--screen { font-size: var(--text-heading-base-font-size); line-height: var(--text-heading-base-line-height); }
+.uu-state__description {
+  margin: 0; color: var(--object-primary);
+  font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body); /* style body */
+  letter-spacing: 0;
+}
+/* ButtonGroup một nút · HUG (không FILL như trong footer). */
+.uu-state .uu-state__action { width: auto; }
+
+/* ResultScreen · ErrorScreen: Body + Footer (NavigationBar do màn đặt). EmptyScreen: NavigationBar · Body FILL căn giữa hai chiều, padding ngang 16 · Footer HUG padding 16. */
+.uu-state-screen {
+  box-sizing: border-box; display: flex; flex-direction: column;
+  width: 100%; height: 100%;
+}
+.uu-state-screen__body {
+  flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 0 var(--gap-4);
+}
+.uu-state-screen__footer { padding: var(--gap-4); padding-bottom: calc(var(--gap-4) + env(safe-area-inset-bottom, 0px)); }

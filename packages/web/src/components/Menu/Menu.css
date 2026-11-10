@@ -1,0 +1,108 @@
+/* Menu (6.21) — danh sách option của Dropdown / Chip Dropdown / panel gợi ý SearchInput.
+   set `Menu` (Platform = Panel · Sheet; Search · Footer) + component nội bộ `.MenuItem` (16 variant),
+   `.MenuSection`, `.MenuDivider`. Platform=Sheet dùng lại nguyên `BottomSheet` (§6.8). */
+.uu-menu {
+  box-sizing: border-box; width: 100%;
+  display: flex; flex-direction: column; gap: var(--gap-1);
+  padding: var(--gap-3); border-radius: var(--rounded-2xl);
+  background: var(--background-surface); box-shadow: var(--elevation-low);
+  max-height: var(--size-80); /* cao tối đa 320; dài hơn thì danh sách cuộn trong panel */
+}
+.uu-menu__sheetbody { display: flex; flex-direction: column; gap: var(--gap-1); }
+.uu-menu__list, .uu-menu__group { display: flex; flex-direction: column; gap: var(--gap-1); }
+/* Chỉ danh sách cuộn: ô tìm nhanh ở trên và footer ở dưới đứng yên — "dính trên / dính dưới". */
+.uu-menu > .uu-menu__list { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+.uu-menu > .uu-menu__search, .uu-menu > .uu-menu__footer, .uu-menu > .uu-menu__empty { flex: 0 0 auto; }
+
+/* MenuAnchor — neo panel dưới phần tử mở, cách 4. Lật lên trên / canh mép phải do JS chọn theo chỗ trống. */
+.uu-menu-anchor { position: relative; }
+.uu-menu-anchor[data-width="min"] { display: inline-block; vertical-align: top; }
+.uu-menu-anchor__panel { position: absolute; z-index: 10; left: 0; right: 0; }
+.uu-menu-anchor__panel[data-placement="bottom"] { top: 100%; margin-top: var(--gap-1); }
+.uu-menu-anchor__panel[data-placement="top"] { bottom: 100%; margin-bottom: var(--gap-1); }
+/* Mở từ chip / nút: rộng tối thiểu 240, canh mép trái với phần tử; sát mép phải thì canh mép phải. */
+.uu-menu-anchor[data-width="min"] > .uu-menu-anchor__panel { right: auto; min-width: max(100%, var(--size-60)); }
+.uu-menu-anchor[data-width="min"] > .uu-menu-anchor__panel[data-align="end"] { left: auto; right: 0; }
+
+/* Search=true: SearchInput không nhãn ở đầu panel, dính trên khi panel cuộn. */
+.uu-menu__search { position: sticky; top: 0; z-index: 1; background: var(--background-surface); }
+.uu-menu__empty {
+  margin: 0; padding: var(--gap-2);
+  font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body); /* style body */
+  color: var(--object-secondary);
+}
+
+/* Footer=true: "Bỏ chọn" ghost + "Áp dụng" solid, Small, dồn phải, gap 8. */
+.uu-menu__footer { display: flex; justify-content: flex-end; align-items: center; gap: var(--gap-2); }
+
+/* .MenuSection: padding 8/8/4/8, title-xs object-secondary IN HOA. */
+.uu-menu__section {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--gap-2);
+  padding: var(--gap-2) var(--gap-2) var(--gap-1);
+}
+.uu-menu__section-title {
+  min-width: 0; text-transform: uppercase; color: var(--object-secondary);
+  font: var(--font-weight-semibold) var(--text-title-xs-font-size)/var(--text-title-xs-line-height) var(--font-family-body); /* style title-xs */
+}
+.uu-menu__section-action { flex: 0 0 auto; display: inline-flex; }
+
+/* .MenuDivider: 1px border-muted, margin dọc 4. */
+.uu-menu__divider { flex: 0 0 auto; height: 0; margin: var(--gap-1) 0; border-top: 1px solid var(--border-muted); }
+
+/* .MenuItem: H · gap 12 · padding 8 · radius 12 · FILL × HUG → cao 40 (Multiple: 48 Touch / 40 Compact, theo ô Checkbox). Chữ `body` 16/24. */
+.uu-menu__item {
+  box-sizing: border-box; position: relative; isolation: isolate;
+  display: flex; align-items: center; gap: var(--gap-3);
+  width: 100%; min-height: var(--size-10); padding: var(--gap-2);
+  border: 0; border-radius: var(--radius-base); background: transparent;
+  color: var(--object-primary); text-align: left;
+  font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body); /* style body */
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.uu-menu__label { flex: 1 1 0; min-width: 0; }
+
+/* Description: tên + dòng mô tả `caption` object-secondary (tối đa 2 dòng). Hàng cao theo nội dung, icon / check /
+   checkbox căn trên thẳng dòng tên. */
+.uu-menu__text { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.uu-menu__text > .uu-menu__label { flex: 0 0 auto; }
+.uu-menu__desc {
+  color: var(--object-secondary);
+  font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); /* style caption */
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+}
+.uu-menu__item[data-description] { align-items: flex-start; }
+.uu-menu__item[data-description] .uu-menu__check { margin-top: var(--gap-1); } /* check 16 giữa dòng tên 24 */
+.uu-menu__item[data-type="multiple"][data-description] .uu-menu__text { padding-top: var(--selection-label-offset); } /* như CheckboxInput */
+.uu-menu__item:is(:disabled, [aria-disabled="true"]) .uu-menu__desc { color: var(--object-disabled); }
+
+/* Hàng có nút riêng ở cuối (xoá một mục "Tìm gần đây"): nút đè lên mép phải hàng, hàng chừa chỗ cho nút. */
+.uu-menu__row { position: relative; display: flex; }
+.uu-menu__li { display: flex; flex-direction: column; } /* hàng trong panel role=list (SearchInput "Tìm gần đây") */
+.uu-menu__item[data-action] { padding-right: calc(var(--gap-1) + var(--control-height-small) + var(--gap-3)); }
+.uu-menu__action { position: absolute; top: 0; bottom: 0; right: var(--gap-1); display: flex; align-items: center; }
+.uu-menu__match { font-weight: var(--font-weight-semibold); }
+.uu-menu__prefix { flex: 0 0 auto; color: var(--object-secondary); }
+.uu-menu__check { flex: 0 0 auto; color: var(--object-interactive); }
+.uu-menu__checkbox { pointer-events: none; }
+
+/* State layer: phủ tràn, bậc nền sáng 5 / 10. Hàng CHƯA chọn (và mọi hàng Multiple) lấy fill `object-primary`;
+   hàng Single ĐÃ chọn lấy `background-interactive` — nền hàng đã là tint nên phủ cùng họ màu. */
+.uu-menu__item::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: var(--object-primary); opacity: 0; transition: opacity 120ms ease;
+}
+.uu-menu__item:not(:disabled):not([aria-disabled="true"]):hover::after, .uu-menu__item[data-state="hover"]::after { opacity: var(--opacity-5); }
+.uu-menu__item:not(:disabled):not([aria-disabled="true"]):active::after, .uu-menu__item[data-state="pressed"]::after { opacity: var(--opacity-10); }
+
+/* Single đã chọn: nền tint, chữ và dấu check `object-interactive`, icon trước `object-accent`. */
+.uu-menu__item:not([data-type="multiple"])[aria-selected="true"] { background: var(--background-accent-subtle); color: var(--object-interactive); }
+.uu-menu__item:not([data-type="multiple"])[aria-selected="true"] .uu-menu__prefix { color: var(--object-accent); }
+.uu-menu__item:not([data-type="multiple"])[aria-selected="true"]::after { background: var(--background-interactive); }
+
+/* Disabled: bỏ nền tint, chữ/icon `object-disabled`, không state layer. */
+.uu-menu__item:is(:disabled, [aria-disabled="true"]) { cursor: not-allowed; color: var(--object-disabled); background: transparent; }
+.uu-menu__item:is(:disabled, [aria-disabled="true"])[aria-selected="true"] { background: transparent; color: var(--object-disabled); }
+.uu-menu__item:is(:disabled, [aria-disabled="true"])[aria-selected] .uu-menu__prefix,
+.uu-menu__item:is(:disabled, [aria-disabled="true"])[aria-selected] .uu-menu__check { color: var(--object-disabled); }
+.uu-menu__item:is(:disabled, [aria-disabled="true"])::after { opacity: 0 !important; }
+.uu-menu__item:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: -2px; }

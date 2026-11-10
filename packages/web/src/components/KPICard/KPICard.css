@@ -1,0 +1,49 @@
+/* KPICard (6.26) — thẻ một con số chính trên dashboard. 5 variant: Trend × Polarity (bỏ qua khi [No trend]) · Interactive.
+   VERTICAL · padding --card-padding (16 · Compact 12) · gap 4 · radius-lg · nền background-surface
+   · viền 1px border-muted · FILL. Chỉ thẻ Interactive mới có state layer.
+   Viền vẽ bằng box-shadow inset để không cộng vào kích thước (bản vẽ strokeAlign INSIDE). */
+.uu-kpicard {
+  box-sizing: border-box; width: 100%;
+  display: flex; flex-direction: column; gap: var(--gap-1);
+  margin: 0; padding: var(--card-padding);
+  border: 0; border-radius: var(--radius-lg);
+  background: var(--background-surface);
+  box-shadow: inset 0 0 0 1px var(--border-muted), 0 0 0 var(--border-outer-width) var(--border-outer); /* viền thẻ theo DNA (spec 4.3, border-outer-*): vẽ ngoài, không chiếm chỗ; mặc định 0 */
+  color: var(--object-primary);
+  font-family: var(--font-family-body);
+  text-align: left; text-decoration: none;
+}
+.uu-kpicard > span { display: block; }
+
+/* Hàng Label — chevron (thẻ Interactive) nằm cuối hàng. */
+.uu-kpicard > .uu-kpicard__head { display: flex; align-items: center; gap: var(--gap-1); }
+/* Label: caption object-secondary. */
+.uu-kpicard__label {
+  flex: 1 1 auto; min-width: 0;
+  color: var(--object-secondary);
+  font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); /* style caption */
+}
+.uu-kpicard__chevron { color: var(--object-secondary); }
+/* Value: heading-base object-primary, chữ số cùng bề rộng. */
+.uu-kpicard__value {
+  color: var(--object-primary);
+  font: var(--font-weight-semibold) var(--text-heading-base-font-size)/var(--text-heading-base-line-height) var(--font-family-body); /* style heading-base */
+  letter-spacing: 0; font-variant-numeric: tabular-nums;
+}
+/* Delta: HORIZONTAL gap 4 · icon 16 + caption. */
+.uu-kpicard > .uu-kpicard__delta {
+  display: flex; align-items: center; gap: var(--gap-1);
+  font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); /* style caption */
+  font-variant-numeric: tabular-nums;
+}
+/* Polarity=Normal: màu theo chiều số — Up positive, Down negative.
+   Polarity=Inverse (tăng là xấu): Up negative, Down positive; icon vẫn theo chiều số. */
+.uu-kpicard[data-trend="up"][data-polarity="normal"] .uu-kpicard__delta,
+.uu-kpicard[data-trend="down"][data-polarity="inverse"] .uu-kpicard__delta { color: var(--object-positive); }
+.uu-kpicard[data-trend="down"][data-polarity="normal"] .uu-kpicard__delta,
+.uu-kpicard[data-trend="up"][data-polarity="inverse"] .uu-kpicard__delta { color: var(--object-negative); }
+
+/* Interactive: cả thẻ là một link / nút. State layer (.uu-interactive) tô currentColor = object-primary,
+   5 / 10 (.uu-on-light), radius theo thẻ (border-radius: inherit). Focus: vòng 2px border-emphasized. */
+.uu-kpicard--interactive { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.uu-kpicard--interactive:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }

@@ -1,0 +1,21 @@
+name: uu_ds_widgetbook
+description: Widgetbook cho uu_ds_flutter — duyệt widget UU DS.
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  widgetbook: ^3.10.0
+  uu_ds_flutter:
+    path: ../uu_ds_flutter
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,81 @@
+/* Bảng (6.23) — TableHeaderCell (21 variant) · TableCell (18 variant).
+   Table / TableRow chỉ là khung <table> ngữ nghĩa, không thêm hình học.
+   Không viền ngoài, không kẻ dọc: chỉ kẻ ngang bằng viền dưới 1px `border-muted` của mỗi ô.
+   Viền dưới vẽ bằng box-shadow inset để không cộng vào chiều cao ô (bản vẽ strokeAlign INSIDE).
+   Kích thước đọc biến density: --table-header-height · --table-row-height · --table-cell-padding-x. */
+.uu-table {
+  width: 100%;
+  border-collapse: separate; border-spacing: 0;
+  font-family: var(--font-family-body);
+}
+
+/* ---------- TableHeaderCell ---------- */
+.uu-tableheadercell {
+  box-sizing: border-box;
+  height: var(--table-header-height);
+  padding: 0 var(--table-cell-padding-x);
+  box-shadow: inset 0 -1px 0 var(--border-muted);
+  background: transparent; color: var(--object-secondary);
+  font: var(--font-weight-semibold) var(--text-title-sm-font-size)/var(--text-title-sm-line-height) var(--font-family-body); /* style title-sm */
+  letter-spacing: 0; text-align: left; vertical-align: middle; white-space: nowrap;
+}
+/* Đang sắp: nhãn và icon `object-primary`. Unsorted: icon `sort-vertical` giữ `object-secondary`. */
+.uu-tableheadercell[data-sort="ascending"],
+.uu-tableheadercell[data-sort="descending"] { color: var(--object-primary); }
+/* Align=Right (cột số): icon đứng trước nhãn, cả hai dồn phải. */
+.uu-tableheadercell[data-align="right"] { text-align: right; }
+
+.uu-tableheadercell__inner { display: inline-flex; align-items: center; gap: var(--gap-1); }
+.uu-tableheadercell__button { cursor: pointer; border-radius: var(--radius-sm); -webkit-tap-highlight-color: transparent; }
+.uu-tableheadercell__button:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+/* Cột sắp được (Sort≠Off) có Hover / Pressed: state layer `object-primary` 5 / 10 phủ cả ô (P10, §6.23).
+   Nút giãn vùng bấm ra cả ô bằng ::before; Sort=Off không có state. */
+.uu-tableheadercell[data-sortable], .uu-tableheadercell[data-state] { position: relative; }
+.uu-tableheadercell[data-sortable]::after, .uu-tableheadercell[data-state]::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: var(--object-primary); opacity: 0;
+}
+.uu-tableheadercell[data-sortable]:hover::after,
+.uu-tableheadercell[data-state="hover"]::after { opacity: var(--opacity-5); }
+.uu-tableheadercell[data-sortable]:active::after,
+.uu-tableheadercell[data-state="pressed"]::after { opacity: var(--opacity-10); }
+.uu-tableheadercell__button::before { content: ''; position: absolute; inset: 0; }
+/* Type=Checkbox — ô "chọn tất cả" rộng 64 như ô TableCell Checkbox. Không nhãn, không state layer riêng. */
+.uu-tableheadercell--checkbox { width: var(--size-16); }
+
+/* ---------- TableCell ---------- */
+.uu-tablecell {
+  box-sizing: border-box; position: relative; isolation: isolate;
+  height: var(--table-row-height);
+  padding: 0 var(--table-cell-padding-x);
+  box-shadow: inset 0 -1px 0 var(--border-muted);
+  background: transparent; color: var(--object-primary);
+  font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body); /* style body */
+  letter-spacing: 0; text-align: left; vertical-align: middle;
+}
+.uu-tablecell__inner { display: flex; align-items: center; gap: var(--gap-2); }
+
+/* Type=Secondary — cột phụ (mã, ngày tạo, ghi chú): caption object-secondary. */
+.uu-tablecell--secondary {
+  color: var(--object-secondary);
+  font: var(--font-weight-normal) var(--text-caption-font-size)/var(--text-caption-line-height) var(--font-family-body); /* style caption */
+}
+/* Type=Number — body căn phải, chữ số cùng bề rộng để cột thẳng hàng. */
+.uu-tablecell--number { text-align: right; font-variant-numeric: tabular-nums; }
+.uu-tablecell--number .uu-tablecell__inner { justify-content: flex-end; }
+/* Type=Checkbox — ô rộng 64. */
+.uu-tablecell--checkbox { width: var(--size-16); }
+
+/* State layer (6.0): `object-primary` opacity-5 phủ cả ô. Hover là trạng thái của CẢ HÀNG,
+   nên rê vào hàng trong <tbody> thì mọi ô cùng hiện lớp phủ. Không đổi nền, không đổi chữ. */
+.uu-tablecell::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--object-primary); opacity: 0; transition: opacity 120ms ease;
+}
+tbody > .uu-tablerow:hover > .uu-tablecell::after,
+.uu-tablerow[data-state="hover"] > .uu-tablecell::after,
+.uu-tablecell[data-state="hover"]::after { opacity: var(--opacity-5); }
+
+/* Selected — nền `background-interactive-muted` cho mọi ô của hàng. */
+.uu-tablerow[data-state="selected"] > .uu-tablecell,
+.uu-tablecell[data-state="selected"] { background: var(--background-interactive-muted); }

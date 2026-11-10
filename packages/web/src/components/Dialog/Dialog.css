@@ -1,0 +1,17 @@
+/* Dialog (6.10): CardDialog = panel 384 khi đứng riêng · radius 24 · KHÔNG có tiêu đề — nội dung vào Slot.
+   Banner=False: header chỉ có nút đóng (Outline Small), căn phải.
+   Banner=True: header là ảnh 16:9 (384 × 216), panel cắt theo bo 24 ở hai góc trên; nút đóng Solid Small đè góc trên phải 16. */
+.uu-dialog { box-sizing: border-box; display: flex; flex-direction: column; width: 100%; max-width: var(--size-96); border-radius: var(--rounded-2xl); background: var(--background-surface); overflow: hidden;
+  box-shadow: 0 0 0 var(--border-outer-width) var(--border-outer); /* viền thẻ theo DNA (spec 4.3, border-outer-*): vẽ ngoài, không chiếm chỗ; mặc định 0 */ }
+.uu-dialog--standalone { width: var(--size-96); }
+.uu-dialog__header { display: flex; justify-content: flex-end; align-items: center; gap: var(--gap-4); padding: var(--gap-4) var(--gap-4) 0; }
+.uu-dialog__body { display: flex; flex-direction: column; gap: var(--gap-3); padding: var(--gap-3) var(--gap-4) var(--gap-4); }
+.uu-dialog__slot { min-width: 0; }
+
+.uu-dialog__banner { position: relative; width: 100%; aspect-ratio: 16 / 9; flex: 0 0 auto; }
+.uu-dialog__image { display: block; width: 100%; height: 100%; object-fit: cover; }
+.uu-dialog__banner-close { position: absolute; top: var(--gap-4); right: var(--gap-4); }
+.uu-dialog[data-banner] .uu-dialog__body { padding: var(--gap-4); } /* Banner=True: body padding 16 bốn phía */
+
+.uu-scrim--center .uu-scrim__wrapper { padding-bottom: 0; }
+.uu-scrim--center .uu-dialog { max-width: none; } /* trong overlay: rộng = khung − 24 (thụt 12 mỗi bên) */

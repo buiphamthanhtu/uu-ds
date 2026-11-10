@@ -1,0 +1,61 @@
+/* Chip (6.18): cùng thang với TextButton Small — cao 32, padding 4/12, gap 8, radius circle,
+   viền 2px, chữ 16/24, min 32×32. 20 variant: Type (Select/Dropdown) × Selected × State + 4 Type=Input. */
+.uu-chip {
+  position: relative; isolation: isolate; box-sizing: border-box; flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-2);
+  min-width: var(--control-height-small); min-height: var(--control-height-small);
+  padding: var(--control-padding-y-small) var(--control-padding-x-small); border-radius: var(--rounded-4xl);
+  background: transparent; color: var(--object-primary);
+  --uu-dna: 0 0 0 var(--border-outer-width) var(--border-outer), var(--elevation-none); /* viền + bóng control theo DNA (spec 4.3) */
+  /* Viền vẽ bằng box-shadow inset, KHÔNG bằng `border`: Bản thiết kế để strokeAlign INSIDE nên viền không
+     cộng vào chiều cao, còn `border` trong CSS thì có — chip sẽ cao 36 thay vì 32. */
+  /* P33 (spec 4.3): bật vòng viền DNA thì bỏ viền trong ở trạng thái thường — bề rộng về 0 khi border-outer-width > 0. */
+  --uu-rest-bw: max(0px, calc(var(--chip-border-width) - var(--border-outer-width) * 1000));
+  border: 0; box-shadow: inset 0 0 0 var(--uu-rest-bw) var(--border), var(--uu-dna);
+  font: var(--text-label-font-weight) var(--text-label-font-size)/var(--text-label-line-height) var(--font-family-body); /* style label */
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms ease, box-shadow 120ms ease, color 120ms ease;
+}
+/* State layer phủ tràn viền, nằm dưới chữ. Fill là màu object của chip — cùng luật 6.0 với nút. */
+.uu-chip::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: currentColor; opacity: 0; transition: opacity 120ms ease;
+}
+.uu-chip:not(:disabled):hover::after, .uu-chip[data-state="hover"]::after { opacity: var(--opacity-5); }
+.uu-chip:not(:disabled):active::after, .uu-chip[data-state="pressed"]::after { opacity: var(--opacity-10); }
+
+/* Đã chọn: nền interactive-muted + viền interactive, chữ / icon / lớp phủ object-interactive → đổi theo brand (§6.18). */
+.uu-chip[data-selected] { background: var(--background-interactive-muted); box-shadow: inset 0 0 0 var(--chip-border-width) var(--border-interactive), var(--uu-dna); color: var(--object-interactive); }
+
+/* Disabled: chip chưa chọn bỏ nền như TextButton Outline; chip đã chọn giữ nền như Solid. */
+.uu-chip:disabled { cursor: not-allowed; box-shadow: inset 0 0 0 var(--chip-border-width) var(--border-muted), var(--uu-dna); color: var(--object-disabled); }
+.uu-chip:disabled:not([data-selected]) { background: transparent; }
+.uu-chip:disabled[data-selected] { background: var(--background-disabled); }
+.uu-chip:disabled::after { opacity: 0 !important; }
+.uu-chip:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+.uu-chip__label { min-width: 0; }
+.uu-chip__chevron, .uu-chip__check, .uu-chip__icon { flex: 0 0 auto; display: inline-flex; color: inherit; } /* chevron / check / icon trước chữ cùng màu chữ */
+
+/* Type=Input: màu như Selected=False, thân chip không bấm được (không state layer), padding phải 4.
+   Nút gỡ `xmark` 16 trong ô tròn 24 (`size-6`) cuối chip; state layer object-primary 5/10 chỉ phủ ô tròn.
+   Compact (chip 24): ô tròn co theo chiều cao chip trừ padding dọc. */
+.uu-chip[data-type="input"] { cursor: default; padding-right: var(--gap-1); }
+.uu-chip[data-type="input"]::after { content: none; }
+.uu-chip[data-type="input"][data-disabled] { box-shadow: inset 0 0 0 var(--chip-border-width) var(--border-muted), var(--uu-dna); color: var(--object-disabled); }
+.uu-chip__remove {
+  flex: 0 0 auto; position: relative; isolation: isolate;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: min(var(--size-6), calc(var(--control-height-small) - 2 * var(--control-padding-y-small)));
+  aspect-ratio: 1; padding: 0; border: 0; border-radius: var(--rounded-circle);
+  background: transparent; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.uu-chip__remove::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: currentColor; opacity: 0; transition: opacity 120ms ease;
+}
+.uu-chip__remove:not(:disabled):hover::after, .uu-chip[data-state="hover"] .uu-chip__remove::after { opacity: var(--opacity-5); }
+.uu-chip__remove:not(:disabled):active::after, .uu-chip[data-state="pressed"] .uu-chip__remove::after { opacity: var(--opacity-10); }
+.uu-chip__remove:disabled { cursor: not-allowed; }
+.uu-chip__remove:disabled::after { opacity: 0 !important; }
+.uu-chip__remove:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }

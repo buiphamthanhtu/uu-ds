@@ -1,0 +1,69 @@
+/* Switch (6.17): rãnh 56×32 radius 16 viền 2px · núm 16 → 28 · 10 variant (Selected × State × Disabled).
+   Nửa TẮT là nền sáng (state layer 5/10), nửa BẬT là nền đặc (20/40) — đúng luật 6.0.
+   Viền vẽ bằng box-shadow inset, KHÔNG bằng `border`: núm là phần tử absolute nên nếu có border
+   thật thì gốc toạ độ lùi vào 2px và núm lòi ra khỏi rãnh 2px ở trạng thái bật. */
+.uu-switch {
+  position: relative; isolation: isolate; box-sizing: border-box; flex: 0 0 auto;
+  display: inline-block; padding: 0; border: 0;
+  width: var(--switch-width); height: var(--switch-height); border-radius: var(--rounded-circle);
+  --uu-dna: 0 0 0 var(--border-outer-width) var(--border-outer), var(--elevation-none); /* viền + bóng control theo DNA (spec 4.3) */
+  /* P33 (spec 4.3): bật vòng viền DNA thì bỏ viền trong ở trạng thái thường — bề rộng về 0 khi border-outer-width > 0. */
+  --uu-rest-bw: max(0px, calc(2px - var(--border-outer-width) * 1000));
+  background: var(--background-surface); box-shadow: inset 0 0 0 var(--uu-rest-bw) var(--border), var(--uu-dna);
+  color: var(--object-secondary);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: background-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+}
+/* State layer nằm TRÊN viền, DƯỚI núm — đúng thứ tự lớp trong bản thiết kế. Fill là màu object của variant. */
+.uu-switch::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: currentColor; opacity: 0; transition: opacity 120ms ease;
+}
+/* Núm: đổi CẢ vị trí lẫn kích thước — 16 ở mép trái 8, 28 ở mép phải 2. */
+.uu-switch__handle {
+  position: absolute; top: var(--switch-padding); left: var(--switch-padding);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--switch-handle-off); height: var(--switch-handle-off); border-radius: var(--rounded-circle);
+  background: currentColor;
+  transition: top 160ms ease, left 160ms ease, width 160ms ease, height 160ms ease, background-color 160ms ease;
+}
+
+/* ---- Tắt ---- */
+.uu-switch:not(:disabled):hover, .uu-switch[data-state="hover"],
+.uu-switch:not(:disabled):focus-visible, .uu-switch[data-state="focus"],
+.uu-switch:not(:disabled):active, .uu-switch[data-state="pressed"] { box-shadow: inset 0 0 0 2px var(--border-emphasized), var(--uu-dna); }
+.uu-switch:not(:disabled):hover::after, .uu-switch[data-state="hover"]::after { opacity: var(--opacity-5); }
+.uu-switch:not(:disabled):focus-visible::after, .uu-switch[data-state="focus"]::after { opacity: var(--opacity-10); }
+/* Pressed khi TẮT: núm đậm thêm một bậc (object-primary). Ngoại lệ duy nhất của luật
+   "state layer là toàn bộ hiệu ứng" — bản thiết kế vẽ đúng như vậy.
+   vibe-allow: hover-changes-color — bản vẽ bản thiết kế Switch Selected=False State=Pressed */
+.uu-switch:not([aria-checked="true"]):not(:disabled):active, .uu-switch:not([aria-checked="true"])[data-state="pressed"] { color: var(--object-primary); }
+.uu-switch:not(:disabled):active::after, .uu-switch[data-state="pressed"]::after { opacity: var(--opacity-10); }
+
+/* ---- Bật ---- */
+.uu-switch[aria-checked="true"] { background: var(--background-interactive); box-shadow: var(--uu-dna); color: var(--object-interactive); }
+.uu-switch[aria-checked="true"] .uu-switch__handle {
+  top: calc((var(--switch-height) - var(--switch-handle-on)) / 2); left: calc(var(--switch-width) - (var(--switch-height) - var(--switch-handle-on)) / 2 - var(--switch-handle-on));
+  width: var(--switch-handle-on); height: var(--switch-handle-on); background: var(--background-surface);
+}
+.uu-switch[aria-checked="true"]:not(:disabled):hover, .uu-switch[aria-checked="true"][data-state="hover"],
+.uu-switch[aria-checked="true"]:not(:disabled):focus-visible, .uu-switch[aria-checked="true"][data-state="focus"],
+.uu-switch[aria-checked="true"]:not(:disabled):active, .uu-switch[aria-checked="true"][data-state="pressed"] { box-shadow: var(--uu-dna); }
+.uu-switch[aria-checked="true"]::after { background: var(--background-surface); }
+.uu-switch[aria-checked="true"]:not(:disabled):hover::after, .uu-switch[aria-checked="true"][data-state="hover"]::after { opacity: var(--opacity-20); }
+.uu-switch[aria-checked="true"]:not(:disabled):focus-visible::after, .uu-switch[aria-checked="true"][data-state="focus"]::after { opacity: var(--opacity-40); }
+.uu-switch[aria-checked="true"]:not(:disabled):active::after, .uu-switch[aria-checked="true"][data-state="pressed"]::after { opacity: var(--opacity-40); }
+
+/* ---- Disabled: không có state layer ---- */
+.uu-switch:disabled { cursor: not-allowed; background: var(--background-disabled); box-shadow: inset 0 0 0 2px var(--border-muted), var(--uu-dna); color: var(--object-disabled); }
+.uu-switch[aria-checked="true"]:disabled { box-shadow: var(--uu-dna); }
+.uu-switch[aria-checked="true"]:disabled .uu-switch__handle { background: var(--background-surface); }
+.uu-switch:disabled::after { opacity: 0 !important; }
+.uu-switch:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .uu-switch, .uu-switch::after, .uu-switch__handle { transition: none; }
+}
+
+/* Icon `check` trên núm bật: Touch 16 · Compact 12 (density). */
+.uu-switch .uu-icon { --uu-icon-size: var(--switch-handle-icon); }

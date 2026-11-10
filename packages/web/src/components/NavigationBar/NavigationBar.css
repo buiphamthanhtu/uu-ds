@@ -1,0 +1,4 @@
+/* NavigationBar (6.5): 56 cao · padding 0/12 · gap 12 · KHÔNG có nền riêng (nằm trên nền màn). */
+.uu-navbar { box-sizing: border-box; display: flex; align-items: center; gap: var(--gap-3); height: var(--size-14); padding: 0 var(--gap-3); width: 100%; }
+.uu-navbar__content { flex: 1 1 0; min-width: 0; display: flex; align-items: center; }
+.uu-navbar__title { font: var(--font-weight-semibold) var(--text-heading-base-font-size)/var(--text-heading-base-line-height) var(--font-family-body); color: var(--object-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

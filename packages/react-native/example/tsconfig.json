@@ -1,0 +1,7 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": { "uu-ds-native": ["../uu-ds-native/src/index.ts"] }
+  }
+}

@@ -1,0 +1,23 @@
+/* Popover (6.29) — khung nổi neo vào phần tử, nội dung tương tác được. 1 variant.
+   VERTICAL · rộng 320 (size-80) · padding card/padding · gap 12 · radius-lg · background-surface · elevation-medium.
+   Header: Title title-base + IconButtonNeutral Ghost Small xmark. Footer: dồn phải, Neutral Ghost Small + Accent Solid Small. */
+.uu-popover {
+  box-sizing: border-box; display: flex; flex-direction: column; gap: var(--gap-3);
+  width: var(--size-80); max-width: 100%;
+  padding: var(--card-padding); border-radius: var(--radius-lg);
+  background: var(--background-surface); box-shadow: var(--elevation-medium);
+  color: var(--object-primary);
+}
+.uu-popover__header { display: flex; align-items: center; gap: var(--gap-2); }
+.uu-popover__title {
+  flex: 1 1 0; min-width: 0; margin: 0; color: var(--object-primary);
+  font: var(--font-weight-semibold) var(--text-title-base-font-size)/var(--text-title-base-line-height) var(--font-family-body); /* style title-base */
+  letter-spacing: 0;
+}
+.uu-popover__content { min-width: 0; }
+.uu-popover__footer { display: flex; justify-content: flex-end; align-items: center; gap: var(--gap-2); }
+
+/* Có anchorRef: khung tự đặt chỗ, position fixed (toạ độ do Popover.tsx đo). Không mũi tên.
+   Khoảng cách khung ↔ phần tử neo 8 (gap-2) — giữ đúng số web đang dùng. */
+.uu-popover { --uu-popover-gap: var(--gap-2); }
+.uu-popover--anchored { position: fixed; z-index: 100; }

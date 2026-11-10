@@ -1,0 +1,11 @@
+/* Toast (6.6): h64 · padding 8/16 · gap 12 · radius 12 · elevation-medium. Độ sáng của nền quyết định cả ba phần tử. */
+.uu-toast {
+  box-sizing: border-box; display: flex; align-items: center; gap: var(--gap-3);
+  min-height: var(--size-16); padding: var(--gap-2) var(--gap-4); width: 100%;
+  border-radius: var(--radius-base); box-shadow: var(--elevation-medium);
+}
+.uu-toast__content { flex: 1 1 0; min-width: 0; font: var(--font-weight-normal) var(--text-body-font-size)/var(--text-body-line-height) var(--font-family-body); }
+.uu-toast--neutral  { background: var(--background-inverted); color: var(--object-primary-inverted); }
+.uu-toast--negative { background: var(--background-negative);    color: var(--object-on-negative); }
+.uu-toast--positive { background: var(--background-positive);  color: var(--object-on-positive); }
+.uu-toast--warning  { background: var(--background-warning);  color: var(--object-on-warning); }

@@ -1,0 +1,43 @@
+/* SearchInput (6.3g): dùng lại shell .uu-field của Field.css, thêm icon trái và nút xoá phải.
+   8 variant: Value (Empty/Filled) × State (Default/Hover/Focus/Typing/Loading) × Disabled. Không có Error. */
+.uu-fieldroot--search { width: var(--size-64); } /* khổ master; instance trong màn để FILL */
+
+/* Icon `magnifier` 24 luôn có, `object-secondary`; Disabled xuống `object-disabled` cùng luật với
+   icon `calendar-days` của DateInput. */
+.uu-field--search[data-disabled] .uu-field__prefix { color: var(--object-disabled); }
+
+/* Nút xoá: icon 16 như bản vẽ, nhưng vùng chạm 32 để đủ ngưỡng chạm.
+   Lùi 8 sang phải để tâm icon vẫn nằm cách mép phải 20 như bản thiết kế. */
+.uu-field__clear {
+  flex: 0 0 auto; position: relative; isolation: isolate;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--size-8); height: var(--size-8); margin-right: calc(-1 * var(--gap-2));
+  padding: 0; border: 0; background: transparent; border-radius: var(--rounded-circle);
+  color: var(--object-secondary); cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.uu-field__clear::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: currentColor; opacity: 0; transition: opacity 120ms ease;
+}
+.uu-field__clear:hover::after { opacity: var(--opacity-5); }
+.uu-field__clear:active::after { opacity: var(--opacity-10); }
+.uu-field__clear:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+/* Trình duyệt tự vẽ nút xoá cho input[type=search] — bỏ, ta có nút riêng. */
+.uu-field--search .uu-field__input::-webkit-search-decoration,
+.uu-field--search .uu-field__input::-webkit-search-cancel-button,
+.uu-field--search .uu-field__input::-webkit-search-results-button,
+.uu-field--search .uu-field__input::-webkit-search-results-decoration { display: none; -webkit-appearance: none; }
+
+/* State=Loading: `.loading` 16 thay chỗ nút xoá (cùng ô 32 để chữ không xê dịch), viền như Typing. */
+.uu-field--search[data-state="loading"] { --uu-bw: 1px; border-color: var(--border-emphasized); }
+.uu-field__loading {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  width: var(--size-8); height: var(--size-8); margin-right: calc(-1 * var(--gap-2));
+  color: var(--object-secondary);
+}
+.uu-field__loading .uu-spinner { width: var(--size-4); height: var(--size-4); }
+
+/* Cancel=true: hàng HORIZONTAL gap 8 — Field co lại, "Huỷ" Ghost Small bên phải. */
+.uu-searchrow { display: flex; align-items: center; gap: var(--gap-2); min-width: 0; }
+.uu-searchrow > .uu-field, .uu-searchrow > .uu-menu-anchor { flex: 1 1 0; min-width: 0; }

@@ -1,0 +1,27 @@
+/* StatusIndicator (§6.15): Dot 8×8 + chữ title-sm 600, gap 6. None: cao 20, không nền. Filled: cao 24, padding 2/8, viên thuốc. */
+.uu-status {
+  box-sizing: border-box; display: inline-flex; align-items: center; gap: var(--gap-1-5);
+  height: var(--size-5); white-space: nowrap; vertical-align: middle;
+  font: var(--font-weight-semibold) var(--text-title-sm-font-size)/var(--text-title-sm-line-height) var(--font-family-body);
+  color: var(--object-primary);
+}
+.uu-status__dot { flex: 0 0 auto; width: var(--size-2); height: var(--size-2); border-radius: var(--rounded-circle); background: currentColor; animation: uu-status-blink 1.6s ease-in-out infinite; }
+/* Chấm nhấp nháy (§6.15): opacity 1 → 0.3 → 1, chu kỳ 1.6s. Giảm chuyển động thì đứng yên. */
+@keyframes uu-status-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) { .uu-status__dot { animation: none; } }
+
+/* Container=None: chấm mang màu tone, chữ giữ object-primary */
+.uu-status--none.uu-status--neutral .uu-status__dot { color: var(--object-secondary); }
+.uu-status--none.uu-status--success .uu-status__dot { color: var(--object-positive); }
+.uu-status--none.uu-status--warning .uu-status__dot { color: var(--object-warning); }
+.uu-status--none.uu-status--error   .uu-status__dot { color: var(--object-negative); }
+/* Highlight: họ accent (đổi theo brand) — "đáng chú ý", không phải trạng thái. */
+.uu-status--none.uu-status--highlight .uu-status__dot { color: var(--object-accent); }
+
+/* Container=Filled: nền status, chấm và chữ cùng object-on-{tone} */
+.uu-status--filled { height: var(--size-6); padding: var(--gap-0-5) var(--gap-2); border-radius: var(--rounded-circle); }
+.uu-status--filled.uu-status--neutral { background: var(--background-inverted); color: var(--object-on-dark); }
+.uu-status--filled.uu-status--success { background: var(--background-positive);  color: var(--object-on-positive); }
+.uu-status--filled.uu-status--warning { background: var(--background-warning);  color: var(--object-on-warning); }
+.uu-status--filled.uu-status--error   { background: var(--background-negative);    color: var(--object-on-negative); }
+.uu-status--filled.uu-status--highlight { background: var(--background-accent); color: var(--object-on-accent); }

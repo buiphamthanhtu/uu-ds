@@ -1,0 +1,58 @@
+/* BottomBar (6.22) — thanh điều hướng giữa các màn chính. 10 variant: Active 1–5 × Compact.
+   Vỏ pill nền background-surface, padding 4, gap 4, không viền, không bóng.
+   Compact=False: vỏ FILL, mục FILL chia đều, mục cao 56 → thanh 64.
+   Compact=True: vỏ HUG, mục 64 × 40 không nhãn → thanh 48.
+   Mục đang chọn thuộc họ `interactive` (thứ bấm được), giống Tab — không dùng accent.
+   Mục đổi trạng thái bằng nền Active. */
+.uu-bottombar {
+  box-sizing: border-box; display: flex; align-items: center;
+  width: 100%; gap: var(--gap-1); padding: var(--gap-1);
+  border-radius: var(--rounded-circle); background: var(--background-surface);
+}
+.uu-bottombar--compact { display: inline-flex; width: auto; }
+
+/* base/FooterItem: VERTICAL, padding 6/12, gap 4, min 64 × 40, radius circle. */
+.uu-bottombar__item {
+  box-sizing: border-box; position: relative;
+  flex: 1 1 0; min-width: var(--size-16); min-height: var(--size-10);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--gap-1); padding: var(--gap-1-5) var(--gap-3);
+  border: 0; border-radius: var(--rounded-circle); background: transparent;
+  color: var(--object-secondary);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.uu-bottombar--compact .uu-bottombar__item { flex: 0 0 auto; }
+.uu-bottombar__item[aria-current="page"] {
+  background: var(--background-interactive-muted); color: var(--object-interactive);
+}
+.uu-bottombar__item:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+/* Icon hộp 24; badge neo góc trên phải icon: mép phải trùng mép icon, cao hơn đỉnh icon 4px. */
+.uu-bottombar__icon { position: relative; display: inline-flex; }
+.uu-bottombar__badge { position: absolute; right: 0; top: calc(-1 * var(--gap-1)); }
+
+/* Nhãn: title-xs 11/16 600, một dòng. */
+.uu-bottombar__label {
+  font: var(--font-weight-semibold) var(--text-title-xs-font-size)/var(--text-title-xs-line-height) var(--font-family-body);
+  letter-spacing: 0; white-space: nowrap;
+}
+
+/* base/FooterItemSpecial — nút hành động RỜI bên phải vỏ, cách 8. 4 variant: Type (Subtle · Emphasized) × Compact.
+   Compact=False: 64 × 64 · padding 6/16 · icon 24 + nhãn title-xs. Compact=True: 48 × 48 · padding 12 · chỉ icon.
+   Subtle: background-surface + object-interactive · state layer 5/10 (.uu-on-light).
+   Emphasized: background-interactive + object-on-interactive · state layer 20/40 (.uu-on-dark). */
+.uu-bottombar-row { box-sizing: border-box; display: flex; align-items: center; gap: var(--gap-2); width: 100%; }
+.uu-bottombar-row > .uu-bottombar { flex: 1 1 0; min-width: 0; }
+.uu-bottombar-row--compact { display: inline-flex; width: auto; }
+.uu-bottombar-row--compact > .uu-bottombar { flex: 0 0 auto; }
+.uu-bottombar__action {
+  box-sizing: border-box; flex: 0 0 auto;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--gap-1);
+  min-width: var(--size-16); height: var(--size-16); padding: var(--gap-1-5) var(--gap-4);
+  border: 0; border-radius: var(--rounded-circle);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.uu-bottombar-row--compact .uu-bottombar__action { min-width: var(--size-12); width: var(--size-12); height: var(--size-12); padding: var(--gap-3); }
+.uu-bottombar__action--subtle     { background: var(--background-surface);     color: var(--object-interactive); }
+.uu-bottombar__action--emphasized { background: var(--background-interactive); color: var(--object-on-interactive); }
+.uu-bottombar__action:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }

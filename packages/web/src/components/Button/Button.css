@@ -1,0 +1,74 @@
+/* TextButton (6.1) · IconButton (6.2) — 4 bộ: Accent/Neutral × Text/Icon.
+   Hover/Pressed đi qua state layer (.uu-interactive + .uu-on-dark/.uu-on-light trong tokens.css).
+   KHÔNG đổi nền, chữ, hay font-weight ở hover/pressed. */
+.uu-btn {
+  box-sizing: border-box;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--gap-2);
+  border-radius: var(--rounded-4xl);
+  border: 0;
+  background: transparent;
+  font: var(--text-label-font-weight) var(--text-label-font-size)/var(--text-label-line-height) var(--font-family-body); /* style label */
+  letter-spacing: 0; white-space: nowrap; text-decoration: none;
+  cursor: pointer; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Size — min-width = min-height nên nút chữ ngắn không hẹp hơn hình tròn. Hug width, không hardcode. */
+.uu-btn--large { min-height: var(--control-height-large); min-width: var(--control-height-large); padding: var(--control-padding-y-large) var(--control-padding-x-large); }
+.uu-btn--base  { min-height: var(--control-height-base); min-width: var(--control-height-base); padding: var(--control-padding-y-base) var(--control-padding-x-base); }
+.uu-btn--small { min-height: var(--control-height-small); min-width: var(--control-height-small); padding: var(--control-padding-y-small) var(--control-padding-x-small); }
+/* Icon trong nút theo density: Touch 24 / 24 / 16 · Compact 16. */
+.uu-btn--large .uu-icon { --uu-icon-size: var(--control-icon-large); }
+.uu-btn--base .uu-icon  { --uu-icon-size: var(--control-icon-base); }
+.uu-btn--small .uu-icon { --uu-icon-size: var(--control-icon-small); }
+/* Viền Outline vẽ bằng box-shadow inset, KHÔNG bằng border.
+   Bản thiết kế strokeAlign=INSIDE nên viền phải nằm gọn bên trong, không cộng thêm chiều cao.
+   `border` + `box-sizing: border-box` vẫn cộng 4px khi chiều cao do nội dung quyết định
+   (nút Small: 4+24+4 = 32 đã chạm min-height, viền đẩy thành 36). box-shadow không chiếm chỗ,
+   và lớp state layer `::after { inset: 0 }` phủ trọn cả vùng viền — đúng như bản vẽ bản thiết kế. */
+/* P33 (spec 4.3): bật vòng viền DNA thì bỏ viền trong ở trạng thái thường — bề rộng về 0 khi border-outer-width > 0. */
+.uu-btn--outline { --uu-btn-inset: inset 0 0 0 max(0px, calc(2px - var(--border-outer-width) * 1000)) var(--uu-btn-border, transparent); }
+.uu-btn--outline:disabled { --uu-btn-inset: inset 0 0 0 2px var(--uu-btn-border, transparent); }
+/* Viền + bóng control theo DNA (spec 4.3): vòng ngoài, không chiếm chỗ. Mặc định 0 / không bóng. */
+.uu-btn { box-shadow: var(--uu-btn-inset, 0 0 0 0 transparent), 0 0 0 var(--border-outer-width) var(--border-outer), var(--elevation-none); }
+
+/* Accent */
+.uu-btn--accent.uu-btn--solid   { background: var(--background-interactive); color: var(--object-on-interactive); }
+.uu-btn--accent.uu-btn--solid.uu-btn--inverted   { background: var(--background-surface); color: var(--object-interactive); }
+.uu-btn--accent.uu-btn--outline { --uu-btn-border: var(--border-interactive); color: var(--object-interactive); }
+.uu-btn--accent.uu-btn--outline.uu-btn--inverted { --uu-btn-border: var(--border-interactive-inverted); color: var(--object-interactive-inverted); }
+.uu-btn--accent.uu-btn--ghost   { color: var(--object-interactive); }
+.uu-btn--accent.uu-btn--ghost.uu-btn--inverted   { color: var(--object-interactive-inverted); }
+
+/* Neutral */
+.uu-btn--neutral.uu-btn--solid   { background: var(--background-inverted); color: var(--object-primary-inverted); }
+.uu-btn--neutral.uu-btn--solid.uu-btn--inverted   { background: var(--background-surface); color: var(--object-primary); }
+.uu-btn--neutral.uu-btn--outline { --uu-btn-border: var(--border); color: var(--object-primary); }
+.uu-btn--neutral.uu-btn--outline.uu-btn--inverted { --uu-btn-border: var(--border-inverted); color: var(--object-primary-inverted); }
+.uu-btn--neutral.uu-btn--ghost   { color: var(--object-primary); }
+.uu-btn--neutral.uu-btn--ghost.uu-btn--inverted   { color: var(--object-primary-inverted); }
+.uu-btn--neutral.uu-btn--tonal   { background: var(--background-subtle); color: var(--object-primary); }
+
+/* TextButtonDanger (6.1) — hành động phá huỷ. Không có Inverted. */
+.uu-btn--danger.uu-btn--solid   { background: var(--background-negative); color: var(--object-on-negative); }
+.uu-btn--danger.uu-btn--outline { --uu-btn-border: var(--border-negative); color: var(--object-negative); }
+.uu-btn--danger.uu-btn--ghost   { color: var(--object-negative); }
+
+/* Focus bàn phím: viền 2px border-emphasized cách 2px, chỉ :focus-visible (Nền tảng → Contrast & Accessibility) */
+.uu-btn:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: 2px; }
+
+/* Disabled — không có state layer (tokens.css đã tắt ::after khi [disabled]) */
+.uu-btn:disabled, .uu-btn[aria-disabled="true"] { cursor: not-allowed; }
+.uu-btn.uu-btn--solid:disabled, .uu-btn.uu-btn--tonal:disabled { background: var(--background-disabled); color: var(--object-disabled); }
+.uu-btn.uu-btn--outline:disabled { --uu-btn-border: var(--border-muted); color: var(--object-disabled); }
+.uu-btn.uu-btn--outline.uu-btn--inverted:disabled { --uu-btn-border: var(--border-muted-inverted); }
+.uu-btn.uu-btn--ghost:disabled   { color: var(--object-disabled); }
+
+/* Loading — khoá chạm, KHÔNG giảm độ đục, spinner đứng trước label, label vẫn hiện */
+.uu-btn[data-state="loading"] { pointer-events: none; }
+
+/* Icon button — hộp vuông, icon 24 (L/Base) · 16 (Small), stroke outline 2px */
+.uu-iconbtn { padding: 0; }
+.uu-iconbtn.uu-btn--large { width: var(--control-height-large); height: var(--control-height-large); }
+.uu-iconbtn.uu-btn--base  { width: var(--control-height-base); height: var(--control-height-base); }
+.uu-iconbtn.uu-btn--small { width: var(--control-height-small); height: var(--control-height-small); }

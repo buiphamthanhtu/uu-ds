@@ -1,0 +1,57 @@
+/* Bottom sheet (6.8): CardSheet = tấm sheet · BottomSheet = scrim + wrapper (thay cho template `Sheet`). */
+.uu-sheet {
+  box-sizing: border-box; display: flex; flex-direction: column; width: 100%;
+  border-radius: var(--rounded-2xl); background: var(--background-surface); overflow: hidden; /* bo cả 4 góc: sheet thụt 12 mỗi bên */
+  box-shadow: 0 0 0 var(--border-outer-width) var(--border-outer); /* viền thẻ theo DNA (spec 4.3, border-outer-*): vẽ ngoài, không chiếm chỗ; mặc định 0 */
+  transition: transform 200ms ease;
+}
+.uu-sheet[data-dragging] { transition: none; }
+.uu-sheet__header { display: flex; align-items: center; gap: var(--gap-4); padding: var(--gap-4) var(--gap-4) 0; min-height: var(--size-12); }
+.uu-sheet__title { flex: 1 1 0; min-width: 0; margin: 0; font: var(--font-weight-semibold) var(--text-heading-base-font-size)/var(--text-heading-base-line-height) var(--font-family-body); color: var(--object-primary); }
+.uu-sheet__body { display: flex; flex-direction: column; gap: var(--gap-3); padding: var(--gap-3) var(--gap-4) var(--gap-4); }
+.uu-sheet__slot { min-width: 0; }
+
+/* Handle=true: từ đỉnh 8 · thanh 4 · 8 · Header (Header bỏ padding trên 16 → sheet chỉ cao thêm 4).
+   Vùng bấm là cả dải 20 ngang sheet; thanh 32 × 4 (size-8 × size-1) rounded-circle nền border căn giữa. */
+.uu-sheet__handle {
+  flex: 0 0 auto; display: flex; justify-content: center; padding: var(--gap-2) 0;
+  cursor: grab; touch-action: none; -webkit-tap-highlight-color: transparent;
+}
+.uu-sheet[data-dragging] .uu-sheet__handle { cursor: grabbing; }
+.uu-sheet__handle:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: -2px; border-radius: var(--rounded-2xl) var(--rounded-2xl) 0 0; }
+.uu-sheet__handle-bar { display: block; width: var(--size-8); height: var(--size-1); border-radius: var(--rounded-circle); background: var(--border); }
+.uu-sheet[data-handle] .uu-sheet__header { padding-top: 0; }
+
+/* Height=Full: cao bằng khung chứa (BottomSheet: tới cách đỉnh safe area 12). Body cuộn trong Slot;
+   Header và nhóm nút đứng yên. Vẫn bo 4 góc. */
+.uu-sheet[data-height="full"] { flex: 1 1 auto; height: 100%; min-height: 0; }
+.uu-sheet[data-height="full"] .uu-sheet__body,
+.uu-sheet[data-dragging] .uu-sheet__body { flex: 1 1 auto; min-height: 0; }
+.uu-sheet[data-height="full"] .uu-sheet__slot,
+.uu-sheet[data-dragging] .uu-sheet__slot { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+
+/* Scrim: overlay (đen 10%, alpha nằm trong token) + overlay-blur (16). Đừng nhân thêm opacity lên fill. */
+.uu-scrim {
+  position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; justify-content: flex-end;
+  background: var(--overlay); -webkit-backdrop-filter: blur(var(--overlay-blur)); backdrop-filter: blur(var(--overlay-blur));
+}
+.uu-scrim--center { justify-content: center; }
+.uu-scrim__wrapper { padding: 0 var(--gap-3); padding-bottom: calc(var(--gap-3) + env(safe-area-inset-bottom, 0px)); }
+/* Wrapper của sheet phủ cả chiều cao scrim, chừa đỉnh safe area + 12 → nấc Full; sheet Fit dồn xuống đáy. */
+.uu-scrim__wrapper--sheet {
+  box-sizing: border-box; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding-top: calc(var(--gap-3) + env(safe-area-inset-top, 0px));
+}
+.uu-scrim__wrapper--sheet > .uu-sheet { flex: 0 1 auto; max-height: 100%; }
+.uu-scrim__wrapper--sheet > .uu-sheet[data-height="full"] { flex: 1 1 auto; }
+/* Nội dung dài hơn màn ở Fit: sheet chạm đỉnh rồi Slot cuộn, Header và nhóm nút vẫn đứng yên. */
+.uu-scrim__wrapper--sheet > .uu-sheet .uu-sheet__body { flex: 1 1 auto; min-height: 0; }
+.uu-scrim__wrapper--sheet > .uu-sheet .uu-sheet__slot { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+/* Màn rộng (spec 6.8, density Compact): sheet giữa màn theo cả hai trục, rộng tối đa 480, vẫn bo 4 góc.
+   Cần rộng hơn thì dùng Dialog / SideSheet, đừng kéo sheet rộng ra. */
+[data-density="compact"] .uu-scrim__wrapper--sheet,
+.uu-scrim__wrapper--sheet[data-density="compact"] { justify-content: center; align-items: center; padding-bottom: calc(var(--gap-3) + env(safe-area-inset-bottom, 0px)); }
+[data-density="compact"] .uu-scrim__wrapper--sheet > .uu-sheet,
+.uu-scrim__wrapper--sheet[data-density="compact"] > .uu-sheet { max-width: var(--size-120); }
+/* Trong bản thiết kế template có IOS Home indicator 34 dưới sheet; OS tự vẽ nên code không dựng. */
+.uu-sheet__slot:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: -2px; }
