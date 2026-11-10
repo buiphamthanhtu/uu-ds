@@ -237,6 +237,11 @@ class UuWidgetbook extends StatelessWidget {
           WidgetbookComponent(name: 'BottomSheet', useCases: [
             WidgetbookUseCase(name: 'CardSheet', builder: (ctx) => SizedBox(width: 366, child: UuCardSheet(header: 'Header', onBack: ctx.knobs.boolean(label: 'Navigation=Back') ? () {} : null, cta: const UuButtonGroup(primary: UuGroupAction('Xác nhận'), secondary: UuGroupAction('Huỷ')), child: const Text('Nội dung đặt vào Slot.')))),
             WidgetbookUseCase(name: 'Mở sheet', builder: (ctx) => Builder(builder: (c) => UuTextButton(label: 'Mở sheet', onPressed: () => showUuBottomSheet(c, header: 'Xoá tài khoản', builder: (_) => const Text('Nội dung'), cta: const UuButtonGroup(primary: UuGroupAction('Xoá tài khoản'), secondary: UuGroupAction('Huỷ')))))),
+            WidgetbookUseCase(name: 'Vị trí (placement) + ô nhập', builder: (ctx) {
+              final p = ctx.knobs.object.dropdown<String>(label: 'placement', options: const ['theo density', 'bottom', 'center']);
+              final placement = p == 'bottom' ? UuSheetPlacement.bottom : p == 'center' ? UuSheetPlacement.center : null;
+              return Builder(builder: (c) => UuTextButton(label: 'Mở sheet', onPressed: () => showUuBottomSheet(c, header: 'Đổi tên', placement: placement, builder: (_) => const UuTextInput(label: 'Tên hiển thị'), cta: const UuButtonGroup(primary: UuGroupAction('Lưu'), secondary: UuGroupAction('Huỷ')))));
+            }),
           ]),
           WidgetbookComponent(name: 'Dialog', useCases: [
             WidgetbookUseCase(name: 'CardDialog', builder: (_) => const UuCardDialog(width: 384, buttonGroup: UuButtonGroup(primary: UuGroupAction('Đã hiểu')), child: Text('Huỷ đơn hàng?'))),
