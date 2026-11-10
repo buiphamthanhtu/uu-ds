@@ -1434,7 +1434,7 @@ Nút Action là `TextButtonNeutral / Solid / Base` (48, nền `background-surfac
 | `BottomBar` (§6.22) | **mép trên** của thanh, không đè lên mục điều hướng |
 | Bàn phím đang mở | **mép trên** bàn phím |
 
-`BottomBar` tự báo vị trí lên lớp hiện Toast, app không truyền tay chiều cao. `CardPushNotification` (§6.31) ở đỉnh, không theo quy tắc này.
+`BottomBar` tự báo vị trí lên lớp hiện Toast, app không truyền tay chiều cao. App tự làm thanh đáy riêng (không dùng `BottomBar`) thì gắn cơ chế báo đó vào view của thanh: React Native `const edge = useUuBottomEdgeReporter()` rồi `<View ref={edge.ref} onLayout={edge.onLayout}>`. `CardPushNotification` (§6.31) ở đỉnh, không theo quy tắc này.
 
 **Contrast đã đo** (WCAG AA, ngưỡng 4.5 cho chữ thường): Neutral 21.00 · Negative 4.83 · Positive 5.02 · Warning 15.93. Cả bốn type đều đạt.
 
@@ -1557,6 +1557,11 @@ Bo cả bốn góc chứ không riêng hai góc trên, vì sheet nổi cách hai
 
 **Màn rộng** (density `Compact`: tablet, web): sheet hiện **giữa màn** theo cả hai trục, rộng tối đa **480**, vẫn bo 4
 góc, scrim như trên. Cần rộng hơn 480 thì đổi sang `Dialog` hoặc `SideSheet`, không kéo sheet rộng ra.
+
+**Vị trí `placement`** (`bottom` · `center`): mặc định theo density như trên (Touch → `bottom`, Compact → `center`).
+Truyền tay khi vị trí cần khác density, ví dụ app giữ Touch (control 48) nhưng muốn sheet giữa màn trên màn rộng.
+`center` vẫn rộng tối đa 480. Web `<BottomSheet placement="center">` · Flutter `showUuBottomSheet(placement:
+UuSheetPlacement.center)` · React Native `<UuBottomSheet placement="center">`.
 
 **Bàn phím** (app): sheet có ô nhập thì nổi cách **đỉnh bàn phím 12** (cùng luật mép dưới của Toast §6.6), Body
 cuộn nếu thiếu chỗ. Chạm nút trong sheet khi bàn phím đang mở thì nút nhận chạm ngay, không mất một lượt để đóng

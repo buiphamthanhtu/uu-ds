@@ -138,6 +138,8 @@ export type BaseSheetProps = CardSheetProps;
 
 export interface BottomSheetProps extends CardSheetProps {
   open: boolean;
+  /** Vị trí sheet (spec 6.8). Bỏ trống = theo density: Touch → `bottom`, Compact → `center` (giữa màn, rộng tối đa 480). */
+  placement?: 'bottom' | 'center';
 }
 
 /**
@@ -146,7 +148,7 @@ export interface BottomSheetProps extends CardSheetProps {
  * Esc và bấm ra ngoài gọi `onClose` — kể cả khi tấm đang ở `Navigation=Back`.
  * `position: fixed` — đặt trong khung có `transform` (vd. frame điện thoại trong Storybook) thì bám khung đó.
  */
-export function BottomSheet({ open, onClose, ...sheet }: BottomSheetProps) {
+export function BottomSheet({ open, onClose, placement, ...sheet }: BottomSheetProps) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: globalThis.KeyboardEvent) => { if (e.key === 'Escape') onClose?.(); };
@@ -156,7 +158,7 @@ export function BottomSheet({ open, onClose, ...sheet }: BottomSheetProps) {
   if (!open) return null;
   return (
     <div className="uu-scrim" onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}>
-      <div className="uu-scrim__wrapper uu-scrim__wrapper--sheet" onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}>
+      <div className="uu-scrim__wrapper uu-scrim__wrapper--sheet" data-placement={placement} onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}>
         <CardSheet onClose={onClose} {...sheet} />
       </div>
     </div>

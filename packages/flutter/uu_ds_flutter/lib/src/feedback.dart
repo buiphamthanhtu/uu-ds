@@ -236,6 +236,9 @@ class UuButtonGroup extends StatelessWidget {
 /// `Height` của [UuCardSheet]: [fit] cao theo nội dung · [full] cao tới cách đỉnh safe area 12 (Body cuộn).
 enum UuSheetHeight { fit, full }
 
+/// Vị trí bottom sheet (§6.8). Bỏ trống = theo density: Touch → [bottom], Compact → [center] (giữa màn, rộng tối đa 480).
+enum UuSheetPlacement { bottom, center }
+
 /// CardSheet (§6.8): tấm sheet radius 24 (cả 4 góc), header (tiêu đề + điều hướng), body (slot + Button group).
 /// `Navigation` = Close (mặc định: nút đóng Outline Small bên phải) · Back (truyền [onBack]: nút quay lại
 /// bên trái, KHÔNG có nút đóng). Hai nút loại trừ nhau — sheet con về sheet cha, muốn đóng thì về sheet gốc.
@@ -352,12 +355,15 @@ class _UuCardSheetState extends State<UuCardSheet> {
           if (mounted && _current == UuSheetHeight.fit && _liveH == null) _fitHeight = _size;
         });
       }
-      final slot = SingleChildScrollView(child: widget.child);
+      // Viền ngoài + bóng của control vẽ ra ngoài hộp; vùng cuộn cắt mọi thứ ngoài khung, nên khung nội dung
+      // nới ra đúng phần tràn đó (§4.3), vị trí nội dung không đổi.
+      final e = _outerExtent(UuTheme.of(context).outerShadows);
+      final slot = SingleChildScrollView(padding: EdgeInsets.all(e), child: widget.child);
       final body = Padding(
-        padding: const EdgeInsets.fromLTRB(UuGap.g4, UuGap.g3, UuGap.g4, UuGap.g4),
+        padding: EdgeInsets.fromLTRB(UuGap.g4 - e, UuGap.g3 - e, UuGap.g4 - e, UuGap.g4),
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, mainAxisSize: MainAxisSize.min, children: [
-          if (!bounded) widget.child else if (dragging || full) Expanded(child: slot) else Flexible(child: slot),
-          if (widget.cta != null) ...[const SizedBox(height: UuGap.g3), widget.cta!],
+          if (!bounded) Padding(padding: EdgeInsets.all(e), child: widget.child) else if (dragging || full) Expanded(child: slot) else Flexible(child: slot),
+          if (widget.cta != null) ...[SizedBox(height: UuGap.g3 - e), Padding(padding: EdgeInsets.symmetric(horizontal: e), child: widget.cta!)],
         ]),
       );
       Widget sheet = Container(
@@ -456,12 +462,21 @@ class _UuSheetHandle extends StatelessWidget {
 typedef UuBaseSheet = UuCardSheet;
 
 /// Scrim chung cho Sheet/Dialog: `overlay` (đen 10%, alpha trong token) + blur 16.
+/// Phần bóng / vòng viền tràn ra ngoài hộp, tối đa 12 (khoảng đệm nhỏ nhất quanh nội dung sheet).
+double _outerExtent(List<BoxShadow> shadows) {
+  var e = 0.0;
+  for (final s in shadows) {
+    e = math.max(e, math.max(s.offset.dx.abs(), s.offset.dy.abs()) + s.blurRadius + s.spreadRadius);
+  }
+  return math.min(e.ceilToDouble(), UuGap.g3);
+}
+
 Widget _scrim(BuildContext context, Widget child, {required bool bottom}) {
   final c = UuTheme.of(context).colors;
   // Bàn phím mở: khối nổi cách đỉnh bàn phím 12 (§6.8).
   final kb = MediaQuery.viewInsetsOf(context).bottom;
   final pad = MediaQuery.paddingOf(context);
-  final bottomPad = kb > 0 ? kb + UuGap.g3 : (bottom ? pad.bottom : 0.0);
+  final bottomPad = kb > 0 ? kb + UuGap.g3 : (bottom ? pad.bottom + UuGap.g3 : 0.0);
   return BackdropFilter(
     filter: ImageFilter.blur(sigmaX: UuEffect.overlayBlur, sigmaY: UuEffect.overlayBlur),
     child: Container(
@@ -476,18 +491,19 @@ Widget _scrim(BuildContext context, Widget child, {required bool bottom}) {
 
 /// Bottom sheet đầy đủ: scrim + wrapper thụt 12 mỗi bên, sheet sát đáy (OS tự vẽ home indicator).
 /// [handle] = sheet kéo được, bắt đầu ở [initialHeight]; nấc `full` cao tới cách đỉnh safe area 12.
-Future<T?> showUuBottomSheet<T>(BuildContext context, {required String header, required WidgetBuilder builder, UuButtonGroup? cta, VoidCallback? onBack, bool handle = false, UuSheetHeight initialHeight = UuSheetHeight.fit}) {
+/// [placement] bỏ trống thì theo density; truyền tay khi vị trí cần khác density (§6.8).
+Future<T?> showUuBottomSheet<T>(BuildContext context, {required String header, required WidgetBuilder builder, UuButtonGroup? cta, VoidCallback? onBack, bool handle = false, UuSheetHeight initialHeight = UuSheetHeight.fit, UuSheetPlacement? placement}) {
   return showGeneralDialog<T>(
     context: context,
     barrierDismissible: true,
     barrierLabel: 'Đóng',
     barrierColor: Colors.transparent,
     transitionDuration: const Duration(milliseconds: 200),
-    // Màn rộng (density Compact): sheet giữa màn, rộng tối đa 480 (§6.8). Bàn phím mở thì bỏ SafeArea đáy (đã cách bàn phím 12).
+    // Màn rộng (density Compact): sheet giữa màn, rộng tối đa 480 (§6.8). Đáy: cách safe area 12, bàn phím mở thì cách bàn phím 12 (_scrim lo).
     pageBuilder: uuRoutePage(context, (ctx) => _scrim(
         ctx,
-        SafeArea(top: false, bottom: MediaQuery.viewInsetsOf(ctx).bottom == 0, child: UuCardSheet(header: header, cta: cta, onBack: onBack, handle: handle, initialHeight: initialHeight, child: builder(ctx))),
-        bottom: UuTheme.of(ctx).density != UuDensity.compact)),
+        SafeArea(top: false, bottom: false, child: UuCardSheet(header: header, cta: cta, onBack: onBack, handle: handle, initialHeight: initialHeight, child: builder(ctx))),
+        bottom: (placement ?? (UuTheme.of(ctx).density == UuDensity.compact ? UuSheetPlacement.center : UuSheetPlacement.bottom)) == UuSheetPlacement.bottom)),
     transitionBuilder: (ctx, anim, _, child) => FadeTransition(opacity: anim, child: SlideTransition(position: Tween(begin: const Offset(0, 0.1), end: Offset.zero).animate(anim), child: child)),
   );
 }

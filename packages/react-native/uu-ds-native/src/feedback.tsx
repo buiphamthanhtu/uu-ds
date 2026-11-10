@@ -251,13 +251,25 @@ export interface UuCardSheetProps {
   maxHeight?: number;
 }
 
+/** Khoảng bóng / vòng viền tràn ra ngoài hộp, đọc từ chuỗi box-shadow (`x y blur spread màu`, nhiều lớp cách nhau dấu phẩy). */
+function outerExtent(shadow: string | undefined): number {
+  if (!shadow) return 0;
+  let e = 0;
+  for (const m of shadow.matchAll(/(-?[\d.]+)px\s+(-?[\d.]+)px(?:\s+([\d.]+)px)?(?:\s+(-?[\d.]+)px)?/g)) {
+    e = Math.max(e, Math.max(Math.abs(+m[1]), Math.abs(+m[2])) + +(m[3] ?? 0) + +(m[4] ?? 0));
+  }
+  return Math.ceil(e);
+}
+
 /**
  * CardSheet (§6.8): tấm sheet radius 24 cả 4 góc, header (heading-base + điều hướng), body (slot + Button group).
  * Kéo được (`handle`): kéo xuống ở `fit` quá 1/3 chiều cao → đóng; ở `full` → về `fit`; thả giữa chừng về nấc gần nhất.
  * Chạm thanh kéo để đổi nấc.
  */
 export function UuCardSheet({ header, children, onClose, onBack, cta, handle = false, height, initialHeight = 'fit', onHeightChange, maxHeight }: UuCardSheetProps) {
-  const { colors: c, text, radius, cardShadow } = useUu();
+  const { colors: c, text, radius, cardShadow, outerShadow } = useUu();
+  // Viền ngoài + bóng của control vẽ ra ngoài hộp; ScrollView cắt mọi thứ ngoài khung nên nới khung đúng chừng đó (§4.3).
+  const ext = outerExtent(outerShadow);
   const [own, setOwn] = useState<UuSheetHeight>(initialHeight);
   const current: UuSheetHeight = handle ? height ?? own : 'fit';
   const full = current === 'full' && maxHeight !== undefined;
@@ -302,7 +314,7 @@ export function UuCardSheet({ header, children, onClose, onBack, cta, handle = f
         {!back && <UuIconButton icon="xmark" label="Đóng" tone="neutral" type="outline" size="small" onPress={onClose} />}
       </View>
       <View style={{ paddingTop: gap.g3, paddingHorizontal: gap.g4, paddingBottom: gap.g4, gap: gap.g3, flexShrink: 1, flexGrow: full ? 1 : 0 }}>
-        <ScrollView keyboardShouldPersistTaps="handled" style={{ flexGrow: full ? 1 : 0, flexShrink: 1 }}>{children}</ScrollView>
+        <ScrollView keyboardShouldPersistTaps="handled" style={{ flexGrow: full ? 1 : 0, flexShrink: 1, margin: ext ? -ext : 0 }} contentContainerStyle={{ padding: ext }}>{children}</ScrollView>
         {cta}
       </View>
     </Animated.View>
@@ -338,7 +350,7 @@ function Scrim({ visible, onClose, bottom, children }: { visible: boolean; onClo
       <Animated.View
         pointerEvents="box-none"
         style={{
-          flex: 1, justifyContent: bottom ? 'flex-end' : 'center', alignItems: 'center', paddingHorizontal: gap.g3, paddingTop: bottom || kbPad ? insets.top + gap.g3 : 0, paddingBottom: Math.max(bottom ? insets.bottom : 0, kbPad),
+          flex: 1, justifyContent: bottom ? 'flex-end' : 'center', alignItems: 'center', paddingHorizontal: gap.g3, paddingTop: bottom || kbPad ? insets.top + gap.g3 : 0, paddingBottom: Math.max(bottom ? insets.bottom + gap.g3 : 0, kbPad),
           opacity: bottom && !reduce ? 1 : anim, transform: [{ translateY: shift }],
         }}
       >
@@ -350,17 +362,21 @@ function Scrim({ visible, onClose, bottom, children }: { visible: boolean; onClo
 }
 
 /** Bottom sheet đầy đủ: scrim + lề 12 mỗi bên, sheet sát đáy. Nấc `full` cao tới cách đỉnh safe area 12. */
-export function UuBottomSheet({ visible, ...sheet }: UuCardSheetProps & { visible: boolean }) {
+/** Vị trí bottom sheet (§6.8). Bỏ trống = theo density: Touch → `bottom`, Compact → `center` (giữa màn, rộng tối đa 480). */
+export type UuSheetPlacement = 'bottom' | 'center';
+
+export function UuBottomSheet({ visible, placement, ...sheet }: UuCardSheetProps & { visible: boolean; placement?: UuSheetPlacement }) {
   const { density } = useUu();
   const { height } = useWindowDimensions();
   const insets = useSafeAreaInsetsOptional();
   const kbTop = useUuKeyboardTop();
-  const bottomPad = kbTop !== null ? Math.max(insets.bottom, height - kbTop + gap.g3) : insets.bottom;
-  // Màn rộng (density Compact): sheet giữa màn, rộng tối đa 480, mờ dần như dialog (§6.8).
-  const wide = density === 'compact';
+  // Khoảng chừa dưới sheet: safe area + 12, hoặc đỉnh bàn phím + 12 (§6.8).
+  const bottomPad = kbTop !== null ? Math.max(insets.bottom + gap.g3, height - kbTop + gap.g3) : insets.bottom + gap.g3;
+  // Giữa màn (mặc định ở Compact, hoặc placement="center"): rộng tối đa 480, mờ dần như dialog (§6.8).
+  const wide = (placement ?? (density === 'compact' ? 'center' : 'bottom')) === 'center';
   return (
     <Scrim visible={visible} onClose={sheet.onBack ?? sheet.onClose} bottom={!wide}>
-      <UuCardSheet {...sheet} maxHeight={height - insets.top - gap.g3 - bottomPad - (wide ? gap.g3 : 0)} />
+      <UuCardSheet {...sheet} maxHeight={height - insets.top - gap.g3 - bottomPad} />
     </Scrim>
   );
 }

@@ -15,3 +15,5 @@ export * from './feedback';
 export * from './overlay';
 export * from './data';
 export { useSafeAreaInsetsOptional } from './safe-area';
+// Thanh đáy tự làm (không dùng UuBottomBar) gắn hook này để Toast nổi trên nó (§6.6).
+export { useUuBottomEdgeReporter } from './bottom-edge';
