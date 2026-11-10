@@ -45,6 +45,19 @@ export function CardSheet({ header, onClose, onBack, children, cta, handle = fal
   const slot = useRef<HTMLDivElement>(null);
   const drag = useRef<{ id: number; y: number; h0: number; fitH: number; fullH: number; moved: boolean } | null>(null);
   const [live, setLive] = useState<{ height?: number; y?: number } | null>(null);
+  // Slot chỉ là điểm dừng Tab khi nội dung tràn (vùng cuộn phải tới được bằng bàn phím); không tràn thì không dừng.
+  const [scrolls, setScrolls] = useState(false);
+  useEffect(() => {
+    const s = slot.current;
+    if (!s) return;
+    const check = () => setScrolls(s.scrollHeight > s.clientHeight + 1);
+    check();
+    if (typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver(check);
+    ro.observe(s);
+    Array.from(s.children).forEach((c) => ro.observe(c));
+    return () => ro.disconnect();
+  }, [children, current]);
 
   const change = (next: CardSheetHeight) => {
     if (next === current) return;
@@ -124,7 +137,7 @@ export function CardSheet({ header, onClose, onBack, children, cta, handle = fal
       </div>
       <div className="uu-sheet__body">
         {/* Slot cuộn được (Full / nội dung dài) phải vào được bằng bàn phím để cuộn bằng phím mũi tên (WCAG 2.1.1). */}
-        <div className="uu-sheet__slot" ref={slot} tabIndex={0}>{children}</div>
+        <div className="uu-sheet__slot" ref={slot} tabIndex={scrolls ? 0 : undefined} role={scrolls ? 'region' : undefined} aria-label={scrolls ? `Nội dung: ${header}` : undefined}>{children}</div>
         {cta && <ButtonGroup layout="horizontal" {...cta} />}
       </div>
     </section>
@@ -149,6 +162,15 @@ export interface BottomSheetProps extends CardSheetProps {
  * `position: fixed` — đặt trong khung có `transform` (vd. frame điện thoại trong Storybook) thì bám khung đó.
  */
 export function BottomSheet({ open, onClose, placement, ...sheet }: BottomSheetProps) {
+  const wrap = useRef<HTMLDivElement>(null);
+  // Mở: focus vào phần tử bấm được đầu tiên của sheet (dialog modal). Đóng: trả focus về chỗ cũ (nút đã mở sheet).
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.activeElement as HTMLElement | null;
+    const first = wrap.current?.querySelector<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]):not(.uu-sheet__handle)');
+    first?.focus();
+    return () => { if (prev && document.contains(prev)) prev.focus(); };
+  }, [open]);
   useEffect(() => {
     if (!open) return;
     const onKey = (e: globalThis.KeyboardEvent) => { if (e.key === 'Escape') onClose?.(); };
@@ -158,7 +180,7 @@ export function BottomSheet({ open, onClose, placement, ...sheet }: BottomSheetP
   if (!open) return null;
   return (
     <div className="uu-scrim" onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}>
-      <div className="uu-scrim__wrapper uu-scrim__wrapper--sheet" data-placement={placement} onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}>
+      <div ref={wrap} className="uu-scrim__wrapper uu-scrim__wrapper--sheet" data-placement={placement} onClick={(e) => { if (e.target === e.currentTarget) onClose?.(); }}>
         <CardSheet onClose={onClose} {...sheet} />
       </div>
     </div>
