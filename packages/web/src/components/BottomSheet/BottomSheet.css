@@ -45,7 +45,9 @@
   box-sizing: border-box; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end;
   padding-top: calc(var(--gap-3) + env(safe-area-inset-top, 0px));
 }
-.uu-scrim__wrapper--sheet > .uu-sheet { flex: 0 1 auto; max-height: 100%; }
+/* Mọi vị trí rộng tối đa 480 (spec 6.8), kể cả Touch ở đáy trên màn rộng: căn giữa theo chiều ngang. */
+.uu-scrim__wrapper--sheet { align-items: center; }
+.uu-scrim__wrapper--sheet > .uu-sheet { flex: 0 1 auto; max-height: 100%; width: 100%; max-width: var(--size-120); }
 .uu-scrim__wrapper--sheet > .uu-sheet[data-height="full"] { flex: 1 1 auto; }
 /* Nội dung dài hơn màn ở Fit: sheet chạm đỉnh rồi Slot cuộn, Header và nhóm nút vẫn đứng yên. */
 .uu-scrim__wrapper--sheet > .uu-sheet .uu-sheet__body { flex: 1 1 auto; min-height: 0; }
@@ -54,13 +56,9 @@
    Cần rộng hơn thì dùng Dialog / SideSheet, đừng kéo sheet rộng ra. */
 [data-density="compact"] .uu-scrim__wrapper--sheet,
 .uu-scrim__wrapper--sheet[data-density="compact"] { justify-content: center; align-items: center; padding-bottom: calc(var(--gap-3) + env(safe-area-inset-bottom, 0px)); }
-[data-density="compact"] .uu-scrim__wrapper--sheet > .uu-sheet,
-.uu-scrim__wrapper--sheet[data-density="compact"] > .uu-sheet { max-width: var(--size-120); }
-/* placement truyền tay thắng density (spec 6.8); độ rộng tối đa 480 vẫn theo density như cũ. */
+/* placement truyền tay thắng density (spec 6.8). */
 .uu-scrim__wrapper--sheet[data-placement="center"] { justify-content: center; align-items: center; }
-.uu-scrim__wrapper--sheet[data-placement="center"] > .uu-sheet { max-width: var(--size-120); }
 [data-density] .uu-scrim__wrapper--sheet[data-placement="bottom"],
 .uu-scrim__wrapper--sheet[data-placement="bottom"] { justify-content: flex-end; align-items: center; }
-.uu-scrim__wrapper--sheet[data-placement="bottom"] > .uu-sheet { width: 100%; }
 /* Trong bản thiết kế template có IOS Home indicator 34 dưới sheet; OS tự vẽ nên code không dựng. */
 .uu-sheet__slot:focus-visible { outline: 2px solid var(--border-emphasized); outline-offset: -2px; }
