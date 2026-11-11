@@ -4,7 +4,7 @@ Project này dùng gói `uu-ds` (UU Design system). Trước khi dựng UI, đ�
 
 1. `docs/design-system.md` — spec đầy đủ. Đọc mục 0–3 và 6.0 trước dòng code đầu tiên. Chỉ dùng component có ở mục 5.
 2. `docs/tokens.css` — mọi giá trị lấy từ token semantic (`var(--background-interactive)`). Không hex, không `--color-*`.
-3. `docs/icons.md` + `docs/uu-icon-index.json` — UU icon trong gói; bộ riêng của sản phẩm đăng ký qua `IconProvider`.
+3. `docs/icons.md` + `docs/uu-icon-index.json` — 22 UU icon trong gói chỉ để component chạy; bộ icon của sản phẩm (Lucide, Nucleo…) đăng ký qua `IconProvider`.
 4. `docs/product-dna.md` + `docs/dna-template.md` — style riêng của sản phẩm (`DNA.md` ở gốc project, nếu có).
 5. `docs/ontology.json` — quan hệ token ↔ component ↔ mode. Không có ở đây = chưa chốt → hỏi, đừng tự chế.
 

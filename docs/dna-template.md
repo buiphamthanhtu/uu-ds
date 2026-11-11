@@ -8,7 +8,7 @@ sources:
 
 # DNA — tên sản phẩm
 
-Giá trị nào chưa đo được thì bỏ trống, UU DS sẽ dùng mặc định. Thêm `(đoán)` sau giá trị chưa chắc.
+Giá trị nào chưa đo được thì bỏ trống, UU DS sẽ dùng mặc định. Thêm `(estimated)` sau giá trị chưa chắc.
 
 ## 1. Cá tính
 
@@ -86,7 +86,7 @@ Cần biến `--dna-*` khác (viền thẻ, độ nghiêng…) thì thêm dòng 
 
 ## 8. Mẫu màn
 
-Cách màn được dựng. Ghi màn mẫu cho từng dòng để người sau mở ra so. Cách làm chỉ thấy ở một màn thì thêm `(1 màn)`.
+Cách màn được dựng. Ghi màn mẫu cho từng dòng để người sau mở ra so. Cách làm chỉ thấy ở một màn thì thêm `(1 screen)`.
 
 | Phần | Cách làm | Màn mẫu |
 |---|---|---|
@@ -111,7 +111,7 @@ Cách màn được dựng. Ghi màn mẫu cho từng dòng để người sau m
 
 - Kiểu ảnh:
 - Kiểu minh hoạ:
-- Bộ icon (gói chỉ kèm icon cho component; sản phẩm cần icon thì đăng ký cả bộ):
+- Bộ icon (gói chỉ kèm 22 icon cho component; sản phẩm cần icon thì đăng ký cả bộ, ví dụ Lucide miễn phí hoặc Nucleo trả phí):
 - Icon `outline` hay `fill` ở đâu:
 
 ## 11. Dấu hiệu nhận diện
