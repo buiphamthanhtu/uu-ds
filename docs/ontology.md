@@ -88,7 +88,7 @@ Bản đầy đủ: `ontology.json` (848 node · 2050 quan hệ). Sinh tự đ�
 - **dont** — Đừng dùng object-warning (1.92 trên trắng) hay object-attention cho chữ đứng một mình — chỉ cho chấm / icon kèm chữ object-primary. (§2.3)
 - **must** — Đừng để màu là tín hiệu duy nhất ở chỗ quan trọng — kèm chữ hoặc icon. (§2.3)
 - **must** — Hover/Pressed chỉ qua state layer ::after phủ toàn bộ, fill = currentColor (màu object của variant); không đổi nền, chữ, font-weight. (§6.0)
-- **must** — Bậc opacity state layer: content sáng trên nền tối → 20/40; content tối trên nền sáng → 5/10. Disabled và Loading không có state layer. (§6.0)
+- **must** — Bậc opacity state layer chia theo loại nền, không theo màu chữ: nền đặc màu (Solid Accent / Neutral) → 20/40; nền sáng hoặc trong suốt (Outline, Ghost, Solid Inverted) → 5/10; Outline / Ghost Inverted trên nền tối → 20/40. Radio là ngoại lệ (§6.3d). Disabled và Loading không có state layer. (§6.0)
 - **do** — Mode chữ Active (đậm thêm một bậc) chỉ cho ToggleButton Active=True và Segment item đang chọn; không liên quan :hover/:active hay State=Pressed. (§3)
 - **dont** — Đừng hardcode width cho component hug (button, toggle, chip); line-height là giá trị tuyệt đối, không bội số. (§3)
 - **must** — Component đọc biến density (--control-height-*, --field-height, --text-<style>-*); không gõ cứng 24/32/40/48/56px, không đọc thẳng --font-size-*. Không dùng Compact cho màn chạm. (§4.1)

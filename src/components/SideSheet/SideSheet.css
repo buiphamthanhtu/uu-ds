@@ -32,5 +32,6 @@
 /* Footer: padding card/padding · Neutral Outline Base + Accent Solid Base, dồn phải. */
 .uu-sidesheet__footer { display: flex; justify-content: flex-end; align-items: center; gap: var(--gap-3); padding: var(--card-padding); }
 
-/* Scrim của Modal: dùng lại .uu-scrim (overlay + blur 16), tấm dính mép phải, cao FILL. */
-.uu-scrim--side { flex-direction: row; justify-content: flex-end; align-items: stretch; }
+/* Scrim của Modal: dùng lại .uu-scrim (overlay + blur 16), tấm dính mép phải, cao FILL.
+   Hai class để thắng .uu-scrim của BottomSheet bất kể thứ tự nạp CSS. */
+.uu-scrim.uu-scrim--side { flex-direction: row; justify-content: flex-end; align-items: stretch; }
