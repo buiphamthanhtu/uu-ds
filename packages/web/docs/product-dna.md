@@ -180,15 +180,17 @@ Khi người dùng nhờ tạo DNA từ Figma, website hoặc ảnh chụp:
    lỗi) tính là **một** màn.
    Nguồn số đo, tốt trước: file Figma (đọc bằng Figma MCP, lấy số và biến đang gắn) hoặc code / prototype của sản phẩm
    (đọc CSS) → website → ảnh chụp. Ghi nguồn cho từng giá trị.
-   Ghi `(đoán)` khi giá trị đo từ ảnh chụp hoặc website, hoặc khi chỉ có một màn. Số đọc được từ Figma thì không cần.
+   Ghi `(estimated)` khi giá trị đo từ ảnh chụp hoặc website, hoặc khi chỉ có một màn. Số đọc được từ Figma thì không cần.
+   Dấu ghi vào file để nguyên tiếng Anh (`(estimated)`, `(1 screen)`) cho người đọc file ở ngôn ngữ nào cũng hiểu.
+   File cũ ghi `(đoán)`, `(1 màn)` vẫn hiểu như vậy.
 2. Chép `dna-template.md` thành `DNA.md`. Lưu ở gốc project; người dùng chỉ làm trong Figma, không có project thì hỏi chỗ lưu, mặc định thư mục đang làm việc, và báo đường dẫn.
 3. Đo những gì lặp lại: màu nền, gradient, bóng, viền, bo góc, lề hai biên, khoảng cách giữa khối.
 4. Chỉ ghi giá trị xuất hiện từ hai lần trở lên. Giá trị xuất hiện một lần là ngoại lệ, không phải DNA.
 5. Quy về thang UU DS nếu lệch không quá 2px, ví dụ 15px thành `radius-lg`.
-6. Ghi nguồn. Từ ảnh chụp chỉ ước lượng được, nên thêm `(đoán)`.
+6. Ghi nguồn. Từ ảnh chụp chỉ ước lượng được, nên thêm `(estimated)`.
 7. Tìm 2–3 dấu hiệu nhận diện. Đây là phần làm sản phẩm khác đi, đừng bỏ qua.
 8. Ghi **mẫu màn** (mục 8 của khuôn): cách màn được dựng. Khác bước 4, cách làm chỉ thấy ở một màn vẫn ghi, gắn nhãn
-   `(1 màn)`; luật "từ hai lần trở lên" chỉ áp cho số đo (mục 2–7). Thiếu mục này thì màn mới đúng màu,
+   `(1 screen)`; luật "từ hai lần trở lên" chỉ áp cho số đo (mục 2–7). Thiếu mục này thì màn mới đúng màu,
    đúng bo góc nhưng bố cục khác hẳn màn mẫu.
 
 Chỉ trích từ sản phẩm người dùng sở hữu hoặc được phép dùng. Muốn học phong cách của sản phẩm khác thì lấy nhịp bố cục, không lấy logo hay nhận diện.

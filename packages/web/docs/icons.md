@@ -18,13 +18,14 @@ sản phẩm dùng UU DS lấy từ một bộ duy nhất: **UU icon**.
 
 1. **Một component `Icon(name, variant, size)`** (hoặc sprite). Gọi theo **tên trong bộ**
    (`chevron-right`, `gift`, `list-checkbox`), kèm kiểu `outline` / `fill`. Không lưu file
-   icon theo màn, không tự vẽ, không lấy icon từ bộ khác vì "trông giống".
+   icon theo màn, không tự vẽ, không nhặt icon lẻ từ bộ khác vì "trông giống". Bộ khác chỉ vào qua DNA, cả bộ (luật 7).
 2. **Tên icon không mang màu hay trạng thái.** `icon-chevron-down-white.svg`, `fire-active.svg`
    là dấu hiệu đang lưu MÀU thành icon. Đó là một icon, tô bằng `object-on-interactive` hay
    `object-disabled` tuỳ chỗ đặt.
 3. **Kiểu `fill` = trạng thái bật.** Toggle button `Active=True` và mục điều hướng đang chọn
    đổi sang kiểu `fill` (cùng tên); trạng thái thường dùng `outline`.
-4. **Không có trong bộ → dừng và hỏi**, đúng như token không có trong `tokens.css`.
+4. **Không có trong bộ → dừng và hỏi**, đúng như token không có trong `tokens.css`. Bộ ở đây là bộ
+   sản phẩm đã gắn qua DNA; chưa gắn bộ nào thì hỏi người dùng chọn bộ (luật 7), trong lúc chờ dùng `texture`.
    Tra tên trước bằng `uu-icon-index.json`; tên gần giống (`cart` vs `cart-shopping`) không
    phải là cùng icon.
 5. Ảnh minh hoạ, huy hiệu, sticker nhiều màu **không phải icon** — đó là asset, đi đường asset.
@@ -34,8 +35,10 @@ sản phẩm dùng UU DS lấy từ một bộ duy nhất: **UU icon**.
    component Figma; không lấy icon trang trí khác. Không có trang tra cứu icon công khai. Icon khác trong
    bundle `assets/icons/` chỉ dùng nội bộ (mockup, artifact riêng, prototype không công bố). Cần
    đưa thêm icon ra ngoài → hỏi trước, đừng tự thêm vào danh sách.
-7. **Icon công khai chỉ đủ cho component chạy, không phải bộ icon của sản phẩm.** Sản phẩm cần icon
-   thì tự mua license Nucleo hoặc gắn bộ khác, đăng ký cả bộ qua DNA (spec 4.3 — web `IconProvider`, app `UuProvider icons`).
+7. **22 icon công khai chỉ để component chạy và làm ví dụ, không phải bộ icon của sản phẩm.** Sản phẩm cần icon
+   thì gắn một bộ: miễn phí như Lucide, hoặc mua license Nucleo, hoặc bộ khác có giấy phép phù hợp. Đăng ký cả bộ
+   qua DNA (spec 4.3 — web `IconProvider`, app `UuProvider icons`), ghi tên bộ ở mục Hình ảnh và icon của DNA.md.
+   Bộ không có kiểu `fill` (như Lucide) thì trạng thái bật dùng lại outline, component vẫn đổi nền / màu như thường.
    Tên đăng ký ghi đè icon mặc định cùng tên, tên không đăng ký vẫn lấy bộ mặc định. Một sản phẩm một bộ,
    không trộn từng icon của hai bộ trên cùng màn. Bộ do sản phẩm tự gắn thì giấy phép thuộc về sản phẩm:
    lấy thêm UU icon ngoài bản công khai (gốc Nucleo, xem `NOTICE.md` trong repo) cần license Nucleo đứng tên
@@ -89,9 +92,10 @@ khoảng 60–65% hộp. Số đo trên nút đóng của Toast:
 | 16 | ≈ 10px | Icon button Small 32 |
 
 Đây là chủ đích của bản vẽ: hộp giữ vùng chạm và nhịp layout, lề giữ icon nét mảnh không
-lấn chữ. **Đừng** phóng path cho vừa hộp, **đừng** đổi sang Lucide / Phosphor / Font Awesome
+lấn chữ. **Đừng** phóng path cho vừa hộp, **đừng** thay từng icon lẻ sang Lucide / Phosphor / Font Awesome
 vì "cùng 24" — mỗi bộ có tỷ lệ nét/hộp khác nhau (Lucide `x` nét 12 stroke 2, FA `xmark`
-lấp gần hết hộp), nên cùng con số 24 mà nhìn lệch hẳn.
+lấp gần hết hộp), nên cùng con số 24 mà nhìn lệch hẳn. Sản phẩm gắn cả bộ Lucide qua DNA thì được, nhưng
+xem icon cạnh chữ và nút một lượt: Lucide nét dày và to hơn UU icon trong cùng hộp.
 
 Ba lỗi hay gặp khi icon lệch cỡ:
 

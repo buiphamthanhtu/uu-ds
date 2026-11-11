@@ -68,6 +68,6 @@ Hướng dẫn: `packages/flutter/uu_ds_flutter/README.md`. Widgetbook: `package
 
 ## Icon
 
-Gói chỉ kèm UU icon: icon component dùng cố định và `texture` (icon giữ chỗ). Sản phẩm cần icon thì tự mua
-license Nucleo hoặc dùng bộ khác, rồi đăng ký bộ của mình
+Gói chỉ kèm 22 UU icon làm ví dụ: icon component dùng cố định và `texture` (icon giữ chỗ). Sản phẩm cần icon thì
+gắn một bộ: miễn phí như Lucide, hoặc mua license Nucleo, rồi đăng ký cả bộ
 (Product DNA, spec 4.3). Giấy phép icon: `NOTICE.md`.
