@@ -1,7 +1,7 @@
 {
   "name": "uu-ds-native",
   "version": "1.0.0",
-  "description": "ÚÙ Design System cho React Native (Expo). Token sinh từ docs/tokens.json, component theo spec, icon UU icon (bản công khai: icon component dùng cố định + texture).",
+  "description": "UU Design system cho React Native (Expo). Token sinh từ docs/tokens.json, component theo spec, icon UU icon (bản công khai: icon component dùng cố định + texture).",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "react-native": "src/index.ts",
