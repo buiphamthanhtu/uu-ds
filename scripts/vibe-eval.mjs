@@ -95,7 +95,7 @@ const DIMENSIONS = ['mau', 'brand', 'tuong-tac', 'thang', 'pham-vi', 'icon', 'no
 const PENALTY = { critical: 15, moderate: 5, minor: 2 };
 const findings = [];
 const add = (file, line, dim, rule, severity, detail, example) =>
-  findings.push({ file: path.relative(process.cwd(), file), line, dimension: dim, rule, severity, detail, example: (example || '').trim().slice(0, 160) });
+  findings.push({ file: path.relative(process.cwd(), file), line, dimension: dim, rule, severity, detail, example: (example || '').replace(/\s+/g, ' ').trim().slice(0, 160) });
 
 const stripComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' ')).replace(/^\s*\/\/.*$/gm, '');
 const lineOf = (src, idx) => src.slice(0, idx).split('\n').length;
@@ -111,7 +111,7 @@ function checkColors(file, src, isCss) {
     const before = s.slice(Math.max(0, m.index - 24), m.index);
     if (/data:image|querySelector|getElementById|href=|url\(|from\s*\(|^\s*import/.test(before)) continue;
     if (!isCss && !/(color|background|border|fill|stroke|shadow|outline|['"`:])\s*[:=]?\s*['"`]?$/i.test(before) && !/['"`]$/.test(before)) continue;
-    add(file, lineOf(s, m.index), 'mau', 'hex', 'critical', 'Màu hex viết thẳng — phải dùng token semantic (var(--background-*), var(--object-*), var(--border-*)).', s.slice(m.index - 30, m.index + 12));
+    add(file, lineOf(s, m.index), 'mau', 'hex', 'critical', 'Màu hex viết thẳng — phải dùng token semantic (var(--background-*), var(--object-*), var(--border-*)).', s.slice(Math.max(m.index - 30, s.lastIndexOf('\n', m.index) + 1), m.index + 12));
   }
   for (const m of s.matchAll(/\b(rgba?|hsla?|oklch|lab)\(\s*[0-9.]/g))
     add(file, lineOf(s, m.index), 'mau', 'color-literal', 'critical', `Màu ${m[1]}() viết thẳng — cần token semantic; màu mờ compose bằng color-mix từ token.`, s.slice(m.index, m.index + 40));
