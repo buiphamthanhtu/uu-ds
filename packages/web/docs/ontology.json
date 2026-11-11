@@ -5703,7 +5703,7 @@
    "id": "rule:global/10",
    "type": "Rule",
    "kind": "must",
-   "text": "Bậc opacity state layer: content sáng trên nền tối → 20/40; content tối trên nền sáng → 5/10. Disabled và Loading không có state layer.",
+   "text": "Bậc opacity state layer chia theo loại nền, không theo màu chữ: nền đặc màu (Solid Accent / Neutral) → 20/40; nền sáng hoặc trong suốt (Outline, Ghost, Solid Inverted) → 5/10; Outline / Ghost Inverted trên nền tối → 20/40. Radio là ngoại lệ (§6.3d). Disabled và Loading không có state layer.",
    "source": "§6.0",
    "scope": "global"
   },
