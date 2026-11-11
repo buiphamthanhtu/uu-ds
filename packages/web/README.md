@@ -5,7 +5,7 @@ Component React + CSS thuần, token (`tokens.css`), UU icon công khai. Tài li
 ## Cài
 
 ```bash
-npm i "github:buiphamthanhtu/uu-ds#web-v1.1.0"
+npm i "github:buiphamthanhtu/uu-ds#web-v1.0.0"
 ```
 
 Gói là mã nguồn TypeScript, app tự build (Vite, kể cả Zalo Mini App). Khi cài, `prepare` gom SVG thành bundle icon
