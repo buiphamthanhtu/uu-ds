@@ -35,7 +35,7 @@ Sửa đến khi critical = 0; `--strict` để CI dừng khi còn critical. Ch�
 ## Web
 
 ```bash
-npm i "github:buiphamthanhtu/uu-ds#web-v1.0.0"   # hoặc #web để lấy bản mới nhất
+npm i "github:buiphamthanhtu/uu-ds#web-v1.1.0"   # hoặc #web để lấy bản mới nhất
 ```
 
 Hướng dẫn: `packages/web/README.md` (Vite cần `optimizeDeps.exclude: ['uu-ds']`). Gói kèm `docs/` (spec, token,

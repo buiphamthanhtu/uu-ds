@@ -1,6 +1,6 @@
 {
   "name": "uu-ds",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "UU Design system cho web: component React + CSS thuần, token, UU icon (bản công khai: icon component dùng cố định + texture).",
   "type": "module",
   "exports": {
