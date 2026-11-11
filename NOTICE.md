@@ -11,3 +11,9 @@ tên gọi trong design system, không chuyển quyền sở hữu. Không tách
 
 Gói chỉ kèm icon component dùng cố định và `texture` (icon giữ chỗ). Sản phẩm cần icon thì tự mua license
 Nucleo hoặc dùng bộ khác, đăng ký qua Product DNA (spec 4.3). Bộ icon do sản phẩm tự đăng ký (Product DNA) thì giấy phép thuộc về sản phẩm đó.
+
+## Bộ chấm `uu-ds-check`
+
+`scripts/vibe-eval.mjs` trong gói web (lệnh `npx uu-ds-check`) học cách chấm tất định từ
+`internal/vibe-tests/src/universal-eval.ts` của dự án **facebook/astryx** (https://github.com/facebook/astryx, giấy phép MIT),
+rồi viết lại và thu hẹp về các ràng buộc của UU DS.

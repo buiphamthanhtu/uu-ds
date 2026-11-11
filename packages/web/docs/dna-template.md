@@ -70,40 +70,58 @@ Sản phẩm có **nhiều chế độ màu** (spec 4.3): thêm một cột giá
 | `--dna-floating-shadow` | | phần nổi: thanh đáy, nút back |
 | `--dna-feature-background` | | khối tính năng nổi bật trên màn |
 
+Cần biến `--dna-*` khác (viền thẻ, độ nghiêng…) thì thêm dòng vào bảng mục 6 hoặc 7: hợp lệ, miễn chỉ layout đọc.
+
 ## 7. Bố cục
 
-| Biến | App | Desktop |
-|---|---|---|
-| `--dna-page-margin` | | lề hai bên |
-| `--dna-section-gap` | | giữa các khối lớn |
-| `--dna-card-gap` | | giữa các thẻ |
-| `--dna-content-max` | | bề rộng nội dung tối đa |
-| `--dna-card-inset` | | nút hoặc khối lồng cách mép thẻ |
-| `--dna-card-head-inset` | | khối chữ cách mép thẻ, thêm vào `--dna-card-inset` |
-| `--dna-floating-inset` | | phần nổi cách đáy và hai bên |
+| Biến | App | Desktop | Ghi chú |
+|---|---|---|---|
+| `--dna-page-margin` | | | lề hai bên |
+| `--dna-section-gap` | | | giữa các khối lớn |
+| `--dna-card-gap` | | | giữa các thẻ |
+| `--dna-content-max` | | | bề rộng nội dung tối đa |
+| `--dna-card-inset` | | | nút hoặc khối lồng cách mép thẻ |
+| `--dna-card-head-inset` | | | khối chữ cách mép thẻ, thêm vào `--dna-card-inset` |
+| `--dna-floating-inset` | | | phần nổi cách đáy và hai bên |
 
-## 8. Chữ
+## 8. Mẫu màn
+
+Cách màn được dựng. Ghi màn mẫu cho từng dòng để người sau mở ra so. Cách làm chỉ thấy ở một màn thì thêm `(1 màn)`.
+
+| Phần | Cách làm | Màn mẫu |
+|---|---|---|
+| Header | kiểu `NavigationBar`, có tiêu đề lớn không, nút bên phải | |
+| Mở đầu màn | khối hero, tóm tắt, ô tìm kiếm… | |
+| Danh sách | thẻ hay hàng `ListItem`, có ảnh không, nhóm theo gì | |
+| Form | nhãn trên ô, nhóm field, nút gửi ở đâu | |
+| Nút chính | cuối nội dung, ghim đáy, hay trong header | |
+| Trạng thái trống, lỗi | `EmptySection` / `EmptyScreen`, có minh hoạ không | |
+| Điều hướng đáy | `BottomBar` mấy mục, kiểu vỏ, mục đang chọn trông ra sao | |
+| Minh hoạ, sticker | đặt ở đâu (header, trạng thái trống…), chọn hình theo gì | |
+| Thứ bậc chữ | text style cho tiêu đề màn, tiêu đề khối, chữ phụ | |
+
+## 9. Chữ
 
 - Font tiêu đề lớn (`font-family-display`):
 - Font chữ còn lại (`font-family-body`, mặc định font hệ thống — chỉ đổi họ font):
 - Cách dùng tiêu đề: to hay vừa, viết hoa hay thường:
 - Giọng văn:
 
-## 9. Hình ảnh và icon
+## 10. Hình ảnh và icon
 
 - Kiểu ảnh:
 - Kiểu minh hoạ:
 - Bộ icon (gói chỉ kèm icon cho component; sản phẩm cần icon thì đăng ký cả bộ):
 - Icon `outline` hay `fill` ở đâu:
 
-## 10. Dấu hiệu nhận diện
+## 11. Dấu hiệu nhận diện
 
 Hai đến ba chi tiết làm người ta nhận ra sản phẩm này, có ảnh hoặc màn cụ thể.
 
 -
 -
 
-## 11. Không làm
+## 12. Không làm
 
 -
 -

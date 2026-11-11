@@ -1,0 +1,137 @@
+{
+ "_doc": "Bộ UU icon — bản công khai: icon component dùng cố định + texture (giữ chỗ). name → category và style có sẵn (outline / fill). Tên gần giống KHÔNG phải cùng icon. Không có ở đây → dừng và hỏi.",
+ "icons": {
+  "arrow-down": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "arrow-trend-down": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "arrow-trend-up": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "arrow-up": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "calendar-days": {
+   "category": "time",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "check": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "chevron-down": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "chevron-left": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "chevron-right": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "chevron-up": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "circle-check": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "circle-info": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "circle-warning": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "circle-xmark": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "clock": {
+   "category": "time",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "dots": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "magnifier": {
+   "category": "filtering-sorting",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "sidebar-left": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "sort-vertical": {
+   "category": "arrows",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "texture": {
+   "category": "design-development",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "triangle-warning": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  },
+  "xmark": {
+   "category": "ui-layout",
+   "outline": true,
+   "fill": true,
+   "public": true
+  }
+ }
+}

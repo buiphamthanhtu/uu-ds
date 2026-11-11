@@ -1,7 +1,7 @@
 {
   "name": "uu-ds",
   "version": "1.0.0",
-  "description": "ÚÙ Design System cho web: component React + CSS thuần, token, UU icon (bản công khai: icon component dùng cố định + texture).",
+  "description": "UU Design system cho web: component React + CSS thuần, token, UU icon (bản công khai: icon component dùng cố định + texture).",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -15,9 +15,14 @@
     "src",
     "docs",
     "scripts/build-icons.mjs",
+    "scripts/vibe-eval.mjs",
     "README.md",
-    "AGENTS.md"
+    "AGENTS.md",
+    "NOTICE.md"
   ],
+  "bin": {
+    "uu-ds-check": "scripts/vibe-eval.mjs"
+  },
   "sideEffects": [
     "**/*.css",
     "./src/index.ts"

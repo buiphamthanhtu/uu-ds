@@ -1,6 +1,6 @@
 # uu_ds_flutter
 
-ÚÙ Design System cho Flutter. Cùng nguồn với bản web: token sinh từ `docs/tokens.json`, widget theo `docs/design-system.md`, icon UU icon từ `src/icons/svg`.
+UU Design system cho Flutter. Cùng nguồn với bản web: token sinh từ `docs/tokens.json`, widget theo `docs/design-system.md`, icon UU icon từ `src/icons/svg`.
 
 ## Cài
 

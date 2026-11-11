@@ -1,0 +1,1595 @@
+{
+  "$description": "Quy tắc theo component, trích từ spec design-system.md. Mỗi quy tắc dẫn về mục spec.",
+  "global": [
+    {
+      "kind": "must",
+      "text": "Chỉ dùng token semantic (background-*, object-*, border-*); không hardcode hex, không tạo primitive màu có sẵn alpha.",
+      "source": "§0"
+    },
+    {
+      "kind": "dont",
+      "text": "Đừng lấy token nền tô chữ hay ngược lại — mỗi token có phạm vi riêng (nền, chữ, viền, gap, radius).",
+      "source": "§1"
+    },
+    {
+      "kind": "must",
+      "text": "Component không biết mình ở brand nào; đổi brand bằng data-theme trên khung chứa, không sửa component.",
+      "source": "§2.5"
+    },
+    {
+      "kind": "dont",
+      "text": "Đừng lấy accent cho thứ bấm được: interactive cho nút, link, tab, field focus, mục đang chọn; accent cho nhấn nội dung.",
+      "source": "§2.5"
+    },
+    {
+      "kind": "must",
+      "text": "background-{status} chỉ đi với object-on-{status}; object-{status} dùng cho chữ/icon trên nền sáng.",
+      "source": "§2.2"
+    },
+    {
+      "kind": "dont",
+      "text": "Đừng dùng negative cho badge “có mới”, đừng dùng attention cho thông báo lỗi; attention = có mới chưa xem, warning = rủi ro, negative = hỏng/sai.",
+      "source": "§2.2"
+    },
+    {
+      "kind": "dont",
+      "text": "Đừng dùng object-warning (1.92 trên trắng) hay object-attention cho chữ đứng một mình — chỉ cho chấm / icon kèm chữ object-primary.",
+      "source": "§2.3"
+    },
+    {
+      "kind": "must",
+      "text": "Đừng để màu là tín hiệu duy nhất ở chỗ quan trọng — kèm chữ hoặc icon.",
+      "source": "§2.3"
+    },
+    {
+      "kind": "must",
+      "text": "Hover/Pressed chỉ qua state layer ::after phủ toàn bộ, fill = currentColor (màu object của variant); không đổi nền, chữ, font-weight.",
+      "source": "§6.0"
+    },
+    {
+      "kind": "must",
+      "text": "Bậc opacity state layer: content sáng trên nền tối → 20/40; content tối trên nền sáng → 5/10. Disabled và Loading không có state layer.",
+      "source": "§6.0"
+    },
+    {
+      "kind": "do",
+      "text": "Mode chữ Active (đậm thêm một bậc) chỉ cho ToggleButton Active=True và Segment item đang chọn; không liên quan :hover/:active hay State=Pressed.",
+      "source": "§3"
+    },
+    {
+      "kind": "dont",
+      "text": "Đừng hardcode width cho component hug (button, toggle, chip); line-height là giá trị tuyệt đối, không bội số.",
+      "source": "§3"
+    },
+    {
+      "kind": "must",
+      "text": "Component đọc biến density (--control-height-*, --field-height, --text-<style>-*); không gõ cứng 24/32/40/48/56px, không đọc thẳng --font-size-*. Không dùng Compact cho màn chạm.",
+      "source": "§4.1"
+    },
+    {
+      "kind": "must",
+      "text": "Chỉ dùng UU icon; không thay Lucide/Phosphor/Font Awesome, không crop viewBox. Trạng thái bật dùng biến thể fill, tắt dùng outline.",
+      "source": "§6.11"
+    },
+    {
+      "kind": "do",
+      "text": "Chỉ build component có trong mục 5; thứ không có là chưa chốt — hỏi lại, đừng suy đoán.",
+      "source": "§0"
+    }
+  ],
+  "components": {
+    "TextButtonAccent": [
+      {
+        "kind": "do",
+        "text": "Dùng cho hành động chính của màn.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "do",
+        "text": "Một nút Solid (Accent hoặc Danger) mỗi màn.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "dont",
+        "text": "Hành động lặp theo dòng hoặc theo thẻ không bao giờ Solid — dùng Ghost Small hoặc gom vào menu “⋯”.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "do",
+        "text": "Inverted=True khi đặt trên nền tối.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "must",
+        "text": "min-width = min-height = chiều cao size (56/48/32) — nút chữ ngắn không hẹp hơn hình tròn.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "must",
+        "text": "Viền Outline không cộng vào chiều cao: dựng bằng box-shadow inset 2px, không dùng border.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "must",
+        "text": "Loading: spinner .loading đứng trước label, label vẫn hiện, không có state layer.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "dont",
+        "text": "Pressed giữ nguyên weight 600 — không dùng mode chữ Active.",
+        "source": "§3"
+      }
+    ],
+    "TextButtonNeutral": [
+      {
+        "kind": "do",
+        "text": "Dùng cho hành động phụ, trung tính.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "do",
+        "text": "Việc làm lại được (đăng xuất, bỏ qua) vẫn là Neutral, dù trông “nguy hiểm”.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "do",
+        "text": "Inverted=True khi đặt trên nền tối.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "must",
+        "text": "Viền Outline không cộng vào chiều cao: dựng bằng box-shadow inset 2px.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "must",
+        "text": "Disabled: Solid nền background-disabled, Outline viền border-muted, chữ object-disabled, không state layer.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "do",
+        "text": "Ghost Small là dạng nút Action trong suffix của TextInput và nút Huỷ của SearchInput.",
+        "source": "§6.3"
+      },
+      {
+        "kind": "do",
+        "text": "`Type=Tonal` cho hành động lặp trên thẻ nền `background-surface`. Không đặt trên `background-subtle`.",
+        "source": "§6.1"
+      }
+    ],
+    "TextButtonDanger": [
+      {
+        "kind": "do",
+        "text": "Chỉ cho hành động phá huỷ, không hoàn tác được (xoá tài khoản, huỷ đơn, gỡ thiết bị).",
+        "source": "§6.1"
+      },
+      {
+        "kind": "dont",
+        "text": "Đừng dùng Danger chỉ vì nút “trông nguy hiểm” — việc làm lại được là Neutral.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có Inverted=True — nút phá huỷ luôn trên nền sáng; màn tối thì mở Dialog xác nhận.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "do",
+        "text": "Hành động phá huỷ theo dòng nằm trong menu “⋯” và xác nhận bằng Dialog có TextButtonDanger Solid.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "do",
+        "text": "Một nút Solid (Accent hoặc Danger) mỗi màn.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "must",
+        "text": "Hình học, density, state layer, Loading, Disabled y hệt TextButtonAccent; chỉ đổi họ màu sang negative.",
+        "source": "§6.1"
+      }
+    ],
+    "IconButtonAccent": [
+      {
+        "kind": "must",
+        "text": "Prop và màu khớp TextButtonAccent (Type/Inverted/Size/State); icon dùng token object-* như chữ của Text button.",
+        "source": "§6.2"
+      },
+      {
+        "kind": "must",
+        "text": "Hộp vuông tròn: 56/48/32, icon 24/24/16, padding 0.",
+        "source": "§6.2"
+      },
+      {
+        "kind": "must",
+        "text": "Inverted=True: Solid (nền surface) dùng state layer 5/10; Outline và Ghost dùng 20/40.",
+        "source": "§6.2"
+      },
+      {
+        "kind": "must",
+        "text": "Nút chỉ có icon cần tên: có label, hoặc Tooltip relation='label' (aria-labelledby).",
+        "source": "§6.30"
+      },
+      {
+        "kind": "do",
+        "text": "Sub action của NavigationBar là IconButtonAccent Solid Inverted=True Base.",
+        "source": "§6.5"
+      }
+    ],
+    "IconButtonNeutral": [
+      {
+        "kind": "must",
+        "text": "Prop và màu khớp TextButtonNeutral; Solid Inverted=False dùng background-inverted.",
+        "source": "§6.2"
+      },
+      {
+        "kind": "must",
+        "text": "Inverted=True: Solid (nền surface) dùng state layer 5/10; Outline và Ghost dùng 20/40.",
+        "source": "§6.2"
+      },
+      {
+        "kind": "must",
+        "text": "Nút chỉ có icon cần tên: có label, hoặc Tooltip relation='label' (aria-labelledby).",
+        "source": "§6.30"
+      },
+      {
+        "kind": "do",
+        "text": "Ghost Small mở Menu “⋯” cho hành động theo dòng / theo thẻ.",
+        "source": "§6.1"
+      },
+      {
+        "kind": "do",
+        "text": "Nút đóng (xmark) của Toast, SideSheet, Popover là IconButtonNeutral Ghost; của CardSheet/CardDialog là Outline Small.",
+        "source": "§6.6"
+      },
+      {
+        "kind": "do",
+        "text": "Nút đóng đè lên ảnh banner của CardDialog dùng Solid để đọc được trên mọi ảnh.",
+        "source": "§6.10"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có IconButton kiểu Danger — xoá theo dòng nằm trong menu “⋯”, xác nhận bằng Dialog có TextButtonDanger Solid.",
+        "source": "§6.2"
+      }
+    ],
+    "ToggleButton": [
+      {
+        "kind": "do",
+        "text": "Dùng cho nút giữ trạng thái bật/tắt; Active là prop độc lập với State.",
+        "source": "§6.7"
+      },
+      {
+        "kind": "must",
+        "text": "Hai prop chữ riêng (Label / Active label) để đổi copy theo trạng thái — đừng dùng chung một chuỗi.",
+        "source": "§6.7"
+      },
+      {
+        "kind": "must",
+        "text": "Icon đổi hẳn biến thể outline ↔ fill khi bật, không chỉ đổi màu.",
+        "source": "§6.7"
+      },
+      {
+        "kind": "must",
+        "text": "Chữ đậm thêm một bậc khi bật qua typography mode Active, không override weight trên node.",
+        "source": "§6.7"
+      },
+      {
+        "kind": "dont",
+        "text": "Đừng hardcode width — bề rộng chênh 1px giữa hai trạng thái.",
+        "source": "§6.7"
+      },
+      {
+        "kind": "dont",
+        "text": "Không border, không shadow ở mọi variant — dùng nổi trên ảnh hoặc nền màu.",
+        "source": "§6.7"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có state Loading; Disabled không có state layer.",
+        "source": "§6.7"
+      }
+    ],
+    "ButtonGroup": [
+      {
+        "kind": "must",
+        "text": "Horizontal: nút phụ (Outline) bên trái, nút chính (Solid) bên phải, hai nút chia đều.",
+        "source": "§6.9"
+      },
+      {
+        "kind": "must",
+        "text": "Vertical: nút chính (Solid) trên, nút phụ (Outline) dưới.",
+        "source": "§6.9"
+      },
+      {
+        "kind": "must",
+        "text": "Nút dùng TextButtonAccent size Large (56), gap 12.",
+        "source": "§6.9"
+      },
+      {
+        "kind": "must",
+        "text": "Khi code hai nút chia đôi dùng flex: 1 1 0, không dùng flex: 1 1 auto.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "do",
+        "text": "Là nhóm nút dùng chung của CardSheet và CardDialog — không tự dựng frame nút riêng.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "must",
+        "text": "Tone=Danger (dialog / sheet xác nhận xoá): nút chính là TextButtonDanger Solid Large, nút phụ giữ nguyên; không tự xếp hai nút.",
+        "source": "§6.9"
+      }
+    ],
+    "TextInput": [
+      {
+        "kind": "must",
+        "text": "Error=True đổi ba thứ: viền border-negative, Label object-negative, hiện dòng Error message caption dưới Field.",
+        "source": "§6.3"
+      },
+      {
+        "kind": "dont",
+        "text": "Dòng lỗi là chữ, không có icon (tín hiệu thứ tư không thêm thông tin).",
+        "source": "§6.3"
+      },
+      {
+        "kind": "must",
+        "text": "Dòng lỗi chiếm chỗ thật (root 76 → 100) — bố cục phải nhường chỗ, đừng để đè lên khối khác.",
+        "source": "§6.3"
+      },
+      {
+        "kind": "dont",
+        "text": "Error không kết hợp với Disabled.",
+        "source": "§6.3"
+      },
+      {
+        "kind": "must",
+        "text": "Filled + Disabled giữ chữ object-primary để còn đọc được; chỉ placeholder xuống object-disabled.",
+        "source": "§6.3"
+      },
+      {
+        "kind": "must",
+        "text": "Focus/Typing: viền border-emphasized + con trỏ 1,5×24 object-accent.",
+        "source": "§6.3"
+      },
+      {
+        "kind": "do",
+        "text": "Báo lỗi tại ô bằng viền đỏ + dòng lỗi, không dùng Toast.",
+        "source": "§6.3b"
+      }
+    ],
+    "TextArea": [
+      {
+        "kind": "do",
+        "text": "Component riêng cho nhập nhiều dòng — thay mọi TextInput kéo cao.",
+        "source": "§6.3e"
+      },
+      {
+        "kind": "must",
+        "text": "Field cao 112 (đúng ba dòng + bộ đếm) — đừng tự đổi 88 hay 120; Compact chỉ đổi radius và padding ngang.",
+        "source": "§6.3e"
+      },
+      {
+        "kind": "must",
+        "text": "Chữ bám mép trên, padding 12 bốn phía; bộ đếm (n/100) caption object-secondary ở góc phải dưới.",
+        "source": "§6.3e"
+      },
+      {
+        "kind": "must",
+        "text": "Viền, nền, chữ, Error theo đúng bảng TextInput; dòng lỗi không icon.",
+        "source": "§6.3e"
+      },
+      {
+        "kind": "must",
+        "text": "Disabled: chữ đã gõ giữ object-primary; nhãn, bộ đếm và placeholder xuống object-disabled.",
+        "source": "§6.3e"
+      }
+    ],
+    "OTPInput": [
+      {
+        "kind": "do",
+        "text": "Thay mọi ô mã xác thực dựng tay bằng component này; Masked=True cho mã PIN.",
+        "source": "§6.3b"
+      },
+      {
+        "kind": "must",
+        "text": "Ô rỗng mang dấu “-” object-secondary, không phải ô trắng trơn hay placeholder chữ số.",
+        "source": "§6.3b"
+      },
+      {
+        "kind": "must",
+        "text": "Con trỏ 2px object-accent là tín hiệu duy nhất cho ô đang nhận chữ.",
+        "source": "§6.3b"
+      },
+      {
+        "kind": "must",
+        "text": "Lỗi: cả sáu ô cùng viền border-negative, không tô riêng ô nào; nền và chữ giữ nguyên.",
+        "source": "§6.3b"
+      },
+      {
+        "kind": "must",
+        "text": "Chữ đã gõ ở lại khi lỗi — đừng xoá về rỗng.",
+        "source": "§6.3b"
+      },
+      {
+        "kind": "must",
+        "text": "Dòng lỗi căn giữa dưới cụm ô, cách 4, caption object-negative.",
+        "source": "§6.3b"
+      },
+      {
+        "kind": "dont",
+        "text": "Không báo sai mã bằng Toast.",
+        "source": "§6.3b"
+      },
+      {
+        "kind": "do",
+        "text": "Ô co bằng flex: 1 0 0, min-width 36, max-width 48 để không tràn trên máy hẹp.",
+        "source": "§6.3b"
+      }
+    ],
+    "SearchInput": [
+      {
+        "kind": "dont",
+        "text": "Không có Error — không kết quả là chuyện của màn kết quả, không phải của ô.",
+        "source": "§6.3g"
+      },
+      {
+        "kind": "must",
+        "text": "Icon magnifier 24 cố định bên trái; nút xoá circle-xmark 16 chỉ hiện khi Filled, vùng chạm 32×32.",
+        "source": "§6.3g"
+      },
+      {
+        "kind": "must",
+        "text": "Disabled đã có chữ giữ object-primary; icon magnifier xuống object-disabled.",
+        "source": "§6.3g"
+      },
+      {
+        "kind": "must",
+        "text": "Loading: .loading 16 thay chỗ nút xoá, viền như Typing.",
+        "source": "§6.3g"
+      },
+      {
+        "kind": "do",
+        "text": "Cancel=true (nút Huỷ TextButtonNeutral Ghost Small) chỉ dùng ở màn tìm kiếm riêng trên mobile; bấm Huỷ xoá chữ, bỏ focus, đóng panel.",
+        "source": "§6.3g"
+      },
+      {
+        "kind": "do",
+        "text": "Panel gợi ý / lịch sử là Menu Platform=Panel neo dưới ô cách 4; rỗng + focus → lịch sử, đang gõ → gợi ý, không có gì → không mở panel.",
+        "source": "§6.3g"
+      },
+      {
+        "kind": "do",
+        "text": "Hàng “Tìm gần đây” có IconButtonNeutral Ghost Small xmark cuối hàng để xoá từng mục; panel vẫn mở, focus về ô.",
+        "source": "§6.3g"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có cỡ nhỏ riêng — density Compact đã thu ô.",
+        "source": "§6.3g"
+      }
+    ],
+    "DateInput": [
+      {
+        "kind": "dont",
+        "text": "Đừng tự ghép TextInput với icon lịch — dùng DateInput.",
+        "source": "§6.3c"
+      },
+      {
+        "kind": "must",
+        "text": "Ô không nhận gõ tay: chạm mở lịch của hệ điều hành, không con trỏ, không bàn phím.",
+        "source": "§6.3c"
+      },
+      {
+        "kind": "must",
+        "text": "Giá trị hiển thị DD/MM/YYYY, style body 400.",
+        "source": "§6.3c"
+      },
+      {
+        "kind": "dont",
+        "text": "Icon calendar-days 24 luôn object-secondary — đừng tô object-interactive, đừng bọc thành Icon button; không thay bằng icon calendar.",
+        "source": "§6.3c"
+      },
+      {
+        "kind": "must",
+        "text": "Error: viền border-negative, Label object-negative, dòng lỗi chữ không icon.",
+        "source": "§6.3c"
+      }
+    ],
+    "Dropdown": [
+      {
+        "kind": "must",
+        "text": "Giá trị đã chọn dùng label 600; gợi ý rỗng “Bấm để chọn” body 400 object-secondary.",
+        "source": "§6.4"
+      },
+      {
+        "kind": "must",
+        "text": "Icon chevron-down 16 object-secondary ở mọi state.",
+        "source": "§6.4"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có Focus/Typing — ô không nhận gõ.",
+        "source": "§6.4"
+      },
+      {
+        "kind": "do",
+        "text": "Danh sách option bung ra dùng Menu (§6.21).",
+        "source": "§6.4"
+      },
+      {
+        "kind": "must",
+        "text": "Error: viền border-negative, Label object-negative, dòng lỗi chữ không icon.",
+        "source": "§6.3"
+      }
+    ],
+    "Menu": [
+      {
+        "kind": "do",
+        "text": "Là panel option của Dropdown, Chip Dropdown và gợi ý SearchInput; Platform=Panel cho desktop, Sheet cho mobile.",
+        "source": "§6.21"
+      },
+      {
+        "kind": "must",
+        "text": "Hàng đã chọn (Single): nền tint background-accent-subtle, chữ object-interactive, state layer background-interactive 5/10.",
+        "source": "§6.21"
+      },
+      {
+        "kind": "must",
+        "text": "Type=Multiple: Checkbox đầu hàng, không tint nền, chữ object-primary; không đóng khi chọn, bật Footer “Bỏ chọn” + “Áp dụng”.",
+        "source": "§6.21"
+      },
+      {
+        "kind": "do",
+        "text": "Bật Search (SearchInput không nhãn, dính trên) khi > 8 option; không còn option → “Không tìm thấy “{từ khoá}””.",
+        "source": "§6.21"
+      },
+      {
+        "kind": "do",
+        "text": ".MenuSection: title-xs object-secondary IN HOA; .MenuDivider 1px border-muted, nhóm đầu không cần vạch phía trên.",
+        "source": "§6.21"
+      },
+      {
+        "kind": "must",
+        "text": "Panel neo dưới phần tử cách 4; thiếu chỗ thì lật lên; cao tối đa 320 rồi cuộn trong panel (tìm nhanh dính trên, footer dính dưới).",
+        "source": "§6.21"
+      },
+      {
+        "kind": "must",
+        "text": "Prefix icon chỉ có ở Type=Single.",
+        "source": "§6.21"
+      },
+      {
+        "kind": "do",
+        "text": "Đóng khi chọn xong (Single), bấm ra ngoài, Esc; Multiple chỉ áp dụng khi bấm “Áp dụng”.",
+        "source": "§6.21"
+      },
+      {
+        "kind": "do",
+        "text": "Option cần giải thích thêm → Description caption object-secondary dưới tên, tối đa 2 dòng; icon / checkbox căn trên.",
+        "source": "§6.21"
+      },
+      {
+        "kind": "must",
+        "text": "“Chọn tất cả” (Multiple, từ 4 option): hàng đầu + MenuDivider; Checked khi chọn hết, Indeterminate khi một phần; đang tìm nhanh chỉ tác động option đang hiện.",
+        "source": "§6.21"
+      }
+    ],
+    "Checkbox": [
+      {
+        "kind": "must",
+        "text": "Checked là mảng màu đặc background-interactive + icon check fill 20 object-on-interactive.",
+        "source": "§6.3f"
+      },
+      {
+        "kind": "must",
+        "text": "Indeterminate là vạch 16×2 bo tròn — không phải dấu trừ của font hay icon minus; bấm vào chuyển sang Checked.",
+        "source": "§6.3f"
+      },
+      {
+        "kind": "do",
+        "text": "Indeterminate dùng cho ô “chọn tất cả” khi danh sách mới tick một phần.",
+        "source": "§6.3f"
+      },
+      {
+        "kind": "do",
+        "text": "Error khi ô bắt buộc chưa tick mà người dùng đã bấm tiếp tục (vd. đồng ý Điều khoản).",
+        "source": "§6.3f"
+      },
+      {
+        "kind": "dont",
+        "text": "Không báo lỗi checkbox bằng Toast — báo tại ô kèm dòng chữ object-negative dưới hàng.",
+        "source": "§6.3f"
+      },
+      {
+        "kind": "must",
+        "text": "Viền 2px dựng inside (box-shadow inset), state layer phủ tràn viền.",
+        "source": "§6.1"
+      }
+    ],
+    "CheckboxInput": [
+      {
+        "kind": "must",
+        "text": "Vùng chạm là cả hàng, không riêng ô tick.",
+        "source": "§6.3f"
+      },
+      {
+        "kind": "must",
+        "text": "Ô tick + chữ gap 12, canh mép trên (items-start), text wrapper đệm trên 4.",
+        "source": "§6.3f"
+      },
+      {
+        "kind": "do",
+        "text": "Chữ là property Label (TEXT), override trên instance.",
+        "source": "§6.3f"
+      }
+    ],
+    "Radio": [
+      {
+        "kind": "do",
+        "text": "Chọn một trong nhiều trong form.",
+        "source": "§6.3d"
+      },
+      {
+        "kind": "must",
+        "text": "Vòng tròn 32, đã chọn vẫn nền trắng + viền border-interactive + chấm 20 object-interactive.",
+        "source": "§6.3d"
+      },
+      {
+        "kind": "do",
+        "text": "Error khi nhóm radio bắt buộc chưa chọn hoặc lựa chọn không hợp lệ.",
+        "source": "§6.3d"
+      },
+      {
+        "kind": "must",
+        "text": "Disabled không có hover/pressed.",
+        "source": "§6.3d"
+      }
+    ],
+    "RadioInput": [
+      {
+        "kind": "must",
+        "text": "Vùng chạm là cả hàng, không riêng vòng tròn 32.",
+        "source": "§6.3d"
+      },
+      {
+        "kind": "must",
+        "text": "Canh mép trên (items-start), gap 12, cụm chữ đệm trên 4 — không canh giữa.",
+        "source": "§6.3d"
+      },
+      {
+        "kind": "must",
+        "text": "Danh sách: vạch nét đứt 6/6 border-muted giữa hai hàng, hàng cuối không kẻ; dựng bằng gradient lặp, không dùng border dashed.",
+        "source": "§6.3d"
+      }
+    ],
+    "Switch": [
+      {
+        "kind": "do",
+        "text": "Bật/tắt một thiết lập có hiệu lực ngay — khác Checkbox (chọn rồi bấm xác nhận).",
+        "source": "§6.17"
+      },
+      {
+        "kind": "must",
+        "text": "Núm đổi cả vị trí lẫn kích thước (16 → 28 có check fill) — đừng chỉ trượt một núm cùng cỡ.",
+        "source": "§6.17"
+      },
+      {
+        "kind": "must",
+        "text": "Nửa tắt state layer 5/10, nửa bật 20/40; dựng bằng currentColor.",
+        "source": "§6.17"
+      },
+      {
+        "kind": "do",
+        "text": "Cần nhãn thì màn tự dựng hàng và ghi rõ là phần tự chế.",
+        "source": "§6.17"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có cỡ nhỏ riêng (dùng Compact) và không có chữ On/Off trong rãnh.",
+        "source": "§6.17"
+      }
+    ],
+    "Chip": [
+      {
+        "kind": "do",
+        "text": "Nhãn bấm được giữ trạng thái chọn; dùng để lọc (thẻ y hệt chỉ ít đi).",
+        "source": "§6.18"
+      },
+      {
+        "kind": "must",
+        "text": "Hình học chép TextButtonNeutral Small; chữ style label.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "must",
+        "text": "Đã chọn: nền background-interactive-muted, viền border-interactive, chữ object-interactive.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "dont",
+        "text": "Đừng dùng background-emphasized làm nền chip đã chọn — trùng background-disabled.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "must",
+        "text": "Type=Select đã chọn có icon check fill 16 trước chữ — không chỉ dựa vào màu.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "must",
+        "text": "Type=Dropdown có chevron-down 16 cùng màu chữ, không icon check; khi mở chip Selected=True và chevron-up.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "do",
+        "text": "Panel bung ra là Menu: lọc một giá trị → Single, chọn xong đóng; lọc nhiều → Multiple + footer, nhãn “{Tên} · n”.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "must",
+        "text": "Prefix icon 16 cùng màu chữ, gap 8; Type=Select đã chọn thì check thay chỗ icon — chip chỉ có một icon đầu.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "must",
+        "text": "Type=Input: màu như chưa chọn, xmark 16 trong ô tròn 24 cuối chip là nút gỡ duy nhất (aria-label “Gỡ {nhãn}”); thân chip không bấm được.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "do",
+        "text": "Type=Input cho giá trị đã nhập / bộ lọc đang áp dụng; gỡ xong focus sang chip kế tiếp.",
+        "source": "§6.18"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có cỡ khác 32 — Compact dùng 24.",
+        "source": "§6.18"
+      }
+    ],
+    "SegmentedControl": [
+      {
+        "kind": "do",
+        "text": "Chọn một-trong-nhiều kiểu tab pill khi cùng nội dung chỉ đổi cách xem.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "must",
+        "text": "Item đang chọn đậm lên bằng mode Active (.uu-is-active), không override weight.",
+        "source": "§6.13"
+      },
+      {
+        "kind": "must",
+        "text": "State layer item dùng fill object-primary bậc 5/10 ở cả hai giá trị Active.",
+        "source": "§6.13"
+      },
+      {
+        "kind": "dont",
+        "text": "Item HUG — đừng chia đều bề ngang trừ khi màn yêu cầu, đừng hardcode 204.",
+        "source": "§6.13"
+      },
+      {
+        "kind": "must",
+        "text": "Vỏ nền background-emphasized, item đang chọn nền background-surface + elevation-low.",
+        "source": "§6.13"
+      }
+    ],
+    "NavigationBar": [
+      {
+        "kind": "must",
+        "text": "Không có nền riêng — trong suốt, nằm trên nền màn.",
+        "source": "§6.5"
+      },
+      {
+        "kind": "must",
+        "text": "Back là IconButtonNeutral Solid Inverted=True Base với chevron-left.",
+        "source": "§6.5"
+      },
+      {
+        "kind": "do",
+        "text": "Tắt .Mini App Control bằng prop Mini app khi màn không chạy trong mini app.",
+        "source": "§6.5"
+      },
+      {
+        "kind": "dont",
+        "text": "Thanh kính mờ là lựa chọn của sản phẩm, component không tự bật.",
+        "source": "§2.4"
+      },
+      {
+        "kind": "do",
+        "text": "Trên desktop dùng Breadcrumb; không dùng Breadcrumb thay NavigationBar trên app.",
+        "source": "§6.25"
+      }
+    ],
+    "BottomBar": [
+      {
+        "kind": "do",
+        "text": "Điều hướng giữa các màn chính ngang hàng; bấm mục là chuyển màn, không lọc nội dung.",
+        "source": "§6.22"
+      },
+      {
+        "kind": "must",
+        "text": "Có 2 đến 5 mục.",
+        "source": "§6.22"
+      },
+      {
+        "kind": "must",
+        "text": "Mục đang chọn thuộc họ interactive (không accent), icon outline → fill.",
+        "source": "§6.22"
+      },
+      {
+        "kind": "must",
+        "text": "Badge là NotificationBadge Count neo góc trên phải icon; chỉ ở mục không Active.",
+        "source": "§6.22"
+      },
+      {
+        "kind": "do",
+        "text": "Nút hành động riêng (FooterItemSpecial) cho một hành động chính, không phải đích điều hướng; mặc định Emphasized, Subtle khi màn đã có nút Solid.",
+        "source": "§6.22"
+      },
+      {
+        "kind": "must",
+        "text": "Có nút hành động thì Compact=True tối đa 4 mục.",
+        "source": "§6.22"
+      },
+      {
+        "kind": "dont",
+        "text": "Thanh kính mờ không phải thuộc tính của BottomBar — component không tự bật.",
+        "source": "§2.4"
+      }
+    ],
+    "TablePagination": [
+      {
+        "kind": "do",
+        "text": "Thanh dưới bảng có số trang bấm được — khác Pagination (gạch chỉ báo carousel).",
+        "source": "§6.24"
+      },
+      {
+        "kind": "must",
+        "text": "Trang đang chọn: viền 2px border-interactive + aria-current=\"page\".",
+        "source": "§6.24"
+      },
+      {
+        "kind": "must",
+        "text": "Nút lùi ở trang đầu / tiến ở trang cuối là Disabled.",
+        "source": "§6.24"
+      },
+      {
+        "kind": "must",
+        "text": "≤ 7 trang hiện đủ; quá 7 giữ trang đầu, cuối, trang đang chọn ± 1, khoảng trống thành một ô “…”.",
+        "source": "§6.24"
+      },
+      {
+        "kind": "dont",
+        "text": "Không bao giờ “…” thay cho đúng một số trang.",
+        "source": "§6.24"
+      },
+      {
+        "kind": "must",
+        "text": "Ô Ellipsis không bấm được, không state layer, aria-hidden.",
+        "source": "§6.24"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có ô nhập số trang để nhảy — rút gọn “…” là đủ.",
+        "source": "§6.24"
+      }
+    ],
+    "Breadcrumb": [
+      {
+        "kind": "do",
+        "text": "Đường dẫn vị trí trong cây trang trên desktop.",
+        "source": "§6.25"
+      },
+      {
+        "kind": "must",
+        "text": "Mục cuối luôn là trang hiện tại: object-primary, không phải link, aria-current=\"page\", không Hover.",
+        "source": "§6.25"
+      },
+      {
+        "kind": "must",
+        "text": "Ngăn cách “/” object-disabled, aria-hidden.",
+        "source": "§6.25"
+      },
+      {
+        "kind": "dont",
+        "text": "Không dùng Breadcrumb thay NavigationBar trên app.",
+        "source": "§6.25"
+      },
+      {
+        "kind": "must",
+        "text": "Quá 4 mục: giữ mục đầu và 2 mục cuối, các mục giữa gom vào một mục Type=Overflow “…” mở Menu.",
+        "source": "§6.25"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có icon trước mục đầu.",
+        "source": "§6.25"
+      }
+    ],
+    "SideNav": [
+      {
+        "kind": "do",
+        "text": "Thanh điều hướng dọc của web app / portal — tương đương BottomBar trên app.",
+        "source": "§6.27"
+      },
+      {
+        "kind": "must",
+        "text": "Một mục Active mỗi lúc: nền background-interactive-muted, icon fill object-interactive, aria-current=\"page\".",
+        "source": "§6.27"
+      },
+      {
+        "kind": "must",
+        "text": "Collapsed: rộng 73, ẩn nhãn / chevron / tiêu đề nhóm / mục cấp 2; nhãn chuyển thành Tooltip.",
+        "source": "§6.27"
+      },
+      {
+        "kind": "do",
+        "text": "Ẩn/hiện nhãn qua collection layout (data-layout=\"collapsed\" hoặc prop collapsed), không tạo collection mới.",
+        "source": "§4.2"
+      },
+      {
+        "kind": "must",
+        "text": "Mục Level=2 không icon, thụt 24 để nhãn thẳng hàng nhãn cấp 1.",
+        "source": "§6.27"
+      },
+      {
+        "kind": "must",
+        "text": "Chevron-down xoay 180° khi nhóm mở (không đổi icon); mục có aria-expanded.",
+        "source": "§6.27"
+      },
+      {
+        "kind": "do",
+        "text": "Badge trên mục: NotificationBadge Count cuối mục; khi thu gọn thành Dot ở góc trên phải icon.",
+        "source": "§6.27"
+      },
+      {
+        "kind": "do",
+        "text": "Nút thu / mở: IconButtonNeutral Ghost Small sidebar-left đầu thanh, aria-expanded, nhãn “Thu gọn / Mở rộng thanh điều hướng”.",
+        "source": "§6.27"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có mục cấp 3 — quá 2 cấp thì tách trang.",
+        "source": "§6.27"
+      }
+    ],
+    "Tab": [
+      {
+        "kind": "do",
+        "text": "Chuyển giữa các vùng nội dung khác nhau (bố cục bên dưới đổi), không để lọc danh sách.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "must",
+        "text": "Tab Active: chữ object-interactive + gạch 32×4 border-interactive cố định 32, không giãn theo nhãn.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "dont",
+        "text": "Đừng lấy object-accent cho chữ tab — tab thuộc họ interactive.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "must",
+        "text": "Hover/Pressed chỉ có ở tab không Active; Disabled không có state layer.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "dont",
+        "text": "Không vỏ, không nền, không viền riêng trên Tab.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "do",
+        "text": "Icon 16 trước chữ (gap 8) cùng màu chữ, Active dùng fill; NotificationBadge Dot sau chữ (gap 4) báo có mới.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "must",
+        "text": "Badge chỉ là thông tin phụ — nhãn tab vẫn tự đủ nghĩa; web thêm chữ ẩn “có mới”.",
+        "source": "§6.20"
+      }
+    ],
+    "TabBar": [
+      {
+        "kind": "do",
+        "text": "Fixed cho 2–4 tab nhãn ngắn (chia đều); Scrollable cho ≥ 5 tab hoặc nhãn dài.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "must",
+        "text": "Viền dưới 1px border-muted chạy suốt, gạch Active đè lên viền.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "must",
+        "text": "Web: role=\"tablist\", mũi tên trái/phải chuyển tab.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "must",
+        "text": "Scrollable: tab Active tự cuộn vào tầm nhìn.",
+        "source": "§6.20"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có TabBar trên nền tối.",
+        "source": "§6.20"
+      }
+    ],
+    "Pagination": [
+      {
+        "kind": "do",
+        "text": "Hàng gạch chỉ vị trí trong băng chuyền — không phải chấm tròn.",
+        "source": "§6.10b"
+      },
+      {
+        "kind": "must",
+        "text": "Chỉ ba vị trí Begin/Middle/End với đúng năm gạch, kể cả khi có hơn 5 trang.",
+        "source": "§6.10b"
+      },
+      {
+        "kind": "must",
+        "text": "Bề rộng là tín hiệu chính (24 vs 16), màu chỉ phụ.",
+        "source": "§6.10b"
+      },
+      {
+        "kind": "dont",
+        "text": "Gạch không active dùng overlay, không dùng màu nền thương hiệu; 🔒Base/Slick không dùng riêng.",
+        "source": "§6.10b"
+      }
+    ],
+    "Toast": [
+      {
+        "kind": "do",
+        "text": "Báo kết quả việc người dùng vừa làm, ở đáy, có Type.",
+        "source": "§6.31"
+      },
+      {
+        "kind": "must",
+        "text": "Độ sáng nền quyết định cả ba phần tử: Warning (nền sáng) → content, nút Action, nút đóng đều Inverted=False; ba type kia Inverted=True.",
+        "source": "§6.6"
+      },
+      {
+        "kind": "must",
+        "text": "Content dùng object-on-{status}; style body 400, không phải label.",
+        "source": "§6.6"
+      },
+      {
+        "kind": "dont",
+        "text": "Không dùng Toast cho lỗi chặn luồng hay lỗi nhập (sai mã OTP, checkbox bắt buộc) — Toast tự tắt.",
+        "source": "§6.3f"
+      },
+      {
+        "kind": "do",
+        "text": "Lỗi sửa được ngay → Dialog / Toast, không phải màn lỗi.",
+        "source": "§6.19"
+      }
+    ],
+    "Badge": [
+      {
+        "kind": "do",
+        "text": "Nhãn trạng thái dạng viên thuốc, không bấm được.",
+        "source": "§6.14"
+      },
+      {
+        "kind": "must",
+        "text": "background-{status} chỉ đi với object-on-{status}.",
+        "source": "§6.14"
+      },
+      {
+        "kind": "must",
+        "text": "Icon 16 fill luôn hiện trước chữ, theo tone: Neutral circle-info · Success circle-check · Warning circle-warning · Error triangle-warning.",
+        "source": "§6.14"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có state (hover/pressed/disabled) — không phải control.",
+        "source": "§6.14"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có size khác 24, không có Highlight, không tắt được icon.",
+        "source": "§6.14"
+      }
+    ],
+    "StatusIndicator": [
+      {
+        "kind": "must",
+        "text": "Container=None: chấm object-{tone}, chữ luôn object-primary (warning chỉ là chấm).",
+        "source": "§6.15"
+      },
+      {
+        "kind": "must",
+        "text": "Chấm nhấp nháy (opacity 1 → 0.3, 1.6s); đứng yên khi người dùng bật giảm chuyển động.",
+        "source": "§6.15"
+      },
+      {
+        "kind": "do",
+        "text": "Highlight cho “mục này đáng chú ý” (Mới, Nổi bật, Đề xuất), dùng họ accent.",
+        "source": "§6.15"
+      },
+      {
+        "kind": "dont",
+        "text": "Đừng dùng Highlight để báo lỗi (Error) hay “có mới chưa xem” (NotificationBadge).",
+        "source": "§6.15"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có state — không phải control.",
+        "source": "§6.15"
+      }
+    ],
+    "CardPushNotification": [
+      {
+        "kind": "do",
+        "text": "Báo chuyện từ bên ngoài (đơn đổi trạng thái, quà, tin nhắn), trượt từ đỉnh; khác Toast báo kết quả thao tác.",
+        "source": "§6.31"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có type, không có nút: bấm cả thẻ để mở, vuốt lên để đóng.",
+        "source": "§6.31"
+      },
+      {
+        "kind": "must",
+        "text": "Tự ẩn sau 5 giây, dừng đếm khi đang chạm / hover.",
+        "source": "§6.31"
+      },
+      {
+        "kind": "must",
+        "text": "Một thẻ mỗi lúc — thẻ mới thay thẻ cũ.",
+        "source": "§6.31"
+      },
+      {
+        "kind": "must",
+        "text": "Web: role=\"status\", aria-live=\"polite\".",
+        "source": "§6.31"
+      },
+      {
+        "kind": "do",
+        "text": "Title và Content tối đa 2 dòng; ảnh nguồn 48 ẩn được.",
+        "source": "§6.31"
+      },
+      {
+        "kind": "must",
+        "text": "Desktop: góc trên phải, cách mép trên và phải 16, rộng 360 (size-90); dừng đếm khi hover.",
+        "source": "§6.31"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có nút đóng, thời gian nhận hay xếp chồng thẻ.",
+        "source": "§6.31"
+      }
+    ],
+    "NotificationBadge": [
+      {
+        "kind": "do",
+        "text": "Chấm/số báo có mới chưa xem, đặt lên góc icon hoặc tab.",
+        "source": "§6.16"
+      },
+      {
+        "kind": "must",
+        "text": "Dùng họ attention — không negative, không warning, không accent.",
+        "source": "§6.16"
+      },
+      {
+        "kind": "dont",
+        "text": "Nền attention là rose-600 (chữ trắng 4.70): đừng đổi sang red-600, sẽ trùng màu negative.",
+        "source": "§2.3"
+      },
+      {
+        "kind": "dont",
+        "text": "Đừng tự chế thêm variant; màn tự đặt vị trí neo.",
+        "source": "§6.16"
+      }
+    ],
+    "Tooltip": [
+      {
+        "kind": "do",
+        "text": "Nhãn ngắn giải thích phần tử khi hover hoặc focus — thường cho IconButton không chữ hay SideNav thu gọn.",
+        "source": "§6.30"
+      },
+      {
+        "kind": "dont",
+        "text": "Chỉ chữ thuần — không link / nút bên trong (cần thì dùng Popover).",
+        "source": "§6.30"
+      },
+      {
+        "kind": "must",
+        "text": "Hiện khi hover và cả focus bàn phím.",
+        "source": "§6.30"
+      },
+      {
+        "kind": "dont",
+        "text": "Không dùng trên màn chạm — không có hover.",
+        "source": "§6.30"
+      },
+      {
+        "kind": "must",
+        "text": "Mặc định aria-describedby; khi tooltip là tên của phần tử chỉ có icon → aria-labelledby (relation='label').",
+        "source": "§6.30"
+      },
+      {
+        "kind": "must",
+        "text": "Hover hiện sau 500 ms, focus bàn phím hiện ngay; rời / mất focus / Esc ẩn ngay, không mờ dần.",
+        "source": "§6.30"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có tooltip nhiều dòng có tiêu đề — dùng Popover.",
+        "source": "§6.30"
+      }
+    ],
+    "TableHeaderCell": [
+      {
+        "kind": "must",
+        "text": "Cột số Align=Right: icon sắp xếp đứng trước nhãn, dồn phải.",
+        "source": "§6.23"
+      },
+      {
+        "kind": "must",
+        "text": "Hover/Pressed chỉ ở cột sắp được (Sort≠Off); Sort=Off không icon, không state.",
+        "source": "§6.23"
+      },
+      {
+        "kind": "must",
+        "text": "Nhãn object-secondary; object-primary khi Ascending / Descending.",
+        "source": "§6.23"
+      },
+      {
+        "kind": "must",
+        "text": "Chiều cao và padding qua biến density (table/header-height, table/cell-padding-x).",
+        "source": "§6.23"
+      },
+      {
+        "kind": "must",
+        "text": "Cột chọn hàng: TableHeaderCell Type=Checkbox rộng 64 — Checked khi chọn hết trang đang xem, Indeterminate khi một phần.",
+        "source": "§6.23"
+      }
+    ],
+    "TableCell": [
+      {
+        "kind": "must",
+        "text": "Hover / Selected là trạng thái của cả hàng — mọi ô trong hàng cùng State.",
+        "source": "§6.23"
+      },
+      {
+        "kind": "must",
+        "text": "Cột số căn phải cả tiêu đề lẫn ô, tabular-nums.",
+        "source": "§6.23"
+      },
+      {
+        "kind": "dont",
+        "text": "Hành động theo dòng không bao giờ Solid; hai hành động trở lên → một Ghost Small, còn lại vào menu “⋯”.",
+        "source": "§6.23"
+      },
+      {
+        "kind": "dont",
+        "text": "Bảng không viền ngoài, không kẻ dọc — chỉ viền dưới mỗi ô.",
+        "source": "§6.23"
+      },
+      {
+        "kind": "do",
+        "text": "Bảng dùng cho desktop / dashboard (density Compact); Selected nền background-interactive-muted.",
+        "source": "§6.23"
+      },
+      {
+        "kind": "do",
+        "text": "Bảng rỗng dùng EmptySection đặt trong thân bảng.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "do",
+        "text": "Cột trạng thái dùng TableCell Type=Status chứa StatusIndicator, không tự đặt indicator vào ô Text.",
+        "source": "§6.23"
+      }
+    ],
+    "KPICard": [
+      {
+        "kind": "do",
+        "text": "Thẻ một con số chính trên dashboard.",
+        "source": "§6.26"
+      },
+      {
+        "kind": "must",
+        "text": "Polarity=Normal: Up object-positive, Down object-negative (màu theo chiều số).",
+        "source": "§6.26"
+      },
+      {
+        "kind": "do",
+        "text": "Chỉ số tăng là xấu (chi phí, tỉ lệ huỷ) → Polarity=Inverse: Up tô negative, Down tô positive; icon vẫn theo chiều số.",
+        "source": "§6.26"
+      },
+      {
+        "kind": "must",
+        "text": "Value heading-base tabular-nums; Trend=[No trend] không có Delta.",
+        "source": "§6.26"
+      },
+      {
+        "kind": "must",
+        "text": "Thẻ bấm được (Interactive): chevron-right 16 cuối hàng Label, state layer 5/10 phủ cả thẻ; cả thẻ là một link, không nút khác bên trong.",
+        "source": "§6.26"
+      }
+    ],
+    "CardSheet": [
+      {
+        "kind": "must",
+        "text": "Back và Close loại trừ nhau: sheet gốc Navigation=Close, sheet con Navigation=Back (không có nút đóng).",
+        "source": "§6.8"
+      },
+      {
+        "kind": "do",
+        "text": "Code: truyền onBack là Navigation=Back; không truyền là Close.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "must",
+        "text": "Nhóm nút là ButtonGroup (§6.9), không frame tự dựng; nút phụ và hướng xếp chỉnh trên instance ButtonGroup.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "must",
+        "text": "Bo cả bốn góc radius 24 — sheet nổi cách mép 12.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "do",
+        "text": "Có tiêu đề qua prop Header; CTA ẩn/hiện toàn bộ nhóm nút.",
+        "source": "§6.10"
+      },
+      {
+        "kind": "do",
+        "text": "Sheet kéo được: Handle 32×4 rounded-circle nền border ở đỉnh; hai nấc Height=Fit / Full.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "must",
+        "text": "Kéo xuống ở Fit quá 1/3 → đóng; ở Full → về Fit; không có Handle thì không kéo được.",
+        "source": "§6.8"
+      }
+    ],
+    "Sheet": [
+      {
+        "kind": "must",
+        "text": "Là template màn hình, không phải component sản phẩm — khi code dựng lại scrim + wrapper, bỏ home indicator.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "must",
+        "text": "Scrim overlay (đen 10%) + overlay-blur 16; đừng nhân thêm opacity lên fill.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "must",
+        "text": "Wrapper padding 0/12/12/12: sheet thụt 12 mỗi bên và nổi cách đáy 12.",
+        "source": "§6.8"
+      },
+      {
+        "kind": "do",
+        "text": "Trên app dùng Sheet, không dùng SideSheet.",
+        "source": "§6.28"
+      }
+    ],
+    "CardDialog": [
+      {
+        "kind": "must",
+        "text": "Không có tiêu đề — mọi nội dung (kể cả tiêu đề) nằm trong Slot; header chỉ chứa nút đóng căn phải.",
+        "source": "§6.10"
+      },
+      {
+        "kind": "must",
+        "text": "Banner=True: ảnh tỉ lệ 16:9 duy nhất, là nội dung nên cần alt.",
+        "source": "§6.10"
+      },
+      {
+        "kind": "must",
+        "text": "Nút đóng đè lên ảnh dùng IconButtonNeutral Solid Small — nút viền sẽ chìm.",
+        "source": "§6.10"
+      },
+      {
+        "kind": "must",
+        "text": "Nhóm nút là ButtonGroup (§6.9).",
+        "source": "§6.10"
+      },
+      {
+        "kind": "dont",
+        "text": "Dialog không xếp tầng — không có nút quay lại.",
+        "source": "§6.10"
+      }
+    ],
+    "Dialog": [
+      {
+        "kind": "must",
+        "text": "Là template màn hình — khi code dựng theo CardDialog và tự làm scrim.",
+        "source": "§6.10"
+      },
+      {
+        "kind": "must",
+        "text": "Panel căn giữa theo chiều dọc (khác Bottom sheet sát đáy).",
+        "source": "§6.10"
+      },
+      {
+        "kind": "must",
+        "text": "Scrim overlay + overlay-blur 16, panel thụt 12 mỗi bên; đừng nhân thêm opacity lên fill.",
+        "source": "§6.10"
+      },
+      {
+        "kind": "do",
+        "text": "Xác nhận hành động phá huỷ bằng Dialog có TextButtonDanger Solid.",
+        "source": "§6.1"
+      }
+    ],
+    "SideSheet": [
+      {
+        "kind": "do",
+        "text": "Tấm trượt từ mép phải màn desktop để xem / sửa chi tiết mà không rời trang.",
+        "source": "§6.28"
+      },
+      {
+        "kind": "do",
+        "text": "Standard nằm cạnh nội dung, viền trái, không scrim; Modal có elevation-high, bo hai góc trái, scrim như Sheet.",
+        "source": "§6.28"
+      },
+      {
+        "kind": "must",
+        "text": "Footer: TextButtonNeutral Outline Base + TextButtonAccent Solid Base, dồn phải, gap 12.",
+        "source": "§6.28"
+      },
+      {
+        "kind": "dont",
+        "text": "Không dùng SideSheet trên app — dùng Sheet.",
+        "source": "§6.28"
+      },
+      {
+        "kind": "do",
+        "text": "Width=Wide (480) cho form dài / nhiều cột; mặc định Base 384.",
+        "source": "§6.28"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có side sheet bên trái, không kéo đổi bề rộng.",
+        "source": "§6.28"
+      }
+    ],
+    "Popover": [
+      {
+        "kind": "do",
+        "text": "Khung nổi neo vào phần tử, chứa nội dung tương tác (form ngắn, xác nhận nhỏ).",
+        "source": "§6.29"
+      },
+      {
+        "kind": "must",
+        "text": "Mở bằng bấm; đóng bằng nút đóng / Esc / bấm ra ngoài.",
+        "source": "§6.29"
+      },
+      {
+        "kind": "must",
+        "text": "Footer dồn phải gap 8: TextButtonNeutral Ghost Small + TextButtonAccent Solid Small.",
+        "source": "§6.29"
+      },
+      {
+        "kind": "dont",
+        "text": "Không dùng Popover cho danh sách lựa chọn (đó là Menu) hay chữ giải thích khi hover (đó là Tooltip).",
+        "source": "§6.29"
+      },
+      {
+        "kind": "must",
+        "text": "Neo dưới phần tử, canh trái; thiếu chỗ thì lật lên, sát mép phải thì canh phải.",
+        "source": "§6.29"
+      },
+      {
+        "kind": "dont",
+        "text": "Không có mũi tên — Popover tách lớp bằng elevation.",
+        "source": "§6.29"
+      }
+    ],
+    "ResultScreen": [
+      {
+        "kind": "do",
+        "text": "Việc đã xong, người dùng phải sang chỗ khác.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Footer là ButtonGroup dọc — nút chính trên, lối đi phụ dưới.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "NavigationBar Back action=false.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "do",
+        "text": "Có component code ResultScreen / UuResultScreen (Body + Footer; NavigationBar do màn đặt); ảnh ô vuông không nền, cần alt.",
+        "source": "§6.19"
+      }
+    ],
+    "ErrorScreen": [
+      {
+        "kind": "do",
+        "text": "Lỗi chặn cả chức năng cốt lõi, không tự khắc phục được; lỗi một khối dùng ErrorSection, lỗi sửa được ngay dùng Dialog / Toast.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Đúng một nút: thử lại.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "NavigationBar Back action=false.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Ảnh minh hoạ ô tròn 128 nền background-accent-muted, cần alt.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "do",
+        "text": "Có component code ErrorScreen / UuErrorScreen nhận đúng một nút thử lại.",
+        "source": "§6.19"
+      }
+    ],
+    "EmptyScreen": [
+      {
+        "kind": "do",
+        "text": "Cả màn chưa có dữ liệu.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Một nút hành động (tạo mới, khám phá), ẩn được bằng Action.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Có nút back (Back action=true) — màn rỗng vẫn là màn bình thường.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Ảnh minh hoạ ô tròn 128 nền background-accent-muted, cần alt.",
+        "source": "§6.19"
+      }
+    ],
+    "EmptySection": [
+      {
+        "kind": "do",
+        "text": "Một khối trong màn chưa có dữ liệu (danh sách rỗng, bảng rỗng), kể cả trong thân bảng.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Một nút, ẩn được bằng Action.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Title heading-sm (nhỏ hơn màn), căn giữa; ảnh tròn 128 nền background-accent-muted, cần alt.",
+        "source": "§6.19"
+      }
+    ],
+    "ErrorSection": [
+      {
+        "kind": "do",
+        "text": "Lỗi chỉ ở một khối, phần còn lại của màn vẫn dùng được.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Một nút thử lại.",
+        "source": "§6.19"
+      },
+      {
+        "kind": "must",
+        "text": "Title heading-sm căn giữa; ảnh tròn 128 nền background-accent-muted, cần alt.",
+        "source": "§6.19"
+      }
+    ]
+  }
+}

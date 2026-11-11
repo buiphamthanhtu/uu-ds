@@ -1,4 +1,4 @@
-/// ÚÙ Design System cho Flutter.
+/// UU Design system cho Flutter.
 ///
 /// Đọc docs/design-system.md trước khi dùng. Luật không đổi so với bản web:
 /// 1. Màu chỉ qua `UuTheme.of(context).colors` (semantic) — không dùng `UuPrimitiveColors` trong widget.

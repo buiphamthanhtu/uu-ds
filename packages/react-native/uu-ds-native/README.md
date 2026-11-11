@@ -1,6 +1,6 @@
 # uu-ds-native
 
-ÚÙ Design System cho React Native / Expo. Cùng nguồn với bản web và Flutter: token sinh từ `docs/tokens.json`, component theo `docs/design-system.md`, UU icon công khai từ `src/icons/svg`.
+UU Design system cho React Native / Expo. Cùng nguồn với bản web và Flutter: token sinh từ `docs/tokens.json`, component theo `docs/design-system.md`, UU icon công khai từ `src/icons/svg`.
 
 Phạm vi bằng bản Flutter `packages/flutter/uu_ds_flutter`. Tên component cùng tên bản Flutter (`UuTextButton`…), prop cùng tên bản web (`tone`, `type`, `inverted`, `size`, `state`, `error`, `disabled`).
 

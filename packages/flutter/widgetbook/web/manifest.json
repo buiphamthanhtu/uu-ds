@@ -1,11 +1,11 @@
 {
-    "name": "ÚÙ Design System · Widgetbook",
+    "name": "ÚÙ Design system · Widgetbook",
     "short_name": "ÚÙ Widgetbook",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FFFFFF",
     "theme_color": "#FFFFFF",
-    "description": "Widgetbook của ÚÙ Design System",
+    "description": "Widgetbook của UU Design system",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

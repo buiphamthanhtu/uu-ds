@@ -1,7 +1,7 @@
-# ÚÙ Design System — gói cài đặt
+# ÚÙ Design system — gói cài đặt
 
-Gói web (React), React Native / Expo và Flutter của **ÚÙ Design System** (UU DS). Tài liệu, spec và Storybook: https://uucreative.co/uu-ds/
-File Figma (UU DLS, Figma Community): https://www.figma.com/community/file/1701990688423474087/uu-design-system
+Gói web (React), React Native / Expo và Flutter của **UU Design system** (UU DS). Tài liệu, spec và Storybook: https://uucreative.co/uu-ds/
+File Figma UU Design system (Figma Community): https://www.figma.com/community/file/1701990688423474087/uu-design-system
 
 | Gói | Thư mục | Cài |
 |---|---|---|
@@ -11,6 +11,26 @@ File Figma (UU DLS, Figma Community): https://www.figma.com/community/file/17019
 
 Repo này được đồng bộ một chiều từ nguồn của UU DS — đừng gửi sửa trực tiếp vào đây. File `*.g.ts` / `*.g.dart`
 là file sinh, không sửa tay.
+
+## Skill cho AI
+
+Thư mục `skills/uu-design-system` là skill của UU DS (spec, token, icon công khai) để AI dựng UI đúng hệ:
+
+```bash
+npx skills add buiphamthanhtu/uu-ds --skill uu-design-system
+```
+
+Claude trên web / app: tải https://uucreative.co/uu-ds/uu-design-system.zip rồi thêm ở Settings → Capabilities → Skills.
+
+## Chấm code
+
+Gói web kèm bộ chấm tất định (không gọi AI). Viết xong thì chạy ở project đã cài `uu-ds`:
+
+```bash
+npx uu-ds-check src
+```
+
+Sửa đến khi critical = 0; `--strict` để CI dừng khi còn critical. Chỉ chấm code web.
 
 ## Web
 

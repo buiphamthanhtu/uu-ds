@@ -4,9 +4,9 @@
   "name": "schema:name",
   "definition": "schema:description"
  },
- "name": "ÚÙ Design System — bản đồ hệ thống (ontology)",
+ "name": "ÚÙ Design system — bản đồ hệ thống (ontology)",
  "description": "Bản đồ tri thức cho AI: khái niệm, token, component, mode và quan hệ giữa chúng. Sinh tự động từ tokens.json, spec §5, CSS / TSX thật và các cây quyết định; cặp dễ nhầm viết tay.",
- "generatedAt": "2026-11-09",
+ "generatedAt": "2026-11-11",
  "howToUse": [
   "Tìm component: nodes có type Component; xem edges usesToken / composedOf / confusedWith / chosenWhen của nó.",
   "Tìm token cho một vai: lọc Token layer=semantic theo role (background/object/border/overlay) và family.",
