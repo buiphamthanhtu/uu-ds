@@ -15,9 +15,9 @@ Theo thứ tự:
 2. `DNA.md` ở gốc project.
 3. `docs/DNA.md`.
 
-Không thấy thì hỏi một lần trong phiên, trước màn đầu tiên: có DNA hoặc style anchor không. Style anchor là thứ để bám phong cách: ảnh chụp hoặc website.
+Không thấy thì hỏi một lần trong phiên, trước màn đầu tiên: có DNA hoặc màn mẫu không. Màn mẫu là thứ để bám phong cách: link Figma hoặc code / prototype của sản phẩm (đo được số thật), website, ảnh chụp.
 
-- Người dùng đưa style anchor: trích thành `DNA.md` theo mục *Trích DNA* rồi áp.
+- Người dùng đưa màn mẫu: trích thành `DNA.md` theo mục *Trích DNA* rồi áp, rồi dựng theo mục *Dựng theo màn mẫu*.
 - Người dùng nói không có, hoặc đang chạy tự động không hỏi được: build Basic và báo một dòng khi bàn giao.
 
 Đừng tự chế chất riêng.
@@ -57,7 +57,8 @@ Không thấy thì hỏi một lần trong phiên, trước màn đầu tiên: c
   /* Chữ và control */
   --font-family-body: "Inter", system-ui, sans-serif;  /* app tự nạp font */
   --border-outer-width: 2px;                               /* viền ngoài control + thẻ, mặc định 0 */
-  --elevation-none: 2px 2px 0 2px var(--object-primary);   /* bóng cứng của control; spread = độ dày viền, không thì bị viền che */
+  --elevation-none: 2px 2px 0 2px var(--object-primary);   /* bóng cứng của control; spread = độ dày viền, không thì bị viền che.
+                                                             Chỉ cho component có viền ngoài vẽ bằng bóng. Khối layout tự dựng dùng border CSS thật thì bóng spread 0. */
 
   /* Nền và bố cục */
   --dna-page-background: linear-gradient(180deg, var(--background-muted), var(--background-surface));
@@ -93,7 +94,9 @@ Phần layout của màn đọc `--dna-*` kèm giá trị dự phòng. Nhờ v�
 ```
 
 - **Giá trị ngoài thang** chỉ được khai trong khối theme này. Component và màn vẫn đọc `var(--token)`, không gõ số rời.
-- **`--dna-*` chỉ dùng ở layout của màn**, không dùng trong component.
+- **`--dna-*` chỉ dùng ở layout của màn**, không dùng trong component. Dấu hiệu nhận diện ngoài thang (thẻ nghiêng,
+  băng keo, bóng của thẻ tự dựng…) cũng khai thành `--dna-*` trong khối theme rồi layout đọc biến, ví dụ
+  `--dna-card-tilt: -1deg`. Không gõ thẳng giá trị vào layout.
 - **Vùng con:** đổi màu chỉ cần `data-theme` trên khung chứa. Đổi bo góc thì đặt thêm `data-density` lên cùng khung đó, vì `--field-radius` tính sẵn ở nơi khai `data-density`.
 - **React Native:** `<UuProvider dna={{ colors, radius, elevation, fontFamily, borderOuter }} icons={…}>`; bóng control là `elevation.none`.
 - **Flutter:** màu qua `UuTheme.copyWith(colors: …)`; font, viền ngoài (`borderOuterWidth` · `borderOuter`), bóng control (`elevationNone`), bộ icon qua `uuThemeData(...)`. Bo góc, elevation và `--dna-*` chưa có đường ghi đè, nên báo người dùng thay vì sửa widget.
@@ -144,19 +147,82 @@ AI làm theo các bước sau (một trang mỗi lần gọi, chụp kiểm từ
 5. Chụp từng bộ để kiểm: viền đủ bốn phía, không bị cắt, viền trạng thái (focus, Error) vẫn thấy.
 6. Muốn gỡ: xoá các bóng và stroke gắn `border-outer*`, đặt `border-outer-width` về 0, `elevation-none` về bóng trong suốt.
 
+## Ba tầng file trong Figma
+
+UU DS là nơi khuôn khổ, Snowflake là nơi tự do. Một sản phẩm dùng ba file:
+
+| File | Chứa gì | Thừa hưởng |
+|---|---|---|
+| **UU DS** (file gốc) | Token, component foundation. DNA của sản phẩm là **một mode của sản phẩm** trong các collection biến (`color`, `effect`…), cạnh `Default` | — |
+| **`[Snowflake] <Tên sản phẩm>`** | Component riêng của sản phẩm: card, section, khối nâng cao, khối nhận diện (thẻ tóm tắt, thẻ băng keo…) | Component + token của UU DS |
+| **File UI** | Các màn của sản phẩm | UU DS + Snowflake |
+
+- **DNA vào mode của sản phẩm trong UU DS**: màu (mục 2 của `DNA.md`) ở collection `color`; bo góc, bóng, viền ngoài,
+  font ở collection đang chứa biến đó. Không tạo collection riêng, không gõ giá trị lên layer. File UI chọn mode của
+  sản phẩm trên khung màn. Giá trị không phải biến (effect style, text style) thì không theo mode được: báo người dùng.
+- **Mode `UU` chỉ là ví dụ.** Sản phẩm có thể dùng luôn mode này: đổi tên thành tên sản phẩm rồi thay giá trị, thay vì
+  thêm mode mới. Mỗi sản phẩm vẫn cần một mode riêng.
+- **Tên mode = tên theme trong code.** Mode `cam-nang-no` trong Figma ứng với khối `[data-theme="cam-nang-no"]` ở code
+  (web), cùng giá trị lấy từ `DNA.md`. Code không đọc Figma: `DNA.md` là cầu nối, sửa giá trị thì sửa cả mode lẫn
+  `DNA.md`. Theme `uu` trong gói vẫn giữ nguyên làm ví dụ; sản phẩm không gọi nó.
+- **Khối lặp lại của màn mẫu** (mục 8 của `DNA.md`) là component trong Snowflake, dựng từ instance và token của UU DS.
+  Khối chưa có trong Snowflake mà xuất hiện từ hai màn: đề xuất thêm vào Snowflake, đừng chép frame qua lại giữa các màn.
+- **Không sửa component của UU DS** để ra chất sản phẩm. Cần khác thì làm component mới trong Snowflake.
+- Trước khi dựng: hỏi link file UU DS (đã có mode của sản phẩm chưa), file Snowflake và file UI. File UI phải bật cả hai
+  thư viện. Chưa có mode hoặc Snowflake thì báo người dùng, không tự tạo trong file gốc.
+- Code đi theo cùng ba tầng: gói `uu-ds` · component riêng của sản phẩm (đọc token, như Snowflake) · màn.
+
 ## Trích DNA từ sản phẩm
 
 Khi người dùng nhờ tạo DNA từ Figma, website hoặc ảnh chụp:
 
-1. Lấy ít nhất 3 màn khác nhau. Một màn chưa đủ để biết đâu là quy luật. Style anchor ít hơn 3 màn vẫn dùng được, nhưng mọi giá trị ghi `(đoán)`.
-2. Chép `dna-template.md` thành `DNA.md`.
+1. Lấy 2–3 màn khác nhau. Một màn chưa đủ để biết đâu là quy luật. Các trạng thái của cùng một màn (rỗng, có dữ liệu,
+   lỗi) tính là **một** màn.
+   Nguồn số đo, tốt trước: file Figma (đọc bằng Figma MCP, lấy số và biến đang gắn) hoặc code / prototype của sản phẩm
+   (đọc CSS) → website → ảnh chụp. Ghi nguồn cho từng giá trị.
+   Ghi `(đoán)` khi giá trị đo từ ảnh chụp hoặc website, hoặc khi chỉ có một màn. Số đọc được từ Figma thì không cần.
+2. Chép `dna-template.md` thành `DNA.md`. Lưu ở gốc project; người dùng chỉ làm trong Figma, không có project thì hỏi chỗ lưu, mặc định thư mục đang làm việc, và báo đường dẫn.
 3. Đo những gì lặp lại: màu nền, gradient, bóng, viền, bo góc, lề hai biên, khoảng cách giữa khối.
 4. Chỉ ghi giá trị xuất hiện từ hai lần trở lên. Giá trị xuất hiện một lần là ngoại lệ, không phải DNA.
 5. Quy về thang UU DS nếu lệch không quá 2px, ví dụ 15px thành `radius-lg`.
 6. Ghi nguồn. Từ ảnh chụp chỉ ước lượng được, nên thêm `(đoán)`.
 7. Tìm 2–3 dấu hiệu nhận diện. Đây là phần làm sản phẩm khác đi, đừng bỏ qua.
+8. Ghi **mẫu màn** (mục 8 của khuôn): cách màn được dựng. Khác bước 4, cách làm chỉ thấy ở một màn vẫn ghi, gắn nhãn
+   `(1 màn)`; luật "từ hai lần trở lên" chỉ áp cho số đo (mục 2–7). Thiếu mục này thì màn mới đúng màu,
+   đúng bo góc nhưng bố cục khác hẳn màn mẫu.
 
 Chỉ trích từ sản phẩm người dùng sở hữu hoặc được phép dùng. Muốn học phong cách của sản phẩm khác thì lấy nhịp bố cục, không lấy logo hay nhận diện.
+
+## Dựng theo màn mẫu
+
+Khi người dùng đã có màn mẫu (thường là các màn trong file Figma) và nhờ dựng màn mới, màn mới phải trông như cùng một
+sản phẩm. Áp cho mọi nơi dựng: Figma, canvas thiết kế, code. Ví dụ `DNA.md` có đủ mục Mẫu màn: Cẩm Nang Nô
+(`examples/dna-cam-nang-no/DNA.md` trong repo UU DS).
+
+1. **Đọc trước khi dựng.** Mở `DNA.md` và 2–3 màn mẫu gần nhất với màn cần dựng (cùng loại: danh sách, form, chi tiết…).
+   Chưa có `DNA.md` thì trích trước theo mục *Trích DNA*.
+2. **Lấy khung từ màn mẫu.** Màn mới cùng loại thì giữ header, lề, nhịp khoảng cách, kiểu thẻ hoặc danh sách, vị trí nút
+   chính như màn mẫu (mục 8 của `DNA.md`). Chỉ đổi phần nội dung khác. Thứ tự lấy khung: màn mẫu của sản phẩm →
+   `recipes.md` → tự dựng.
+3. **Dựng bằng UU DS, không vẽ tay.**
+   - **Khối bố cục của màn mẫu** (thẻ tóm tắt, khối hero… là frame / div gắn token, không phải component) thì được chép
+     lại. Chỉ dừng và hỏi khi cần một **control tương tác** chưa có trong UU DS; đừng tự vẽ một control giống.
+   - **Figma:** làm theo mục *Ba tầng file trong Figma*. Cách nhanh và khớp nhất là nhân bản màn mẫu cùng loại rồi
+     thay nội dung. Dùng instance từ UU DS và Snowflake của sản phẩm; khối của màn mẫu đã có trong Snowflake thì lấy
+     instance, không chép frame. Màu, bo góc, khoảng cách gắn biến, không gõ số lên layer. Không tách instance
+     (detach). Instance đặt vào khung màn thì cho rộng `FILL` theo khung.
+   - **Canvas thiết kế, HTML:** nạp `tokens.css`, khai DNA trong khối `[data-theme="<tên>"]`. Chỉ nút, field, checkbox,
+     radio, toggle, segmented có class sẵn; phần còn lại (`ListItem`, `Badge`, `NavigationBar`…) dựng theo cấu trúc và
+     số đo ở spec §6.x bằng token, và ghi rõ là tự dựng khi bàn giao. Canvas chạy được React thì dùng component của gói
+     `uu-ds` thay vì dựng tay.
+   - **Code:** project đã cài gói `uu-ds` thì dùng component của gói (`ListItem`, `ListGroup`…), không viết lại bằng
+     HTML + token. Rồi chạy `npx uu-ds-check src` (web) đến khi critical = 0. Chưa cài gói thì bộ chấm không chạy được:
+     cài gói (`npm i "github:buiphamthanhtu/uu-ds#web"`) hoặc báo khi bàn giao là chưa chấm.
+4. **So trước khi giao.** Chụp màn mới, đặt cạnh màn mẫu cùng loại. Liệt kê chỗ lệch theo thứ tự: bố cục, thứ bậc chữ,
+   khoảng cách, màu và bóng, chi tiết. Sửa rồi so lại. Chỗ lệch cố ý (màn mới cần khác) thì ghi lý do khi bàn giao.
+5. **Màn mẫu đụng phần khoá** (ví dụ hover đổi màu nền, hex gõ thẳng, độ đậm chữ khác text style): giữ phần khoá của
+   UU DS, không chép sang màn mới. Khi bàn giao, liệt kê từng chỗ màn mới vì thế mà khác màn mẫu, kèm hai lựa chọn cho
+   người dùng: chấp nhận lệch, hoặc đề xuất mở thêm đường ghi đè trong DNA cho UU DS (không tự mở).
 
 ## Kiểm trước khi giao
 

@@ -1,6 +1,6 @@
 # UU DS — Design System Specification
 
-> Spec đầy đủ của **ÚÙ Design System** (UU DS). Mọi giá trị dưới đây khớp với `tokens.css` / `tokens.json` cùng thư mục.
+> Spec đầy đủ của **UU Design system** (UU DS). Mọi giá trị dưới đây khớp với `tokens.css` / `tokens.json` cùng thư mục.
 > Đơn vị mặc định: **px**. Base rem = 16px.
 
 ---
@@ -2470,4 +2470,4 @@ vào component library.
 
 ---
 
-*ÚÙ Design System — spec. File này chỉ chứa phần đã chốt.*
+*UU Design system — spec. File này chỉ chứa phần đã chốt.*
