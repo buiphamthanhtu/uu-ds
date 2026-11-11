@@ -1560,7 +1560,7 @@ góc, scrim như trên. Cần rộng hơn 480 thì đổi sang `Dialog` hoặc `
 
 **Vị trí `placement`** (`bottom` · `center`): mặc định theo density như trên (Touch → `bottom`, Compact → `center`).
 Truyền tay khi vị trí cần khác density, ví dụ app giữ Touch (control 48) nhưng muốn sheet giữa màn trên màn rộng.
-`center` vẫn rộng tối đa 480. Web `<BottomSheet placement="center">` · Flutter `showUuBottomSheet(placement:
+Mọi vị trí đều rộng tối đa **480** (cả `bottom` ở Touch trên màn rộng: sheet nằm đáy, căn giữa). Web `<BottomSheet placement="center">` · Flutter `showUuBottomSheet(placement:
 UuSheetPlacement.center)` · React Native `<UuBottomSheet placement="center">`.
 
 **Bàn phím** (app): sheet có ô nhập thì nổi cách **đỉnh bàn phím 12** (cùng luật mép dưới của Toast §6.6), Body
