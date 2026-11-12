@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:uu_ds_flutter/uu_ds_flutter.dart';
 import 'package:widgetbook/widgetbook.dart';
 
+// Icon minh hoạ (house, gift…) gắn như bộ icon DNA, không nằm trong package uu_ds_flutter.
+import 'demo_icons.g.dart';
+
 /// DNA mẫu để xem widget khi sản phẩm bật Product DNA (spec 4.3).
 enum UuDnaSample {
   /// Không DNA: đúng UU DS gốc.
@@ -48,7 +51,7 @@ class UuThemeAddon extends WidgetbookAddon<UuThemeSetting> {
 
   @override
   Widget buildUseCase(BuildContext context, Widget child, UuThemeSetting setting) {
-    final base = uuThemeData(brand: setting.brand, density: setting.density, layout: setting.layout);
+    final base = uuThemeData(brand: setting.brand, density: setting.density, layout: setting.layout, icons: demoIcons);
     final ThemeData data;
     if (setting.dna == UuDnaSample.outer) {
       // Màu viền lấy object-primary của brand đang chọn (để null = mặc định), bóng dùng cùng màu.
@@ -57,6 +60,7 @@ class UuThemeAddon extends WidgetbookAddon<UuThemeSetting> {
         brand: setting.brand,
         density: setting.density,
         layout: setting.layout,
+        icons: demoIcons,
         borderOuterWidth: 2,
         elevationNone: [BoxShadow(color: ink, offset: const Offset(2, 2), spreadRadius: 2)],
       );

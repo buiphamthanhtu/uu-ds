@@ -2,6 +2,8 @@ import { useState, type ReactNode } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+// Icon minh hoạ (gear, heart…) gắn như bộ icon DNA, không nằm trong package uu-ds-native.
+import { demoIcons } from './demoIcons.g';
 import {
   UuBadge, UuBottomBar, UuBottomSheet, UuBreadcrumb, UuButtonGroup, UuCheckboxInput, UuChip, UuDateInput, UuDialog, UuDropdown,
   UuEmptySection, UuFeedbackHost, UuListGroup, UuListIconContainer, UuListItem, UuListValue, UuIconButton, UuKPICard, UuMenu, UuNavigationBar, UuNotificationBadge, UuOTPInput, UuPagination,
@@ -44,7 +46,7 @@ function Gallery({ brand, setBrand, density, setDensity }: { brand: UuBrand; set
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: c.backgroundMuted }} edges={['top']}>
-      <UuNavigationBar title="UU DS Native" subActionIcon="texture" subActionLabel="Cài đặt" />
+      <UuNavigationBar title="UU DS Native" subActionIcon="gear" subActionLabel="Cài đặt" />
       {/* Giữ ô đang gõ trên bàn phím: Android edge-to-edge không tự co màn → KeyboardAvoidingView;
           iOS → ScrollView tự thêm inset và cuộn tới ô đang gõ. */}
       <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'android'} style={{ flex: 1 }}>
@@ -60,21 +62,21 @@ function Gallery({ brand, setBrand, density, setDensity }: { brand: UuBrand; set
             <UuTextButton label="Huỷ" tone="neutral" type="outline" />
             <UuTextButton label="Đang lưu" state="loading" />
             <UuTextButton label="Tắt" state="disabled" />
-            <UuTextButton label="Thêm" type="outline" prefixIcon="texture" />
+            <UuTextButton label="Thêm" type="outline" prefixIcon="plus" />
           </Row>
           <Row>
             <UuTextButtonDanger label="Xoá" onPress={() => setDialog(true)} />
-            <UuIconButton icon="texture" label="Thích" tone="neutral" type="tonal" />
-            <UuToggleButton active={on} onToggle={setOn} icon="texture" label="Theo dõi" activeLabel="Đang theo dõi" />
+            <UuIconButton icon="heart" label="Thích" tone="neutral" type="tonal" />
+            <UuToggleButton active={on} onToggle={setOn} icon="star" label="Theo dõi" activeLabel="Đang theo dõi" />
           </Row>
         </Section>
 
         <Section title="List">
           <UuListGroup title="Cài đặt">
-            <UuListItem title="Thông tin cá nhân" leading={<UuListIconContainer icon="texture" />} trailing="chevron" onPress={() => showUuToast({ content: 'Mở Thông tin cá nhân' })} />
+            <UuListItem title="Thông tin cá nhân" leading={<UuListIconContainer icon="user" />} trailing="chevron" onPress={() => showUuToast({ content: 'Mở Thông tin cá nhân' })} />
             <UuListItem title="Thông báo đẩy" description="Đơn hàng, khuyến mãi" selection={{ type: 'switch', checked: on, onChange: setOn }} />
             <UuListItem title="Ngôn ngữ" trailing={<UuListValue>Tiếng Việt</UuListValue>} onPress={() => {}} />
-            <UuListItem title="Nhà riêng" description="12 Nguyễn Huệ, Quận 1" leading={<UuListIconContainer icon="texture" />} action={{ icon: 'texture', label: 'Sửa', onPress: () => showUuToast({ content: 'Sửa địa chỉ' }) }} onPress={() => {}} />
+            <UuListItem title="Nhà riêng" description="12 Nguyễn Huệ, Quận 1" leading={<UuListIconContainer icon="location" />} action={{ icon: 'pen', label: 'Sửa', onPress: () => showUuToast({ content: 'Sửa địa chỉ' }) }} onPress={() => {}} />
           </UuListGroup>
         </Section>
 
@@ -169,7 +171,7 @@ function Gallery({ brand, setBrand, density, setDensity }: { brand: UuBrand; set
 
       <View style={{ position: 'absolute', left: 12, right: 12, bottom: 24 }}>
         <UuBottomBar
-          items={[{ value: 'home', label: 'Trang chủ', icon: 'texture' }, { value: 'orders', label: 'Đơn hàng', icon: 'texture', badge: '2' }, { value: 'me', label: 'Tài khoản', icon: 'texture' }]}
+          items={[{ value: 'home', label: 'Trang chủ', icon: 'house' }, { value: 'orders', label: 'Đơn hàng', icon: 'receipt', badge: '2' }, { value: 'me', label: 'Tài khoản', icon: 'user' }]}
           value={nav}
           onChange={setNav}
         />
@@ -191,7 +193,7 @@ export default function App() {
   const [density, setDensity] = useState<UuDensity>('touch');
   return (
     <SafeAreaProvider>
-      <UuProvider brand={brand} density={density}>
+      <UuProvider brand={brand} density={density} icons={demoIcons}>
         <StatusBar style="dark" />
         <Gallery brand={brand} setBrand={setBrand} density={density} setDensity={setDensity} />
       </UuProvider>

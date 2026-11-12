@@ -51,7 +51,7 @@ class UuWidgetbook extends StatelessWidget {
             )),
           ]),
           WidgetbookComponent(name: 'ToggleButton', useCases: [
-            WidgetbookUseCase(name: 'Playground', builder: (ctx) => _Stateful<bool>(false, (v, set) => UuToggleButton(active: v, onToggle: set, icon: 'texture', label: 'Theo dõi', activeLabel: 'Đang theo dõi'))),
+            WidgetbookUseCase(name: 'Playground', builder: (ctx) => _Stateful<bool>(false, (v, set) => UuToggleButton(active: v, onToggle: set, icon: 'heart', label: 'Theo dõi', activeLabel: 'Đang theo dõi'))),
           ]),
           WidgetbookComponent(name: 'ButtonGroup', useCases: [
             WidgetbookUseCase(name: 'Horizontal', builder: (_) => const SizedBox(width: 352, child: UuButtonGroup(primary: UuGroupAction('Xác nhận'), secondary: UuGroupAction('Huỷ')))),
@@ -119,12 +119,12 @@ class UuWidgetbook extends StatelessWidget {
                   search: ctx.knobs.boolean(label: 'search'), options: _cities)))),
             WidgetbookUseCase(name: 'Section · Divider', builder: (ctx) => SizedBox(width: 280, child: UuMenuPanel(children: [
               const UuMenuSection(title: 'Miền Bắc'),
-              UuMenuItem(label: 'Hà Nội', icon: 'texture', selected: true, onTap: () {}),
-              UuMenuItem(label: 'Hải Phòng', icon: 'texture', onTap: () {}),
+              UuMenuItem(label: 'Hà Nội', icon: 'map-pin', selected: true, onTap: () {}),
+              UuMenuItem(label: 'Hải Phòng', icon: 'map-pin', onTap: () {}),
               const UuMenuDivider(),
               const UuMenuSection(title: 'Miền Nam'),
-              UuMenuItem(label: 'TP. Hồ Chí Minh', icon: 'texture', onTap: () {}),
-              const UuMenuItem(label: 'Cần Thơ', icon: 'texture', disabled: true),
+              UuMenuItem(label: 'TP. Hồ Chí Minh', icon: 'map-pin', onTap: () {}),
+              const UuMenuItem(label: 'Cần Thơ', icon: 'map-pin', disabled: true),
             ]))),
             WidgetbookUseCase(name: 'Ma trận .MenuItem', builder: (ctx) => SizedBox(width: 280, child: UuMenuPanel(children: [
               for (final type in UuMenuItemType.values)
@@ -138,7 +138,7 @@ class UuWidgetbook extends StatelessWidget {
           ]),
           WidgetbookComponent(name: 'SegmentedControl', useCases: [
             WidgetbookUseCase(name: 'Playground', builder: (ctx) => _Stateful<String>('a', (v, set) => UuSegmentedControl<String>(value: v, onChanged: set, items: const [
-              UuSegmentItem(value: 'a', label: 'Page'), UuSegmentItem(value: 'b', label: 'Page'), UuSegmentItem(value: 'c', label: 'Quà', icon: 'texture')]))),
+              UuSegmentItem(value: 'a', label: 'Page'), UuSegmentItem(value: 'b', label: 'Page'), UuSegmentItem(value: 'c', label: 'Quà', icon: 'gift')]))),
           ]),
           WidgetbookComponent(name: 'DateInput', useCases: [
             WidgetbookUseCase(name: 'Playground', builder: (ctx) => SizedBox(width: 358, child: _Stateful<DateTime?>(null, (v, set) => UuDateInput(label: 'Ngày sinh', value: v, onChanged: set, error: ctx.knobs.boolean(label: 'error'), errorMessage: 'Error message', disabled: ctx.knobs.boolean(label: 'disabled'))))),
@@ -171,7 +171,7 @@ class UuWidgetbook extends StatelessWidget {
         ]),
         WidgetbookFolder(name: 'Điều hướng', children: [
           WidgetbookComponent(name: 'NavigationBar', useCases: [
-            WidgetbookUseCase(name: 'Playground', builder: (ctx) => SizedBox(width: 430, child: UuNavigationBar(title: 'Screen', onBack: () {}, subActionIcon: 'texture', subActionLabel: 'Chia sẻ'))),
+            WidgetbookUseCase(name: 'Playground', builder: (ctx) => SizedBox(width: 430, child: UuNavigationBar(title: 'Screen', onBack: () {}, subActionIcon: 'share-right', subActionLabel: 'Chia sẻ'))),
           ]),
           WidgetbookComponent(name: 'BottomBar', useCases: [
             WidgetbookUseCase(name: 'Playground', builder: (ctx) => Container(
@@ -183,16 +183,16 @@ class UuWidgetbook extends StatelessWidget {
                         onChanged: set,
                         compact: ctx.knobs.boolean(label: 'compact'),
                         action: ctx.knobs.boolean(label: 'action')
-                            ? UuBottomBarAction(label: 'Quét mã', icon: 'texture', type: ctx.knobs.object.dropdown(labelBuilder: _n, label: 'action type', options: UuFooterItemSpecialType.values, initialOption: UuFooterItemSpecialType.emphasized), onPressed: () {})
+                            ? UuBottomBarAction(label: 'Quét mã', icon: 'qrcode', type: ctx.knobs.object.dropdown(labelBuilder: _n, label: 'action type', options: UuFooterItemSpecialType.values, initialOption: UuFooterItemSpecialType.emphasized), onPressed: () {})
                             : null,
                         items: [
-                          UuBottomBarItem(value: 'home', label: 'Trang chủ', icon: 'texture'),
-                          UuBottomBarItem(value: 'gift', label: 'Ưu đãi', icon: 'texture'),
-                          const UuBottomBarItem(value: 'home', label: 'Trang chủ', icon: 'texture'),
-                          const UuBottomBarItem(value: 'gift', label: 'Ưu đãi', icon: 'texture'),
-                          if (!ctx.knobs.boolean(label: 'action')) const UuBottomBarItem(value: 'scan', label: 'Quét mã', icon: 'texture'),
-                          const UuBottomBarItem(value: 'bell', label: 'Thông báo', icon: 'texture', badge: '9', badgeLabel: '9 thông báo mới'),
-                          const UuBottomBarItem(value: 'user', label: 'Tài khoản', icon: 'texture'),
+                          UuBottomBarItem(value: 'home', label: 'Trang chủ', icon: 'house'),
+                          UuBottomBarItem(value: 'gift', label: 'Ưu đãi', icon: 'gift'),
+                          const UuBottomBarItem(value: 'home', label: 'Trang chủ', icon: 'house'),
+                          const UuBottomBarItem(value: 'gift', label: 'Ưu đãi', icon: 'gift'),
+                          if (!ctx.knobs.boolean(label: 'action')) const UuBottomBarItem(value: 'scan', label: 'Quét mã', icon: 'qrcode'),
+                          const UuBottomBarItem(value: 'bell', label: 'Thông báo', icon: 'bell', badge: '9', badgeLabel: '9 thông báo mới'),
+                          const UuBottomBarItem(value: 'user', label: 'Tài khoản', icon: 'user'),
                         ],
                       )),
                 )),
@@ -225,9 +225,9 @@ class UuWidgetbook extends StatelessWidget {
                   // Bỏ trống → theo layout của theme (chọn theme "Collapsed" để xem).
                   collapsed: ctx.knobs.boolean(label: 'collapsed (prop)') ? true : null,
                   children: [
-                    UuSideNavItem(label: 'Trang chủ', icon: 'texture', active: v == 'home', onTap: () => set('home')),
+                    UuSideNavItem(label: 'Trang chủ', icon: 'house', active: v == 'home', onTap: () => set('home')),
                     const UuSideNavSection(title: 'Quản lý'),
-                    UuSideNavItem(label: 'Khách hàng', icon: 'texture', chevron: true, active: v == 'kh', onTap: () => set('kh')),
+                    UuSideNavItem(label: 'Khách hàng', icon: 'users', chevron: true, active: v == 'kh', onTap: () => set('kh')),
                     UuSideNavItem(label: 'Danh sách', level: 2, active: v == 'ds', onTap: () => set('ds')),
                   ],
                 )))),
@@ -425,7 +425,7 @@ class UuWidgetbook extends StatelessWidget {
         ]),
         WidgetbookFolder(name: 'Icon', children: [
           WidgetbookComponent(name: 'UuIcon', useCases: [
-            WidgetbookUseCase(name: 'Playground', builder: (ctx) => UuIcon(ctx.knobs.string(label: 'name', initialValue: 'texture'), variant: ctx.knobs.object.dropdown(labelBuilder: _n, label: 'variant', options: UuIconVariant.values), size: ctx.knobs.double.slider(label: 'size', initialValue: 24, min: 16, max: 48))),
+            WidgetbookUseCase(name: 'Playground', builder: (ctx) => UuIcon(ctx.knobs.string(label: 'name', initialValue: 'gift'), variant: ctx.knobs.object.dropdown(labelBuilder: _n, label: 'variant', options: UuIconVariant.values), size: ctx.knobs.double.slider(label: 'size', initialValue: 24, min: 16, max: 48))),
           ]),
         ]),
       ],
