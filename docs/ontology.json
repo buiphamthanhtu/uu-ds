@@ -6,7 +6,7 @@
  },
  "name": "ÚÙ Design system — bản đồ hệ thống (ontology)",
  "description": "Bản đồ tri thức cho AI: khái niệm, token, component, mode và quan hệ giữa chúng. Sinh tự động từ tokens.json, spec §5, CSS / TSX thật và các cây quyết định; cặp dễ nhầm viết tay.",
- "generatedAt": "2026-11-11",
+ "generatedAt": "2026-11-12",
  "howToUse": [
   "Tìm component: nodes có type Component; xem edges usesToken / composedOf / confusedWith / chosenWhen của nó.",
   "Tìm token cho một vai: lọc Token layer=semantic theo role (background/object/border/overlay) và family.",
@@ -62,7 +62,7 @@
    "id": "concept:brand-mode",
    "type": "Concept",
    "name": "Brand mode",
-   "definition": "Bộ giá trị của 23 token thương hiệu. Bật bằng data-theme; component không biết brand."
+   "definition": "Bộ giá trị của 22 token thương hiệu. Bật bằng data-theme; component không biết brand."
   },
   {
    "id": "concept:density",
@@ -9306,7 +9306,7 @@
   [
    "token:border",
    "aliasOf",
-   "token:color-neutral-300",
+   "token:color-slate-300",
    "brand uu"
   ],
   [

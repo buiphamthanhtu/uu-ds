@@ -1,6 +1,6 @@
 # UU DS — bản đồ hệ thống (ontology, tóm tắt)
 
-Bản đầy đủ: `ontology.json` (848 node · 2050 quan hệ). Sinh tự động — 2026-11-11.
+Bản đầy đủ: `ontology.json` (848 node · 2050 quan hệ). Sinh tự động — 2026-11-12.
 
 ## Quan hệ
 
