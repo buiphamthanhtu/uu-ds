@@ -186,8 +186,6 @@ class UuWidgetbook extends StatelessWidget {
                             ? UuBottomBarAction(label: 'Quét mã', icon: 'qrcode', type: ctx.knobs.object.dropdown(labelBuilder: _n, label: 'action type', options: UuFooterItemSpecialType.values, initialOption: UuFooterItemSpecialType.emphasized), onPressed: () {})
                             : null,
                         items: [
-                          UuBottomBarItem(value: 'home', label: 'Trang chủ', icon: 'house'),
-                          UuBottomBarItem(value: 'gift', label: 'Ưu đãi', icon: 'gift'),
                           const UuBottomBarItem(value: 'home', label: 'Trang chủ', icon: 'house'),
                           const UuBottomBarItem(value: 'gift', label: 'Ưu đãi', icon: 'gift'),
                           if (!ctx.knobs.boolean(label: 'action')) const UuBottomBarItem(value: 'scan', label: 'Quét mã', icon: 'qrcode'),
