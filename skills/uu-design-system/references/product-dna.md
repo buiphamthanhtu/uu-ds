@@ -28,7 +28,7 @@ Không thấy thì hỏi một lần trong phiên, trước màn đầu tiên: c
 
 | Khoá, DNA không đổi | DNA được đổi |
 |---|---|
-| Danh sách component, tên, prop, cấu trúc | 23 token thương hiệu |
+| Danh sách component, tên, prop, cấu trúc | 22 token thương hiệu |
 | State layer | `radius-sm` · `radius-base` · `radius-lg` · `radius-xl` |
 | Chiều cao control, density | `rounded-2xl` · `rounded-3xl` · `rounded-4xl` (nút, chip) |
 | Radio, Switch, chấm tròn, vỏ `BottomBar` (`rounded-circle`) | `elevation-low` · `elevation-medium` · `elevation-high` · `elevation-none` (bóng của control, mặc định không có) |
@@ -46,7 +46,7 @@ Không thấy thì hỏi một lần trong phiên, trước màn đầu tiên: c
 
 ```css
 [data-theme="ten-san-pham"] {
-  /* 23 token thương hiệu */
+  /* 22 token thương hiệu */
   --background-interactive: var(--color-…);
 
   /* Hình khối */

@@ -574,7 +574,7 @@ export const colors = {
     objectOnAttention: '#FFFFFF',
     objectWarning: '#EAB308',
     objectOnWarning: '#000000',
-    border: '#D4D4D4',
+    border: '#CBD5E1',
     borderMuted: '#E2E8F0',
     borderEmphasized: '#64748B',
     borderSubtle: '#FDE68A',

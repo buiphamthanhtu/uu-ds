@@ -862,7 +862,7 @@ class UuSemanticColors {
     objectOnAttention: UuPrimitiveColors.white,
     objectWarning: UuPrimitiveColors.yellow500,
     objectOnWarning: UuPrimitiveColors.black,
-    border: UuPrimitiveColors.neutral300,
+    border: UuPrimitiveColors.slate300,
     borderMuted: UuPrimitiveColors.slate200,
     borderEmphasized: UuPrimitiveColors.slate500,
     borderSubtle: UuPrimitiveColors.amber200,

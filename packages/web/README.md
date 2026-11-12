@@ -27,7 +27,7 @@ import { TextButtonAccent, Icon, IconProvider } from 'uu-ds';
 ```
 
 - Brand: `<html data-theme="uu">` (mặc định Default). Density: `data-density="compact"`.
-- Product DNA (spec 4.3): khai trong một khối `[data-theme="<tên>"]` — 23 token thương hiệu, bo góc, elevation,
+- Product DNA (spec 4.3): khai trong một khối `[data-theme="<tên>"]` — 22 token thương hiệu, bo góc, elevation,
   `--font-family-body` / `--font-family-display`, `--border-outer-width` · `--border-outer` · `--elevation-none`.
 - Bộ icon của sản phẩm (Lucide, Nucleo…): `<IconProvider icons={{ paw: { outline: '<svg…>' } }}>` — tên trùng ghi đè 22 icon mặc định. Ví dụ map Lucide: trang Icon / Hướng dẫn.
 

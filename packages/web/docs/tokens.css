@@ -3,7 +3,7 @@
    để giao diện co theo cỡ chữ người dùng chọn trong trình duyệt. Giữ px: size-px (nét 1px), rounded-circle,
    bóng đổ, độ dày viền. App (Flutter) dùng cùng giá trị ở dạng logical px — xem tokens.json. */
 /* UU DS — hai brand mode: Default (:root) và UU ([data-theme="uu"], cam + vàng theo nhận diện Ú Ù). Brand khác: thêm một khối
-   [data-theme="<tên>"] ghi đè đúng 23 token thương hiệu (spec 2.5). */
+   [data-theme="<tên>"] ghi đè đúng 22 token thương hiệu (spec 2.5). */
 
 :root {
   /* ---- primitive: color ---- */
@@ -457,12 +457,11 @@
   --border-medium: var(--color-blue-300);
 }
 
-/* ---- brand mode UU (spec 2.5): cam + vàng theo nhận diện Ú Ù — chỉ 23 token thương hiệu ----
+/* ---- brand mode UU (spec 2.5): cam + vàng theo nhận diện Ú Ù — chỉ 22 token thương hiệu ----
    Nền nút orange-500 (chủ DS chốt 2026-10-18): chữ trắng chỉ 2.80 → chữ trên nút ĐEN (7.49) qua object-on-interactive.
    Chữ / link màu cam vẫn orange-700 (5.18 trên trắng); orange-500 trên trắng chỉ 2.80. */
 [data-theme="uu"] {
   --object-secondary: var(--color-neutral-600);
-  --border: var(--color-neutral-300);
   --background-muted: var(--color-neutral-50);
   --background-subtle: var(--color-neutral-100);
   --background-emphasized: var(--color-neutral-200);

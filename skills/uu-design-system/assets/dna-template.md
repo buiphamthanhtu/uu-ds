@@ -18,7 +18,7 @@ Giá trị nào chưa đo được thì bỏ trống, UU DS sẽ dùng mặc đ�
 
 ## 2. Màu
 
-Bảng này chỉ ghi các token muốn đổi trong 23 token thương hiệu (spec 2.5).
+Bảng này chỉ ghi các token muốn đổi trong 22 token thương hiệu (spec 2.5).
 Sản phẩm có **nhiều chế độ màu** (spec 4.3): thêm một cột giá trị cho mỗi chế độ (`Giá trị · <chế độ 1>`,
 `Giá trị · <chế độ 2>`…) và ghi tên chế độ mặc định. Phần còn lại của file dùng chung cho mọi chế độ.
 

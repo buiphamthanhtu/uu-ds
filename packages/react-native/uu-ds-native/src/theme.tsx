@@ -28,7 +28,7 @@ export type UuIconSet = Record<string, UuIconSetEntry>;
  * cỡ chữ / line-height / font-weight, `rounded-circle`, token status) không có ở đây.
  */
 export interface UuDna {
-  /** 23 token thương hiệu (spec 2.5), ghi đè lên brand. */
+  /** 22 token thương hiệu (spec 2.5), ghi đè lên brand. */
   colors?: Partial<UuColors>;
   /** `radius-sm` → `radius-xl` (`sm` · `base` · `lg` · `xl`), `rounded-2xl` → `rounded-4xl` (`xl2` · `xl3` · `xl4` — nút, chip). */
   radius?: Partial<Omit<UuRadius, 'none' | 'circle'>>;

@@ -329,7 +329,7 @@ vàng đậm amber-400 chỉ làm nền (`background-accent-emphasized`, chữ �
 Figma: collection `color`, mode `Default` · `UU`. tokens.json: `semantic.color.default` · `semantic.color.uu`.
 Flutter: `UuBrand.defaultBrand` · `UuBrand.uu` (`default` là từ khoá của Dart).
 
-Nhóm token thương hiệu — 23 token:
+Nhóm token thương hiệu — 22 token:
 
 ```
 background-muted / -subtle / -emphasized     nền trung tính của trang (hiện: slate-50 / 100 / 200)
@@ -340,7 +340,7 @@ object-on-interactive                         chữ / icon trên nền interacti
 object-accent / -muted / -inverted
 border-interactive / -interactive-inverted
 border-subtle / border-medium
-object-secondary / border                     chữ phụ và viền trung tính (Default slate · UU neutral)
+object-secondary                              chữ phụ (Default slate · UU neutral)
 ```
 
 Mọi token còn lại — status (`positive` / `negative` / `warning` / `attention`), thang xám, `object-primary`, overlay — **không đổi theo brand**.
@@ -631,7 +631,7 @@ prop `collapsed` của `SideNav` là cách viết tắt cho đúng vùng thanh b
 UU DS giữ cấu trúc và hành vi. Style riêng của một sản phẩm khai trong file `DNA.md`, áp bằng một khối
 `[data-theme="<tên>"]` trên `<html>`. Không có DNA thì dùng brand Default.
 
-Khối này được đổi: 23 token thương hiệu (2.5), `radius-sm` → `radius-xl`, `rounded-2xl` → `rounded-4xl`,
+Khối này được đổi: 22 token thương hiệu (2.5), `radius-sm` → `radius-xl`, `rounded-2xl` → `rounded-4xl`,
 `elevation-*` (gồm `elevation-none`, bóng của control), `font-family-display`, `font-family-body`, viền ngoài
 (`border-outer-width` · `border-outer`), bộ icon, và biến `--dna-*` cho nền và bố cục của màn.
 Không được đổi `rounded-circle`, state layer, chiều cao control, density, cỡ chữ / line-height / font-weight của
@@ -694,13 +694,13 @@ Sản phẩm cần viền ngoài thì bật theo hướng dẫn ở `product-dna
 hoặc nhờ AI).
 
 **Nhiều chế độ màu.** Một sản phẩm có thể có nhiều chế độ màu (chế độ theo vai trò, theo dịp, theo gu người dùng…).
-Mỗi chế độ là một brand mode của sản phẩm: chỉ khai lại **23 token thương hiệu** (2.5). Mọi phần khác của DNA — font,
+Mỗi chế độ là một brand mode của sản phẩm: chỉ khai lại **22 token thương hiệu** (2.5). Mọi phần khác của DNA — font,
 bo góc, elevation, viền ngoài, bộ icon, `--dna-*` — khai **một lần**, dùng chung cho mọi chế độ.
 
 - Không đổi theo chế độ: state layer, token status, `object-primary`, thang xám (như mọi DNA).
 - Contrast (2.3) đo lại **từng chế độ**. Một chế độ không đạt thì sửa màu của chế độ đó, không nới luật.
 - Đổi chế độ chỉ đổi màu: không đổi layout, không đổi component, không cần tải lại màn.
-- Màu trang trí riêng của sản phẩm không thuộc 23 token (vd. băng keo, minh hoạ) khai bằng `--dna-*`; giữ cố định hay
+- Màu trang trí riêng của sản phẩm không thuộc 22 token (vd. băng keo, minh hoạ) khai bằng `--dna-*`; giữ cố định hay
   đổi theo chế độ là quyết định của sản phẩm.
 - Chế độ tối (dark) **không** đi đường này: UU DS chưa chốt dark mode.
 

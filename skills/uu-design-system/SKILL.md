@@ -45,7 +45,7 @@ Luật: `--color-*` chỉ được xuất hiện trong **định nghĩa token se
 hiện trong component. Chỗ nào cần một màu mà không có token semantic đúng vai trò thì
 **thêm token vào UU DS trước**, đừng với xuống tầng primitive cho nhanh.
 
-**2. Brand mode.** UU DS có **hai** brand mode: **Default** (`:root` — interactive indigo, accent blue, nền slate) và **UU** (`data-theme="uu"` — nền nút orange-500 với chữ **đen**, chữ/link orange-700, accent vàng amber, nền neutral; theo nhận diện Ú Ù). Màu thương hiệu gói trong 23 token; chữ trên nút luôn là `object-on-interactive`, đừng gõ trắng. Màu thương hiệu nằm gọn trong 23 token (spec 2.5); thêm brand là thêm một khối `[data-theme="<tên>"]` ghi đè đúng nhóm đó. Component **không được** biết mình đang ở brand nào — nếu phải viết `if (brand === …)` thì đang làm sai.
+**2. Brand mode.** UU DS có **hai** brand mode: **Default** (`:root` — interactive indigo, accent blue, nền slate) và **UU** (`data-theme="uu"` — nền nút orange-500 với chữ **đen**, chữ/link orange-700, accent vàng amber, nền neutral; theo nhận diện Ú Ù). Màu thương hiệu gói trong 22 token; chữ trên nút luôn là `object-on-interactive`, đừng gõ trắng. Màu thương hiệu nằm gọn trong 22 token (spec 2.5); thêm brand là thêm một khối `[data-theme="<tên>"]` ghi đè đúng nhóm đó. Component **không được** biết mình đang ở brand nào — nếu phải viết `if (brand === …)` thì đang làm sai.
 
 **Màu thương hiệu UU** (đã chốt, theo file Figma UU DLS): `interactive` = ramp `indigo` (`indigo-600` `#4F46E5`, 6.29:1 trên trắng), `accent` = ramp `blue` (`blue-600`, 5.17), nền và viền trung tính = ramp `slate`. Khi chốt màu UU chỉ đổi nhóm token thương hiệu rồi đo lại contrast ở spec 2.3.
 
