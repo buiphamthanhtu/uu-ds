@@ -12,6 +12,10 @@ tên gọi trong design system, không chuyển quyền sở hữu. Không tách
 Gói chỉ kèm icon component dùng cố định và `texture` (icon giữ chỗ). Sản phẩm cần icon thì tự mua license
 Nucleo hoặc dùng bộ khác, đăng ký qua Product DNA (spec 4.3). Bộ icon do sản phẩm tự đăng ký (Product DNA) thì giấy phép thuộc về sản phẩm đó.
 
+Widgetbook (`flutter/widgetbook/lib/demo_icons.g.dart`) và app mẫu (`react-native/example/demoIcons.g.ts`) có thêm
+icon minh hoạ, cũng dựng từ Nucleo. Bộ này chỉ để trình diễn, gắn như một bộ icon DNA, không nằm trong gói và không
+được tách ra dùng trong sản phẩm.
+
 ## Bộ chấm `uu-ds-check`
 
 `scripts/vibe-eval.mjs` trong gói web (lệnh `npx uu-ds-check`) học cách chấm tất định từ

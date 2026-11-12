@@ -29,12 +29,14 @@ sản phẩm dùng UU DS lấy từ một bộ duy nhất: **UU icon**.
    Tra tên trước bằng `uu-icon-index.json`; tên gần giống (`cart` vs `cart-shopping`) không
    phải là cùng icon.
 5. Ảnh minh hoạ, huy hiệu, sticker nhiều màu **không phải icon** — đó là asset, đi đường asset.
-6. **Chỗ công khai chỉ dùng icon `public: true`.** Repo UU DS, Storybook deploy, package
-   phát hành, demo đưa ra ngoài: chỉ chứa icon có `public: true`. Ví dụ, story, docs cần icon
-   minh hoạ (BottomBar, Tab, SideNav, ListItem, Chip…) thì dùng **`texture`**, icon giữ chỗ giống
-   component Figma; không lấy icon trang trí khác. Không có trang tra cứu icon công khai. Icon khác trong
-   bundle `assets/icons/` chỉ dùng nội bộ (mockup, artifact riêng, prototype không công bố). Cần
-   đưa thêm icon ra ngoài → hỏi trước, đừng tự thêm vào danh sách.
+6. **Package chỉ gói icon `public: true`; demo của UU DS được thêm icon minh hoạ.** Package phát hành
+   (web, React Native, Flutter) chỉ chứa 22 icon `public: true`. Storybook, Widgetbook, app mẫu React Native
+   và website của UU DS được dùng thêm icon minh hoạ (house, gift, bell…): đó là một bộ icon DNA riêng
+   (`src/docs/demo-icons` trong repo), gắn qua `IconProvider` / `uuThemeData(icons:)` / `UuProvider icons`,
+   không vào package. Package cộng bộ minh hoạ không quá 100 tên (giới hạn công khai của license Nucleo).
+   Muốn thêm tên vào package hay bộ minh hoạ → hỏi chủ design system trước, đừng tự thêm. Không có trang
+   tra cứu icon công khai. Icon khác trong bundle `assets/icons/` chỉ dùng nội bộ (mockup, artifact riêng,
+   prototype không công bố).
 7. **22 icon công khai chỉ để component chạy và làm ví dụ, không phải bộ icon của sản phẩm.** Sản phẩm cần icon
    thì gắn một bộ: miễn phí như Lucide, hoặc mua license Nucleo, hoặc bộ khác có giấy phép phù hợp. Đăng ký cả bộ
    qua DNA (spec 4.3 — web `IconProvider`, app `UuProvider icons`), ghi tên bộ ở mục Hình ảnh và icon của DNA.md.
@@ -113,3 +115,6 @@ trong skill. Ngày 2026-11-09 thu bộ công khai lại, chỉ còn icon compone
 định (chevron, xmark, check, circle-*, magnifier, calendar-days, clock, dots, arrow-*, sort-vertical,
 sidebar-left, triangle-warning) và `texture` làm icon giữ chỗ. Bỏ trang tra cứu icon trên Storybook. Đừng chép `assets/icons/` vào repo hay đăng lên chỗ công khai như một bộ icon tự
 do. Nguồn gốc glyph ghi ở `src/icons/NOTICE.md` của repo.
+
+Ngày 2026-11-12 tách hai việc: package vẫn chỉ gói 22 icon trên; demo và website của UU DS được dùng thêm
+icon minh hoạ qua bộ DNA riêng, không gói vào package. Tổng công khai (package + bộ minh hoạ) không quá 100.
