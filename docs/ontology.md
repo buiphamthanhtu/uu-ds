@@ -1,6 +1,6 @@
 # UU DS — bản đồ hệ thống (ontology, tóm tắt)
 
-Bản đầy đủ: `ontology.json` (848 node · 2050 quan hệ). Sinh tự động — 2026-11-12.
+Bản đầy đủ: `ontology.json` (848 node · 2049 quan hệ). Sinh tự động — 2026-11-13.
 
 ## Quan hệ
 
@@ -302,7 +302,6 @@ Prop: `Selected` (False · True), `State` (Default · Hover · Focus · Pressed 
 - **must** — Nửa tắt state layer 5/10, nửa bật 20/40; dựng bằng currentColor. (§6.17)
 - **do** — Cần nhãn thì màn tự dựng hàng và ghi rõ là phần tự chế. (§6.17)
 - **dont** — Không có cỡ nhỏ riêng (dùng Compact) và không có chữ On/Off trong rãnh. (§6.17)
-- **chưa có** — nhãn đi kèm (hàng switch + nhãn). Cần nhãn thì màn tự dựng hàng và nói rõ đó là phần tự chế
 
 ### Chip
 
@@ -347,7 +346,7 @@ Prop: `Active` (1 · 2 · 3 · 4 · 5), `Compact` (False · True)
 - **do** — Nút hành động riêng (FooterItemSpecial) cho một hành động chính, không phải đích điều hướng; mặc định Emphasized, Subtle khi màn đã có nút Solid. (§6.22)
 - **must** — Có nút hành động thì Compact=True tối đa 4 mục. (§6.22)
 - **dont** — Thanh kính mờ không phải thuộc tính của BottomBar — component không tự bật. (§2.4)
-- **chưa có** — `Hover` / `Pressed` / `Disabled` của mục; vị trí thanh trên màn (cách đáy, lề ngang, safe area); bóng hay viền cho vỏ khi nền màn cũng là `background-surface`; nhãn dài quá bề rộng mục; quá 5 mục
+- **chưa có** — item `Hover` / `Pressed` / `Disabled`; bar position on screen (distance from the bottom, horizontal margins, safe area); shadow or border for the shell when the screen background is also `background-surface`; labels longer than the item width; more than 5 items
 
 ### TablePagination
 
@@ -358,7 +357,7 @@ Prop: `Active` (1 · 2 · 3 · 4 · 5), `Compact` (False · True)
 - **dont** — Không bao giờ “…” thay cho đúng một số trang. (§6.24)
 - **must** — Ô Ellipsis không bấm được, không state layer, aria-hidden. (§6.24)
 - **dont** — Không có ô nhập số trang để nhảy — rút gọn “…” là đủ. (§6.24)
-- **chưa có** — phân trang không biết tổng số dòng
+- **chưa có** — pagination without a known total row count
 
 ### Breadcrumb
 
@@ -382,7 +381,7 @@ Prop: `Collapsed` (False · True)
 - **do** — Badge trên mục: NotificationBadge Count cuối mục; khi thu gọn thành Dot ở góc trên phải icon. (§6.27)
 - **do** — Nút thu / mở: IconButtonNeutral Ghost Small sidebar-left đầu thanh, aria-expanded, nhãn “Thu gọn / Mở rộng thanh điều hướng”. (§6.27)
 - **dont** — Không có mục cấp 3 — quá 2 cấp thì tách trang. (§6.27)
-- **chưa có** — khu tài khoản cuối thanh
+- **chưa có** — an account area at the bottom of the bar
 
 ### Tab
 
@@ -486,7 +485,7 @@ Prop: `Align` (Left · Right), `Sort` (Off · Unsorted · Ascending · Descendin
 - **must** — Nhãn object-secondary; object-primary khi Ascending / Descending. (§6.23)
 - **must** — Chiều cao và padding qua biến density (table/header-height, table/cell-padding-x). (§6.23)
 - **must** — Cột chọn hàng: TableHeaderCell Type=Checkbox rộng 64 — Checked khi chọn hết trang đang xem, Indeterminate khi một phần. (§6.23)
-- **chưa có** — cột cố định khi cuộn ngang, hàng mở rộng, sửa trực tiếp trong ô, kéo đổi thứ tự cột, hàng rỗng / đang tải, mật độ thứ ba. Cột cố định, hàng mở rộng, sửa trong ô, kéo đổi cột để sau — chỉ làm khi có màn quản trị cần
+- **chưa có** — sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them
 
 ### TableCell
 
@@ -499,7 +498,7 @@ Prop: `Type` (Text · Number · Secondary · Actions · Checkbox · Status), `St
 - **do** — Bảng dùng cho desktop / dashboard (density Compact); Selected nền background-interactive-muted. (§6.23)
 - **do** — Bảng rỗng dùng EmptySection đặt trong thân bảng. (§6.19)
 - **do** — Cột trạng thái dùng TableCell Type=Status chứa StatusIndicator, không tự đặt indicator vào ô Text. (§6.23)
-- **chưa có** — cột cố định khi cuộn ngang, hàng mở rộng, sửa trực tiếp trong ô, kéo đổi thứ tự cột, hàng rỗng / đang tải, mật độ thứ ba. Cột cố định, hàng mở rộng, sửa trong ô, kéo đổi cột để sau — chỉ làm khi có màn quản trị cần
+- **chưa có** — sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them
 
 ### KPICard
 
@@ -510,7 +509,7 @@ Prop: `Trend` (Up · Down · [No trend]), `Polarity` (Normal · Inverse)
 - **do** — Chỉ số tăng là xấu (chi phí, tỉ lệ huỷ) → Polarity=Inverse: Up tô negative, Down tô positive; icon vẫn theo chiều số. (§6.26)
 - **must** — Value heading-base tabular-nums; Trend=[No trend] không có Delta. (§6.26)
 - **must** — Thẻ bấm được (Interactive): chevron-right 16 cuối hàng Label, state layer 5/10 phủ cả thẻ; cả thẻ là một link, không nút khác bên trong. (§6.26)
-- **chưa có** — biểu đồ nhỏ (sparkline) trong thẻ — để sau
+- **chưa có** — a small chart (sparkline) in the card — deferred
 
 ### CardSheet
 

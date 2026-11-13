@@ -1,120 +1,120 @@
-# Icon — bộ UU icon
+# Icons — the UU icon set
 
-Icon là của **design system**, không phải của từng màn hay từng sản phẩm. Mọi icon trong
-sản phẩm dùng UU DS lấy từ một bộ duy nhất: **UU icon**.
+Icons belong to the **design system**, not to individual screens or products. Every icon in a
+product built on UU DS comes from one set: **UU icon**.
 
-| Thứ | Giá trị |
+| Thing | Value |
 |---|---|
-| Bộ icon | UU icon |
-| Kiểu mỗi tên | hai kiểu · **bản công khai** (`public: true`) chỉ gồm icon component dùng cố định + `texture` (icon giữ chỗ) |
-| Kiểu | `outline` · `fill` — vẽ ở **18×18** |
-| Cỡ dùng | 16 · 18 · 24 (`size-4` / `size-6`); Icon button: 24 cho Large/Base, 16 cho Small |
-| Màu | **Không có màu riêng.** SVG dùng `currentColor`; màu lấy từ token `object-*` của phần tử chứa |
-| Bảng tra | `references/uu-icon-index.json` — tên → nhóm (`category`), kiểu có sẵn, `public` |
-| SVG (skill) | `assets/icons/<category>.json` — bộ đầy đủ × outline/fill, chia bundle theo nhóm; lấy bằng `scripts/icon.py` |
-| File SVG (repo UU DS) | `src/icons/svg/` — **chỉ các tên công khai** |
+| Icon set | UU icon |
+| Styles per name | two styles · the **public edition** (`public: true`) only holds icons components use internally + `texture` (placeholder icon) |
+| Styles | `outline` · `fill` — drawn at **18×18** |
+| Sizes in use | 16 · 18 · 24 (`size-4` / `size-6`); Icon button: 24 for Large/Base, 16 for Small |
+| Color | **No color of its own.** SVGs use `currentColor`; color comes from the container's `object-*` token |
+| Lookup | `references/uu-icon-index.json` — name → group (`category`), available styles, `public` |
+| SVG (skill) | `assets/icons/<category>.json` — full set × outline/fill, bundled per group; fetch with `scripts/icon.py` |
+| SVG files (UU DS repo) | `src/icons/svg/` — **public names only** |
 
-## Luật
+## Rules
 
-1. **Một component `Icon(name, variant, size)`** (hoặc sprite). Gọi theo **tên trong bộ**
-   (`chevron-right`, `gift`, `list-checkbox`), kèm kiểu `outline` / `fill`. Không lưu file
-   icon theo màn, không tự vẽ, không nhặt icon lẻ từ bộ khác vì "trông giống". Bộ khác chỉ vào qua DNA, cả bộ (luật 7).
-2. **Tên icon không mang màu hay trạng thái.** `icon-chevron-down-white.svg`, `fire-active.svg`
-   là dấu hiệu đang lưu MÀU thành icon. Đó là một icon, tô bằng `object-on-interactive` hay
-   `object-disabled` tuỳ chỗ đặt.
-3. **Kiểu `fill` = trạng thái bật.** Toggle button `Active=True` và mục điều hướng đang chọn
-   đổi sang kiểu `fill` (cùng tên); trạng thái thường dùng `outline`.
-4. **Không có trong bộ → dừng và hỏi**, đúng như token không có trong `tokens.css`. Bộ ở đây là bộ
-   sản phẩm đã gắn qua DNA; chưa gắn bộ nào thì hỏi người dùng chọn bộ (luật 7), trong lúc chờ dùng `texture`.
-   Tra tên trước bằng `uu-icon-index.json`; tên gần giống (`cart` vs `cart-shopping`) không
-   phải là cùng icon.
-5. Ảnh minh hoạ, huy hiệu, sticker nhiều màu **không phải icon** — đó là asset, đi đường asset.
-6. **Package chỉ gói icon `public: true`; demo của UU DS được thêm icon minh hoạ.** Package phát hành
-   (web, React Native, Flutter) chỉ chứa 22 icon `public: true`. Storybook, Widgetbook, app mẫu React Native
-   và website của UU DS được dùng thêm icon minh hoạ (house, gift, bell…): đó là một bộ icon DNA riêng
-   (`src/docs/demo-icons` trong repo), gắn qua `IconProvider` / `uuThemeData(icons:)` / `UuProvider icons`,
-   không vào package. Package cộng bộ minh hoạ không quá 100 tên (giới hạn công khai của license Nucleo).
-   Muốn thêm tên vào package hay bộ minh hoạ → hỏi chủ design system trước, đừng tự thêm. Không có trang
-   tra cứu icon công khai. Icon khác trong bundle `assets/icons/` chỉ dùng nội bộ (mockup, artifact riêng,
-   prototype không công bố).
-7. **22 icon công khai chỉ để component chạy và làm ví dụ, không phải bộ icon của sản phẩm.** Sản phẩm cần icon
-   thì gắn một bộ: miễn phí như Lucide, hoặc mua license Nucleo, hoặc bộ khác có giấy phép phù hợp. Đăng ký cả bộ
-   qua DNA (spec 4.3 — web `IconProvider`, app `UuProvider icons`), ghi tên bộ ở mục Hình ảnh và icon của DNA.md.
-   Bộ không có kiểu `fill` (như Lucide) thì trạng thái bật dùng lại outline, component vẫn đổi nền / màu như thường.
-   Tên đăng ký ghi đè icon mặc định cùng tên, tên không đăng ký vẫn lấy bộ mặc định. Một sản phẩm một bộ,
-   không trộn từng icon của hai bộ trên cùng màn. Bộ do sản phẩm tự gắn thì giấy phép thuộc về sản phẩm:
-   lấy thêm UU icon ngoài bản công khai (gốc Nucleo, xem `NOTICE.md` trong repo) cần license Nucleo đứng tên
-   đơn vị phát hành sản phẩm.
+1. **One `Icon(name, variant, size)` component** (or a sprite). Call icons by **set name**
+   (`chevron-right`, `gift`, `list-checkbox`), with an `outline` / `fill` style. Don't store icon
+   files per screen, don't draw your own, don't pick single icons from another set because they "look similar". Other sets only come in via DNA, as a whole set (rule 7).
+2. **Icon names carry no color or state.** `icon-chevron-down-white.svg`, `fire-active.svg`
+   are signs that a COLOR is being stored as an icon. That is one icon, painted with `object-on-interactive` or
+   `object-disabled` depending on where it sits.
+3. **The `fill` style = on state.** Toggle button `Active=True` and the selected navigation item
+   switch to the `fill` style (same name); the normal state uses `outline`.
+4. **Not in the set → stop and ask**, exactly like a token missing from `tokens.css`. The set here is the set
+   the product attached via DNA; if none is attached, ask the user to choose a set (rule 7), using `texture` meanwhile.
+   Look names up first in `uu-icon-index.json`; similar names (`cart` vs `cart-shopping`) are not
+   the same icon.
+5. Illustrations, badges, multi-color stickers are **not icons** — they are assets and go the asset route.
+6. **The package only ships `public: true` icons; UU DS demos may add illustration icons.** The released packages
+   (web, React Native, Flutter) only contain the 22 `public: true` icons. UU DS's Storybook, Widgetbook, React Native sample app
+   and website may use extra illustration icons (house, gift, bell…): that is a separate DNA icon set
+   (`src/docs/demo-icons` in the repo), attached via `IconProvider` / `uuThemeData(icons:)` / `UuProvider icons`,
+   never in the package. Package plus illustration set stay within 100 names (the Nucleo license's public limit).
+   To add a name to the package or the illustration set → ask the DS owner first; don't add it yourself. There is no public icon
+   lookup page. Other icons in the `assets/icons/` bundle are for internal use only (mockups, private artifacts,
+   unpublished prototypes).
+7. **The 22 public icons only make components work and fill examples; they are not a product icon set.** A product that needs icons
+   attaches a set: free like Lucide, a Nucleo license, or another suitably licensed set. Register the whole set
+   via DNA (spec 4.3 — web `IconProvider`, app `UuProvider icons`), and name the set in the Images and icons section of DNA.md.
+   A set without a `fill` style (like Lucide) reuses the outline for the on state; components still change background / color as usual.
+   A registered name overrides the default icon of the same name; unregistered names fall back to the default set. One product, one set,
+   never mixing single icons of two sets on one screen. The license of a set the product attaches belongs to the product:
+   using UU icons beyond the public edition (Nucleo origin, see `NOTICE.md` in the repo) requires a Nucleo license in the name of the
+   organization releasing the product.
 
-## Lấy SVG
+## Getting SVGs
 
-SVG nằm trong bundle theo nhóm: `assets/icons/<category>.json` =
-`{"category": …, "icons": {"<name>": {"outline": "<svg…>", "fill": "<svg…>"}}}`. Gom theo nhóm
-vì Claude Chat giới hạn 200 file mỗi skill. Mọi SVG `viewBox="0 0 18 18"`, không `width`/`height`,
-màu là `currentColor`. Ngoại lệ: `loader-2` và `loader-2-fill` giữ gradient màu cố định như bản gốc.
+SVGs live in per-group bundles: `assets/icons/<category>.json` =
+`{"category": …, "icons": {"<name>": {"outline": "<svg…>", "fill": "<svg…>"}}}`. Grouped
+because Claude Chat allows 200 files per skill. Every SVG has `viewBox="0 0 18 18"`, no `width`/`height`,
+color `currentColor`. Exception: `loader-2` and `loader-2-fill` keep their fixed-color gradient as in the original.
 
 ```bash
-python3 scripts/icon.py magnifier            # SVG outline
-python3 scripts/icon.py magnifier fill       # SVG fill
-python3 scripts/icon.py --search cart        # tra tên
-python3 scripts/icon.py --public             # các tên công khai
-python3 scripts/icon.py --out ./icons house gift   # ghi ra <name>.svg / <name>-fill.svg
+python3 scripts/icon.py magnifier            # outline SVG
+python3 scripts/icon.py magnifier fill       # fill SVG
+python3 scripts/icon.py --search cart        # look up names
+python3 scripts/icon.py --public             # public names
+python3 scripts/icon.py --out ./icons house gift   # write <name>.svg / <name>-fill.svg
 ```
 
-- **Dự án React dùng package `uu-ds`:** gọi `<Icon name variant size />`, đừng chép SVG.
-- **Artifact / HTML một file (Claude Chat):** chép SVG inline, bọc trong hộp đúng cỡ
-  (16 · 18 · 24), để `color` của phần tử chứa quyết định màu:
+- **React projects using the `uu-ds` package:** call `<Icon name variant size />`; don't copy SVGs.
+- **Artifact / single-file HTML (Claude Chat):** inline the SVG, wrapped in a box of the right size
+  (16 · 18 · 24), and let the container's `color` decide the color:
 
 ```html
 <span class="uu-icon" style="display:inline-flex;width:24px;height:24px;color:var(--object-secondary)">
-  <!-- kết quả của: python3 scripts/icon.py magnifier --><svg viewBox="0 0 18 18" width="100%" height="100%">…</svg>
+  <!-- output of: python3 scripts/icon.py magnifier --><svg viewBox="0 0 18 18" width="100%" height="100%">…</svg>
 </span>
 ```
 
-## Thêm một icon vào UU icon
+## Adding an icon to UU icon
 
-1. Vẽ trên lưới **18 × 18 có lề**, đúng độ dày nét của bộ. Xuất hai file:
-   thêm hai chuỗi SVG đó vào `assets/icons/<category>.json` của skill (khoá `outline` / `fill`).
-2. Chuẩn hoá SVG: `viewBox="0 0 18 18"`, **bỏ** `width`/`height`, mọi `fill`/`stroke` → `currentColor`.
-   `clipPath` nếu có thì đặt id riêng theo tên icon để hai icon cùng trang không đè nhau.
-3. Thêm một dòng vào `uu-icon-index.json` (`category`, `outline`, `fill`; `public: true` chỉ khi đã được duyệt công khai).
-4. Icon công khai: chép hai file vào `src/icons/svg/` của repo, thêm dòng vào `src/icons/manifest.json`,
-   chạy `npm run icons` (web) và `npm run flutter:icons` (Flutter).
+1. Draw on the **18 × 18 grid with margins**, at the set's stroke weight. Export two files:
+   add those two SVG strings to the skill's `assets/icons/<category>.json` (keys `outline` / `fill`).
+2. Normalize the SVG: `viewBox="0 0 18 18"`, **drop** `width`/`height`, every `fill`/`stroke` → `currentColor`.
+   Give any `clipPath` an id unique to the icon name so two icons on one page don't collide.
+3. Add a line to `uu-icon-index.json` (`category`, `outline`, `fill`; `public: true` only once approved for public release).
+4. Public icons: copy the two files to the repo's `src/icons/svg/`, add a line to `src/icons/manifest.json`,
+   run `npm run icons` (web) and `npm run flutter:icons` (Flutter).
 
-Tên icon: chữ thường, gạch nối, tả **hình**, không tả chỗ dùng — `calendar-days`, không `date-picker-icon`.
+Icon names: lowercase, hyphenated, describe the **shape**, not where it is used — `calendar-days`, not `date-picker-icon`.
 
-## Cỡ hộp và cỡ nét — đọc trước khi than "icon sai size"
+## Box size and glyph size — read before complaining "the icon is the wrong size"
 
-UU icon vẽ mọi icon trên lưới **18 × 18 có lề**. Khi đặt vào hộp 24, nét thật chỉ chiếm
-khoảng 60–65% hộp. Số đo trên nút đóng của Toast:
+UU icon draws every icon on an **18 × 18 grid with margins**. In a 24 box the actual
+glyph only fills about 60–65% of the box. Measurements on the Toast close button:
 
-| Hộp `Icon` | Nét `xmark` hiện ra | Nút chứa |
+| `Icon` box | Visible `xmark` glyph | Container |
 |---|---|---|
-| 24 | 15,3px | Icon button Base 48 / Large 56 |
+| 24 | 15.3px | Icon button Base 48 / Large 56 |
 | 16 | ≈ 10px | Icon button Small 32 |
 
-Đây là chủ đích của bản vẽ: hộp giữ vùng chạm và nhịp layout, lề giữ icon nét mảnh không
-lấn chữ. **Đừng** phóng path cho vừa hộp, **đừng** thay từng icon lẻ sang Lucide / Phosphor / Font Awesome
-vì "cùng 24" — mỗi bộ có tỷ lệ nét/hộp khác nhau (Lucide `x` nét 12 stroke 2, FA `xmark`
-lấp gần hết hộp), nên cùng con số 24 mà nhìn lệch hẳn. Sản phẩm gắn cả bộ Lucide qua DNA thì được, nhưng
-xem icon cạnh chữ và nút một lượt: Lucide nét dày và to hơn UU icon trong cùng hộp.
+This is the drawing's intent: the box keeps the touch target and layout rhythm, the margin keeps
+thin-stroke icons from crowding text. **Don't** scale paths to fill the box, **don't** swap single icons for Lucide / Phosphor / Font Awesome
+because they are "also 24" — each set has its own stroke-to-box ratio (Lucide `x` is a 12 glyph with stroke 2, FA `xmark`
+fills nearly the whole box), so the same 24 looks completely different. A product may attach the whole Lucide set via DNA, but
+check icons next to text and buttons once: Lucide is thicker and larger than UU icon in the same box.
 
-Ba lỗi hay gặp khi icon lệch cỡ:
+Three common causes of wrongly sized icons:
 
-1. Dùng bộ icon khác thay UU icon → tỷ lệ nét sai. Sửa: tra đúng tên trong `uu-icon-index.json`.
-2. SVG còn `width="18" height="18"` → trình duyệt render 18 dù CSS hộp là 24. Sửa: bỏ hai
-   thuộc tính đó, giữ `viewBox`.
-3. Crop `viewBox` sát nét (một số tool "optimize" làm vậy) → nét phình ra đầy hộp. Sửa: giữ
-   `viewBox="0 0 18 18"` kèm lề.
+1. Another icon set used instead of UU icon → wrong stroke ratio. Fix: look up the exact name in `uu-icon-index.json`.
+2. The SVG still has `width="18" height="18"` → the browser renders 18 even though the CSS box is 24. Fix: drop those two
+   attributes, keep the `viewBox`.
+3. The `viewBox` is cropped to the glyph (some "optimize" tools do this) → the glyph swells to fill the box. Fix: keep
+   `viewBox="0 0 18 18"` with margins.
 
-## Phạm vi công khai
+## Public scope
 
-Chủ design system chốt ngày 2026-09-24: bộ này là **UU icon**; chỗ công khai (repo, Storybook
-deploy, package phát hành) **chỉ** chứa icon `public: true`. Bộ đầy đủ chỉ nằm
-trong skill. Ngày 2026-11-09 thu bộ công khai lại, chỉ còn icon component dùng cố
-định (chevron, xmark, check, circle-*, magnifier, calendar-days, clock, dots, arrow-*, sort-vertical,
-sidebar-left, triangle-warning) và `texture` làm icon giữ chỗ. Bỏ trang tra cứu icon trên Storybook. Đừng chép `assets/icons/` vào repo hay đăng lên chỗ công khai như một bộ icon tự
-do. Nguồn gốc glyph ghi ở `src/icons/NOTICE.md` của repo.
+Decided by the DS owner on 2026-09-24: the set is **UU icon**; public places (repo, Storybook
+deploy, released packages) contain **only** `public: true` icons. The full set lives only
+in the skill. On 2026-11-09 the public set was reduced to icons components use internally
+(chevron, xmark, check, circle-*, magnifier, calendar-days, clock, dots, arrow-*, sort-vertical,
+sidebar-left, triangle-warning) and `texture` as the placeholder icon. The Storybook icon lookup page was removed. Don't copy `assets/icons/` into the repo or publish it anywhere as a free-to-use
+icon set. Glyph origin is recorded in the repo's `src/icons/NOTICE.md`.
 
-Ngày 2026-11-12 tách hai việc: package vẫn chỉ gói 22 icon trên; demo và website của UU DS được dùng thêm
-icon minh hoạ qua bộ DNA riêng, không gói vào package. Tổng công khai (package + bộ minh hoạ) không quá 100.
+On 2026-11-12 the two concerns were separated: the package still ships only the 22 icons above; UU DS demos and website may use extra
+illustration icons through a separate DNA set, not bundled in the package. Total public (package + illustration set) stays within 100.

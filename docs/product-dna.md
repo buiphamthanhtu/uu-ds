@@ -1,90 +1,90 @@
 # Product DNA
 
-UU DS là bộ xương: component, cấu trúc, tương tác, khả năng tiếp cận. **DNA** là phần da thịt của một sản phẩm: màu, bo góc, đổ bóng, nền, lề, nhịp bố cục.
+UU DS is the skeleton: components, structure, interaction, accessibility. **DNA** is a product's flesh: color, corner radius, shadow, background, margins, layout rhythm.
 
-| Chế độ | Khi nào | Kết quả |
+| Mode | When | Result |
 |---|---|---|
-| **Có DNA** | Tìm thấy file DNA | UI đúng UU DS và mang chất riêng của sản phẩm |
-| **Basic** | Không có file DNA | UI đúng UU DS, dùng brand Default và mặc định của hệ thống |
+| **With DNA** | A DNA file is found | UI follows UU DS and carries the product's own character |
+| **Basic** | No DNA file | UI follows UU DS, with the Default brand and system defaults |
 
-## Tìm file
+## Finding the file
 
-Theo thứ tự:
+In order:
 
-1. Đường dẫn người dùng đưa.
-2. `DNA.md` ở gốc project.
+1. The path the user gives.
+2. `DNA.md` at the project root.
 3. `docs/DNA.md`.
 
-Không thấy thì hỏi một lần trong phiên, trước màn đầu tiên: có DNA hoặc màn mẫu không. Màn mẫu là thứ để bám phong cách: link Figma hoặc code / prototype của sản phẩm (đo được số thật), website, ảnh chụp.
+Not found → ask once per session, before the first screen: is there a DNA or sample screens? Sample screens are something to anchor the style on: a Figma link or the product's code / prototype (real measurements), a website, screenshots.
 
-- Người dùng đưa màn mẫu: trích thành `DNA.md` theo mục *Trích DNA* rồi áp, rồi dựng theo mục *Dựng theo màn mẫu*.
-- Người dùng nói không có, hoặc đang chạy tự động không hỏi được: build Basic và báo một dòng khi bàn giao.
+- The user gives sample screens: extract them into `DNA.md` per *Extracting DNA*, apply it, then build per *Build from sample screens*.
+- The user says there are none, or you run unattended and can't ask: build Basic and mention it in one line at handoff.
 
-Đừng tự chế chất riêng.
+Don't invent a character of your own.
 
-## Thứ tự ưu tiên
+## Priority
 
-**Phần khoá của UU DS → DNA → mặc định của UU DS.** DNA chỉ thay mặc định, không thay phần khoá. Hai bên đụng nhau thì giữ phần khoá và báo cho người dùng.
+**UU DS locked parts → DNA → UU DS defaults.** DNA only replaces defaults, never locked parts. When they clash, keep the locked part and tell the user.
 
-| Khoá, DNA không đổi | DNA được đổi |
+| Locked, DNA cannot change | DNA may change |
 |---|---|
-| Danh sách component, tên, prop, cấu trúc | 22 token thương hiệu |
+| Component list, names, props, structure | The 22 brand tokens |
 | State layer | `radius-sm` · `radius-base` · `radius-lg` · `radius-xl` |
-| Chiều cao control, density | `rounded-2xl` · `rounded-3xl` · `rounded-4xl` (nút, chip) |
-| Radio, Switch, chấm tròn, vỏ `BottomBar` (`rounded-circle`) | `elevation-low` · `elevation-medium` · `elevation-high` · `elevation-none` (bóng của control, mặc định không có) |
-| Token status, `object-primary`, thang xám | `font-family-display` · `font-family-body` (chỉ họ font) |
-| Cỡ chữ, line-height, font-weight của text style | `border-outer-width` · `border-outer` (viền ngoài của control và thẻ, mặc định không có) |
-| Thứ tự nút trong `ButtonGroup` | Biến `--dna-*` cho nền và bố cục |
-| Hộp icon 24 / 16 / 18, luật bật = `fill` | Bộ icon (gói chỉ kèm icon cho component; sản phẩm đăng ký bộ riêng, spec 4.3) |
-| | Kiểu ảnh, minh hoạ, giọng văn |
-| Vai trò của token: `interactive` cho thứ bấm được, `accent` cho chỗ nhấn | Lề, khoảng cách giữa các khối, bề rộng nội dung |
-| Contrast theo spec 2.3 | |
+| Control heights, density | `rounded-2xl` · `rounded-3xl` · `rounded-4xl` (buttons, chips) |
+| Radio, Switch, dots, `BottomBar` shell (`rounded-circle`) | `elevation-low` · `elevation-medium` · `elevation-high` · `elevation-none` (control shadow, none by default) |
+| Status tokens, `object-primary`, gray scale | `font-family-display` · `font-family-body` (family only) |
+| Text-style font size, line-height, font-weight | `border-outer-width` · `border-outer` (outer border of controls and cards, none by default) |
+| Button order in `ButtonGroup` | `--dna-*` variables for background and layout |
+| Icon boxes 24 / 16 / 18, the on = `fill` rule | Icon set (the package only ships component icons; the product registers its own set, spec 4.3) |
+| | Image style, illustration, tone of voice |
+| Token roles: `interactive` for clickable things, `accent` for emphasis | Margins, spacing between blocks, content width |
+| Contrast per spec 2.3 | |
 
-## Áp vào web
+## Applying on the web
 
-Đổi trong một khối theme, đặt trên `<html>`. Component không đổi dòng nào.
+Change values in one theme block, placed on `<html>`. No component line changes.
 
 ```css
-[data-theme="ten-san-pham"] {
-  /* 22 token thương hiệu */
+[data-theme="product-name"] {
+  /* 22 brand tokens */
   --background-interactive: var(--color-…);
 
-  /* Hình khối */
+  /* Shape */
   --radius-lg: 0.5rem;
-  --rounded-4xl: var(--radius-sm); /* nút và chip */
+  --rounded-4xl: var(--radius-sm); /* buttons and chips */
   --elevation-medium: 0 12px 32px rgba(0, 0, 0, 0.08);
 
-  /* Chữ và control */
-  --font-family-body: "Inter", system-ui, sans-serif;  /* app tự nạp font */
-  --border-outer-width: 2px;                               /* viền ngoài control + thẻ, mặc định 0 */
-  --elevation-none: 2px 2px 0 2px var(--object-primary);   /* bóng cứng của control; spread = độ dày viền, không thì bị viền che.
-                                                             Chỉ cho component có viền ngoài vẽ bằng bóng. Khối layout tự dựng dùng border CSS thật thì bóng spread 0. */
+  /* Type and controls */
+  --font-family-body: "Inter", system-ui, sans-serif;  /* the app loads the font */
+  --border-outer-width: 2px;                               /* outer border of controls + cards, default 0 */
+  --elevation-none: 2px 2px 0 2px var(--object-primary);   /* hard control shadow; spread = border width, otherwise the border hides it.
+                                                             Only for components whose outer border is drawn as a shadow. Self-built layout blocks with a real CSS border use spread 0. */
 
-  /* Nền và bố cục */
+  /* Background and layout */
   --dna-page-background: linear-gradient(180deg, var(--background-muted), var(--background-surface));
   --dna-page-margin: var(--gap-8);
   --dna-section-gap: var(--gap-12);
 }
 ```
 
-**Nhiều chế độ màu** (spec 4.3): phần dùng chung khai một lần, mỗi chế độ chỉ khai lại token thương hiệu.
+**Multiple color modes** (spec 4.3): the shared part is declared once; each mode only re-declares the brand tokens.
 
 ```css
-[data-theme^="ten-san-pham-"] {          /* dùng chung: font, viền ngoài, bo góc, --dna-* */
+[data-theme^="product-name-"] {          /* shared: font, outer border, radius, --dna-* */
   --font-family-body: "Inter", system-ui, sans-serif;
   --border-outer-width: 2px;
 }
-[data-theme="ten-san-pham-xanh"] { --background-interactive: var(--color-…); --object-on-interactive: var(--color-…); }
-[data-theme="ten-san-pham-do"]   { --background-interactive: var(--color-…); --object-on-interactive: var(--color-…); }
+[data-theme="product-name-green"] { --background-interactive: var(--color-…); --object-on-interactive: var(--color-…); }
+[data-theme="product-name-red"]   { --background-interactive: var(--color-…); --object-on-interactive: var(--color-…); }
 ```
 
 ```tsx
-// React Native: giữ phần dùng chung, chỉ thay màu theo chế độ
+// React Native: keep the shared part, only swap colors per mode
 const dna = useMemo(() => ({ ...shared, colors: modes[mode] }), [mode]);
 <UuProvider dna={dna}>…</UuProvider>
 ```
 
-Phần layout của màn đọc `--dna-*` kèm giá trị dự phòng. Nhờ vậy cùng một code chạy được ở cả hai chế độ:
+Screen layout reads `--dna-*` with a fallback. That way the same code runs in both modes:
 
 ```css
 .page {
@@ -93,144 +93,144 @@ Phần layout của màn đọc `--dna-*` kèm giá trị dự phòng. Nhờ v�
 }
 ```
 
-- **Giá trị ngoài thang** chỉ được khai trong khối theme này. Component và màn vẫn đọc `var(--token)`, không gõ số rời.
-- **`--dna-*` chỉ dùng ở layout của màn**, không dùng trong component. Dấu hiệu nhận diện ngoài thang (thẻ nghiêng,
-  băng keo, bóng của thẻ tự dựng…) cũng khai thành `--dna-*` trong khối theme rồi layout đọc biến, ví dụ
-  `--dna-card-tilt: -1deg`. Không gõ thẳng giá trị vào layout.
-- **Vùng con:** đổi màu chỉ cần `data-theme` trên khung chứa. Đổi bo góc thì đặt thêm `data-density` lên cùng khung đó, vì `--field-radius` tính sẵn ở nơi khai `data-density`.
-- **React Native:** `<UuProvider dna={{ colors, radius, elevation, fontFamily, borderOuter }} icons={…}>`; bóng control là `elevation.none`.
-- **Flutter:** màu qua `UuTheme.copyWith(colors: …)`; font, viền ngoài (`borderOuterWidth` · `borderOuter`), bóng control (`elevationNone`), bộ icon qua `uuThemeData(...)`. Bo góc, elevation và `--dna-*` chưa có đường ghi đè, nên báo người dùng thay vì sửa widget.
+- **Off-scale values** may only be declared in this theme block. Components and screens still read `var(--token)`, never loose numbers.
+- **`--dna-*` is only for screen layout**, never inside components. Off-scale identity markers (tilted cards,
+  tape, the shadow of a self-built card…) are also declared as `--dna-*` in the theme block and read by the layout, e.g.
+  `--dna-card-tilt: -1deg`. Never type the value straight into the layout.
+- **Sub-regions:** changing color only needs `data-theme` on the container. Changing radius also needs `data-density` on the same container, because `--field-radius` is computed where `data-density` is declared.
+- **React Native:** `<UuProvider dna={{ colors, radius, elevation, fontFamily, borderOuter }} icons={…}>`; the control shadow is `elevation.none`.
+- **Flutter:** colors via `UuTheme.copyWith(colors: …)`; font, outer border (`borderOuterWidth` · `borderOuter`), control shadow (`elevationNone`), icon set via `uuThemeData(...)`. Radius, elevation and `--dna-*` have no override path yet, so tell the user instead of editing widgets.
 
-## Bật viền ngoài trong Figma
+## Turning on the outer border in Figma
 
-Component trong Figma **không gắn sẵn** viền ngoài: panel Effects gọn, designer không thấy lớp lạ. File chỉ có biến
-`border-outer` (collection `color`), `border-outer-width` (collection `effect`) và effect style `elevation-none`.
-Sản phẩm có DNA viền ngoài (ví dụ viền mực + bóng cứng) thì bật theo một trong hai cách.
+Components in Figma are **not pre-bound** to the outer border: the Effects panel stays clean and designers see no odd layers. The file only has the variables
+`border-outer` (collection `color`), `border-outer-width` (collection `effect`) and the effect style `elevation-none`.
+A product whose DNA has an outer border (e.g. ink border + hard shadow) turns it on in one of two ways.
 
-### Tự làm tay
+### By hand
 
-1. Mở panel **Local variables**, đặt `border-outer-width` thành độ dày cần (ví dụ 2). Muốn màu khác thì đổi
-   `border-outer` sang một biến màu khác.
-2. Mở effect style `elevation-none` (panel phải, mục **Effect styles**), sửa bóng thành bóng cứng: X 2, Y 2, Blur 0,
-   **Spread = độ dày viền**, màu như viền.
-3. Với **mỗi bộ component** cần viền (danh sách ở spec 4.3: nút, chip, checkbox, radio, switch, khung ô nhập, ô OTP,
-   và thẻ `CardSheet` · `CardDialog` · `KPICard`), chọn tất cả biến thể trong bộ:
-   - Ô nhập: chọn lớp `Field` bên trong, không chọn cả component. OTP: chọn ô con `.base/input-*`.
-   - Bấm **+** ở mục **Effect**, chọn **Drop shadow**: X 0, Y 0, Blur 0. Bấm vào ô Spread → **Apply variable** →
-     `border-outer-width`. Bấm vào màu → tab **Libraries/Variables** → `border-outer`.
-   - Control (không phải thẻ): thêm tiếp style `elevation-none` vào mục Effect, kéo nó **xuống dưới** bóng viền.
-   - Bật **Clip content** ở khung vừa thêm bóng. Figma chỉ vẽ phần spread khi khung bật cắt tràn.
-   - Nút **Ghost** không có nền nên Figma không vẽ bóng: ở các biến thể này dùng **Stroke** thay cho bóng viền,
-     Position **Outside**, độ dày gắn `border-outer-width`, màu gắn `border-outer`.
-4. Tắt viền trong ở trạng thái thường (biến không làm thay được): `Chip` chưa chọn, `Checkbox` chưa tick, `Radio`
-   chưa chọn, `Switch` tắt, nút `Outline`, khung ô nhập, ô OTP. Giữ viền ở focus, Error, đã chọn, Disabled.
-5. Khung cha nào bật Clip content mà sát control (ví dụ lớp `Row` của `SearchInput`) thì tắt, không thì viền bị cắt.
+1. Open the **Local variables** panel and set `border-outer-width` to the width you need (e.g. 2). For another color, point
+   `border-outer` at a different color variable.
+2. Open the effect style `elevation-none` (right panel, **Effect styles**) and make it a hard shadow: X 2, Y 2, Blur 0,
+   **Spread = border width**, color as the border.
+3. For **each component set** that needs the border (list in spec 4.3: buttons, chips, checkbox, radio, switch, input frames, OTP cells,
+   and the cards `CardSheet` · `CardDialog` · `KPICard`), select all variants in the set:
+   - Inputs: select the inner `Field` layer, not the whole component. OTP: select the child cells `.base/input-*`.
+   - Press **+** under **Effect**, choose **Drop shadow**: X 0, Y 0, Blur 0. Click the Spread field → **Apply variable** →
+     `border-outer-width`. Click the color → **Libraries/Variables** tab → `border-outer`.
+   - Controls (not cards): also add the `elevation-none` style under Effect and drag it **below** the border shadow.
+   - Turn on **Clip content** on the frame that got the shadow. Figma only draws the spread when the frame clips content.
+   - **Ghost** buttons have no fill, so Figma draws no shadow: on those variants use a **Stroke** instead of the border shadow,
+     Position **Outside**, width bound to `border-outer-width`, color bound to `border-outer`.
+4. Turn off the inner border in the resting state (variables can't do this): unselected `Chip`, unchecked `Checkbox`, unselected `Radio`,
+   off `Switch`, `Outline` button, input frames, OTP cells. Keep the border for focus, Error, selected, Disabled.
+5. Any parent frame with Clip content sitting flush against a control (e.g. the `Row` layer of `SearchInput`) must be turned off, or the border gets cut.
 
-### Nhờ AI làm
+### With AI
 
-Dán cho AI có Figma MCP (kèm link file Figma):
+Paste this to an AI with Figma MCP (plus the Figma file link):
 
-> Bật viền ngoài theo UU DS cho file này: viền {độ dày}px màu {token màu}, bóng cứng lệch {x},{y}. Làm theo mục
-> "Bật viền ngoài trong Figma" trong `product-dna.md` của skill UU DS.
+> Turn on the UU DS outer border for this file: {width}px border in {color token}, hard shadow offset {x},{y}. Follow the section
+> "Turning on the outer border in Figma" in the UU DS skill's `product-dna.md`.
 
-AI làm theo các bước sau (một trang mỗi lần gọi, chụp kiểm từng bộ):
+The AI follows these steps (one page per call, screenshot-checking each set):
 
-1. Đặt giá trị `border-outer-width` (collection `effect`) và nếu cần đổi `border-outer` (collection `color`, mọi mode).
-   Sửa effect style `elevation-none` thành bóng cứng với `spread` = độ dày viền.
-2. Với mỗi biến thể của bộ component trong danh sách spec 4.3 (lớp `Field` cho ô nhập, ô con cho OTP): thêm
-   `DROP_SHADOW` lệch 0, mờ 0, `showShadowBehindNode: false`, `spread` gắn `border-outer-width`, `color` gắn
-   `border-outer` (`figma.variables.setBoundVariableForEffect`). Control thêm bóng của `elevation-none` **trước** bóng
-   viền trong mảng `effects` (để nằm dưới). Bật `clipsContent`.
-3. Biến thể không có fill nhìn thấy và không có stroke (nút Ghost ở trạng thái thường): thay bóng viền bằng stroke
-   `OUTSIDE`, `strokeWeight` gắn `border-outer-width`, màu gắn `border-outer`.
-4. Tắt viền trong ở trạng thái thường như bước 4 phần tự làm. Tắt `clipsContent` ở khung cha sát control.
-5. Chụp từng bộ để kiểm: viền đủ bốn phía, không bị cắt, viền trạng thái (focus, Error) vẫn thấy.
-6. Muốn gỡ: xoá các bóng và stroke gắn `border-outer*`, đặt `border-outer-width` về 0, `elevation-none` về bóng trong suốt.
+1. Set `border-outer-width` (collection `effect`) and, if needed, change `border-outer` (collection `color`, every mode).
+   Make the effect style `elevation-none` a hard shadow with `spread` = border width.
+2. For each variant of the component sets listed in spec 4.3 (the `Field` layer for inputs, the child cells for OTP): add a
+   `DROP_SHADOW` with offset 0, blur 0, `showShadowBehindNode: false`, `spread` bound to `border-outer-width`, `color` bound to
+   `border-outer` (`figma.variables.setBoundVariableForEffect`). Controls get the `elevation-none` shadow **before** the border
+   shadow in the `effects` array (so it sits below). Turn on `clipsContent`.
+3. Variants with no visible fill and no stroke (Ghost buttons at rest): replace the border shadow with an `OUTSIDE` stroke,
+   `strokeWeight` bound to `border-outer-width`, color bound to `border-outer`.
+4. Turn off the inner border at rest as in step 4 above. Turn off `clipsContent` on parent frames flush against controls.
+5. Screenshot each set to check: border on all four sides, not clipped, state borders (focus, Error) still visible.
+6. To remove: delete the shadows and strokes bound to `border-outer*`, set `border-outer-width` back to 0, `elevation-none` back to a transparent shadow.
 
-## Ba tầng file trong Figma
+## Three file tiers in Figma
 
-UU DS là nơi khuôn khổ, Snowflake là nơi tự do. Một sản phẩm dùng ba file:
+UU DS is where the framework lives, Snowflake is where freedom lives. A product uses three files:
 
-| File | Chứa gì | Thừa hưởng |
+| File | Holds | Inherits |
 |---|---|---|
-| **UU DS** (file gốc) | Token, component foundation. DNA của sản phẩm là **một mode của sản phẩm** trong các collection biến (`color`, `effect`…), cạnh `Default` | — |
-| **`[Snowflake] <Tên sản phẩm>`** | Component riêng của sản phẩm: card, section, khối nâng cao, khối nhận diện (thẻ tóm tắt, thẻ băng keo…) | Component + token của UU DS |
-| **File UI** | Các màn của sản phẩm | UU DS + Snowflake |
+| **UU DS** (root file) | Tokens, foundation components. The product's DNA is **a mode of the product** in the variable collections (`color`, `effect`…), next to `Default` | — |
+| **`[Snowflake] <Product name>`** | The product's own components: cards, sections, advanced blocks, identity blocks (summary cards, tape cards…) | UU DS components + tokens |
+| **UI file** | The product's screens | UU DS + Snowflake |
 
-- **DNA vào mode của sản phẩm trong UU DS**: màu (mục 2 của `DNA.md`) ở collection `color`; bo góc, bóng, viền ngoài,
-  font ở collection đang chứa biến đó. Không tạo collection riêng, không gõ giá trị lên layer. File UI chọn mode của
-  sản phẩm trên khung màn. Giá trị không phải biến (effect style, text style) thì không theo mode được: báo người dùng.
-- **Mode `UU` chỉ là ví dụ.** Sản phẩm có thể dùng luôn mode này: đổi tên thành tên sản phẩm rồi thay giá trị, thay vì
-  thêm mode mới. Mỗi sản phẩm vẫn cần một mode riêng.
-- **Tên mode = tên theme trong code.** Mode `cam-nang-no` trong Figma ứng với khối `[data-theme="cam-nang-no"]` ở code
-  (web), cùng giá trị lấy từ `DNA.md`. Code không đọc Figma: `DNA.md` là cầu nối, sửa giá trị thì sửa cả mode lẫn
-  `DNA.md`. Theme `uu` trong gói vẫn giữ nguyên làm ví dụ; sản phẩm không gọi nó.
-- **Khối lặp lại của màn mẫu** (mục 8 của `DNA.md`) là component trong Snowflake, dựng từ instance và token của UU DS.
-  Khối chưa có trong Snowflake mà xuất hiện từ hai màn: đề xuất thêm vào Snowflake, đừng chép frame qua lại giữa các màn.
-- **Không sửa component của UU DS** để ra chất sản phẩm. Cần khác thì làm component mới trong Snowflake.
-- Trước khi dựng: hỏi link file UU DS (đã có mode của sản phẩm chưa), file Snowflake và file UI. File UI phải bật cả hai
-  thư viện. Chưa có mode hoặc Snowflake thì báo người dùng, không tự tạo trong file gốc.
-- Code đi theo cùng ba tầng: gói `uu-ds` · component riêng của sản phẩm (đọc token, như Snowflake) · màn.
+- **DNA goes into the product's mode in UU DS**: colors (section 2 of `DNA.md`) in the `color` collection; radius, shadow, outer border,
+  font in whichever collection holds that variable. Don't create a separate collection, don't type values onto layers. The UI file picks the product's
+  mode on the screen frame. Values that aren't variables (effect styles, text styles) can't follow modes: tell the user.
+- **The `UU` mode is only an example.** A product may reuse it: rename it to the product name and replace the values, instead of
+  adding a new mode. Each product still needs its own mode.
+- **Mode name = theme name in code.** The `cam-nang-no` mode in Figma maps to the `[data-theme="cam-nang-no"]` block in code
+  (web), with the same values from `DNA.md`. Code doesn't read Figma: `DNA.md` is the bridge; change a value and you change both the mode and
+  `DNA.md`. The package's `uu` theme stays as an example; products don't use it.
+- **Repeated blocks of the sample screens** (section 8 of `DNA.md`) are components in Snowflake, built from UU DS instances and tokens.
+  A block not yet in Snowflake that appears on two screens: propose adding it to Snowflake; don't copy frames between screens.
+- **Never edit UU DS components** to get the product's character. If something must differ, make a new component in Snowflake.
+- Before building: ask for the UU DS file link (does it already have the product's mode?), the Snowflake file and the UI file. The UI file must enable both
+  libraries. No mode or no Snowflake yet → tell the user; don't create them in the root file yourself.
+- Code follows the same three tiers: the `uu-ds` package · the product's own components (reading tokens, like Snowflake) · screens.
 
-## Trích DNA từ sản phẩm
+## Extracting DNA from a product
 
-Khi người dùng nhờ tạo DNA từ Figma, website hoặc ảnh chụp:
+When the user asks you to create a DNA from Figma, a website or screenshots:
 
-1. Lấy 2–3 màn khác nhau. Một màn chưa đủ để biết đâu là quy luật. Các trạng thái của cùng một màn (rỗng, có dữ liệu,
-   lỗi) tính là **một** màn.
-   Nguồn số đo, tốt trước: file Figma (đọc bằng Figma MCP, lấy số và biến đang gắn) hoặc code / prototype của sản phẩm
-   (đọc CSS) → website → ảnh chụp. Ghi nguồn cho từng giá trị.
-   Ghi `(estimated)` khi giá trị đo từ ảnh chụp hoặc website, hoặc khi chỉ có một màn. Số đọc được từ Figma thì không cần.
-   Dấu ghi vào file để nguyên tiếng Anh (`(estimated)`, `(1 screen)`) cho người đọc file ở ngôn ngữ nào cũng hiểu.
-   File cũ ghi `(đoán)`, `(1 màn)` vẫn hiểu như vậy.
-2. Chép `dna-template.md` thành `DNA.md`. Lưu ở gốc project; người dùng chỉ làm trong Figma, không có project thì hỏi chỗ lưu, mặc định thư mục đang làm việc, và báo đường dẫn.
-3. Đo những gì lặp lại: màu nền, gradient, bóng, viền, bo góc, lề hai biên, khoảng cách giữa khối.
-4. Chỉ ghi giá trị xuất hiện từ hai lần trở lên. Giá trị xuất hiện một lần là ngoại lệ, không phải DNA.
-5. Quy về thang UU DS nếu lệch không quá 2px, ví dụ 15px thành `radius-lg`.
-6. Ghi nguồn. Từ ảnh chụp chỉ ước lượng được, nên thêm `(estimated)`.
-7. Tìm 2–3 dấu hiệu nhận diện. Đây là phần làm sản phẩm khác đi, đừng bỏ qua.
-8. Ghi **mẫu màn** (mục 8 của khuôn): cách màn được dựng. Khác bước 4, cách làm chỉ thấy ở một màn vẫn ghi, gắn nhãn
-   `(1 screen)`; luật "từ hai lần trở lên" chỉ áp cho số đo (mục 2–7). Thiếu mục này thì màn mới đúng màu,
-   đúng bo góc nhưng bố cục khác hẳn màn mẫu.
+1. Take 2–3 different screens. One screen isn't enough to know what is a pattern. States of the same screen (empty, filled,
+   error) count as **one** screen.
+   Measurement sources, best first: the Figma file (read via Figma MCP, taking numbers and bound variables) or the product's code / prototype
+   (read the CSS) → website → screenshots. Record the source of every value.
+   Mark `(estimated)` when a value is measured from a screenshot or website, or when there is only one screen. Numbers read from Figma don't need it.
+   Keep the markers in English (`(estimated)`, `(1 screen)`) so readers in any language understand them.
+   Older files with `(đoán)`, `(1 màn)` mean the same.
+2. Copy `dna-template.md` to `DNA.md`. Save it at the project root; if the user only works in Figma and has no project, ask where to save it, default to the working folder, and report the path.
+3. Measure what repeats: background colors, gradients, shadows, borders, radius, side margins, spacing between blocks.
+4. Only record values that appear at least twice. A value that appears once is an exception, not DNA.
+5. Snap to the UU DS scale when within 2px, e.g. 15px becomes `radius-lg`.
+6. Record the source. Screenshots only allow estimates, so add `(estimated)`.
+7. Find 2–3 identity markers. This is what makes the product different; don't skip it.
+8. Record the **screen patterns** (section 8 of the template): how screens are built. Unlike step 4, a pattern seen on only one screen is still recorded, tagged
+   `(1 screen)`; the "at least twice" rule only applies to measurements (sections 2–7). Without this section, new screens get the right colors and
+   radius but a layout completely unlike the sample screens.
 
-Chỉ trích từ sản phẩm người dùng sở hữu hoặc được phép dùng. Muốn học phong cách của sản phẩm khác thì lấy nhịp bố cục, không lấy logo hay nhận diện.
+Only extract from products the user owns or is allowed to use. To learn another product's style, take the layout rhythm, not the logo or identity.
 
-## Dựng theo màn mẫu
+## Build from sample screens
 
-Khi người dùng đã có màn mẫu (thường là các màn trong file Figma) và nhờ dựng màn mới, màn mới phải trông như cùng một
-sản phẩm. Áp cho mọi nơi dựng: Figma, canvas thiết kế, code. Ví dụ `DNA.md` có đủ mục Mẫu màn: Cẩm Nang Nô
-(`examples/dna-cam-nang-no/DNA.md` trong repo UU DS).
+When the user already has sample screens (usually screens in a Figma file) and asks for a new one, the new screen must look like the same
+product. Applies everywhere you build: Figma, a design canvas, code. An example `DNA.md` with a full Screen patterns section: Cẩm Nang Nô
+(`examples/dna-cam-nang-no/DNA.md` in the UU DS repo).
 
-1. **Đọc trước khi dựng.** Mở `DNA.md` và 2–3 màn mẫu gần nhất với màn cần dựng (cùng loại: danh sách, form, chi tiết…).
-   Chưa có `DNA.md` thì trích trước theo mục *Trích DNA*.
-2. **Lấy khung từ màn mẫu.** Màn mới cùng loại thì giữ header, lề, nhịp khoảng cách, kiểu thẻ hoặc danh sách, vị trí nút
-   chính như màn mẫu (mục 8 của `DNA.md`). Chỉ đổi phần nội dung khác. Thứ tự lấy khung: màn mẫu của sản phẩm →
-   `recipes.md` → tự dựng.
-3. **Dựng bằng UU DS, không vẽ tay.**
-   - **Khối bố cục của màn mẫu** (thẻ tóm tắt, khối hero… là frame / div gắn token, không phải component) thì được chép
-     lại. Chỉ dừng và hỏi khi cần một **control tương tác** chưa có trong UU DS; đừng tự vẽ một control giống.
-   - **Figma:** làm theo mục *Ba tầng file trong Figma*. Cách nhanh và khớp nhất là nhân bản màn mẫu cùng loại rồi
-     thay nội dung. Dùng instance từ UU DS và Snowflake của sản phẩm; khối của màn mẫu đã có trong Snowflake thì lấy
-     instance, không chép frame. Màu, bo góc, khoảng cách gắn biến, không gõ số lên layer. Không tách instance
-     (detach). Instance đặt vào khung màn thì cho rộng `FILL` theo khung.
-   - **Canvas thiết kế, HTML:** nạp `tokens.css`, khai DNA trong khối `[data-theme="<tên>"]`. Chỉ nút, field, checkbox,
-     radio, toggle, segmented có class sẵn; phần còn lại (`ListItem`, `Badge`, `NavigationBar`…) dựng theo cấu trúc và
-     số đo ở spec §6.x bằng token, và ghi rõ là tự dựng khi bàn giao. Canvas chạy được React thì dùng component của gói
-     `uu-ds` thay vì dựng tay.
-   - **Code:** project đã cài gói `uu-ds` thì dùng component của gói (`ListItem`, `ListGroup`…), không viết lại bằng
-     HTML + token. Rồi chạy `npx uu-ds-check src` (web) đến khi critical = 0. Chưa cài gói thì bộ chấm không chạy được:
-     cài gói (`npm i "github:buiphamthanhtu/uu-ds#web"`) hoặc báo khi bàn giao là chưa chấm.
-4. **So trước khi giao.** Chụp màn mới, đặt cạnh màn mẫu cùng loại. Liệt kê chỗ lệch theo thứ tự: bố cục, thứ bậc chữ,
-   khoảng cách, màu và bóng, chi tiết. Sửa rồi so lại. Chỗ lệch cố ý (màn mới cần khác) thì ghi lý do khi bàn giao.
-5. **Màn mẫu đụng phần khoá** (ví dụ hover đổi màu nền, hex gõ thẳng, độ đậm chữ khác text style): giữ phần khoá của
-   UU DS, không chép sang màn mới. Khi bàn giao, liệt kê từng chỗ màn mới vì thế mà khác màn mẫu, kèm hai lựa chọn cho
-   người dùng: chấp nhận lệch, hoặc đề xuất mở thêm đường ghi đè trong DNA cho UU DS (không tự mở).
+1. **Read before building.** Open `DNA.md` and the 2–3 sample screens closest to the one you need (same kind: list, form, detail…).
+   No `DNA.md` yet → extract one first per *Extracting DNA*.
+2. **Take the frame from the sample screens.** A new screen of the same kind keeps the header, margins, spacing rhythm, card or list style, and primary button
+   position of the sample (section 8 of `DNA.md`). Only change what differs in content. Frame source order: the product's sample screens →
+   `recipes.md` → self-built.
+3. **Build with UU DS, never by hand.**
+   - **Layout blocks of the sample screens** (summary cards, hero blocks… frames / divs bound to tokens, not components) may be copied.
+     Only stop and ask when you need an **interactive control** UU DS doesn't have; never draw a look-alike control.
+   - **Figma:** follow *Three file tiers in Figma*. The fastest and closest way is to duplicate a sample screen of the same kind and
+     replace the content. Use instances from UU DS and the product's Snowflake; blocks already in Snowflake come in as
+     instances, not copied frames. Colors, radius and spacing bind to variables, never typed onto layers. Don't detach
+     instances. Instances placed in a screen frame get `FILL` width.
+   - **Design canvas, HTML:** load `tokens.css`, declare the DNA in a `[data-theme="<name>"]` block. Only buttons, fields, checkbox,
+     radio, toggle and segmented have ready-made classes; the rest (`ListItem`, `Badge`, `NavigationBar`…) is built per the structure and
+     measurements in the component's file (spec §6.x) with tokens, and marked as self-built at handoff. If the canvas runs React, use the `uu-ds`
+     package components instead of building by hand.
+   - **Code:** with the `uu-ds` package installed, use its components (`ListItem`, `ListGroup`…), don't rewrite them in
+     HTML + tokens. Then run `npx uu-ds-check src` (web) until critical = 0. Without the package the checker can't run:
+     install it (`npm i "github:buiphamthanhtu/uu-ds#web"`) or say at handoff that it wasn't checked.
+4. **Compare before handing off.** Screenshot the new screen and put it next to a sample screen of the same kind. List the differences in order: layout, text hierarchy,
+   spacing, color and shadow, detail. Fix, then compare again. Intentional differences (the new screen needs to differ) get a reason at handoff.
+5. **A sample screen that breaks a locked part** (e.g. hover changing the background, hardcoded hex, text weight unlike the text style): keep UU DS's
+   locked part, don't copy it to the new screen. At handoff, list every place where the new screen differs from the sample because of that, with two options for
+   the user: accept the difference, or propose that UU DS open an extra DNA override path (don't open it yourself).
 
-## Kiểm trước khi giao
+## Check before handing off
 
-- Đo lại contrast mọi cặp đã đổi: chữ từ 4.5, viền tương tác từ 3.
-- `object-secondary` phải đạt 4.5 trên cả `background-surface` và `background-muted`.
-- Chữ trên `background-interactive` luôn là `object-on-interactive`. Nền nút sáng thì token này phải tối.
-- Chuyển về Basic bằng cách bỏ `data-theme`. Màn phải vẫn dùng được.
-- Phủ tay che logo: màn còn nhận ra sản phẩm không? Nếu không, DNA chưa áp đủ.
-- Liệt kê chỗ DNA bị phần khoá chặn.
+- Re-measure contrast for every changed pair: text 4.5 and up, interactive borders 3 and up.
+- `object-secondary` must reach 4.5 on both `background-surface` and `background-muted`.
+- Text on `background-interactive` is always `object-on-interactive`. If the button fill is light, this token must be dark.
+- Switch back to Basic by removing `data-theme`. The screen must still work.
+- Cover the logo with your hand: is the product still recognizable? If not, the DNA isn't fully applied.
+- List the places where locked parts blocked the DNA.
