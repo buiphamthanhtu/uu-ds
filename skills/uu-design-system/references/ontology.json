@@ -6,7 +6,7 @@
  },
  "name": "ÚÙ Design system — bản đồ hệ thống (ontology)",
  "description": "Bản đồ tri thức cho AI: khái niệm, token, component, mode và quan hệ giữa chúng. Sinh tự động từ tokens.json, spec §5, CSS / TSX thật và các cây quyết định; cặp dễ nhầm viết tay.",
- "generatedAt": "2026-11-12",
+ "generatedAt": "2026-11-13",
  "howToUse": [
   "Tìm component: nodes có type Component; xem edges usesToken / composedOf / confusedWith / chosenWhen của nó.",
   "Tìm token cho một vai: lọc Token layer=semantic theo role (background/object/border/overlay) và family.",
@@ -4340,13 +4340,7 @@
      "True"
     ]
    },
-   "figmaVariants": 10,
-   "notYet": [
-    {
-     "text": "nhãn đi kèm (hàng switch + nhãn). Cần nhãn thì màn tự dựng hàng và nói rõ đó là phần tự chế",
-     "source": "§6.17"
-    }
-   ]
+   "figmaVariants": 10
   },
   {
    "id": "component:Chip",
@@ -4442,23 +4436,23 @@
    "figmaVariants": 10,
    "notYet": [
     {
-     "text": "`Hover` / `Pressed` / `Disabled` của mục",
+     "text": "item `Hover` / `Pressed` / `Disabled`",
      "source": "§6.22"
     },
     {
-     "text": "vị trí thanh trên màn (cách đáy, lề ngang, safe area)",
+     "text": "bar position on screen (distance from the bottom, horizontal margins, safe area)",
      "source": "§6.22"
     },
     {
-     "text": "bóng hay viền cho vỏ khi nền màn cũng là `background-surface`",
+     "text": "shadow or border for the shell when the screen background is also `background-surface`",
      "source": "§6.22"
     },
     {
-     "text": "nhãn dài quá bề rộng mục",
+     "text": "labels longer than the item width",
      "source": "§6.22"
     },
     {
-     "text": "quá 5 mục",
+     "text": "more than 5 items",
      "source": "§6.22"
     }
    ]
@@ -4480,7 +4474,7 @@
    },
    "notYet": [
     {
-     "text": "phân trang không biết tổng số dòng",
+     "text": "pagination without a known total row count",
      "source": "§6.24"
     }
    ]
@@ -4523,7 +4517,7 @@
    "figmaVariants": 2,
    "notYet": [
     {
-     "text": "khu tài khoản cuối thanh",
+     "text": "an account area at the bottom of the bar",
      "source": "§6.27"
     }
    ]
@@ -4784,7 +4778,7 @@
    "figmaVariants": 21,
    "notYet": [
     {
-     "text": "cột cố định khi cuộn ngang, hàng mở rộng, sửa trực tiếp trong ô, kéo đổi thứ tự cột, hàng rỗng / đang tải, mật độ thứ ba. Cột cố định, hàng mở rộng, sửa trong ô, kéo đổi cột để sau — chỉ làm khi có màn quản trị cần",
+     "text": "sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them",
      "source": "§6.23"
     }
    ]
@@ -4821,7 +4815,7 @@
    "figmaVariants": 18,
    "notYet": [
     {
-     "text": "cột cố định khi cuộn ngang, hàng mở rộng, sửa trực tiếp trong ô, kéo đổi thứ tự cột, hàng rỗng / đang tải, mật độ thứ ba. Cột cố định, hàng mở rộng, sửa trong ô, kéo đổi cột để sau — chỉ làm khi có màn quản trị cần",
+     "text": "sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them",
      "source": "§6.23"
     }
    ]
@@ -4854,7 +4848,7 @@
    "figmaVariants": 5,
    "notYet": [
     {
-     "text": "biểu đồ nhỏ (sparkline) trong thẻ — để sau",
+     "text": "a small chart (sparkline) in the card — deferred",
      "source": "§6.26"
     }
    ]
@@ -16826,11 +16820,6 @@
    "chosenWhen",
    "decision:xac-thuc",
    "Kiểm được ngay trên máy, không cần gọi máy chủ? — Không ⇒ Trùng tài khoản, mã giảm giá còn hiệu lực, số dư đủ hay không — phải hỏi máy chủ."
-  ],
-  [
-   "component:Switch",
-   "hasNotYet",
-   "concept:not-yet"
   ],
   [
    "component:BottomBar",

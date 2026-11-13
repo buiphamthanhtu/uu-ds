@@ -1,13 +1,14 @@
-# ÚÙ Design system — hướng dẫn cho AI coding agent
+# ÚÙ Design system — instructions for AI coding agents
 
-Project này dùng gói `uu-ds` (UU Design system). Trước khi dựng UI, đọc trong `node_modules/uu-ds/`:
+This project uses the `uu-ds` package (UU Design system). Before building UI, read in `node_modules/uu-ds/`:
 
-1. `docs/design-system.md` — spec đầy đủ. Đọc mục 0–3 và 6.0 trước dòng code đầu tiên. Chỉ dùng component có ở mục 5.
-2. `docs/tokens.css` — mọi giá trị lấy từ token semantic (`var(--background-interactive)`). Không hex, không `--color-*`.
-3. `docs/icons.md` + `docs/uu-icon-index.json` — 22 UU icon trong gói chỉ để component chạy; bộ icon của sản phẩm (Lucide, Nucleo…) đăng ký qua `IconProvider`.
-4. `docs/product-dna.md` + `docs/dna-template.md` — style riêng của sản phẩm (`DNA.md` ở gốc project, nếu có).
-5. `docs/ontology.json` — quan hệ token ↔ component ↔ mode. Không có ở đây = chưa chốt → hỏi, đừng tự chế.
+1. `docs/design-system.md` — the core spec. Read sections 0–3, 5 and 6.0 before the first line of code. Only use components listed in section 5.
+2. `docs/components/<name>.md` — one file per component (table in core §6). Read the file of each component you use.
+3. `docs/tokens.css` — every value comes from semantic tokens (`var(--background-interactive)`). No hex, no `--color-*`.
+4. `docs/icons.md` + `docs/uu-icon-index.json` — the 22 UU icons in the package only make components work; the product's icon set (Lucide, Nucleo…) is registered via `IconProvider`.
+5. `docs/product-dna.md` + `docs/dna-template.md` — the product's own style (`DNA.md` at the project root, if any).
+6. `docs/ontology.json` — token ↔ component ↔ mode relations. Not here = not decided → ask, don't invent.
 
-Viết xong thì chấm: `npx uu-ds-check src` (bộ chấm tất định, không gọi AI). Sửa đến khi critical = 0.
+After writing, check: `npx uu-ds-check src` (deterministic checker, no AI calls). Fix until critical = 0.
 
-Hover / Pressed đi qua state layer có sẵn — không đổi nền, chữ, font-weight. Tài liệu đầy đủ: https://uucreative.co/uu-ds/
+Hover / Pressed go through the built-in state layer — no background, text or font-weight change. UI copy stays Vietnamese. Full docs: https://uucreative.co/uu-ds/

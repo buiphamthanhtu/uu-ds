@@ -1,161 +1,161 @@
-# Khung màn chuẩn
+# Standard screen frames
 
-Sáu khung màn chuẩn của UU DS để chép cấu trúc. Sản phẩm đã có màn mẫu riêng (mục 8 của `DNA.md`) thì màn mẫu đó đi trước file này. Dựng màn mới thì tìm màn gần nhất ở đây, giữ nguyên bộ khung và thứ tự component, rồi thay nội dung. Đừng dựng từ đầu.
+Six standard UU DS screen frames to copy structure from. If the product already has its own sample screens (section 8 of `DNA.md`), those come before this file. To build a new screen, find the closest one here, keep the frame and component order, then replace the content. Don't build from scratch.
 
-Mỗi màn có ba phần: **khung**, **học gì**, **dễ sai**. Số đo của từng component nằm ở spec mục 6; file này chỉ nói cách ghép.
+Each screen has three parts: **frame**, **what to learn**, **common mistakes**. Each component's measurements are in its file under `components/` (spec §6.x); this file only covers how they fit together.
 
-| Cần dựng | Khung |
+| Need to build | Frame |
 |---|---|
-| Nhập thông tin trên app | [Form](#1-form-trên-app) |
-| Nhập mã xác thực | [OTP](#2-nhập-mã-xác-thực) |
-| Chọn một mục từ danh sách dài, kể cả chọn nhiều tầng | [Chọn từ danh sách](#3-chọn-từ-danh-sách) |
-| Xác nhận việc không hoàn tác được | [Xác nhận phá huỷ](#4-xác-nhận-phá-huỷ) |
-| Xong việc, lỗi, chưa có dữ liệu | [Kết quả, lỗi, rỗng](#5-kết-quả-lỗi-rỗng) |
-| Dashboard, trang quản trị trên desktop | [Dashboard](#6-dashboard-desktop) |
+| Data entry on an app | [Form](#1-form-on-an-app) |
+| Verification code entry | [OTP](#2-verification-code-entry) |
+| Picking from a long list, including multi-level picking | [Pick from a list](#3-pick-from-a-list) |
+| Confirming an irreversible action | [Destructive confirmation](#4-destructive-confirmation) |
+| Done, error, no data yet | [Result, error, empty](#5-result-error-empty) |
+| Dashboard, admin page on desktop | [Dashboard](#6-desktop-dashboard) |
 
-**Chưa có khung:** màn danh sách và màn cài đặt trên app. Dựng bằng `ListGroup` + `ListItem` (§6.32) và nói rõ khung là tự dựng khi bàn giao; sản phẩm có màn mẫu cùng loại thì bám màn mẫu.
+**No frame yet:** list screens and settings screens on apps. Build them with `ListGroup` + `ListItem` (§6.32) and say at handoff that the frame is self-built; if the product has a sample screen of the same kind, follow it.
 
-**Khoảng cách giữa các khối trong màn** chưa có trong spec, trừ khung template ở §6.19. Lấy từ thang `gap-*` và nói rõ đó là phần tự chọn khi bàn giao.
+**Spacing between blocks on a screen** is not in the spec, except the template frames in §6.19. Take it from the `gap-*` scale and say at handoff that it is your own choice.
 
 ---
 
-## 1. Form trên app
+## 1. Form on an app
 
 ```
-Khung 390 · density Touch
-├─ NavigationBar         Back action=true · tên màn ngắn
-├─ Body                  padding ngang 16 · cuộn được
-│  ├─ TextInput          Label · một dòng tự do
-│  ├─ Dropdown           Label · một đáp án từ danh sách
-│  ├─ DateInput          Label · ngày trên lịch
-│  └─ TextArea           Label · chữ nhiều dòng
+Frame 390 · density Touch
+├─ NavigationBar         Back action=true · short screen name
+├─ Body                  horizontal padding 16 · scrollable
+│  ├─ TextInput          Label · one line of free text
+│  ├─ Dropdown           Label · one answer from a list
+│  ├─ DateInput          Label · a date on the calendar
+│  └─ TextArea           Label · multi-line text
 └─ Footer                padding 16
-   └─ ButtonGroup        một nút chính · Secondary button=false
+   └─ ButtonGroup        one primary button · Secondary button=false
 ```
 
-**Học gì**
-- Mỗi loại đáp án có một component riêng. Ngày dùng `DateInput`, không dùng `TextInput` gắn icon lịch.
-- Nhãn còn nguyên sau khi đã điền, nên người dùng luôn biết ô đó là gì.
-- Lỗi nằm ngay dưới ô gây ra lỗi. Dòng lỗi nói cách sửa.
+**What to learn**
+- Each kind of answer has its own component. Dates use `DateInput`, not a `TextInput` with a calendar icon.
+- The label stays after the field is filled, so the user always knows what the field is.
+- The error sits right under the field that caused it. The error line says how to fix it.
 
-**Dễ sai**
-- Dùng placeholder thay nhãn.
-- Báo lỗi nhập liệu bằng `Toast`: toast biến mất, lỗi biến theo.
-- Kéo cao `TextInput` thay vì đổi sang `TextArea`.
+**Common mistakes**
+- Using the placeholder instead of a label.
+- Reporting input errors with a `Toast`: the toast disappears and the error with it.
+- Stretching a `TextInput` tall instead of switching to `TextArea`.
 
-## 2. Nhập mã xác thực
+## 2. Verification code entry
 
 ```
-Khung 390 · density Touch
+Frame 390 · density Touch
 ├─ NavigationBar         Back action=true
-└─ Body                  padding ngang 16
-   ├─ Tiêu đề, mô tả     nói mã gửi về đâu
-   ├─ OTPInput           Masked=False · 6 ô
-   └─ TextButton         Ghost · gửi lại mã
+└─ Body                  horizontal padding 16
+   ├─ Title, description says where the code was sent
+   ├─ OTPInput           Masked=False · 6 cells
+   └─ TextButton         Ghost · resend code
 ```
 
-**Học gì**
-- Mã SMS để `Masked=False`, người dùng còn đối chiếu với tin nhắn. Mã PIN mới `Masked=True`.
-- Sai mã: cả 6 ô đỏ, chữ số giữ nguyên, dòng lỗi căn giữa. Lỗi chỉ hiện sau khi nhập đủ.
+**What to learn**
+- SMS codes use `Masked=False` so the user can compare with the message. Only PINs use `Masked=True`.
+- Wrong code: all 6 cells red, digits kept, centered error line. The error only shows after the code is complete.
 
-**Dễ sai**
-- Dựng 6 `TextInput` xếp hàng.
-- Xoá hết các ô khi sai mã.
+**Common mistakes**
+- Building 6 `TextInput`s in a row.
+- Clearing all cells on a wrong code.
 
-## 3. Chọn từ danh sách
+## 3. Pick from a list
 
 ```
-Dropdown                 Value=Empty · bấm mở sheet
+Dropdown                 Value=Empty · tap opens a sheet
 └─ Menu Platform=Sheet   CardSheet · Navigation=Close · CTA=false
-   ├─ Search             bật khi danh sách dài
-   ├─ Danh sách option   chọn một: bấm là đóng
-   ├─ Footer             chọn nhiều: Type=Multiple + Bỏ chọn, Áp dụng
-   └─ Sheet con          Navigation=Back · ví dụ Tỉnh rồi tới Huyện
+   ├─ Search             on when the list is long
+   ├─ Option list        single choice: tap closes
+   ├─ Footer             multiple choice: Type=Multiple + Bỏ chọn, Áp dụng
+   └─ Child sheet        Navigation=Back · e.g. Province then District
 ```
 
-**Học gì**
-- Sheet con có nút Back bên trái và không có nút đóng. Back và Close không bao giờ hiện cùng lúc.
-- Back về sheet cha. Muốn đóng cả chuỗi thì về sheet gốc rồi đóng, để người dùng không mất dấu đang ở tầng nào.
-- Desktop dùng `Menu` Panel neo vào ô, không dùng sheet.
+**What to learn**
+- A child sheet has a Back button on the left and no close button. Back and Close never show together.
+- Back returns to the parent sheet. To close the whole chain, go back to the root sheet and close it, so the user never loses track of the level.
+- Desktop uses a `Menu` Panel anchored to the field, not a sheet.
 
-**Dễ sai**
-- Thêm ô tìm kiếm cho danh sách vài mục.
-- Dùng `CardSheet` cho một câu hỏi có/không. Trường hợp đó là `Dialog`.
+**Common mistakes**
+- Adding a search field to a list of a few items.
+- Using a `CardSheet` for a yes/no question. That is a `Dialog`.
 
-## 4. Xác nhận phá huỷ
+## 4. Destructive confirmation
 
 ```
-Scrim                    overlay + blur · panel thụt 12 mỗi bên
-└─ CardDialog            Banner=False · căn giữa dọc
-   ├─ Close              góc phải
+Scrim                    overlay + blur · panel inset 12 each side
+└─ CardDialog            Banner=False · vertically centered
+   ├─ Close              top right
    └─ Body
-      ├─ Slot            câu hỏi nằm ở đây · Dialog không có tiêu đề riêng
+      ├─ Slot            the question goes here · Dialog has no separate title
       └─ ButtonGroup     Tone=Danger · Secondary button=true
-                         phụ "Giữ đơn" · chính "Huỷ đơn"
+                         secondary "Giữ đơn" · primary "Huỷ đơn"
 ```
 
-**Học gì**
-- Nút nói đúng việc sẽ xảy ra. Đọc mỗi hai nút vẫn hiểu.
-- `Tone=Danger` chỉ đổi nút chính sang đỏ. Thứ tự và hình học giữ nguyên.
-- `Danger` chỉ dành cho việc không lấy lại được.
+**What to learn**
+- Buttons say exactly what will happen. Reading only the two buttons is enough to understand.
+- `Tone=Danger` only turns the primary button red. Order and geometry stay.
+- `Danger` is only for things that can't be undone.
 
-**Dễ sai**
-- Nút ghi "OK" và "Không".
-- Tô đỏ hành động an toàn như lưu nháp.
-- Đặt `Slot` trống: đây là chỗ của nội dung, không phải phần trang trí.
-- Mở dialog chồng lên dialog.
+**Common mistakes**
+- Buttons saying "OK" and "Không".
+- Coloring a safe action red, like saving a draft.
+- Leaving the `Slot` empty: it is where the content goes, not decoration.
+- Opening a dialog on top of a dialog.
 
-## 5. Kết quả, lỗi, rỗng
+## 5. Result, error, empty
 
-| Tình huống | Dùng | Nút |
+| Situation | Use | Buttons |
 |---|---|---|
-| Xong việc, phải sang chỗ khác | `ResultScreen` | `ButtonGroup` dọc: chính trên, phụ dưới |
-| Lỗi chặn chức năng chính, không tự sửa được | `ErrorScreen` | Đúng một nút thử lại |
-| Cả màn chưa có dữ liệu | `EmptyScreen` | Một nút hành động |
-| Một khối chưa có dữ liệu | `EmptySection` | Một nút, ẩn được |
-| Lỗi ở một khối, phần còn lại vẫn dùng được | `ErrorSection` | Một nút thử lại |
-| Sửa được ngay | `Dialog` hoặc `Toast` | Tuỳ việc |
+| Done, must move elsewhere | `ResultScreen` | vertical `ButtonGroup`: primary on top, secondary below |
+| Error blocks the main function, user can't fix it | `ErrorScreen` | exactly one retry button |
+| The whole screen has no data yet | `EmptyScreen` | one action button |
+| One block has no data yet | `EmptySection` | one button, hideable |
+| Error in one block, the rest still works | `ErrorSection` | one retry button |
+| Fixable right away | `Dialog` or `Toast` | depends on the task |
 
 ```
-Khung 390 · density Touch
+Frame 390 · density Touch
 ├─ NavigationBar         ResultScreen, ErrorScreen: Back action=false
-├─ Body                  FILL · căn giữa hai chiều · padding ngang 16
-│  └─ Ảnh, tiêu đề, mô tả
-└─ Footer                padding 16 · nút theo bảng trên
+├─ Body                  FILL · centered on both axes · horizontal padding 16
+│  └─ Image, title, description
+└─ Footer                padding 16 · buttons per the table above
 ```
 
-**Học gì**
-- Ảnh là nội dung, cần `alt`.
-- `ErrorScreen` có một nút là cố ý. Nếu người dùng còn việc khác để làm thì đó không phải lỗi toàn màn.
-- Nút ở màn rỗng nói bước tiếp theo, ví dụ "Xoá bộ lọc".
+**What to learn**
+- The image is content and needs `alt`.
+- `ErrorScreen` having one button is intentional. If the user still has something else to do, it isn't a full-screen error.
+- The button on an empty screen states the next step, e.g. "Xoá bộ lọc".
 
-**Dễ sai**
-- Viết "Không có dữ liệu" rồi dừng ở đó.
-- Nút ghi "OK" nhưng không dẫn đi đâu.
-- Để nút Back trên `ResultScreen`.
+**Common mistakes**
+- Writing "Không có dữ liệu" and stopping there.
+- A button saying "OK" that leads nowhere.
+- Leaving a Back button on `ResultScreen`.
 
-## 6. Dashboard desktop
+## 6. Desktop dashboard
 
 ```
-Khung 1440 · data-density="compact"
-├─ SideNav               mục đang chọn duy nhất · tối đa 2 cấp
+Frame 1440 · data-density="compact"
+├─ SideNav               exactly one selected item · max 2 levels
 └─ Main
-   ├─ Breadcrumb         chữ, mục cuối là trang hiện tại
-   ├─ Hàng KPICard       mỗi thẻ một số · chi phí, tỉ lệ huỷ: Polarity=Inverse
-   ├─ Bảng               TableHeaderCell + TableCell
-   │  ├─ Cột số          Align=Right + Type=Number
-   │  ├─ Cột trạng thái  Type=Status
-   │  └─ Cột hành động   Ghost Small · còn lại vào "⋯"
-   └─ TablePagination    khi quá một trang
+   ├─ Breadcrumb         text, the last item is the current page
+   ├─ KPICard row        one number per card · cost, cancellation rate: Polarity=Inverse
+   ├─ Table              TableHeaderCell + TableCell
+   │  ├─ Number column   Align=Right + Type=Number
+   │  ├─ Status column   Type=Status
+   │  └─ Action column   Ghost Small · the rest in "⋯"
+   └─ TablePagination    when there is more than one page
 ```
 
-**Học gì**
-- Bảng không viền ngoài, không kẻ dọc. Hover và chọn là trạng thái của cả hàng.
-- Chọn `Polarity` theo ý nghĩa của chỉ số. Mũi tên vẫn theo chiều số.
-- Bảng rỗng dùng `EmptySection` trong thân bảng.
+**What to learn**
+- Tables have no outer border and no vertical lines. Hover and selection are states of the whole row.
+- Choose `Polarity` by what the metric means. Arrows still follow the number's direction.
+- An empty table uses `EmptySection` in the table body.
 
-**Dễ sai**
-- Dùng `Solid` trong hàng bảng.
-- Lật mũi tên để lấy màu đỏ.
-- Dùng `Compact` cho màn chạm.
-- Dùng chấm `Pagination` dưới bảng. Bảng dùng `TablePagination`.
+**Common mistakes**
+- Using `Solid` in table rows.
+- Flipping the arrow to get a red color.
+- Using `Compact` on touch screens.
+- Using `Pagination` dots under a table. Tables use `TablePagination`.

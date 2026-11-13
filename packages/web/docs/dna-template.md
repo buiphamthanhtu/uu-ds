@@ -1,28 +1,28 @@
 ---
-product: tên sản phẩm
-theme: ten-san-pham
+product: product name
+theme: product-name
 updated: YYYY-MM-DD
 sources:
-  - màn, link Figma hoặc ảnh đã đo
+  - screens, Figma links or screenshots measured
 ---
 
-# DNA — tên sản phẩm
+# DNA — product name
 
-Giá trị nào chưa đo được thì bỏ trống, UU DS sẽ dùng mặc định. Thêm `(estimated)` sau giá trị chưa chắc.
+Leave values you couldn't measure empty; UU DS uses its defaults. Add `(estimated)` after uncertain values.
 
-## 1. Cá tính
+## 1. Personality
 
-- Ba tính từ:
-- Không phải:
-- Một câu mô tả cảm giác khi dùng:
+- Three adjectives:
+- Not:
+- One sentence describing how it feels to use:
 
-## 2. Màu
+## 2. Color
 
-Bảng này chỉ ghi các token muốn đổi trong 22 token thương hiệu (spec 2.5).
-Sản phẩm có **nhiều chế độ màu** (spec 4.3): thêm một cột giá trị cho mỗi chế độ (`Giá trị · <chế độ 1>`,
-`Giá trị · <chế độ 2>`…) và ghi tên chế độ mặc định. Phần còn lại của file dùng chung cho mọi chế độ.
+This table only lists the tokens to change among the 22 brand tokens (spec 2.5).
+A product with **several color modes** (spec 4.3): add one value column per mode (`Value · <mode 1>`,
+`Value · <mode 2>`…) and name the default mode. The rest of the file is shared by every mode.
 
-| Token | Giá trị | Thấy ở đâu |
+| Token | Value | Seen where |
 |---|---|---|
 | `background-interactive` | | |
 | `object-on-interactive` | | |
@@ -30,98 +30,98 @@ Sản phẩm có **nhiều chế độ màu** (spec 4.3): thêm một cột giá
 | `border-interactive` | | |
 | `background-accent` | | |
 | `background-muted` | | |
-| `background-subtle` | | nền nút `Tonal` |
-| `object-secondary` | | chữ phụ |
-| `border` | | viền trung tính |
+| `background-subtle` | | `Tonal` button fill |
+| `object-secondary` | | secondary text |
+| `border-subtle` · `border-medium` | | borders of tinted blocks |
 
-## 3. Bo góc
+## 3. Corner radius
 
-| Token | Giá trị | Dùng cho |
+| Token | Value | Used for |
 |---|---|---|
 | `radius-sm` | | |
 | `radius-base` | | |
-| `radius-lg` | | ô nhập, thẻ |
-| `rounded-2xl` | | sheet, dialog, panel `Menu` |
-| `rounded-4xl` | | nút, chip |
+| `radius-lg` | | inputs, cards |
+| `rounded-2xl` | | sheet, dialog, `Menu` panel |
+| `rounded-4xl` | | buttons, chips |
 
-## 4. Đổ bóng
+## 4. Shadow
 
-| Token | Giá trị | Dùng cho |
+| Token | Value | Used for |
 |---|---|---|
 | `elevation-low` | | |
 | `elevation-medium` | | |
 | `elevation-high` | | |
 
-## 5. Viền
+## 5. Borders
 
-- Viền ngoài của control và thẻ (`border-outer-width` · `border-outer`, mặc định không có):
-- Bóng của control (`elevation-none`, mặc định không có; có viền thì spread = độ dày viền):
-- Thường dùng viền hay dùng bóng để tách khối:
-- Màu viền khối có nền tint (`border-subtle`, `border-medium`):
+- Outer border of controls and cards (`border-outer-width` · `border-outer`, none by default):
+- Control shadow (`elevation-none`, none by default; with a border, spread = border width):
+- Blocks are usually separated by borders or by shadows:
+- Border color of tinted blocks (`border-subtle`, `border-medium`):
 
-## 6. Nền và bề mặt
+## 6. Background and surfaces
 
-| Biến | Giá trị | Ghi chú |
+| Variable | Value | Note |
 |---|---|---|
-| `--dna-page-background` | | màu hoặc gradient nền trang |
-| `--dna-hero-background` | | khối mở đầu |
-| `--dna-card-background` | | thẻ, nếu khác `background-surface` |
-| `--dna-card-shadow` | | bóng của thẻ, `none` nếu thẻ phẳng |
-| `--dna-floating-shadow` | | phần nổi: thanh đáy, nút back |
-| `--dna-feature-background` | | khối tính năng nổi bật trên màn |
+| `--dna-page-background` | | page background color or gradient |
+| `--dna-hero-background` | | opening block |
+| `--dna-card-background` | | cards, if different from `background-surface` |
+| `--dna-card-shadow` | | card shadow, `none` if cards are flat |
+| `--dna-floating-shadow` | | floating parts: bottom bar, back button |
+| `--dna-feature-background` | | featured block on the screen |
 
-Cần biến `--dna-*` khác (viền thẻ, độ nghiêng…) thì thêm dòng vào bảng mục 6 hoặc 7: hợp lệ, miễn chỉ layout đọc.
+Need another `--dna-*` variable (card border, tilt…)? Add a row to the table in section 6 or 7: valid, as long as only the layout reads it.
 
-## 7. Bố cục
+## 7. Layout
 
-| Biến | App | Desktop | Ghi chú |
+| Variable | App | Desktop | Note |
 |---|---|---|---|
-| `--dna-page-margin` | | | lề hai bên |
-| `--dna-section-gap` | | | giữa các khối lớn |
-| `--dna-card-gap` | | | giữa các thẻ |
-| `--dna-content-max` | | | bề rộng nội dung tối đa |
-| `--dna-card-inset` | | | nút hoặc khối lồng cách mép thẻ |
-| `--dna-card-head-inset` | | | khối chữ cách mép thẻ, thêm vào `--dna-card-inset` |
-| `--dna-floating-inset` | | | phần nổi cách đáy và hai bên |
+| `--dna-page-margin` | | | side margins |
+| `--dna-section-gap` | | | between large blocks |
+| `--dna-card-gap` | | | between cards |
+| `--dna-content-max` | | | max content width |
+| `--dna-card-inset` | | | buttons or nested blocks from the card edge |
+| `--dna-card-head-inset` | | | text block from the card edge, added to `--dna-card-inset` |
+| `--dna-floating-inset` | | | floating parts from the bottom and sides |
 
-## 8. Mẫu màn
+## 8. Screen patterns
 
-Cách màn được dựng. Ghi màn mẫu cho từng dòng để người sau mở ra so. Cách làm chỉ thấy ở một màn thì thêm `(1 screen)`.
+How screens are built. Name a sample screen for each row so the next person can open it and compare. A pattern seen on only one screen gets `(1 screen)`.
 
-| Phần | Cách làm | Màn mẫu |
+| Part | How it's done | Sample screen |
 |---|---|---|
-| Header | kiểu `NavigationBar`, có tiêu đề lớn không, nút bên phải | |
-| Mở đầu màn | khối hero, tóm tắt, ô tìm kiếm… | |
-| Danh sách | thẻ hay hàng `ListItem`, có ảnh không, nhóm theo gì | |
-| Form | nhãn trên ô, nhóm field, nút gửi ở đâu | |
-| Nút chính | cuối nội dung, ghim đáy, hay trong header | |
-| Trạng thái trống, lỗi | `EmptySection` / `EmptyScreen`, có minh hoạ không | |
-| Điều hướng đáy | `BottomBar` mấy mục, kiểu vỏ, mục đang chọn trông ra sao | |
-| Minh hoạ, sticker | đặt ở đâu (header, trạng thái trống…), chọn hình theo gì | |
-| Thứ bậc chữ | text style cho tiêu đề màn, tiêu đề khối, chữ phụ | |
+| Header | `NavigationBar` style, large title or not, buttons on the right | |
+| Screen opening | hero block, summary, search field… | |
+| List | cards or `ListItem` rows, with images or not, grouped by what | |
+| Form | labels above fields, field groups, where the submit button is | |
+| Primary button | end of content, pinned to the bottom, or in the header | |
+| Empty, error states | `EmptySection` / `EmptyScreen`, with illustration or not | |
+| Bottom navigation | `BottomBar` with how many items, shell style, what the selected item looks like | |
+| Illustrations, stickers | where they go (header, empty states…), how images are chosen | |
+| Text hierarchy | text styles for screen titles, block titles, secondary text | |
 
-## 9. Chữ
+## 9. Type
 
-- Font tiêu đề lớn (`font-family-display`):
-- Font chữ còn lại (`font-family-body`, mặc định font hệ thống — chỉ đổi họ font):
-- Cách dùng tiêu đề: to hay vừa, viết hoa hay thường:
-- Giọng văn:
+- Large heading font (`font-family-display`):
+- Other text font (`font-family-body`, system font by default — family only):
+- How headings are used: large or medium, uppercase or sentence case:
+- Tone of voice:
 
-## 10. Hình ảnh và icon
+## 10. Images and icons
 
-- Kiểu ảnh:
-- Kiểu minh hoạ:
-- Bộ icon (gói chỉ kèm 22 icon cho component; sản phẩm cần icon thì đăng ký cả bộ, ví dụ Lucide miễn phí hoặc Nucleo trả phí):
-- Icon `outline` hay `fill` ở đâu:
+- Image style:
+- Illustration style:
+- Icon set (the package only ships 22 icons for components; a product that needs icons registers a whole set, e.g. free Lucide or paid Nucleo):
+- Where `outline` vs `fill` icons are used:
 
-## 11. Dấu hiệu nhận diện
+## 11. Identity markers
 
-Hai đến ba chi tiết làm người ta nhận ra sản phẩm này, có ảnh hoặc màn cụ thể.
+Two to three details that make people recognize this product, with a specific image or screen.
 
 -
 -
 
-## 12. Không làm
+## 12. Don't
 
 -
 -
