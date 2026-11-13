@@ -5625,7 +5625,7 @@
    "id": "rule:global/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Chỉ dùng token semantic (background-*, object-*, border-*); không hardcode hex, không tạo primitive màu có sẵn alpha.",
+   "text": "Only use semantic tokens (background-*, object-*, border-*); never hardcode hex, never create color primitives with built-in alpha.",
    "source": "§0",
    "scope": "global"
   },
@@ -5633,7 +5633,7 @@
    "id": "rule:global/2",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng lấy token nền tô chữ hay ngược lại — mỗi token có phạm vi riêng (nền, chữ, viền, gap, radius).",
+   "text": "Don't use a background token to color text or vice versa — each token has its own scope (background, text, border, gap, radius).",
    "source": "§1",
    "scope": "global"
   },
@@ -5641,7 +5641,7 @@
    "id": "rule:global/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Component không biết mình ở brand nào; đổi brand bằng data-theme trên khung chứa, không sửa component.",
+   "text": "A component doesn't know which brand it is in; switch brand with data-theme on the container, don't edit the component.",
    "source": "§2.5",
    "scope": "global"
   },
@@ -5649,7 +5649,7 @@
    "id": "rule:global/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng lấy accent cho thứ bấm được: interactive cho nút, link, tab, field focus, mục đang chọn; accent cho nhấn nội dung.",
+   "text": "Don't use accent for things you can press: interactive for buttons, links, tabs, field focus, selected items; accent for content emphasis.",
    "source": "§2.5",
    "scope": "global"
   },
@@ -5657,7 +5657,7 @@
    "id": "rule:global/5",
    "type": "Rule",
    "kind": "must",
-   "text": "background-{status} chỉ đi với object-on-{status}; object-{status} dùng cho chữ/icon trên nền sáng.",
+   "text": "background-{status} only pairs with object-on-{status}; object-{status} is for text/icons on light backgrounds.",
    "source": "§2.2",
    "scope": "global"
   },
@@ -5665,7 +5665,7 @@
    "id": "rule:global/6",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng dùng negative cho badge “có mới”, đừng dùng attention cho thông báo lỗi; attention = có mới chưa xem, warning = rủi ro, negative = hỏng/sai.",
+   "text": "Don't use negative for a \"new\" badge, don't use attention for error messages; attention = new and unseen, warning = risk, negative = broken/wrong.",
    "source": "§2.2",
    "scope": "global"
   },
@@ -5673,7 +5673,7 @@
    "id": "rule:global/7",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng dùng object-warning (1.92 trên trắng) hay object-attention cho chữ đứng một mình — chỉ cho chấm / icon kèm chữ object-primary.",
+   "text": "Don't use object-warning (1.92 on white) or object-attention for standalone text — only for dots / icons next to object-primary text.",
    "source": "§2.3",
    "scope": "global"
   },
@@ -5681,7 +5681,7 @@
    "id": "rule:global/8",
    "type": "Rule",
    "kind": "must",
-   "text": "Đừng để màu là tín hiệu duy nhất ở chỗ quan trọng — kèm chữ hoặc icon.",
+   "text": "Don't let color be the only signal where it matters — add text or an icon.",
    "source": "§2.3",
    "scope": "global"
   },
@@ -5689,7 +5689,7 @@
    "id": "rule:global/9",
    "type": "Rule",
    "kind": "must",
-   "text": "Hover/Pressed chỉ qua state layer ::after phủ toàn bộ, fill = currentColor (màu object của variant); không đổi nền, chữ, font-weight.",
+   "text": "Hover/Pressed only through a full-cover ::after state layer, fill = currentColor (the variant's object color); no background, text or font-weight change.",
    "source": "§6.0",
    "scope": "global"
   },
@@ -5697,7 +5697,7 @@
    "id": "rule:global/10",
    "type": "Rule",
    "kind": "must",
-   "text": "Bậc opacity state layer chia theo loại nền, không theo màu chữ: nền đặc màu (Solid Accent / Neutral) → 20/40; nền sáng hoặc trong suốt (Outline, Ghost, Solid Inverted) → 5/10; Outline / Ghost Inverted trên nền tối → 20/40. Radio là ngoại lệ (§6.3d). Disabled và Loading không có state layer.",
+   "text": "State-layer opacity steps depend on the background type, not the text color: solid colored backgrounds (Solid Accent / Neutral) → 20/40; light or transparent backgrounds (Outline, Ghost, Solid Inverted) → 5/10; Outline / Ghost Inverted on dark backgrounds → 20/40. Radio is the exception (§6.3d). Disabled and Loading have no state layer.",
    "source": "§6.0",
    "scope": "global"
   },
@@ -5705,7 +5705,7 @@
    "id": "rule:global/11",
    "type": "Rule",
    "kind": "do",
-   "text": "Mode chữ Active (đậm thêm một bậc) chỉ cho ToggleButton Active=True và Segment item đang chọn; không liên quan :hover/:active hay State=Pressed.",
+   "text": "The Active text mode (one weight step bolder) is only for ToggleButton Active=True and the selected Segment item; it has nothing to do with :hover/:active or State=Pressed.",
    "source": "§3",
    "scope": "global"
   },
@@ -5713,7 +5713,7 @@
    "id": "rule:global/12",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng hardcode width cho component hug (button, toggle, chip); line-height là giá trị tuyệt đối, không bội số.",
+   "text": "Don't hardcode width on hugging components (button, toggle, chip); line-height is an absolute value, not a multiplier.",
    "source": "§3",
    "scope": "global"
   },
@@ -5721,7 +5721,7 @@
    "id": "rule:global/13",
    "type": "Rule",
    "kind": "must",
-   "text": "Component đọc biến density (--control-height-*, --field-height, --text-<style>-*); không gõ cứng 24/32/40/48/56px, không đọc thẳng --font-size-*. Không dùng Compact cho màn chạm.",
+   "text": "Components read density variables (--control-height-*, --field-height, --text-<style>-*); never hardcode 24/32/40/48/56px, never read --font-size-* directly. Don't use Compact on touch screens.",
    "source": "§4.1",
    "scope": "global"
   },
@@ -5729,7 +5729,7 @@
    "id": "rule:global/14",
    "type": "Rule",
    "kind": "must",
-   "text": "Chỉ dùng UU icon; không thay Lucide/Phosphor/Font Awesome, không crop viewBox. Trạng thái bật dùng biến thể fill, tắt dùng outline.",
+   "text": "Only use UU icon (or the set attached via DNA); don't swap in Lucide/Phosphor/Font Awesome singles, don't crop the viewBox. On state uses the fill variant, off state uses outline.",
    "source": "§6.11",
    "scope": "global"
   },
@@ -5737,7 +5737,7 @@
    "id": "rule:global/15",
    "type": "Rule",
    "kind": "do",
-   "text": "Chỉ build component có trong mục 5; thứ không có là chưa chốt — hỏi lại, đừng suy đoán.",
+   "text": "Only build components listed in section 5; anything missing is not decided — ask, don't guess.",
    "source": "§0",
    "scope": "global"
   },
@@ -5745,7 +5745,7 @@
    "id": "rule:TextButtonAccent/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Dùng cho hành động chính của màn.",
+   "text": "For the main action of the screen.",
    "source": "§6.1",
    "scope": "TextButtonAccent"
   },
@@ -5753,7 +5753,7 @@
    "id": "rule:TextButtonAccent/2",
    "type": "Rule",
    "kind": "do",
-   "text": "Một nút Solid (Accent hoặc Danger) mỗi màn.",
+   "text": "One Solid button (Accent or Danger) per screen.",
    "source": "§6.1",
    "scope": "TextButtonAccent"
   },
@@ -5761,7 +5761,7 @@
    "id": "rule:TextButtonAccent/3",
    "type": "Rule",
    "kind": "dont",
-   "text": "Hành động lặp theo dòng hoặc theo thẻ không bao giờ Solid — dùng Ghost Small hoặc gom vào menu “⋯”.",
+   "text": "Actions repeated per row or per card are never Solid — use Ghost Small or group them in a \"⋯\" menu.",
    "source": "§6.1",
    "scope": "TextButtonAccent"
   },
@@ -5769,7 +5769,7 @@
    "id": "rule:TextButtonAccent/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Inverted=True khi đặt trên nền tối.",
+   "text": "Inverted=True when placed on a dark background.",
    "source": "§6.1",
    "scope": "TextButtonAccent"
   },
@@ -5777,7 +5777,7 @@
    "id": "rule:TextButtonAccent/5",
    "type": "Rule",
    "kind": "must",
-   "text": "min-width = min-height = chiều cao size (56/48/32) — nút chữ ngắn không hẹp hơn hình tròn.",
+   "text": "min-width = min-height = the size's height (56/48/32) — a short-label button is never narrower than a circle.",
    "source": "§6.1",
    "scope": "TextButtonAccent"
   },
@@ -5785,7 +5785,7 @@
    "id": "rule:TextButtonAccent/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Viền Outline không cộng vào chiều cao: dựng bằng box-shadow inset 2px, không dùng border.",
+   "text": "The Outline border does not add to the height: build it with an inset 2px box-shadow, not a border.",
    "source": "§6.1",
    "scope": "TextButtonAccent"
   },
@@ -5793,7 +5793,7 @@
    "id": "rule:TextButtonAccent/7",
    "type": "Rule",
    "kind": "must",
-   "text": "Loading: spinner .loading đứng trước label, label vẫn hiện, không có state layer.",
+   "text": "Loading: the .loading spinner sits before the label, the label stays visible, no state layer.",
    "source": "§6.1",
    "scope": "TextButtonAccent"
   },
@@ -5801,7 +5801,7 @@
    "id": "rule:TextButtonAccent/8",
    "type": "Rule",
    "kind": "dont",
-   "text": "Pressed giữ nguyên weight 600 — không dùng mode chữ Active.",
+   "text": "Pressed keeps weight 600 — don't use the Active text mode.",
    "source": "§3",
    "scope": "TextButtonAccent"
   },
@@ -5809,7 +5809,7 @@
    "id": "rule:TextButtonNeutral/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Dùng cho hành động phụ, trung tính.",
+   "text": "For secondary, neutral actions.",
    "source": "§6.1",
    "scope": "TextButtonNeutral"
   },
@@ -5817,7 +5817,7 @@
    "id": "rule:TextButtonNeutral/2",
    "type": "Rule",
    "kind": "do",
-   "text": "Việc làm lại được (đăng xuất, bỏ qua) vẫn là Neutral, dù trông “nguy hiểm”.",
+   "text": "Reversible actions (sign out, skip) stay Neutral even if they \"look dangerous\".",
    "source": "§6.1",
    "scope": "TextButtonNeutral"
   },
@@ -5825,7 +5825,7 @@
    "id": "rule:TextButtonNeutral/3",
    "type": "Rule",
    "kind": "do",
-   "text": "Inverted=True khi đặt trên nền tối.",
+   "text": "Inverted=True when placed on a dark background.",
    "source": "§6.1",
    "scope": "TextButtonNeutral"
   },
@@ -5833,7 +5833,7 @@
    "id": "rule:TextButtonNeutral/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Viền Outline không cộng vào chiều cao: dựng bằng box-shadow inset 2px.",
+   "text": "The Outline border does not add to the height: build it with an inset 2px box-shadow.",
    "source": "§6.1",
    "scope": "TextButtonNeutral"
   },
@@ -5841,7 +5841,7 @@
    "id": "rule:TextButtonNeutral/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Disabled: Solid nền background-disabled, Outline viền border-muted, chữ object-disabled, không state layer.",
+   "text": "Disabled: Solid uses background-disabled, Outline uses border-muted, text object-disabled, no state layer.",
    "source": "§6.1",
    "scope": "TextButtonNeutral"
   },
@@ -5849,7 +5849,7 @@
    "id": "rule:TextButtonNeutral/6",
    "type": "Rule",
    "kind": "do",
-   "text": "Ghost Small là dạng nút Action trong suffix của TextInput và nút Huỷ của SearchInput.",
+   "text": "Ghost Small is the Action button inside TextInput's suffix and the Huỷ button of SearchInput.",
    "source": "§6.3",
    "scope": "TextButtonNeutral"
   },
@@ -5857,7 +5857,7 @@
    "id": "rule:TextButtonNeutral/7",
    "type": "Rule",
    "kind": "do",
-   "text": "`Type=Tonal` cho hành động lặp trên thẻ nền `background-surface`. Không đặt trên `background-subtle`.",
+   "text": "`Type=Tonal` for repeated actions on cards with `background-surface`. Don't place it on `background-subtle`.",
    "source": "§6.1",
    "scope": "TextButtonNeutral"
   },
@@ -5865,7 +5865,7 @@
    "id": "rule:TextButtonDanger/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Chỉ cho hành động phá huỷ, không hoàn tác được (xoá tài khoản, huỷ đơn, gỡ thiết bị).",
+   "text": "Only for destructive, irreversible actions (delete account, cancel order, remove device).",
    "source": "§6.1",
    "scope": "TextButtonDanger"
   },
@@ -5873,7 +5873,7 @@
    "id": "rule:TextButtonDanger/2",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng dùng Danger chỉ vì nút “trông nguy hiểm” — việc làm lại được là Neutral.",
+   "text": "Don't use Danger just because a button \"looks dangerous\" — reversible actions are Neutral.",
    "source": "§6.1",
    "scope": "TextButtonDanger"
   },
@@ -5881,7 +5881,7 @@
    "id": "rule:TextButtonDanger/3",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có Inverted=True — nút phá huỷ luôn trên nền sáng; màn tối thì mở Dialog xác nhận.",
+   "text": "No Inverted=True — destructive buttons always sit on light backgrounds; on dark screens open a confirmation Dialog.",
    "source": "§6.1",
    "scope": "TextButtonDanger"
   },
@@ -5889,7 +5889,7 @@
    "id": "rule:TextButtonDanger/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Hành động phá huỷ theo dòng nằm trong menu “⋯” và xác nhận bằng Dialog có TextButtonDanger Solid.",
+   "text": "Per-row destructive actions live in the \"⋯\" menu and are confirmed by a Dialog with a Solid TextButtonDanger.",
    "source": "§6.1",
    "scope": "TextButtonDanger"
   },
@@ -5897,7 +5897,7 @@
    "id": "rule:TextButtonDanger/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Một nút Solid (Accent hoặc Danger) mỗi màn.",
+   "text": "One Solid button (Accent or Danger) per screen.",
    "source": "§6.1",
    "scope": "TextButtonDanger"
   },
@@ -5905,7 +5905,7 @@
    "id": "rule:TextButtonDanger/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Hình học, density, state layer, Loading, Disabled y hệt TextButtonAccent; chỉ đổi họ màu sang negative.",
+   "text": "Geometry, density, state layer, Loading and Disabled are identical to TextButtonAccent; only the color family changes to negative.",
    "source": "§6.1",
    "scope": "TextButtonDanger"
   },
@@ -5913,7 +5913,7 @@
    "id": "rule:IconButtonAccent/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Prop và màu khớp TextButtonAccent (Type/Inverted/Size/State); icon dùng token object-* như chữ của Text button.",
+   "text": "Props and colors match TextButtonAccent (Type/Inverted/Size/State); the icon uses object-* tokens like a Text button's label.",
    "source": "§6.2",
    "scope": "IconButtonAccent"
   },
@@ -5921,7 +5921,7 @@
    "id": "rule:IconButtonAccent/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Hộp vuông tròn: 56/48/32, icon 24/24/16, padding 0.",
+   "text": "Round square box: 56/48/32, icon 24/24/16, padding 0.",
    "source": "§6.2",
    "scope": "IconButtonAccent"
   },
@@ -5929,7 +5929,7 @@
    "id": "rule:IconButtonAccent/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Inverted=True: Solid (nền surface) dùng state layer 5/10; Outline và Ghost dùng 20/40.",
+   "text": "Inverted=True: Solid (surface background) uses state layer 5/10; Outline and Ghost use 20/40.",
    "source": "§6.2",
    "scope": "IconButtonAccent"
   },
@@ -5937,7 +5937,7 @@
    "id": "rule:IconButtonAccent/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Nút chỉ có icon cần tên: có label, hoặc Tooltip relation='label' (aria-labelledby).",
+   "text": "Icon-only buttons need a name: a label, or a Tooltip with relation='label' (aria-labelledby).",
    "source": "§6.30",
    "scope": "IconButtonAccent"
   },
@@ -5945,7 +5945,7 @@
    "id": "rule:IconButtonAccent/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Sub action của NavigationBar là IconButtonAccent Solid Inverted=True Base.",
+   "text": "NavigationBar's sub action is IconButtonAccent Solid Inverted=True Base.",
    "source": "§6.5",
    "scope": "IconButtonAccent"
   },
@@ -5953,7 +5953,7 @@
    "id": "rule:IconButtonNeutral/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Prop và màu khớp TextButtonNeutral; Solid Inverted=False dùng background-inverted.",
+   "text": "Props and colors match TextButtonNeutral; Solid Inverted=False uses background-inverted.",
    "source": "§6.2",
    "scope": "IconButtonNeutral"
   },
@@ -5961,7 +5961,7 @@
    "id": "rule:IconButtonNeutral/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Inverted=True: Solid (nền surface) dùng state layer 5/10; Outline và Ghost dùng 20/40.",
+   "text": "Inverted=True: Solid (surface background) uses state layer 5/10; Outline and Ghost use 20/40.",
    "source": "§6.2",
    "scope": "IconButtonNeutral"
   },
@@ -5969,7 +5969,7 @@
    "id": "rule:IconButtonNeutral/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Nút chỉ có icon cần tên: có label, hoặc Tooltip relation='label' (aria-labelledby).",
+   "text": "Icon-only buttons need a name: a label, or a Tooltip with relation='label' (aria-labelledby).",
    "source": "§6.30",
    "scope": "IconButtonNeutral"
   },
@@ -5977,7 +5977,7 @@
    "id": "rule:IconButtonNeutral/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Ghost Small mở Menu “⋯” cho hành động theo dòng / theo thẻ.",
+   "text": "Ghost Small opens the \"⋯\" Menu for per-row / per-card actions.",
    "source": "§6.1",
    "scope": "IconButtonNeutral"
   },
@@ -5985,7 +5985,7 @@
    "id": "rule:IconButtonNeutral/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Nút đóng (xmark) của Toast, SideSheet, Popover là IconButtonNeutral Ghost; của CardSheet/CardDialog là Outline Small.",
+   "text": "The close button (xmark) of Toast, SideSheet and Popover is IconButtonNeutral Ghost; of CardSheet/CardDialog it is Outline Small.",
    "source": "§6.6",
    "scope": "IconButtonNeutral"
   },
@@ -5993,7 +5993,7 @@
    "id": "rule:IconButtonNeutral/6",
    "type": "Rule",
    "kind": "do",
-   "text": "Nút đóng đè lên ảnh banner của CardDialog dùng Solid để đọc được trên mọi ảnh.",
+   "text": "The close button over CardDialog's banner image uses Solid so it reads on any image.",
    "source": "§6.10",
    "scope": "IconButtonNeutral"
   },
@@ -6001,7 +6001,7 @@
    "id": "rule:IconButtonNeutral/7",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có IconButton kiểu Danger — xoá theo dòng nằm trong menu “⋯”, xác nhận bằng Dialog có TextButtonDanger Solid.",
+   "text": "There is no Danger IconButton — per-row delete lives in the \"⋯\" menu, confirmed by a Dialog with a Solid TextButtonDanger.",
    "source": "§6.2",
    "scope": "IconButtonNeutral"
   },
@@ -6009,7 +6009,7 @@
    "id": "rule:ToggleButton/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Dùng cho nút giữ trạng thái bật/tắt; Active là prop độc lập với State.",
+   "text": "For buttons that hold an on/off state; Active is a prop independent of State.",
    "source": "§6.7",
    "scope": "ToggleButton"
   },
@@ -6017,7 +6017,7 @@
    "id": "rule:ToggleButton/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Hai prop chữ riêng (Label / Active label) để đổi copy theo trạng thái — đừng dùng chung một chuỗi.",
+   "text": "Two separate text props (Label / Active label) to change copy by state — don't share one string.",
    "source": "§6.7",
    "scope": "ToggleButton"
   },
@@ -6025,7 +6025,7 @@
    "id": "rule:ToggleButton/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Icon đổi hẳn biến thể outline ↔ fill khi bật, không chỉ đổi màu.",
+   "text": "The icon switches fully between outline ↔ fill when on, not just its color.",
    "source": "§6.7",
    "scope": "ToggleButton"
   },
@@ -6033,7 +6033,7 @@
    "id": "rule:ToggleButton/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Chữ đậm thêm một bậc khi bật qua typography mode Active, không override weight trên node.",
+   "text": "Text gets one weight step bolder when on via the Active typography mode, not a weight override on the node.",
    "source": "§6.7",
    "scope": "ToggleButton"
   },
@@ -6041,7 +6041,7 @@
    "id": "rule:ToggleButton/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng hardcode width — bề rộng chênh 1px giữa hai trạng thái.",
+   "text": "Don't hardcode width — the two states differ by 1px.",
    "source": "§6.7",
    "scope": "ToggleButton"
   },
@@ -6049,7 +6049,7 @@
    "id": "rule:ToggleButton/6",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không border, không shadow ở mọi variant — dùng nổi trên ảnh hoặc nền màu.",
+   "text": "No border, no shadow in any variant — used floating over images or colored backgrounds.",
    "source": "§6.7",
    "scope": "ToggleButton"
   },
@@ -6057,7 +6057,7 @@
    "id": "rule:ToggleButton/7",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có state Loading; Disabled không có state layer.",
+   "text": "No Loading state; Disabled has no state layer.",
    "source": "§6.7",
    "scope": "ToggleButton"
   },
@@ -6065,7 +6065,7 @@
    "id": "rule:ButtonGroup/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Horizontal: nút phụ (Outline) bên trái, nút chính (Solid) bên phải, hai nút chia đều.",
+   "text": "Horizontal: secondary button (Outline) on the left, primary (Solid) on the right, equal widths.",
    "source": "§6.9",
    "scope": "ButtonGroup"
   },
@@ -6073,7 +6073,7 @@
    "id": "rule:ButtonGroup/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Vertical: nút chính (Solid) trên, nút phụ (Outline) dưới.",
+   "text": "Vertical: primary (Solid) on top, secondary (Outline) below.",
    "source": "§6.9",
    "scope": "ButtonGroup"
   },
@@ -6081,7 +6081,7 @@
    "id": "rule:ButtonGroup/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Nút dùng TextButtonAccent size Large (56), gap 12.",
+   "text": "Buttons are TextButtonAccent size Large (56), gap 12.",
    "source": "§6.9",
    "scope": "ButtonGroup"
   },
@@ -6089,7 +6089,7 @@
    "id": "rule:ButtonGroup/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Khi code hai nút chia đôi dùng flex: 1 1 0, không dùng flex: 1 1 auto.",
+   "text": "In code, the two equal buttons use flex: 1 1 0, not flex: 1 1 auto.",
    "source": "§6.8",
    "scope": "ButtonGroup"
   },
@@ -6097,7 +6097,7 @@
    "id": "rule:ButtonGroup/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Là nhóm nút dùng chung của CardSheet và CardDialog — không tự dựng frame nút riêng.",
+   "text": "The shared button group of CardSheet and CardDialog — don't build your own button frame.",
    "source": "§6.8",
    "scope": "ButtonGroup"
   },
@@ -6105,7 +6105,7 @@
    "id": "rule:ButtonGroup/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Tone=Danger (dialog / sheet xác nhận xoá): nút chính là TextButtonDanger Solid Large, nút phụ giữ nguyên; không tự xếp hai nút.",
+   "text": "Tone=Danger (delete-confirmation dialog / sheet): the primary is TextButtonDanger Solid Large, the secondary stays the same; don't arrange the two buttons yourself.",
    "source": "§6.9",
    "scope": "ButtonGroup"
   },
@@ -6113,7 +6113,7 @@
    "id": "rule:TextInput/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Error=True đổi ba thứ: viền border-negative, Label object-negative, hiện dòng Error message caption dưới Field.",
+   "text": "Error=True changes three things: border-negative border, Label object-negative, and an Error message caption line under the Field.",
    "source": "§6.3",
    "scope": "TextInput"
   },
@@ -6121,7 +6121,7 @@
    "id": "rule:TextInput/2",
    "type": "Rule",
    "kind": "dont",
-   "text": "Dòng lỗi là chữ, không có icon (tín hiệu thứ tư không thêm thông tin).",
+   "text": "The error line is text only, no icon (a fourth signal adds no information).",
    "source": "§6.3",
    "scope": "TextInput"
   },
@@ -6129,7 +6129,7 @@
    "id": "rule:TextInput/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Dòng lỗi chiếm chỗ thật (root 76 → 100) — bố cục phải nhường chỗ, đừng để đè lên khối khác.",
+   "text": "The error line takes real space (root 76 → 100) — the layout must make room, never overlap other blocks.",
    "source": "§6.3",
    "scope": "TextInput"
   },
@@ -6137,7 +6137,7 @@
    "id": "rule:TextInput/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Error không kết hợp với Disabled.",
+   "text": "Error never combines with Disabled.",
    "source": "§6.3",
    "scope": "TextInput"
   },
@@ -6145,7 +6145,7 @@
    "id": "rule:TextInput/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Filled + Disabled giữ chữ object-primary để còn đọc được; chỉ placeholder xuống object-disabled.",
+   "text": "Filled + Disabled keeps object-primary text so it stays readable; only the placeholder drops to object-disabled.",
    "source": "§6.3",
    "scope": "TextInput"
   },
@@ -6153,7 +6153,7 @@
    "id": "rule:TextInput/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Focus/Typing: viền border-emphasized + con trỏ 1,5×24 object-accent.",
+   "text": "Focus/Typing: border-emphasized border + a 1.5×24 object-accent caret.",
    "source": "§6.3",
    "scope": "TextInput"
   },
@@ -6161,7 +6161,7 @@
    "id": "rule:TextInput/7",
    "type": "Rule",
    "kind": "do",
-   "text": "Báo lỗi tại ô bằng viền đỏ + dòng lỗi, không dùng Toast.",
+   "text": "Report errors at the field with a red border + error line, not a Toast.",
    "source": "§6.3b",
    "scope": "TextInput"
   },
@@ -6169,7 +6169,7 @@
    "id": "rule:TextArea/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Component riêng cho nhập nhiều dòng — thay mọi TextInput kéo cao.",
+   "text": "A separate component for multi-line input — replaces any stretched TextInput.",
    "source": "§6.3e",
    "scope": "TextArea"
   },
@@ -6177,7 +6177,7 @@
    "id": "rule:TextArea/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Field cao 112 (đúng ba dòng + bộ đếm) — đừng tự đổi 88 hay 120; Compact chỉ đổi radius và padding ngang.",
+   "text": "Field height 112 (exactly three lines + counter) — don't change it to 88 or 120; Compact only changes radius and horizontal padding.",
    "source": "§6.3e",
    "scope": "TextArea"
   },
@@ -6185,7 +6185,7 @@
    "id": "rule:TextArea/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Chữ bám mép trên, padding 12 bốn phía; bộ đếm (n/100) caption object-secondary ở góc phải dưới.",
+   "text": "Text sticks to the top edge, padding 12 on all sides; the counter (n/100) is caption object-secondary at the bottom right.",
    "source": "§6.3e",
    "scope": "TextArea"
   },
@@ -6193,7 +6193,7 @@
    "id": "rule:TextArea/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Viền, nền, chữ, Error theo đúng bảng TextInput; dòng lỗi không icon.",
+   "text": "Border, background, text and Error follow the TextInput table; the error line has no icon.",
    "source": "§6.3e",
    "scope": "TextArea"
   },
@@ -6201,7 +6201,7 @@
    "id": "rule:TextArea/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Disabled: chữ đã gõ giữ object-primary; nhãn, bộ đếm và placeholder xuống object-disabled.",
+   "text": "Disabled: typed text stays object-primary; label, counter and placeholder drop to object-disabled.",
    "source": "§6.3e",
    "scope": "TextArea"
   },
@@ -6209,7 +6209,7 @@
    "id": "rule:OTPInput/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Thay mọi ô mã xác thực dựng tay bằng component này; Masked=True cho mã PIN.",
+   "text": "Replace every hand-built verification-code field with this component; Masked=True for PINs.",
    "source": "§6.3b",
    "scope": "OTPInput"
   },
@@ -6217,7 +6217,7 @@
    "id": "rule:OTPInput/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Ô rỗng mang dấu “-” object-secondary, không phải ô trắng trơn hay placeholder chữ số.",
+   "text": "Empty cells show a \"-\" in object-secondary, not a blank cell or a digit placeholder.",
    "source": "§6.3b",
    "scope": "OTPInput"
   },
@@ -6225,7 +6225,7 @@
    "id": "rule:OTPInput/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Con trỏ 2px object-accent là tín hiệu duy nhất cho ô đang nhận chữ.",
+   "text": "A 2px object-accent caret is the only signal for the cell receiving input.",
    "source": "§6.3b",
    "scope": "OTPInput"
   },
@@ -6233,7 +6233,7 @@
    "id": "rule:OTPInput/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Lỗi: cả sáu ô cùng viền border-negative, không tô riêng ô nào; nền và chữ giữ nguyên.",
+   "text": "Error: all six cells get the border-negative border together, no single cell highlighted; background and text unchanged.",
    "source": "§6.3b",
    "scope": "OTPInput"
   },
@@ -6241,7 +6241,7 @@
    "id": "rule:OTPInput/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Chữ đã gõ ở lại khi lỗi — đừng xoá về rỗng.",
+   "text": "Typed digits stay on error — don't clear them.",
    "source": "§6.3b",
    "scope": "OTPInput"
   },
@@ -6249,7 +6249,7 @@
    "id": "rule:OTPInput/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Dòng lỗi căn giữa dưới cụm ô, cách 4, caption object-negative.",
+   "text": "The error line is centered under the cells, 4 below, caption object-negative.",
    "source": "§6.3b",
    "scope": "OTPInput"
   },
@@ -6257,7 +6257,7 @@
    "id": "rule:OTPInput/7",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không báo sai mã bằng Toast.",
+   "text": "Never report a wrong code with a Toast.",
    "source": "§6.3b",
    "scope": "OTPInput"
   },
@@ -6265,7 +6265,7 @@
    "id": "rule:OTPInput/8",
    "type": "Rule",
    "kind": "do",
-   "text": "Ô co bằng flex: 1 0 0, min-width 36, max-width 48 để không tràn trên máy hẹp.",
+   "text": "Cells shrink with flex: 1 0 0, min-width 36, max-width 48 so they don't overflow on narrow phones.",
    "source": "§6.3b",
    "scope": "OTPInput"
   },
@@ -6273,7 +6273,7 @@
    "id": "rule:SearchInput/1",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có Error — không kết quả là chuyện của màn kết quả, không phải của ô.",
+   "text": "No Error — \"no results\" belongs to the results screen, not the field.",
    "source": "§6.3g",
    "scope": "SearchInput"
   },
@@ -6281,7 +6281,7 @@
    "id": "rule:SearchInput/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Icon magnifier 24 cố định bên trái; nút xoá circle-xmark 16 chỉ hiện khi Filled, vùng chạm 32×32.",
+   "text": "Fixed 24 magnifier icon on the left; the 16 circle-xmark clear button only shows when Filled, 32×32 touch area.",
    "source": "§6.3g",
    "scope": "SearchInput"
   },
@@ -6289,7 +6289,7 @@
    "id": "rule:SearchInput/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Disabled đã có chữ giữ object-primary; icon magnifier xuống object-disabled.",
+   "text": "Disabled with text keeps object-primary; the magnifier icon drops to object-disabled.",
    "source": "§6.3g",
    "scope": "SearchInput"
   },
@@ -6297,7 +6297,7 @@
    "id": "rule:SearchInput/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Loading: .loading 16 thay chỗ nút xoá, viền như Typing.",
+   "text": "Loading: a 16 .loading replaces the clear button, border as in Typing.",
    "source": "§6.3g",
    "scope": "SearchInput"
   },
@@ -6305,7 +6305,7 @@
    "id": "rule:SearchInput/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Cancel=true (nút Huỷ TextButtonNeutral Ghost Small) chỉ dùng ở màn tìm kiếm riêng trên mobile; bấm Huỷ xoá chữ, bỏ focus, đóng panel.",
+   "text": "Cancel=true (a Huỷ button, TextButtonNeutral Ghost Small) only on a dedicated mobile search screen; pressing Huỷ clears text, blurs and closes the panel.",
    "source": "§6.3g",
    "scope": "SearchInput"
   },
@@ -6313,7 +6313,7 @@
    "id": "rule:SearchInput/6",
    "type": "Rule",
    "kind": "do",
-   "text": "Panel gợi ý / lịch sử là Menu Platform=Panel neo dưới ô cách 4; rỗng + focus → lịch sử, đang gõ → gợi ý, không có gì → không mở panel.",
+   "text": "The suggestion / history panel is a Menu Platform=Panel anchored 4 below the field; empty + focus → history, typing → suggestions, nothing → no panel.",
    "source": "§6.3g",
    "scope": "SearchInput"
   },
@@ -6321,7 +6321,7 @@
    "id": "rule:SearchInput/7",
    "type": "Rule",
    "kind": "do",
-   "text": "Hàng “Tìm gần đây” có IconButtonNeutral Ghost Small xmark cuối hàng để xoá từng mục; panel vẫn mở, focus về ô.",
+   "text": "\"Tìm gần đây\" rows end with an IconButtonNeutral Ghost Small xmark to remove each item; the panel stays open, focus returns to the field.",
    "source": "§6.3g",
    "scope": "SearchInput"
   },
@@ -6329,7 +6329,7 @@
    "id": "rule:SearchInput/8",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có cỡ nhỏ riêng — density Compact đã thu ô.",
+   "text": "No separate small size — Compact density already shrinks the field.",
    "source": "§6.3g",
    "scope": "SearchInput"
   },
@@ -6337,7 +6337,7 @@
    "id": "rule:DateInput/1",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng tự ghép TextInput với icon lịch — dùng DateInput.",
+   "text": "Don't combine a TextInput with a calendar icon yourself — use DateInput.",
    "source": "§6.3c",
    "scope": "DateInput"
   },
@@ -6345,7 +6345,7 @@
    "id": "rule:DateInput/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Ô không nhận gõ tay: chạm mở lịch của hệ điều hành, không con trỏ, không bàn phím.",
+   "text": "The field takes no typing: tapping opens the OS date picker, no caret, no keyboard.",
    "source": "§6.3c",
    "scope": "DateInput"
   },
@@ -6353,7 +6353,7 @@
    "id": "rule:DateInput/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Giá trị hiển thị DD/MM/YYYY, style body 400.",
+   "text": "Value shown as DD/MM/YYYY, body 400 style.",
    "source": "§6.3c",
    "scope": "DateInput"
   },
@@ -6361,7 +6361,7 @@
    "id": "rule:DateInput/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Icon calendar-days 24 luôn object-secondary — đừng tô object-interactive, đừng bọc thành Icon button; không thay bằng icon calendar.",
+   "text": "The 24 calendar-days icon is always object-secondary — don't color it object-interactive, don't wrap it in an Icon button; don't swap it for the calendar icon.",
    "source": "§6.3c",
    "scope": "DateInput"
   },
@@ -6369,7 +6369,7 @@
    "id": "rule:DateInput/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Error: viền border-negative, Label object-negative, dòng lỗi chữ không icon.",
+   "text": "Error: border-negative border, Label object-negative, text-only error line.",
    "source": "§6.3c",
    "scope": "DateInput"
   },
@@ -6377,7 +6377,7 @@
    "id": "rule:Dropdown/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Giá trị đã chọn dùng label 600; gợi ý rỗng “Bấm để chọn” body 400 object-secondary.",
+   "text": "The selected value uses label 600; the empty hint \"Bấm để chọn\" is body 400 object-secondary.",
    "source": "§6.4",
    "scope": "Dropdown"
   },
@@ -6385,7 +6385,7 @@
    "id": "rule:Dropdown/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Icon chevron-down 16 object-secondary ở mọi state.",
+   "text": "The 16 chevron-down icon is object-secondary in every state.",
    "source": "§6.4",
    "scope": "Dropdown"
   },
@@ -6393,7 +6393,7 @@
    "id": "rule:Dropdown/3",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có Focus/Typing — ô không nhận gõ.",
+   "text": "No Focus/Typing — the field takes no typing.",
    "source": "§6.4",
    "scope": "Dropdown"
   },
@@ -6401,7 +6401,7 @@
    "id": "rule:Dropdown/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Danh sách option bung ra dùng Menu (§6.21).",
+   "text": "The option list uses Menu (§6.21).",
    "source": "§6.4",
    "scope": "Dropdown"
   },
@@ -6409,7 +6409,7 @@
    "id": "rule:Dropdown/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Error: viền border-negative, Label object-negative, dòng lỗi chữ không icon.",
+   "text": "Error: border-negative border, Label object-negative, text-only error line.",
    "source": "§6.3",
    "scope": "Dropdown"
   },
@@ -6417,7 +6417,7 @@
    "id": "rule:Menu/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Là panel option của Dropdown, Chip Dropdown và gợi ý SearchInput; Platform=Panel cho desktop, Sheet cho mobile.",
+   "text": "The option panel of Dropdown, Chip Dropdown and SearchInput suggestions; Platform=Panel on desktop, Sheet on mobile.",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6425,7 +6425,7 @@
    "id": "rule:Menu/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Hàng đã chọn (Single): nền tint background-accent-subtle, chữ object-interactive, state layer background-interactive 5/10.",
+   "text": "Selected row (Single): background-accent-subtle tint, object-interactive text, state layer background-interactive 5/10.",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6433,7 +6433,7 @@
    "id": "rule:Menu/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Type=Multiple: Checkbox đầu hàng, không tint nền, chữ object-primary; không đóng khi chọn, bật Footer “Bỏ chọn” + “Áp dụng”.",
+   "text": "Type=Multiple: Checkbox at the start of the row, no background tint, object-primary text; doesn't close on select, turns on the \"Bỏ chọn\" + \"Áp dụng\" Footer.",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6441,7 +6441,7 @@
    "id": "rule:Menu/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Bật Search (SearchInput không nhãn, dính trên) khi > 8 option; không còn option → “Không tìm thấy “{từ khoá}””.",
+   "text": "Turn on Search (unlabeled SearchInput, sticky on top) when > 8 options; no options left → \"Không tìm thấy \"{từ khoá}\"\".",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6449,7 +6449,7 @@
    "id": "rule:Menu/5",
    "type": "Rule",
    "kind": "do",
-   "text": ".MenuSection: title-xs object-secondary IN HOA; .MenuDivider 1px border-muted, nhóm đầu không cần vạch phía trên.",
+   "text": ".MenuSection: title-xs object-secondary UPPERCASE; .MenuDivider 1px border-muted, the first group needs no line above.",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6457,7 +6457,7 @@
    "id": "rule:Menu/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Panel neo dưới phần tử cách 4; thiếu chỗ thì lật lên; cao tối đa 320 rồi cuộn trong panel (tìm nhanh dính trên, footer dính dưới).",
+   "text": "Panel anchored 4 below the element; flips up when there is no room; max height 320, then scrolls inside the panel (quick search sticky on top, footer sticky at the bottom).",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6465,7 +6465,7 @@
    "id": "rule:Menu/7",
    "type": "Rule",
    "kind": "must",
-   "text": "Prefix icon chỉ có ở Type=Single.",
+   "text": "Prefix icons only in Type=Single.",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6473,7 +6473,7 @@
    "id": "rule:Menu/8",
    "type": "Rule",
    "kind": "do",
-   "text": "Đóng khi chọn xong (Single), bấm ra ngoài, Esc; Multiple chỉ áp dụng khi bấm “Áp dụng”.",
+   "text": "Closes on selection (Single), outside click, Esc; Multiple only applies on \"Áp dụng\".",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6481,7 +6481,7 @@
    "id": "rule:Menu/9",
    "type": "Rule",
    "kind": "do",
-   "text": "Option cần giải thích thêm → Description caption object-secondary dưới tên, tối đa 2 dòng; icon / checkbox căn trên.",
+   "text": "Options needing more explanation → a Description caption object-secondary under the name, max 2 lines; icon / checkbox top-aligned.",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6489,7 +6489,7 @@
    "id": "rule:Menu/10",
    "type": "Rule",
    "kind": "must",
-   "text": "“Chọn tất cả” (Multiple, từ 4 option): hàng đầu + MenuDivider; Checked khi chọn hết, Indeterminate khi một phần; đang tìm nhanh chỉ tác động option đang hiện.",
+   "text": "\"Chọn tất cả\" (Multiple, from 4 options): first row + MenuDivider; Checked when all are selected, Indeterminate when some; while quick-searching it only affects visible options.",
    "source": "§6.21",
    "scope": "Menu"
   },
@@ -6497,7 +6497,7 @@
    "id": "rule:Checkbox/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Checked là mảng màu đặc background-interactive + icon check fill 20 object-on-interactive.",
+   "text": "Checked is a solid background-interactive block + a 20 check fill icon in object-on-interactive.",
    "source": "§6.3f",
    "scope": "Checkbox"
   },
@@ -6505,7 +6505,7 @@
    "id": "rule:Checkbox/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Indeterminate là vạch 16×2 bo tròn — không phải dấu trừ của font hay icon minus; bấm vào chuyển sang Checked.",
+   "text": "Indeterminate is a rounded 16×2 bar — not a font minus or a minus icon; pressing it goes to Checked.",
    "source": "§6.3f",
    "scope": "Checkbox"
   },
@@ -6513,7 +6513,7 @@
    "id": "rule:Checkbox/3",
    "type": "Rule",
    "kind": "do",
-   "text": "Indeterminate dùng cho ô “chọn tất cả” khi danh sách mới tick một phần.",
+   "text": "Indeterminate is for a \"select all\" box when the list is partly ticked.",
    "source": "§6.3f",
    "scope": "Checkbox"
   },
@@ -6521,7 +6521,7 @@
    "id": "rule:Checkbox/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Error khi ô bắt buộc chưa tick mà người dùng đã bấm tiếp tục (vd. đồng ý Điều khoản).",
+   "text": "Error when a required box is unticked and the user pressed continue (e.g. agreeing to the Terms).",
    "source": "§6.3f",
    "scope": "Checkbox"
   },
@@ -6529,7 +6529,7 @@
    "id": "rule:Checkbox/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không báo lỗi checkbox bằng Toast — báo tại ô kèm dòng chữ object-negative dưới hàng.",
+   "text": "Never report a checkbox error with a Toast — report it at the box with an object-negative text line under the row.",
    "source": "§6.3f",
    "scope": "Checkbox"
   },
@@ -6537,7 +6537,7 @@
    "id": "rule:Checkbox/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Viền 2px dựng inside (box-shadow inset), state layer phủ tràn viền.",
+   "text": "The 2px border is built inside (inset box-shadow); the state layer covers the border too.",
    "source": "§6.1",
    "scope": "Checkbox"
   },
@@ -6545,7 +6545,7 @@
    "id": "rule:CheckboxInput/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Vùng chạm là cả hàng, không riêng ô tick.",
+   "text": "The touch area is the whole row, not just the box.",
    "source": "§6.3f",
    "scope": "CheckboxInput"
   },
@@ -6553,7 +6553,7 @@
    "id": "rule:CheckboxInput/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Ô tick + chữ gap 12, canh mép trên (items-start), text wrapper đệm trên 4.",
+   "text": "Box + text gap 12, top-aligned (items-start), text wrapper padded 4 on top.",
    "source": "§6.3f",
    "scope": "CheckboxInput"
   },
@@ -6561,7 +6561,7 @@
    "id": "rule:CheckboxInput/3",
    "type": "Rule",
    "kind": "do",
-   "text": "Chữ là property Label (TEXT), override trên instance.",
+   "text": "The text is the Label property (TEXT), overridden on the instance.",
    "source": "§6.3f",
    "scope": "CheckboxInput"
   },
@@ -6569,7 +6569,7 @@
    "id": "rule:Radio/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Chọn một trong nhiều trong form.",
+   "text": "Pick one of many in a form.",
    "source": "§6.3d",
    "scope": "Radio"
   },
@@ -6577,7 +6577,7 @@
    "id": "rule:Radio/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Vòng tròn 32, đã chọn vẫn nền trắng + viền border-interactive + chấm 20 object-interactive.",
+   "text": "32 circle; when selected it stays white with a border-interactive border + a 20 object-interactive dot.",
    "source": "§6.3d",
    "scope": "Radio"
   },
@@ -6585,7 +6585,7 @@
    "id": "rule:Radio/3",
    "type": "Rule",
    "kind": "do",
-   "text": "Error khi nhóm radio bắt buộc chưa chọn hoặc lựa chọn không hợp lệ.",
+   "text": "Error when a required radio group has no selection or an invalid one.",
    "source": "§6.3d",
    "scope": "Radio"
   },
@@ -6593,7 +6593,7 @@
    "id": "rule:Radio/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Disabled không có hover/pressed.",
+   "text": "Disabled has no hover/pressed.",
    "source": "§6.3d",
    "scope": "Radio"
   },
@@ -6601,7 +6601,7 @@
    "id": "rule:RadioInput/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Vùng chạm là cả hàng, không riêng vòng tròn 32.",
+   "text": "The touch area is the whole row, not just the 32 circle.",
    "source": "§6.3d",
    "scope": "RadioInput"
   },
@@ -6609,7 +6609,7 @@
    "id": "rule:RadioInput/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Canh mép trên (items-start), gap 12, cụm chữ đệm trên 4 — không canh giữa.",
+   "text": "Top-aligned (items-start), gap 12, text block padded 4 on top — not centered.",
    "source": "§6.3d",
    "scope": "RadioInput"
   },
@@ -6617,7 +6617,7 @@
    "id": "rule:RadioInput/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Danh sách: vạch nét đứt 6/6 border-muted giữa hai hàng, hàng cuối không kẻ; dựng bằng gradient lặp, không dùng border dashed.",
+   "text": "Lists: a 6/6 dashed border-muted line between rows, none after the last; built with a repeating gradient, not a dashed border.",
    "source": "§6.3d",
    "scope": "RadioInput"
   },
@@ -6625,7 +6625,7 @@
    "id": "rule:Switch/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Bật/tắt một thiết lập có hiệu lực ngay — khác Checkbox (chọn rồi bấm xác nhận).",
+   "text": "Toggles a setting that takes effect immediately — unlike Checkbox (select, then confirm).",
    "source": "§6.17",
    "scope": "Switch"
   },
@@ -6633,7 +6633,7 @@
    "id": "rule:Switch/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Núm đổi cả vị trí lẫn kích thước (16 → 28 có check fill) — đừng chỉ trượt một núm cùng cỡ.",
+   "text": "The knob changes both position and size (16 → 28 with a check fill) — don't just slide a same-size knob.",
    "source": "§6.17",
    "scope": "Switch"
   },
@@ -6641,7 +6641,7 @@
    "id": "rule:Switch/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Nửa tắt state layer 5/10, nửa bật 20/40; dựng bằng currentColor.",
+   "text": "Off half uses state layer 5/10, on half 20/40; built with currentColor.",
    "source": "§6.17",
    "scope": "Switch"
   },
@@ -6649,7 +6649,7 @@
    "id": "rule:Switch/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Cần nhãn thì màn tự dựng hàng và ghi rõ là phần tự chế.",
+   "text": "A switch with a label is a row: use ListItem with a Trailing Switch (§6.32), don't build the row yourself.",
    "source": "§6.17",
    "scope": "Switch"
   },
@@ -6657,7 +6657,7 @@
    "id": "rule:Switch/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có cỡ nhỏ riêng (dùng Compact) và không có chữ On/Off trong rãnh.",
+   "text": "No separate small size (use Compact) and no On/Off text in the track.",
    "source": "§6.17",
    "scope": "Switch"
   },
@@ -6665,7 +6665,7 @@
    "id": "rule:Chip/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Nhãn bấm được giữ trạng thái chọn; dùng để lọc (thẻ y hệt chỉ ít đi).",
+   "text": "A pressable label that holds a selected state; used for filtering (identical cards, just fewer).",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6673,7 +6673,7 @@
    "id": "rule:Chip/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Hình học chép TextButtonNeutral Small; chữ style label.",
+   "text": "Geometry copies TextButtonNeutral Small; text uses the label style.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6681,7 +6681,7 @@
    "id": "rule:Chip/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Đã chọn: nền background-interactive-muted, viền border-interactive, chữ object-interactive.",
+   "text": "Selected: background-interactive-muted background, border-interactive border, object-interactive text.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6689,7 +6689,7 @@
    "id": "rule:Chip/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng dùng background-emphasized làm nền chip đã chọn — trùng background-disabled.",
+   "text": "Don't use background-emphasized as the selected chip background — it equals background-disabled.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6697,7 +6697,7 @@
    "id": "rule:Chip/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Type=Select đã chọn có icon check fill 16 trước chữ — không chỉ dựa vào màu.",
+   "text": "Selected Type=Select has a 16 check fill icon before the text — never rely on color alone.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6705,7 +6705,7 @@
    "id": "rule:Chip/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Type=Dropdown có chevron-down 16 cùng màu chữ, không icon check; khi mở chip Selected=True và chevron-up.",
+   "text": "Type=Dropdown has a 16 chevron-down in the text color, no check icon; when open the chip is Selected=True with chevron-up.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6713,7 +6713,7 @@
    "id": "rule:Chip/7",
    "type": "Rule",
    "kind": "do",
-   "text": "Panel bung ra là Menu: lọc một giá trị → Single, chọn xong đóng; lọc nhiều → Multiple + footer, nhãn “{Tên} · n”.",
+   "text": "The panel that opens is a Menu: single-value filter → Single, closes on select; multi-value filter → Multiple + footer, label \"{Tên} · n\".",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6721,7 +6721,7 @@
    "id": "rule:Chip/8",
    "type": "Rule",
    "kind": "must",
-   "text": "Prefix icon 16 cùng màu chữ, gap 8; Type=Select đã chọn thì check thay chỗ icon — chip chỉ có một icon đầu.",
+   "text": "16 prefix icon in the text color, gap 8; selected Type=Select puts the check in its place — a chip has only one leading icon.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6729,7 +6729,7 @@
    "id": "rule:Chip/9",
    "type": "Rule",
    "kind": "must",
-   "text": "Type=Input: màu như chưa chọn, xmark 16 trong ô tròn 24 cuối chip là nút gỡ duy nhất (aria-label “Gỡ {nhãn}”); thân chip không bấm được.",
+   "text": "Type=Input: unselected colors, a 16 xmark in a 24 circle at the end is the only remove button (aria-label \"Gỡ {nhãn}\"); the chip body is not pressable.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6737,7 +6737,7 @@
    "id": "rule:Chip/10",
    "type": "Rule",
    "kind": "do",
-   "text": "Type=Input cho giá trị đã nhập / bộ lọc đang áp dụng; gỡ xong focus sang chip kế tiếp.",
+   "text": "Type=Input for entered values / applied filters; after removal focus moves to the next chip.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6745,7 +6745,7 @@
    "id": "rule:Chip/11",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có cỡ khác 32 — Compact dùng 24.",
+   "text": "No size other than 32 — Compact uses 24.",
    "source": "§6.18",
    "scope": "Chip"
   },
@@ -6753,7 +6753,7 @@
    "id": "rule:SegmentedControl/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Chọn một-trong-nhiều kiểu tab pill khi cùng nội dung chỉ đổi cách xem.",
+   "text": "Pick one of many as pill tabs when the same content only changes its view.",
    "source": "§6.20",
    "scope": "SegmentedControl"
   },
@@ -6761,7 +6761,7 @@
    "id": "rule:SegmentedControl/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Item đang chọn đậm lên bằng mode Active (.uu-is-active), không override weight.",
+   "text": "The selected item gets bolder via the Active mode (.uu-is-active), no weight override.",
    "source": "§6.13",
    "scope": "SegmentedControl"
   },
@@ -6769,7 +6769,7 @@
    "id": "rule:SegmentedControl/3",
    "type": "Rule",
    "kind": "must",
-   "text": "State layer item dùng fill object-primary bậc 5/10 ở cả hai giá trị Active.",
+   "text": "Item state layer uses an object-primary fill at 5/10 for both Active values.",
    "source": "§6.13",
    "scope": "SegmentedControl"
   },
@@ -6777,7 +6777,7 @@
    "id": "rule:SegmentedControl/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Item HUG — đừng chia đều bề ngang trừ khi màn yêu cầu, đừng hardcode 204.",
+   "text": "Items HUG — don't split the width equally unless the screen requires it, don't hardcode 204.",
    "source": "§6.13",
    "scope": "SegmentedControl"
   },
@@ -6785,7 +6785,7 @@
    "id": "rule:SegmentedControl/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Vỏ nền background-emphasized, item đang chọn nền background-surface + elevation-low.",
+   "text": "Shell background-emphasized; the selected item has background-surface + elevation-low.",
    "source": "§6.13",
    "scope": "SegmentedControl"
   },
@@ -6793,7 +6793,7 @@
    "id": "rule:NavigationBar/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Không có nền riêng — trong suốt, nằm trên nền màn.",
+   "text": "No background of its own — transparent, sitting on the screen background.",
    "source": "§6.5",
    "scope": "NavigationBar"
   },
@@ -6801,7 +6801,7 @@
    "id": "rule:NavigationBar/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Back là IconButtonNeutral Solid Inverted=True Base với chevron-left.",
+   "text": "Back is IconButtonNeutral Solid Inverted=True Base with chevron-left.",
    "source": "§6.5",
    "scope": "NavigationBar"
   },
@@ -6809,7 +6809,7 @@
    "id": "rule:NavigationBar/3",
    "type": "Rule",
    "kind": "do",
-   "text": "Tắt .Mini App Control bằng prop Mini app khi màn không chạy trong mini app.",
+   "text": "Turn off .Mini App Control with the Mini app prop when the screen doesn't run in a mini app.",
    "source": "§6.5",
    "scope": "NavigationBar"
   },
@@ -6817,7 +6817,7 @@
    "id": "rule:NavigationBar/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Thanh kính mờ là lựa chọn của sản phẩm, component không tự bật.",
+   "text": "A frosted-glass bar is a product choice; the component never turns it on itself.",
    "source": "§2.4",
    "scope": "NavigationBar"
   },
@@ -6825,7 +6825,7 @@
    "id": "rule:NavigationBar/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Trên desktop dùng Breadcrumb; không dùng Breadcrumb thay NavigationBar trên app.",
+   "text": "Use Breadcrumb on desktop; never use Breadcrumb instead of NavigationBar in an app.",
    "source": "§6.25",
    "scope": "NavigationBar"
   },
@@ -6833,7 +6833,7 @@
    "id": "rule:BottomBar/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Điều hướng giữa các màn chính ngang hàng; bấm mục là chuyển màn, không lọc nội dung.",
+   "text": "Navigates between peer main screens; pressing an item changes screen, it doesn't filter content.",
    "source": "§6.22",
    "scope": "BottomBar"
   },
@@ -6841,7 +6841,7 @@
    "id": "rule:BottomBar/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Có 2 đến 5 mục.",
+   "text": "2 to 5 items.",
    "source": "§6.22",
    "scope": "BottomBar"
   },
@@ -6849,7 +6849,7 @@
    "id": "rule:BottomBar/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Mục đang chọn thuộc họ interactive (không accent), icon outline → fill.",
+   "text": "The selected item is in the interactive family (not accent), icon outline → fill.",
    "source": "§6.22",
    "scope": "BottomBar"
   },
@@ -6857,7 +6857,7 @@
    "id": "rule:BottomBar/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Badge là NotificationBadge Count neo góc trên phải icon; chỉ ở mục không Active.",
+   "text": "The badge is a NotificationBadge Count anchored to the icon's top right; only on non-Active items.",
    "source": "§6.22",
    "scope": "BottomBar"
   },
@@ -6865,7 +6865,7 @@
    "id": "rule:BottomBar/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Nút hành động riêng (FooterItemSpecial) cho một hành động chính, không phải đích điều hướng; mặc định Emphasized, Subtle khi màn đã có nút Solid.",
+   "text": "The standalone action button (FooterItemSpecial) is for one main action, not a navigation destination; Emphasized by default, Subtle when the screen already has a Solid button.",
    "source": "§6.22",
    "scope": "BottomBar"
   },
@@ -6873,7 +6873,7 @@
    "id": "rule:BottomBar/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Có nút hành động thì Compact=True tối đa 4 mục.",
+   "text": "With an action button, Compact=True and at most 4 items.",
    "source": "§6.22",
    "scope": "BottomBar"
   },
@@ -6881,7 +6881,7 @@
    "id": "rule:BottomBar/7",
    "type": "Rule",
    "kind": "dont",
-   "text": "Thanh kính mờ không phải thuộc tính của BottomBar — component không tự bật.",
+   "text": "A frosted-glass bar is not a BottomBar property — the component never turns it on itself.",
    "source": "§2.4",
    "scope": "BottomBar"
   },
@@ -6889,7 +6889,7 @@
    "id": "rule:TablePagination/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Thanh dưới bảng có số trang bấm được — khác Pagination (gạch chỉ báo carousel).",
+   "text": "The bar under a table with pressable page numbers — unlike Pagination (carousel indicator bars).",
    "source": "§6.24",
    "scope": "TablePagination"
   },
@@ -6897,7 +6897,7 @@
    "id": "rule:TablePagination/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Trang đang chọn: viền 2px border-interactive + aria-current=\"page\".",
+   "text": "Current page: 2px border-interactive border + aria-current=\"page\".",
    "source": "§6.24",
    "scope": "TablePagination"
   },
@@ -6905,7 +6905,7 @@
    "id": "rule:TablePagination/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Nút lùi ở trang đầu / tiến ở trang cuối là Disabled.",
+   "text": "Back on the first page / forward on the last page are Disabled.",
    "source": "§6.24",
    "scope": "TablePagination"
   },
@@ -6913,7 +6913,7 @@
    "id": "rule:TablePagination/4",
    "type": "Rule",
    "kind": "must",
-   "text": "≤ 7 trang hiện đủ; quá 7 giữ trang đầu, cuối, trang đang chọn ± 1, khoảng trống thành một ô “…”.",
+   "text": "≤ 7 pages show all; more than 7 keeps the first, the last, the current ± 1, and gaps become one \"…\" cell.",
    "source": "§6.24",
    "scope": "TablePagination"
   },
@@ -6921,7 +6921,7 @@
    "id": "rule:TablePagination/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không bao giờ “…” thay cho đúng một số trang.",
+   "text": "Never use \"…\" in place of exactly one page number.",
    "source": "§6.24",
    "scope": "TablePagination"
   },
@@ -6929,7 +6929,7 @@
    "id": "rule:TablePagination/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Ô Ellipsis không bấm được, không state layer, aria-hidden.",
+   "text": "The Ellipsis cell is not pressable, has no state layer, aria-hidden.",
    "source": "§6.24",
    "scope": "TablePagination"
   },
@@ -6937,7 +6937,7 @@
    "id": "rule:TablePagination/7",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có ô nhập số trang để nhảy — rút gọn “…” là đủ.",
+   "text": "No page-number input to jump — the \"…\" shortening is enough.",
    "source": "§6.24",
    "scope": "TablePagination"
   },
@@ -6945,7 +6945,7 @@
    "id": "rule:Breadcrumb/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Đường dẫn vị trí trong cây trang trên desktop.",
+   "text": "The location path in the page tree on desktop.",
    "source": "§6.25",
    "scope": "Breadcrumb"
   },
@@ -6953,7 +6953,7 @@
    "id": "rule:Breadcrumb/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Mục cuối luôn là trang hiện tại: object-primary, không phải link, aria-current=\"page\", không Hover.",
+   "text": "The last item is always the current page: object-primary, not a link, aria-current=\"page\", no Hover.",
    "source": "§6.25",
    "scope": "Breadcrumb"
   },
@@ -6961,7 +6961,7 @@
    "id": "rule:Breadcrumb/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Ngăn cách “/” object-disabled, aria-hidden.",
+   "text": "The \"/\" separator is object-disabled, aria-hidden.",
    "source": "§6.25",
    "scope": "Breadcrumb"
   },
@@ -6969,7 +6969,7 @@
    "id": "rule:Breadcrumb/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không dùng Breadcrumb thay NavigationBar trên app.",
+   "text": "Never use Breadcrumb instead of NavigationBar in an app.",
    "source": "§6.25",
    "scope": "Breadcrumb"
   },
@@ -6977,7 +6977,7 @@
    "id": "rule:Breadcrumb/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Quá 4 mục: giữ mục đầu và 2 mục cuối, các mục giữa gom vào một mục Type=Overflow “…” mở Menu.",
+   "text": "More than 4 items: keep the first and the last 2; the middle items collapse into one Type=Overflow \"…\" item that opens a Menu.",
    "source": "§6.25",
    "scope": "Breadcrumb"
   },
@@ -6985,7 +6985,7 @@
    "id": "rule:Breadcrumb/6",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có icon trước mục đầu.",
+   "text": "No icon before the first item.",
    "source": "§6.25",
    "scope": "Breadcrumb"
   },
@@ -6993,7 +6993,7 @@
    "id": "rule:SideNav/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Thanh điều hướng dọc của web app / portal — tương đương BottomBar trên app.",
+   "text": "The vertical navigation bar of a web app / portal — the equivalent of BottomBar in an app.",
    "source": "§6.27",
    "scope": "SideNav"
   },
@@ -7001,7 +7001,7 @@
    "id": "rule:SideNav/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Một mục Active mỗi lúc: nền background-interactive-muted, icon fill object-interactive, aria-current=\"page\".",
+   "text": "One Active item at a time: background-interactive-muted background, object-interactive fill icon, aria-current=\"page\".",
    "source": "§6.27",
    "scope": "SideNav"
   },
@@ -7009,7 +7009,7 @@
    "id": "rule:SideNav/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Collapsed: rộng 73, ẩn nhãn / chevron / tiêu đề nhóm / mục cấp 2; nhãn chuyển thành Tooltip.",
+   "text": "Collapsed: 73 wide, hides labels / chevrons / group titles / level-2 items; labels become Tooltips.",
    "source": "§6.27",
    "scope": "SideNav"
   },
@@ -7017,7 +7017,7 @@
    "id": "rule:SideNav/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Ẩn/hiện nhãn qua collection layout (data-layout=\"collapsed\" hoặc prop collapsed), không tạo collection mới.",
+   "text": "Show/hide labels via the layout collection (data-layout=\"collapsed\" or the collapsed prop), don't create a new collection.",
    "source": "§4.2",
    "scope": "SideNav"
   },
@@ -7025,7 +7025,7 @@
    "id": "rule:SideNav/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Mục Level=2 không icon, thụt 24 để nhãn thẳng hàng nhãn cấp 1.",
+   "text": "Level=2 items have no icon, indented 24 so their labels align with level-1 labels.",
    "source": "§6.27",
    "scope": "SideNav"
   },
@@ -7033,7 +7033,7 @@
    "id": "rule:SideNav/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Chevron-down xoay 180° khi nhóm mở (không đổi icon); mục có aria-expanded.",
+   "text": "Chevron-down rotates 180° when the group is open (same icon); the item has aria-expanded.",
    "source": "§6.27",
    "scope": "SideNav"
   },
@@ -7041,7 +7041,7 @@
    "id": "rule:SideNav/7",
    "type": "Rule",
    "kind": "do",
-   "text": "Badge trên mục: NotificationBadge Count cuối mục; khi thu gọn thành Dot ở góc trên phải icon.",
+   "text": "Item badge: a NotificationBadge Count at the end of the item; collapsed it becomes a Dot at the icon's top right.",
    "source": "§6.27",
    "scope": "SideNav"
   },
@@ -7049,7 +7049,7 @@
    "id": "rule:SideNav/8",
    "type": "Rule",
    "kind": "do",
-   "text": "Nút thu / mở: IconButtonNeutral Ghost Small sidebar-left đầu thanh, aria-expanded, nhãn “Thu gọn / Mở rộng thanh điều hướng”.",
+   "text": "Collapse / expand button: IconButtonNeutral Ghost Small sidebar-left at the top of the bar, aria-expanded, label \"Thu gọn / Mở rộng thanh điều hướng\".",
    "source": "§6.27",
    "scope": "SideNav"
   },
@@ -7057,7 +7057,7 @@
    "id": "rule:SideNav/9",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có mục cấp 3 — quá 2 cấp thì tách trang.",
+   "text": "No level-3 items — beyond 2 levels, split into pages.",
    "source": "§6.27",
    "scope": "SideNav"
   },
@@ -7065,7 +7065,7 @@
    "id": "rule:Tab/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Chuyển giữa các vùng nội dung khác nhau (bố cục bên dưới đổi), không để lọc danh sách.",
+   "text": "Switches between different content areas (the layout below changes), not for filtering a list.",
    "source": "§6.20",
    "scope": "Tab"
   },
@@ -7073,7 +7073,7 @@
    "id": "rule:Tab/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Tab Active: chữ object-interactive + gạch 32×4 border-interactive cố định 32, không giãn theo nhãn.",
+   "text": "Active tab: object-interactive text + a 32×4 border-interactive bar fixed at 32, not stretched to the label.",
    "source": "§6.20",
    "scope": "Tab"
   },
@@ -7081,7 +7081,7 @@
    "id": "rule:Tab/3",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng lấy object-accent cho chữ tab — tab thuộc họ interactive.",
+   "text": "Don't use object-accent for tab text — tabs belong to the interactive family.",
    "source": "§6.20",
    "scope": "Tab"
   },
@@ -7089,7 +7089,7 @@
    "id": "rule:Tab/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Hover/Pressed chỉ có ở tab không Active; Disabled không có state layer.",
+   "text": "Hover/Pressed only on non-Active tabs; Disabled has no state layer.",
    "source": "§6.20",
    "scope": "Tab"
   },
@@ -7097,7 +7097,7 @@
    "id": "rule:Tab/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không vỏ, không nền, không viền riêng trên Tab.",
+   "text": "No shell, background or border of its own on Tab.",
    "source": "§6.20",
    "scope": "Tab"
   },
@@ -7105,7 +7105,7 @@
    "id": "rule:Tab/6",
    "type": "Rule",
    "kind": "do",
-   "text": "Icon 16 trước chữ (gap 8) cùng màu chữ, Active dùng fill; NotificationBadge Dot sau chữ (gap 4) báo có mới.",
+   "text": "16 icon before the text (gap 8) in the text color, fill when Active; a NotificationBadge Dot after the text (gap 4) signals something new.",
    "source": "§6.20",
    "scope": "Tab"
   },
@@ -7113,7 +7113,7 @@
    "id": "rule:Tab/7",
    "type": "Rule",
    "kind": "must",
-   "text": "Badge chỉ là thông tin phụ — nhãn tab vẫn tự đủ nghĩa; web thêm chữ ẩn “có mới”.",
+   "text": "The badge is only secondary info — the tab label still stands on its own; on the web add hidden text \"có mới\".",
    "source": "§6.20",
    "scope": "Tab"
   },
@@ -7121,7 +7121,7 @@
    "id": "rule:TabBar/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Fixed cho 2–4 tab nhãn ngắn (chia đều); Scrollable cho ≥ 5 tab hoặc nhãn dài.",
+   "text": "Fixed for 2–4 short-label tabs (equal widths); Scrollable for ≥ 5 tabs or long labels.",
    "source": "§6.20",
    "scope": "TabBar"
   },
@@ -7129,7 +7129,7 @@
    "id": "rule:TabBar/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Viền dưới 1px border-muted chạy suốt, gạch Active đè lên viền.",
+   "text": "A 1px border-muted bottom border runs the full width; the Active bar sits over it.",
    "source": "§6.20",
    "scope": "TabBar"
   },
@@ -7137,7 +7137,7 @@
    "id": "rule:TabBar/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Web: role=\"tablist\", mũi tên trái/phải chuyển tab.",
+   "text": "Web: role=\"tablist\", left/right arrows switch tabs.",
    "source": "§6.20",
    "scope": "TabBar"
   },
@@ -7145,7 +7145,7 @@
    "id": "rule:TabBar/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Scrollable: tab Active tự cuộn vào tầm nhìn.",
+   "text": "Scrollable: the Active tab scrolls into view automatically.",
    "source": "§6.20",
    "scope": "TabBar"
   },
@@ -7153,7 +7153,7 @@
    "id": "rule:TabBar/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có TabBar trên nền tối.",
+   "text": "No TabBar on dark backgrounds.",
    "source": "§6.20",
    "scope": "TabBar"
   },
@@ -7161,7 +7161,7 @@
    "id": "rule:Pagination/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Hàng gạch chỉ vị trí trong băng chuyền — không phải chấm tròn.",
+   "text": "A row of bars showing the position in a carousel — not round dots.",
    "source": "§6.10b",
    "scope": "Pagination"
   },
@@ -7169,7 +7169,7 @@
    "id": "rule:Pagination/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Chỉ ba vị trí Begin/Middle/End với đúng năm gạch, kể cả khi có hơn 5 trang.",
+   "text": "Only three positions, Begin/Middle/End, with exactly five bars, even with more than 5 pages.",
    "source": "§6.10b",
    "scope": "Pagination"
   },
@@ -7177,7 +7177,7 @@
    "id": "rule:Pagination/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Bề rộng là tín hiệu chính (24 vs 16), màu chỉ phụ.",
+   "text": "Width is the main signal (24 vs 16), color only secondary.",
    "source": "§6.10b",
    "scope": "Pagination"
   },
@@ -7185,7 +7185,7 @@
    "id": "rule:Pagination/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Gạch không active dùng overlay, không dùng màu nền thương hiệu; 🔒Base/Slick không dùng riêng.",
+   "text": "Inactive bars use overlay, not a brand background color; 🔒Base/Slick is never used on its own.",
    "source": "§6.10b",
    "scope": "Pagination"
   },
@@ -7193,7 +7193,7 @@
    "id": "rule:Toast/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Báo kết quả việc người dùng vừa làm, ở đáy, có Type.",
+   "text": "Reports the result of what the user just did, at the bottom, with a Type.",
    "source": "§6.31",
    "scope": "Toast"
   },
@@ -7201,7 +7201,7 @@
    "id": "rule:Toast/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Độ sáng nền quyết định cả ba phần tử: Warning (nền sáng) → content, nút Action, nút đóng đều Inverted=False; ba type kia Inverted=True.",
+   "text": "Background lightness decides all three elements: Warning (light background) → content, Action button and close button are all Inverted=False; the other three types Inverted=True.",
    "source": "§6.6",
    "scope": "Toast"
   },
@@ -7209,7 +7209,7 @@
    "id": "rule:Toast/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Content dùng object-on-{status}; style body 400, không phải label.",
+   "text": "Content uses object-on-{status}; body 400 style, not label.",
    "source": "§6.6",
    "scope": "Toast"
   },
@@ -7217,7 +7217,7 @@
    "id": "rule:Toast/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không dùng Toast cho lỗi chặn luồng hay lỗi nhập (sai mã OTP, checkbox bắt buộc) — Toast tự tắt.",
+   "text": "Never use Toast for flow-blocking errors or input errors (wrong OTP, required checkbox) — Toast disappears by itself.",
    "source": "§6.3f",
    "scope": "Toast"
   },
@@ -7225,7 +7225,7 @@
    "id": "rule:Toast/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Lỗi sửa được ngay → Dialog / Toast, không phải màn lỗi.",
+   "text": "Errors fixable right away → Dialog / Toast, not an error screen.",
    "source": "§6.19",
    "scope": "Toast"
   },
@@ -7233,7 +7233,7 @@
    "id": "rule:Badge/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Nhãn trạng thái dạng viên thuốc, không bấm được.",
+   "text": "A pill-shaped status label, not pressable.",
    "source": "§6.14",
    "scope": "Badge"
   },
@@ -7241,7 +7241,7 @@
    "id": "rule:Badge/2",
    "type": "Rule",
    "kind": "must",
-   "text": "background-{status} chỉ đi với object-on-{status}.",
+   "text": "background-{status} only pairs with object-on-{status}.",
    "source": "§6.14",
    "scope": "Badge"
   },
@@ -7249,7 +7249,7 @@
    "id": "rule:Badge/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Icon 16 fill luôn hiện trước chữ, theo tone: Neutral circle-info · Success circle-check · Warning circle-warning · Error triangle-warning.",
+   "text": "A 16 fill icon always shows before the text, by tone: Neutral circle-info · Success circle-check · Warning circle-warning · Error triangle-warning.",
    "source": "§6.14",
    "scope": "Badge"
   },
@@ -7257,7 +7257,7 @@
    "id": "rule:Badge/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có state (hover/pressed/disabled) — không phải control.",
+   "text": "No states (hover/pressed/disabled) — not a control.",
    "source": "§6.14",
    "scope": "Badge"
   },
@@ -7265,7 +7265,7 @@
    "id": "rule:Badge/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có size khác 24, không có Highlight, không tắt được icon.",
+   "text": "No size other than 24, no Highlight, the icon can't be turned off.",
    "source": "§6.14",
    "scope": "Badge"
   },
@@ -7273,7 +7273,7 @@
    "id": "rule:StatusIndicator/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Container=None: chấm object-{tone}, chữ luôn object-primary (warning chỉ là chấm).",
+   "text": "Container=None: object-{tone} dot, text always object-primary (warning is only the dot).",
    "source": "§6.15",
    "scope": "StatusIndicator"
   },
@@ -7281,7 +7281,7 @@
    "id": "rule:StatusIndicator/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Chấm nhấp nháy (opacity 1 → 0.3, 1.6s); đứng yên khi người dùng bật giảm chuyển động.",
+   "text": "The dot pulses (opacity 1 → 0.3, 1.6s); it stays still when the user enables reduced motion.",
    "source": "§6.15",
    "scope": "StatusIndicator"
   },
@@ -7289,7 +7289,7 @@
    "id": "rule:StatusIndicator/3",
    "type": "Rule",
    "kind": "do",
-   "text": "Highlight cho “mục này đáng chú ý” (Mới, Nổi bật, Đề xuất), dùng họ accent.",
+   "text": "Highlight for \"this item deserves attention\" (Mới, Nổi bật, Đề xuất), uses the accent family.",
    "source": "§6.15",
    "scope": "StatusIndicator"
   },
@@ -7297,7 +7297,7 @@
    "id": "rule:StatusIndicator/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng dùng Highlight để báo lỗi (Error) hay “có mới chưa xem” (NotificationBadge).",
+   "text": "Don't use Highlight for errors (Error) or \"new and unseen\" (NotificationBadge).",
    "source": "§6.15",
    "scope": "StatusIndicator"
   },
@@ -7305,7 +7305,7 @@
    "id": "rule:StatusIndicator/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có state — không phải control.",
+   "text": "No states — not a control.",
    "source": "§6.15",
    "scope": "StatusIndicator"
   },
@@ -7313,7 +7313,7 @@
    "id": "rule:CardPushNotification/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Báo chuyện từ bên ngoài (đơn đổi trạng thái, quà, tin nhắn), trượt từ đỉnh; khác Toast báo kết quả thao tác.",
+   "text": "Reports events from outside (order status changes, gifts, messages), slides in from the top; unlike Toast, which reports the result of an action.",
    "source": "§6.31",
    "scope": "CardPushNotification"
   },
@@ -7321,7 +7321,7 @@
    "id": "rule:CardPushNotification/2",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có type, không có nút: bấm cả thẻ để mở, vuốt lên để đóng.",
+   "text": "No type, no buttons: press the whole card to open, swipe up to dismiss.",
    "source": "§6.31",
    "scope": "CardPushNotification"
   },
@@ -7329,7 +7329,7 @@
    "id": "rule:CardPushNotification/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Tự ẩn sau 5 giây, dừng đếm khi đang chạm / hover.",
+   "text": "Hides itself after 5 seconds, pauses the countdown while touched / hovered.",
    "source": "§6.31",
    "scope": "CardPushNotification"
   },
@@ -7337,7 +7337,7 @@
    "id": "rule:CardPushNotification/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Một thẻ mỗi lúc — thẻ mới thay thẻ cũ.",
+   "text": "One card at a time — a new card replaces the old one.",
    "source": "§6.31",
    "scope": "CardPushNotification"
   },
@@ -7353,7 +7353,7 @@
    "id": "rule:CardPushNotification/6",
    "type": "Rule",
    "kind": "do",
-   "text": "Title và Content tối đa 2 dòng; ảnh nguồn 48 ẩn được.",
+   "text": "Title and Content max 2 lines; the 48 source image can be hidden.",
    "source": "§6.31",
    "scope": "CardPushNotification"
   },
@@ -7361,7 +7361,7 @@
    "id": "rule:CardPushNotification/7",
    "type": "Rule",
    "kind": "must",
-   "text": "Desktop: góc trên phải, cách mép trên và phải 16, rộng 360 (size-90); dừng đếm khi hover.",
+   "text": "Desktop: top right corner, 16 from the top and right edges, 360 wide (size-90); pauses the countdown on hover.",
    "source": "§6.31",
    "scope": "CardPushNotification"
   },
@@ -7369,7 +7369,7 @@
    "id": "rule:CardPushNotification/8",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có nút đóng, thời gian nhận hay xếp chồng thẻ.",
+   "text": "No close button, received time or card stacking.",
    "source": "§6.31",
    "scope": "CardPushNotification"
   },
@@ -7377,7 +7377,7 @@
    "id": "rule:NotificationBadge/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Chấm/số báo có mới chưa xem, đặt lên góc icon hoặc tab.",
+   "text": "A dot/count signaling something new and unseen, placed on the corner of an icon or tab.",
    "source": "§6.16",
    "scope": "NotificationBadge"
   },
@@ -7385,7 +7385,7 @@
    "id": "rule:NotificationBadge/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Dùng họ attention — không negative, không warning, không accent.",
+   "text": "Uses the attention family — not negative, not warning, not accent.",
    "source": "§6.16",
    "scope": "NotificationBadge"
   },
@@ -7393,7 +7393,7 @@
    "id": "rule:NotificationBadge/3",
    "type": "Rule",
    "kind": "dont",
-   "text": "Nền attention là rose-600 (chữ trắng 4.70): đừng đổi sang red-600, sẽ trùng màu negative.",
+   "text": "The attention background is rose-600 (white text 4.70): don't change it to red-600, it would collide with negative.",
    "source": "§2.3",
    "scope": "NotificationBadge"
   },
@@ -7401,7 +7401,7 @@
    "id": "rule:NotificationBadge/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Đừng tự chế thêm variant; màn tự đặt vị trí neo.",
+   "text": "Don't invent extra variants; the screen positions the anchor.",
    "source": "§6.16",
    "scope": "NotificationBadge"
   },
@@ -7409,7 +7409,7 @@
    "id": "rule:Tooltip/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Nhãn ngắn giải thích phần tử khi hover hoặc focus — thường cho IconButton không chữ hay SideNav thu gọn.",
+   "text": "A short label explaining an element on hover or focus — usually for text-less IconButtons or a collapsed SideNav.",
    "source": "§6.30",
    "scope": "Tooltip"
   },
@@ -7417,7 +7417,7 @@
    "id": "rule:Tooltip/2",
    "type": "Rule",
    "kind": "dont",
-   "text": "Chỉ chữ thuần — không link / nút bên trong (cần thì dùng Popover).",
+   "text": "Plain text only — no links / buttons inside (use Popover for that).",
    "source": "§6.30",
    "scope": "Tooltip"
   },
@@ -7425,7 +7425,7 @@
    "id": "rule:Tooltip/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Hiện khi hover và cả focus bàn phím.",
+   "text": "Shows on hover and on keyboard focus.",
    "source": "§6.30",
    "scope": "Tooltip"
   },
@@ -7433,7 +7433,7 @@
    "id": "rule:Tooltip/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không dùng trên màn chạm — không có hover.",
+   "text": "Not used on touch screens — there is no hover.",
    "source": "§6.30",
    "scope": "Tooltip"
   },
@@ -7441,7 +7441,7 @@
    "id": "rule:Tooltip/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Mặc định aria-describedby; khi tooltip là tên của phần tử chỉ có icon → aria-labelledby (relation='label').",
+   "text": "aria-describedby by default; when the tooltip is the name of an icon-only element → aria-labelledby (relation='label').",
    "source": "§6.30",
    "scope": "Tooltip"
   },
@@ -7449,7 +7449,7 @@
    "id": "rule:Tooltip/6",
    "type": "Rule",
    "kind": "must",
-   "text": "Hover hiện sau 500 ms, focus bàn phím hiện ngay; rời / mất focus / Esc ẩn ngay, không mờ dần.",
+   "text": "Hover shows after 500 ms, keyboard focus shows immediately; leaving / blur / Esc hides immediately, no fade.",
    "source": "§6.30",
    "scope": "Tooltip"
   },
@@ -7457,7 +7457,7 @@
    "id": "rule:Tooltip/7",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có tooltip nhiều dòng có tiêu đề — dùng Popover.",
+   "text": "No multi-line tooltips with titles — use Popover.",
    "source": "§6.30",
    "scope": "Tooltip"
   },
@@ -7465,7 +7465,7 @@
    "id": "rule:TableHeaderCell/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Cột số Align=Right: icon sắp xếp đứng trước nhãn, dồn phải.",
+   "text": "Numeric columns Align=Right: the sort icon goes before the label, pushed right.",
    "source": "§6.23",
    "scope": "TableHeaderCell"
   },
@@ -7473,7 +7473,7 @@
    "id": "rule:TableHeaderCell/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Hover/Pressed chỉ ở cột sắp được (Sort≠Off); Sort=Off không icon, không state.",
+   "text": "Hover/Pressed only on sortable columns (Sort≠Off); Sort=Off has no icon, no states.",
    "source": "§6.23",
    "scope": "TableHeaderCell"
   },
@@ -7481,7 +7481,7 @@
    "id": "rule:TableHeaderCell/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Nhãn object-secondary; object-primary khi Ascending / Descending.",
+   "text": "Label object-secondary; object-primary when Ascending / Descending.",
    "source": "§6.23",
    "scope": "TableHeaderCell"
   },
@@ -7489,7 +7489,7 @@
    "id": "rule:TableHeaderCell/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Chiều cao và padding qua biến density (table/header-height, table/cell-padding-x).",
+   "text": "Height and padding via density variables (table/header-height, table/cell-padding-x).",
    "source": "§6.23",
    "scope": "TableHeaderCell"
   },
@@ -7497,7 +7497,7 @@
    "id": "rule:TableHeaderCell/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Cột chọn hàng: TableHeaderCell Type=Checkbox rộng 64 — Checked khi chọn hết trang đang xem, Indeterminate khi một phần.",
+   "text": "Row-selection column: TableHeaderCell Type=Checkbox, 64 wide — Checked when the whole visible page is selected, Indeterminate when some.",
    "source": "§6.23",
    "scope": "TableHeaderCell"
   },
@@ -7505,7 +7505,7 @@
    "id": "rule:TableCell/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Hover / Selected là trạng thái của cả hàng — mọi ô trong hàng cùng State.",
+   "text": "Hover / Selected are states of the whole row — every cell in a row shares the State.",
    "source": "§6.23",
    "scope": "TableCell"
   },
@@ -7513,7 +7513,7 @@
    "id": "rule:TableCell/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Cột số căn phải cả tiêu đề lẫn ô, tabular-nums.",
+   "text": "Numeric columns right-align both header and cells, tabular-nums.",
    "source": "§6.23",
    "scope": "TableCell"
   },
@@ -7521,7 +7521,7 @@
    "id": "rule:TableCell/3",
    "type": "Rule",
    "kind": "dont",
-   "text": "Hành động theo dòng không bao giờ Solid; hai hành động trở lên → một Ghost Small, còn lại vào menu “⋯”.",
+   "text": "Per-row actions are never Solid; two or more actions → one Ghost Small, the rest in the \"⋯\" menu.",
    "source": "§6.23",
    "scope": "TableCell"
   },
@@ -7529,7 +7529,7 @@
    "id": "rule:TableCell/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Bảng không viền ngoài, không kẻ dọc — chỉ viền dưới mỗi ô.",
+   "text": "Tables have no outer border, no vertical lines — only a bottom border on each cell.",
    "source": "§6.23",
    "scope": "TableCell"
   },
@@ -7537,7 +7537,7 @@
    "id": "rule:TableCell/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Bảng dùng cho desktop / dashboard (density Compact); Selected nền background-interactive-muted.",
+   "text": "Tables are for desktop / dashboards (Compact density); Selected uses background-interactive-muted.",
    "source": "§6.23",
    "scope": "TableCell"
   },
@@ -7545,7 +7545,7 @@
    "id": "rule:TableCell/6",
    "type": "Rule",
    "kind": "do",
-   "text": "Bảng rỗng dùng EmptySection đặt trong thân bảng.",
+   "text": "An empty table uses EmptySection inside the table body.",
    "source": "§6.19",
    "scope": "TableCell"
   },
@@ -7553,7 +7553,7 @@
    "id": "rule:TableCell/7",
    "type": "Rule",
    "kind": "do",
-   "text": "Cột trạng thái dùng TableCell Type=Status chứa StatusIndicator, không tự đặt indicator vào ô Text.",
+   "text": "Status columns use TableCell Type=Status containing a StatusIndicator; don't put an indicator in a Text cell yourself.",
    "source": "§6.23",
    "scope": "TableCell"
   },
@@ -7561,7 +7561,7 @@
    "id": "rule:KPICard/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Thẻ một con số chính trên dashboard.",
+   "text": "A card with one main number on a dashboard.",
    "source": "§6.26",
    "scope": "KPICard"
   },
@@ -7569,7 +7569,7 @@
    "id": "rule:KPICard/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Polarity=Normal: Up object-positive, Down object-negative (màu theo chiều số).",
+   "text": "Polarity=Normal: Up object-positive, Down object-negative (color follows the number's direction).",
    "source": "§6.26",
    "scope": "KPICard"
   },
@@ -7577,7 +7577,7 @@
    "id": "rule:KPICard/3",
    "type": "Rule",
    "kind": "do",
-   "text": "Chỉ số tăng là xấu (chi phí, tỉ lệ huỷ) → Polarity=Inverse: Up tô negative, Down tô positive; icon vẫn theo chiều số.",
+   "text": "Metrics where up is bad (costs, cancellation rate) → Polarity=Inverse: Up colored negative, Down positive; the icon still follows the direction.",
    "source": "§6.26",
    "scope": "KPICard"
   },
@@ -7585,7 +7585,7 @@
    "id": "rule:KPICard/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Value heading-base tabular-nums; Trend=[No trend] không có Delta.",
+   "text": "Value heading-base tabular-nums; Trend=[No trend] has no Delta.",
    "source": "§6.26",
    "scope": "KPICard"
   },
@@ -7593,7 +7593,7 @@
    "id": "rule:KPICard/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Thẻ bấm được (Interactive): chevron-right 16 cuối hàng Label, state layer 5/10 phủ cả thẻ; cả thẻ là một link, không nút khác bên trong.",
+   "text": "Pressable card (Interactive): a 16 chevron-right at the end of the Label row, state layer 5/10 over the whole card; the whole card is one link, no other buttons inside.",
    "source": "§6.26",
    "scope": "KPICard"
   },
@@ -7601,7 +7601,7 @@
    "id": "rule:CardSheet/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Back và Close loại trừ nhau: sheet gốc Navigation=Close, sheet con Navigation=Back (không có nút đóng).",
+   "text": "Back and Close are mutually exclusive: the root sheet is Navigation=Close, a child sheet Navigation=Back (no close button).",
    "source": "§6.8",
    "scope": "CardSheet"
   },
@@ -7609,7 +7609,7 @@
    "id": "rule:CardSheet/2",
    "type": "Rule",
    "kind": "do",
-   "text": "Code: truyền onBack là Navigation=Back; không truyền là Close.",
+   "text": "Code: passing onBack means Navigation=Back; not passing it means Close.",
    "source": "§6.8",
    "scope": "CardSheet"
   },
@@ -7617,7 +7617,7 @@
    "id": "rule:CardSheet/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Nhóm nút là ButtonGroup (§6.9), không frame tự dựng; nút phụ và hướng xếp chỉnh trên instance ButtonGroup.",
+   "text": "The button group is ButtonGroup (§6.9), not a hand-built frame; the secondary button and direction are set on the ButtonGroup instance.",
    "source": "§6.8",
    "scope": "CardSheet"
   },
@@ -7625,7 +7625,7 @@
    "id": "rule:CardSheet/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Bo cả bốn góc radius 24 — sheet nổi cách mép 12.",
+   "text": "All four corners radius 24 — the sheet floats 12 from the edges.",
    "source": "§6.8",
    "scope": "CardSheet"
   },
@@ -7633,7 +7633,7 @@
    "id": "rule:CardSheet/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Có tiêu đề qua prop Header; CTA ẩn/hiện toàn bộ nhóm nút.",
+   "text": "Title via the Header prop; CTA shows/hides the whole button group.",
    "source": "§6.10",
    "scope": "CardSheet"
   },
@@ -7641,7 +7641,7 @@
    "id": "rule:CardSheet/6",
    "type": "Rule",
    "kind": "do",
-   "text": "Sheet kéo được: Handle 32×4 rounded-circle nền border ở đỉnh; hai nấc Height=Fit / Full.",
+   "text": "Draggable sheet: a 32×4 rounded-circle Handle with border background at the top; two stops Height=Fit / Full.",
    "source": "§6.8",
    "scope": "CardSheet"
   },
@@ -7649,7 +7649,7 @@
    "id": "rule:CardSheet/7",
    "type": "Rule",
    "kind": "must",
-   "text": "Kéo xuống ở Fit quá 1/3 → đóng; ở Full → về Fit; không có Handle thì không kéo được.",
+   "text": "Dragging down from Fit past 1/3 → closes; from Full → back to Fit; without a Handle it can't be dragged.",
    "source": "§6.8",
    "scope": "CardSheet"
   },
@@ -7657,7 +7657,7 @@
    "id": "rule:Sheet/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Là template màn hình, không phải component sản phẩm — khi code dựng lại scrim + wrapper, bỏ home indicator.",
+   "text": "A screen template, not a product component — in code rebuild the scrim + wrapper, drop the home indicator.",
    "source": "§6.8",
    "scope": "Sheet"
   },
@@ -7665,7 +7665,7 @@
    "id": "rule:Sheet/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Scrim overlay (đen 10%) + overlay-blur 16; đừng nhân thêm opacity lên fill.",
+   "text": "Scrim overlay (black 10%) + overlay-blur 16; don't multiply extra opacity onto the fill.",
    "source": "§6.8",
    "scope": "Sheet"
   },
@@ -7673,7 +7673,7 @@
    "id": "rule:Sheet/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Wrapper padding 0/12/12/12: sheet thụt 12 mỗi bên và nổi cách đáy 12.",
+   "text": "Wrapper padding 0/12/12/12: the sheet is inset 12 on each side and floats 12 above the bottom.",
    "source": "§6.8",
    "scope": "Sheet"
   },
@@ -7681,7 +7681,7 @@
    "id": "rule:Sheet/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Trên app dùng Sheet, không dùng SideSheet.",
+   "text": "Use Sheet in apps, not SideSheet.",
    "source": "§6.28",
    "scope": "Sheet"
   },
@@ -7689,7 +7689,7 @@
    "id": "rule:CardDialog/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Không có tiêu đề — mọi nội dung (kể cả tiêu đề) nằm trong Slot; header chỉ chứa nút đóng căn phải.",
+   "text": "No title — all content (including the title) goes in the Slot; the header only holds a right-aligned close button.",
    "source": "§6.10",
    "scope": "CardDialog"
   },
@@ -7697,7 +7697,7 @@
    "id": "rule:CardDialog/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Banner=True: ảnh tỉ lệ 16:9 duy nhất, là nội dung nên cần alt.",
+   "text": "Banner=True: a single 16:9 image; it is content, so it needs alt.",
    "source": "§6.10",
    "scope": "CardDialog"
   },
@@ -7705,7 +7705,7 @@
    "id": "rule:CardDialog/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Nút đóng đè lên ảnh dùng IconButtonNeutral Solid Small — nút viền sẽ chìm.",
+   "text": "The close button over the image uses IconButtonNeutral Solid Small — an outlined button would disappear.",
    "source": "§6.10",
    "scope": "CardDialog"
   },
@@ -7713,7 +7713,7 @@
    "id": "rule:CardDialog/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Nhóm nút là ButtonGroup (§6.9).",
+   "text": "The button group is ButtonGroup (§6.9).",
    "source": "§6.10",
    "scope": "CardDialog"
   },
@@ -7721,7 +7721,7 @@
    "id": "rule:CardDialog/5",
    "type": "Rule",
    "kind": "dont",
-   "text": "Dialog không xếp tầng — không có nút quay lại.",
+   "text": "Dialogs don't stack — no back button.",
    "source": "§6.10",
    "scope": "CardDialog"
   },
@@ -7729,7 +7729,7 @@
    "id": "rule:Dialog/1",
    "type": "Rule",
    "kind": "must",
-   "text": "Là template màn hình — khi code dựng theo CardDialog và tự làm scrim.",
+   "text": "A screen template — in code build it from CardDialog and add the scrim yourself.",
    "source": "§6.10",
    "scope": "Dialog"
   },
@@ -7737,7 +7737,7 @@
    "id": "rule:Dialog/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Panel căn giữa theo chiều dọc (khác Bottom sheet sát đáy).",
+   "text": "The panel is vertically centered (unlike Bottom sheet, which hugs the bottom).",
    "source": "§6.10",
    "scope": "Dialog"
   },
@@ -7745,7 +7745,7 @@
    "id": "rule:Dialog/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Scrim overlay + overlay-blur 16, panel thụt 12 mỗi bên; đừng nhân thêm opacity lên fill.",
+   "text": "Scrim overlay + overlay-blur 16, panel inset 12 on each side; don't multiply extra opacity onto the fill.",
    "source": "§6.10",
    "scope": "Dialog"
   },
@@ -7753,7 +7753,7 @@
    "id": "rule:Dialog/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Xác nhận hành động phá huỷ bằng Dialog có TextButtonDanger Solid.",
+   "text": "Confirm destructive actions with a Dialog containing a Solid TextButtonDanger.",
    "source": "§6.1",
    "scope": "Dialog"
   },
@@ -7761,7 +7761,7 @@
    "id": "rule:SideSheet/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Tấm trượt từ mép phải màn desktop để xem / sửa chi tiết mà không rời trang.",
+   "text": "A panel sliding in from the right edge of a desktop screen to view / edit details without leaving the page.",
    "source": "§6.28",
    "scope": "SideSheet"
   },
@@ -7769,7 +7769,7 @@
    "id": "rule:SideSheet/2",
    "type": "Rule",
    "kind": "do",
-   "text": "Standard nằm cạnh nội dung, viền trái, không scrim; Modal có elevation-high, bo hai góc trái, scrim như Sheet.",
+   "text": "Standard sits beside the content with a left border, no scrim; Modal has elevation-high, two rounded left corners, a scrim like Sheet.",
    "source": "§6.28",
    "scope": "SideSheet"
   },
@@ -7777,7 +7777,7 @@
    "id": "rule:SideSheet/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Footer: TextButtonNeutral Outline Base + TextButtonAccent Solid Base, dồn phải, gap 12.",
+   "text": "Footer: TextButtonNeutral Outline Base + TextButtonAccent Solid Base, right-aligned, gap 12.",
    "source": "§6.28",
    "scope": "SideSheet"
   },
@@ -7785,7 +7785,7 @@
    "id": "rule:SideSheet/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không dùng SideSheet trên app — dùng Sheet.",
+   "text": "Never use SideSheet in apps — use Sheet.",
    "source": "§6.28",
    "scope": "SideSheet"
   },
@@ -7793,7 +7793,7 @@
    "id": "rule:SideSheet/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Width=Wide (480) cho form dài / nhiều cột; mặc định Base 384.",
+   "text": "Width=Wide (480) for long / multi-column forms; default Base 384.",
    "source": "§6.28",
    "scope": "SideSheet"
   },
@@ -7801,7 +7801,7 @@
    "id": "rule:SideSheet/6",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có side sheet bên trái, không kéo đổi bề rộng.",
+   "text": "No left side sheet, no drag-to-resize.",
    "source": "§6.28",
    "scope": "SideSheet"
   },
@@ -7809,7 +7809,7 @@
    "id": "rule:Popover/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Khung nổi neo vào phần tử, chứa nội dung tương tác (form ngắn, xác nhận nhỏ).",
+   "text": "A floating frame anchored to an element, holding interactive content (short forms, small confirmations).",
    "source": "§6.29",
    "scope": "Popover"
   },
@@ -7817,7 +7817,7 @@
    "id": "rule:Popover/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Mở bằng bấm; đóng bằng nút đóng / Esc / bấm ra ngoài.",
+   "text": "Opens on press; closes with the close button / Esc / outside click.",
    "source": "§6.29",
    "scope": "Popover"
   },
@@ -7825,7 +7825,7 @@
    "id": "rule:Popover/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Footer dồn phải gap 8: TextButtonNeutral Ghost Small + TextButtonAccent Solid Small.",
+   "text": "Footer right-aligned, gap 8: TextButtonNeutral Ghost Small + TextButtonAccent Solid Small.",
    "source": "§6.29",
    "scope": "Popover"
   },
@@ -7833,7 +7833,7 @@
    "id": "rule:Popover/4",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không dùng Popover cho danh sách lựa chọn (đó là Menu) hay chữ giải thích khi hover (đó là Tooltip).",
+   "text": "Don't use Popover for option lists (that is Menu) or hover explanations (that is Tooltip).",
    "source": "§6.29",
    "scope": "Popover"
   },
@@ -7841,7 +7841,7 @@
    "id": "rule:Popover/5",
    "type": "Rule",
    "kind": "must",
-   "text": "Neo dưới phần tử, canh trái; thiếu chỗ thì lật lên, sát mép phải thì canh phải.",
+   "text": "Anchored below the element, left-aligned; flips up when there is no room, right-aligns near the right edge.",
    "source": "§6.29",
    "scope": "Popover"
   },
@@ -7849,7 +7849,7 @@
    "id": "rule:Popover/6",
    "type": "Rule",
    "kind": "dont",
-   "text": "Không có mũi tên — Popover tách lớp bằng elevation.",
+   "text": "No arrow — Popover separates by elevation.",
    "source": "§6.29",
    "scope": "Popover"
   },
@@ -7857,7 +7857,7 @@
    "id": "rule:ResultScreen/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Việc đã xong, người dùng phải sang chỗ khác.",
+   "text": "The task is done; the user has to go somewhere else.",
    "source": "§6.19",
    "scope": "ResultScreen"
   },
@@ -7865,7 +7865,7 @@
    "id": "rule:ResultScreen/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Footer là ButtonGroup dọc — nút chính trên, lối đi phụ dưới.",
+   "text": "The footer is a vertical ButtonGroup — primary on top, secondary path below.",
    "source": "§6.19",
    "scope": "ResultScreen"
   },
@@ -7881,7 +7881,7 @@
    "id": "rule:ResultScreen/4",
    "type": "Rule",
    "kind": "do",
-   "text": "Có component code ResultScreen / UuResultScreen (Body + Footer; NavigationBar do màn đặt); ảnh ô vuông không nền, cần alt.",
+   "text": "Has a code component ResultScreen / UuResultScreen (Body + Footer; the screen places the NavigationBar); a square image with no background, needs alt.",
    "source": "§6.19",
    "scope": "ResultScreen"
   },
@@ -7889,7 +7889,7 @@
    "id": "rule:ErrorScreen/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Lỗi chặn cả chức năng cốt lõi, không tự khắc phục được; lỗi một khối dùng ErrorSection, lỗi sửa được ngay dùng Dialog / Toast.",
+   "text": "An error blocking the whole core function that can't fix itself; a single-block error uses ErrorSection, errors fixable right away use Dialog / Toast.",
    "source": "§6.19",
    "scope": "ErrorScreen"
   },
@@ -7897,7 +7897,7 @@
    "id": "rule:ErrorScreen/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Đúng một nút: thử lại.",
+   "text": "Exactly one button: retry.",
    "source": "§6.19",
    "scope": "ErrorScreen"
   },
@@ -7913,7 +7913,7 @@
    "id": "rule:ErrorScreen/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Ảnh minh hoạ ô tròn 128 nền background-accent-muted, cần alt.",
+   "text": "Illustration in a 128 circle with background-accent-muted, needs alt.",
    "source": "§6.19",
    "scope": "ErrorScreen"
   },
@@ -7921,7 +7921,7 @@
    "id": "rule:ErrorScreen/5",
    "type": "Rule",
    "kind": "do",
-   "text": "Có component code ErrorScreen / UuErrorScreen nhận đúng một nút thử lại.",
+   "text": "Has a code component ErrorScreen / UuErrorScreen taking exactly one retry button.",
    "source": "§6.19",
    "scope": "ErrorScreen"
   },
@@ -7929,7 +7929,7 @@
    "id": "rule:EmptyScreen/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Cả màn chưa có dữ liệu.",
+   "text": "The whole screen has no data yet.",
    "source": "§6.19",
    "scope": "EmptyScreen"
   },
@@ -7937,7 +7937,7 @@
    "id": "rule:EmptyScreen/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Một nút hành động (tạo mới, khám phá), ẩn được bằng Action.",
+   "text": "One action button (create, explore), can be hidden with Action.",
    "source": "§6.19",
    "scope": "EmptyScreen"
   },
@@ -7945,7 +7945,7 @@
    "id": "rule:EmptyScreen/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Có nút back (Back action=true) — màn rỗng vẫn là màn bình thường.",
+   "text": "Has a back button (Back action=true) — an empty screen is still a normal screen.",
    "source": "§6.19",
    "scope": "EmptyScreen"
   },
@@ -7953,7 +7953,7 @@
    "id": "rule:EmptyScreen/4",
    "type": "Rule",
    "kind": "must",
-   "text": "Ảnh minh hoạ ô tròn 128 nền background-accent-muted, cần alt.",
+   "text": "Illustration in a 128 circle with background-accent-muted, needs alt.",
    "source": "§6.19",
    "scope": "EmptyScreen"
   },
@@ -7961,7 +7961,7 @@
    "id": "rule:EmptySection/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Một khối trong màn chưa có dữ liệu (danh sách rỗng, bảng rỗng), kể cả trong thân bảng.",
+   "text": "A block inside a screen with no data yet (empty list, empty table), including inside a table body.",
    "source": "§6.19",
    "scope": "EmptySection"
   },
@@ -7969,7 +7969,7 @@
    "id": "rule:EmptySection/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Một nút, ẩn được bằng Action.",
+   "text": "One button, can be hidden with Action.",
    "source": "§6.19",
    "scope": "EmptySection"
   },
@@ -7977,7 +7977,7 @@
    "id": "rule:EmptySection/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Title heading-sm (nhỏ hơn màn), căn giữa; ảnh tròn 128 nền background-accent-muted, cần alt.",
+   "text": "Title heading-sm (smaller than the screen), centered; 128 round image with background-accent-muted, needs alt.",
    "source": "§6.19",
    "scope": "EmptySection"
   },
@@ -7985,7 +7985,7 @@
    "id": "rule:ErrorSection/1",
    "type": "Rule",
    "kind": "do",
-   "text": "Lỗi chỉ ở một khối, phần còn lại của màn vẫn dùng được.",
+   "text": "The error is only in one block; the rest of the screen still works.",
    "source": "§6.19",
    "scope": "ErrorSection"
   },
@@ -7993,7 +7993,7 @@
    "id": "rule:ErrorSection/2",
    "type": "Rule",
    "kind": "must",
-   "text": "Một nút thử lại.",
+   "text": "One retry button.",
    "source": "§6.19",
    "scope": "ErrorSection"
   },
@@ -8001,7 +8001,7 @@
    "id": "rule:ErrorSection/3",
    "type": "Rule",
    "kind": "must",
-   "text": "Title heading-sm căn giữa; ảnh tròn 128 nền background-accent-muted, cần alt.",
+   "text": "Title heading-sm centered; 128 round image with background-accent-muted, needs alt.",
    "source": "§6.19",
    "scope": "ErrorSection"
   }

@@ -79,21 +79,21 @@ Bản đầy đủ: `ontology.json` (848 node · 2049 quan hệ). Sinh tự đ�
 
 ## Quy tắc chung
 
-- **must** — Chỉ dùng token semantic (background-*, object-*, border-*); không hardcode hex, không tạo primitive màu có sẵn alpha. (§0)
-- **dont** — Đừng lấy token nền tô chữ hay ngược lại — mỗi token có phạm vi riêng (nền, chữ, viền, gap, radius). (§1)
-- **must** — Component không biết mình ở brand nào; đổi brand bằng data-theme trên khung chứa, không sửa component. (§2.5)
-- **dont** — Đừng lấy accent cho thứ bấm được: interactive cho nút, link, tab, field focus, mục đang chọn; accent cho nhấn nội dung. (§2.5)
-- **must** — background-{status} chỉ đi với object-on-{status}; object-{status} dùng cho chữ/icon trên nền sáng. (§2.2)
-- **dont** — Đừng dùng negative cho badge “có mới”, đừng dùng attention cho thông báo lỗi; attention = có mới chưa xem, warning = rủi ro, negative = hỏng/sai. (§2.2)
-- **dont** — Đừng dùng object-warning (1.92 trên trắng) hay object-attention cho chữ đứng một mình — chỉ cho chấm / icon kèm chữ object-primary. (§2.3)
-- **must** — Đừng để màu là tín hiệu duy nhất ở chỗ quan trọng — kèm chữ hoặc icon. (§2.3)
-- **must** — Hover/Pressed chỉ qua state layer ::after phủ toàn bộ, fill = currentColor (màu object của variant); không đổi nền, chữ, font-weight. (§6.0)
-- **must** — Bậc opacity state layer chia theo loại nền, không theo màu chữ: nền đặc màu (Solid Accent / Neutral) → 20/40; nền sáng hoặc trong suốt (Outline, Ghost, Solid Inverted) → 5/10; Outline / Ghost Inverted trên nền tối → 20/40. Radio là ngoại lệ (§6.3d). Disabled và Loading không có state layer. (§6.0)
-- **do** — Mode chữ Active (đậm thêm một bậc) chỉ cho ToggleButton Active=True và Segment item đang chọn; không liên quan :hover/:active hay State=Pressed. (§3)
-- **dont** — Đừng hardcode width cho component hug (button, toggle, chip); line-height là giá trị tuyệt đối, không bội số. (§3)
-- **must** — Component đọc biến density (--control-height-*, --field-height, --text-<style>-*); không gõ cứng 24/32/40/48/56px, không đọc thẳng --font-size-*. Không dùng Compact cho màn chạm. (§4.1)
-- **must** — Chỉ dùng UU icon; không thay Lucide/Phosphor/Font Awesome, không crop viewBox. Trạng thái bật dùng biến thể fill, tắt dùng outline. (§6.11)
-- **do** — Chỉ build component có trong mục 5; thứ không có là chưa chốt — hỏi lại, đừng suy đoán. (§0)
+- **must** — Only use semantic tokens (background-*, object-*, border-*); never hardcode hex, never create color primitives with built-in alpha. (§0)
+- **dont** — Don't use a background token to color text or vice versa — each token has its own scope (background, text, border, gap, radius). (§1)
+- **must** — A component doesn't know which brand it is in; switch brand with data-theme on the container, don't edit the component. (§2.5)
+- **dont** — Don't use accent for things you can press: interactive for buttons, links, tabs, field focus, selected items; accent for content emphasis. (§2.5)
+- **must** — background-{status} only pairs with object-on-{status}; object-{status} is for text/icons on light backgrounds. (§2.2)
+- **dont** — Don't use negative for a "new" badge, don't use attention for error messages; attention = new and unseen, warning = risk, negative = broken/wrong. (§2.2)
+- **dont** — Don't use object-warning (1.92 on white) or object-attention for standalone text — only for dots / icons next to object-primary text. (§2.3)
+- **must** — Don't let color be the only signal where it matters — add text or an icon. (§2.3)
+- **must** — Hover/Pressed only through a full-cover ::after state layer, fill = currentColor (the variant's object color); no background, text or font-weight change. (§6.0)
+- **must** — State-layer opacity steps depend on the background type, not the text color: solid colored backgrounds (Solid Accent / Neutral) → 20/40; light or transparent backgrounds (Outline, Ghost, Solid Inverted) → 5/10; Outline / Ghost Inverted on dark backgrounds → 20/40. Radio is the exception (§6.3d). Disabled and Loading have no state layer. (§6.0)
+- **do** — The Active text mode (one weight step bolder) is only for ToggleButton Active=True and the selected Segment item; it has nothing to do with :hover/:active or State=Pressed. (§3)
+- **dont** — Don't hardcode width on hugging components (button, toggle, chip); line-height is an absolute value, not a multiplier. (§3)
+- **must** — Components read density variables (--control-height-*, --field-height, --text-<style>-*); never hardcode 24/32/40/48/56px, never read --font-size-* directly. Don't use Compact on touch screens. (§4.1)
+- **must** — Only use UU icon (or the set attached via DNA); don't swap in Lucide/Phosphor/Font Awesome singles, don't crop the viewBox. On state uses the fill variant, off state uses outline. (§6.11)
+- **do** — Only build components listed in section 5; anything missing is not decided — ask, don't guess. (§0)
 
 ## Quy tắc và phần chưa chốt theo component
 
@@ -101,469 +101,469 @@ Bản đầy đủ: `ontology.json` (848 node · 2049 quan hệ). Sinh tự đ�
 
 Prop: `Type` (Solid · Outline · Ghost), `Size` (Large · Base · Small), `State` (Default · Hover · Pressed · Disabled · Loading), `Inverted` (False · True)
 
-- **do** — Dùng cho hành động chính của màn. (§6.1)
-- **do** — Một nút Solid (Accent hoặc Danger) mỗi màn. (§6.1)
-- **dont** — Hành động lặp theo dòng hoặc theo thẻ không bao giờ Solid — dùng Ghost Small hoặc gom vào menu “⋯”. (§6.1)
-- **do** — Inverted=True khi đặt trên nền tối. (§6.1)
-- **must** — min-width = min-height = chiều cao size (56/48/32) — nút chữ ngắn không hẹp hơn hình tròn. (§6.1)
-- **must** — Viền Outline không cộng vào chiều cao: dựng bằng box-shadow inset 2px, không dùng border. (§6.1)
-- **must** — Loading: spinner .loading đứng trước label, label vẫn hiện, không có state layer. (§6.1)
-- **dont** — Pressed giữ nguyên weight 600 — không dùng mode chữ Active. (§3)
+- **do** — For the main action of the screen. (§6.1)
+- **do** — One Solid button (Accent or Danger) per screen. (§6.1)
+- **dont** — Actions repeated per row or per card are never Solid — use Ghost Small or group them in a "⋯" menu. (§6.1)
+- **do** — Inverted=True when placed on a dark background. (§6.1)
+- **must** — min-width = min-height = the size's height (56/48/32) — a short-label button is never narrower than a circle. (§6.1)
+- **must** — The Outline border does not add to the height: build it with an inset 2px box-shadow, not a border. (§6.1)
+- **must** — Loading: the .loading spinner sits before the label, the label stays visible, no state layer. (§6.1)
+- **dont** — Pressed keeps weight 600 — don't use the Active text mode. (§3)
 
 ### TextButtonNeutral
 
 Prop: `Type` (Solid · Outline · Ghost), `Size` (Large · Base · Small), `State` (Default · Hover · Pressed · Disabled · Loading), `Inverted` (False · True)
 
-- **do** — Dùng cho hành động phụ, trung tính. (§6.1)
-- **do** — Việc làm lại được (đăng xuất, bỏ qua) vẫn là Neutral, dù trông “nguy hiểm”. (§6.1)
-- **do** — Inverted=True khi đặt trên nền tối. (§6.1)
-- **must** — Viền Outline không cộng vào chiều cao: dựng bằng box-shadow inset 2px. (§6.1)
-- **must** — Disabled: Solid nền background-disabled, Outline viền border-muted, chữ object-disabled, không state layer. (§6.1)
-- **do** — Ghost Small là dạng nút Action trong suffix của TextInput và nút Huỷ của SearchInput. (§6.3)
-- **do** — `Type=Tonal` cho hành động lặp trên thẻ nền `background-surface`. Không đặt trên `background-subtle`. (§6.1)
+- **do** — For secondary, neutral actions. (§6.1)
+- **do** — Reversible actions (sign out, skip) stay Neutral even if they "look dangerous". (§6.1)
+- **do** — Inverted=True when placed on a dark background. (§6.1)
+- **must** — The Outline border does not add to the height: build it with an inset 2px box-shadow. (§6.1)
+- **must** — Disabled: Solid uses background-disabled, Outline uses border-muted, text object-disabled, no state layer. (§6.1)
+- **do** — Ghost Small is the Action button inside TextInput's suffix and the Huỷ button of SearchInput. (§6.3)
+- **do** — `Type=Tonal` for repeated actions on cards with `background-surface`. Don't place it on `background-subtle`. (§6.1)
 
 ### TextButtonDanger
 
 Prop: `Type` (Solid · Outline · Ghost), `Size` (Large · Base · Small), `State` (Default · Hover · Pressed · Disabled · Loading), `Inverted` (False)
 
-- **do** — Chỉ cho hành động phá huỷ, không hoàn tác được (xoá tài khoản, huỷ đơn, gỡ thiết bị). (§6.1)
-- **dont** — Đừng dùng Danger chỉ vì nút “trông nguy hiểm” — việc làm lại được là Neutral. (§6.1)
-- **dont** — Không có Inverted=True — nút phá huỷ luôn trên nền sáng; màn tối thì mở Dialog xác nhận. (§6.1)
-- **do** — Hành động phá huỷ theo dòng nằm trong menu “⋯” và xác nhận bằng Dialog có TextButtonDanger Solid. (§6.1)
-- **do** — Một nút Solid (Accent hoặc Danger) mỗi màn. (§6.1)
-- **must** — Hình học, density, state layer, Loading, Disabled y hệt TextButtonAccent; chỉ đổi họ màu sang negative. (§6.1)
+- **do** — Only for destructive, irreversible actions (delete account, cancel order, remove device). (§6.1)
+- **dont** — Don't use Danger just because a button "looks dangerous" — reversible actions are Neutral. (§6.1)
+- **dont** — No Inverted=True — destructive buttons always sit on light backgrounds; on dark screens open a confirmation Dialog. (§6.1)
+- **do** — Per-row destructive actions live in the "⋯" menu and are confirmed by a Dialog with a Solid TextButtonDanger. (§6.1)
+- **do** — One Solid button (Accent or Danger) per screen. (§6.1)
+- **must** — Geometry, density, state layer, Loading and Disabled are identical to TextButtonAccent; only the color family changes to negative. (§6.1)
 
 ### IconButtonAccent
 
 Prop: `Type` (Solid · Outline · Ghost), `Size` (Large · Base · Small), `State` (Default · Hover · Pressed · Disabled · Loading), `Inverted` (False · True)
 
-- **must** — Prop và màu khớp TextButtonAccent (Type/Inverted/Size/State); icon dùng token object-* như chữ của Text button. (§6.2)
-- **must** — Hộp vuông tròn: 56/48/32, icon 24/24/16, padding 0. (§6.2)
-- **must** — Inverted=True: Solid (nền surface) dùng state layer 5/10; Outline và Ghost dùng 20/40. (§6.2)
-- **must** — Nút chỉ có icon cần tên: có label, hoặc Tooltip relation='label' (aria-labelledby). (§6.30)
-- **do** — Sub action của NavigationBar là IconButtonAccent Solid Inverted=True Base. (§6.5)
+- **must** — Props and colors match TextButtonAccent (Type/Inverted/Size/State); the icon uses object-* tokens like a Text button's label. (§6.2)
+- **must** — Round square box: 56/48/32, icon 24/24/16, padding 0. (§6.2)
+- **must** — Inverted=True: Solid (surface background) uses state layer 5/10; Outline and Ghost use 20/40. (§6.2)
+- **must** — Icon-only buttons need a name: a label, or a Tooltip with relation='label' (aria-labelledby). (§6.30)
+- **do** — NavigationBar's sub action is IconButtonAccent Solid Inverted=True Base. (§6.5)
 
 ### IconButtonNeutral
 
 Prop: `Type` (Solid · Outline · Ghost), `Size` (Large · Base · Small), `State` (Default · Hover · Pressed · Disabled · Loading), `Inverted` (False · True)
 
-- **must** — Prop và màu khớp TextButtonNeutral; Solid Inverted=False dùng background-inverted. (§6.2)
-- **must** — Inverted=True: Solid (nền surface) dùng state layer 5/10; Outline và Ghost dùng 20/40. (§6.2)
-- **must** — Nút chỉ có icon cần tên: có label, hoặc Tooltip relation='label' (aria-labelledby). (§6.30)
-- **do** — Ghost Small mở Menu “⋯” cho hành động theo dòng / theo thẻ. (§6.1)
-- **do** — Nút đóng (xmark) của Toast, SideSheet, Popover là IconButtonNeutral Ghost; của CardSheet/CardDialog là Outline Small. (§6.6)
-- **do** — Nút đóng đè lên ảnh banner của CardDialog dùng Solid để đọc được trên mọi ảnh. (§6.10)
-- **dont** — Không có IconButton kiểu Danger — xoá theo dòng nằm trong menu “⋯”, xác nhận bằng Dialog có TextButtonDanger Solid. (§6.2)
+- **must** — Props and colors match TextButtonNeutral; Solid Inverted=False uses background-inverted. (§6.2)
+- **must** — Inverted=True: Solid (surface background) uses state layer 5/10; Outline and Ghost use 20/40. (§6.2)
+- **must** — Icon-only buttons need a name: a label, or a Tooltip with relation='label' (aria-labelledby). (§6.30)
+- **do** — Ghost Small opens the "⋯" Menu for per-row / per-card actions. (§6.1)
+- **do** — The close button (xmark) of Toast, SideSheet and Popover is IconButtonNeutral Ghost; of CardSheet/CardDialog it is Outline Small. (§6.6)
+- **do** — The close button over CardDialog's banner image uses Solid so it reads on any image. (§6.10)
+- **dont** — There is no Danger IconButton — per-row delete lives in the "⋯" menu, confirmed by a Dialog with a Solid TextButtonDanger. (§6.2)
 
 ### ToggleButton
 
 Prop: `Size` (Large · Base · Small), `State` (Default · Hover · Pressed · Disabled), `Active` (False · True), `Label` (False · True)
 
-- **do** — Dùng cho nút giữ trạng thái bật/tắt; Active là prop độc lập với State. (§6.7)
-- **must** — Hai prop chữ riêng (Label / Active label) để đổi copy theo trạng thái — đừng dùng chung một chuỗi. (§6.7)
-- **must** — Icon đổi hẳn biến thể outline ↔ fill khi bật, không chỉ đổi màu. (§6.7)
-- **must** — Chữ đậm thêm một bậc khi bật qua typography mode Active, không override weight trên node. (§6.7)
-- **dont** — Đừng hardcode width — bề rộng chênh 1px giữa hai trạng thái. (§6.7)
-- **dont** — Không border, không shadow ở mọi variant — dùng nổi trên ảnh hoặc nền màu. (§6.7)
-- **dont** — Không có state Loading; Disabled không có state layer. (§6.7)
+- **do** — For buttons that hold an on/off state; Active is a prop independent of State. (§6.7)
+- **must** — Two separate text props (Label / Active label) to change copy by state — don't share one string. (§6.7)
+- **must** — The icon switches fully between outline ↔ fill when on, not just its color. (§6.7)
+- **must** — Text gets one weight step bolder when on via the Active typography mode, not a weight override on the node. (§6.7)
+- **dont** — Don't hardcode width — the two states differ by 1px. (§6.7)
+- **dont** — No border, no shadow in any variant — used floating over images or colored backgrounds. (§6.7)
+- **dont** — No Loading state; Disabled has no state layer. (§6.7)
 
 ### ButtonGroup
 
 Prop: `Layout` (Horizontal · Vertical), `Tone` (Default · Danger)
 
-- **must** — Horizontal: nút phụ (Outline) bên trái, nút chính (Solid) bên phải, hai nút chia đều. (§6.9)
-- **must** — Vertical: nút chính (Solid) trên, nút phụ (Outline) dưới. (§6.9)
-- **must** — Nút dùng TextButtonAccent size Large (56), gap 12. (§6.9)
-- **must** — Khi code hai nút chia đôi dùng flex: 1 1 0, không dùng flex: 1 1 auto. (§6.8)
-- **do** — Là nhóm nút dùng chung của CardSheet và CardDialog — không tự dựng frame nút riêng. (§6.8)
-- **must** — Tone=Danger (dialog / sheet xác nhận xoá): nút chính là TextButtonDanger Solid Large, nút phụ giữ nguyên; không tự xếp hai nút. (§6.9)
+- **must** — Horizontal: secondary button (Outline) on the left, primary (Solid) on the right, equal widths. (§6.9)
+- **must** — Vertical: primary (Solid) on top, secondary (Outline) below. (§6.9)
+- **must** — Buttons are TextButtonAccent size Large (56), gap 12. (§6.9)
+- **must** — In code, the two equal buttons use flex: 1 1 0, not flex: 1 1 auto. (§6.8)
+- **do** — The shared button group of CardSheet and CardDialog — don't build your own button frame. (§6.8)
+- **must** — Tone=Danger (delete-confirmation dialog / sheet): the primary is TextButtonDanger Solid Large, the secondary stays the same; don't arrange the two buttons yourself. (§6.9)
 
 ### TextInput
 
 Prop: `Value` (Empty · Filled), `State` (Default · Hover · Focus · Typing · [No state]), `Error` (False · True), `Disabled` (False · True)
 
-- **must** — Error=True đổi ba thứ: viền border-negative, Label object-negative, hiện dòng Error message caption dưới Field. (§6.3)
-- **dont** — Dòng lỗi là chữ, không có icon (tín hiệu thứ tư không thêm thông tin). (§6.3)
-- **must** — Dòng lỗi chiếm chỗ thật (root 76 → 100) — bố cục phải nhường chỗ, đừng để đè lên khối khác. (§6.3)
-- **dont** — Error không kết hợp với Disabled. (§6.3)
-- **must** — Filled + Disabled giữ chữ object-primary để còn đọc được; chỉ placeholder xuống object-disabled. (§6.3)
-- **must** — Focus/Typing: viền border-emphasized + con trỏ 1,5×24 object-accent. (§6.3)
-- **do** — Báo lỗi tại ô bằng viền đỏ + dòng lỗi, không dùng Toast. (§6.3b)
+- **must** — Error=True changes three things: border-negative border, Label object-negative, and an Error message caption line under the Field. (§6.3)
+- **dont** — The error line is text only, no icon (a fourth signal adds no information). (§6.3)
+- **must** — The error line takes real space (root 76 → 100) — the layout must make room, never overlap other blocks. (§6.3)
+- **dont** — Error never combines with Disabled. (§6.3)
+- **must** — Filled + Disabled keeps object-primary text so it stays readable; only the placeholder drops to object-disabled. (§6.3)
+- **must** — Focus/Typing: border-emphasized border + a 1.5×24 object-accent caret. (§6.3)
+- **do** — Report errors at the field with a red border + error line, not a Toast. (§6.3b)
 
 ### TextArea
 
 Prop: `Value` (Empty · Filled), `State` (Default · Hover · Focus · Typing · [No state]), `Error` (False · True), `Disabled` (False · True)
 
-- **do** — Component riêng cho nhập nhiều dòng — thay mọi TextInput kéo cao. (§6.3e)
-- **must** — Field cao 112 (đúng ba dòng + bộ đếm) — đừng tự đổi 88 hay 120; Compact chỉ đổi radius và padding ngang. (§6.3e)
-- **must** — Chữ bám mép trên, padding 12 bốn phía; bộ đếm (n/100) caption object-secondary ở góc phải dưới. (§6.3e)
-- **must** — Viền, nền, chữ, Error theo đúng bảng TextInput; dòng lỗi không icon. (§6.3e)
-- **must** — Disabled: chữ đã gõ giữ object-primary; nhãn, bộ đếm và placeholder xuống object-disabled. (§6.3e)
+- **do** — A separate component for multi-line input — replaces any stretched TextInput. (§6.3e)
+- **must** — Field height 112 (exactly three lines + counter) — don't change it to 88 or 120; Compact only changes radius and horizontal padding. (§6.3e)
+- **must** — Text sticks to the top edge, padding 12 on all sides; the counter (n/100) is caption object-secondary at the bottom right. (§6.3e)
+- **must** — Border, background, text and Error follow the TextInput table; the error line has no icon. (§6.3e)
+- **must** — Disabled: typed text stays object-primary; label, counter and placeholder drop to object-disabled. (§6.3e)
 
 ### OTPInput
 
 Prop: `Value` (Empty · Filled), `State` (Default · Focus · Typing · [No state]), `Error` (False · True), `Disabled` (False · True), `Masked` (False · True)
 
-- **do** — Thay mọi ô mã xác thực dựng tay bằng component này; Masked=True cho mã PIN. (§6.3b)
-- **must** — Ô rỗng mang dấu “-” object-secondary, không phải ô trắng trơn hay placeholder chữ số. (§6.3b)
-- **must** — Con trỏ 2px object-accent là tín hiệu duy nhất cho ô đang nhận chữ. (§6.3b)
-- **must** — Lỗi: cả sáu ô cùng viền border-negative, không tô riêng ô nào; nền và chữ giữ nguyên. (§6.3b)
-- **must** — Chữ đã gõ ở lại khi lỗi — đừng xoá về rỗng. (§6.3b)
-- **must** — Dòng lỗi căn giữa dưới cụm ô, cách 4, caption object-negative. (§6.3b)
-- **dont** — Không báo sai mã bằng Toast. (§6.3b)
-- **do** — Ô co bằng flex: 1 0 0, min-width 36, max-width 48 để không tràn trên máy hẹp. (§6.3b)
+- **do** — Replace every hand-built verification-code field with this component; Masked=True for PINs. (§6.3b)
+- **must** — Empty cells show a "-" in object-secondary, not a blank cell or a digit placeholder. (§6.3b)
+- **must** — A 2px object-accent caret is the only signal for the cell receiving input. (§6.3b)
+- **must** — Error: all six cells get the border-negative border together, no single cell highlighted; background and text unchanged. (§6.3b)
+- **must** — Typed digits stay on error — don't clear them. (§6.3b)
+- **must** — The error line is centered under the cells, 4 below, caption object-negative. (§6.3b)
+- **dont** — Never report a wrong code with a Toast. (§6.3b)
+- **do** — Cells shrink with flex: 1 0 0, min-width 36, max-width 48 so they don't overflow on narrow phones. (§6.3b)
 
 ### SearchInput
 
 Prop: `Value` (Empty · Filled), `State` (Default · Hover · Focus · Typing · [No state] · Loading), `Disabled` (False · True)
 
-- **dont** — Không có Error — không kết quả là chuyện của màn kết quả, không phải của ô. (§6.3g)
-- **must** — Icon magnifier 24 cố định bên trái; nút xoá circle-xmark 16 chỉ hiện khi Filled, vùng chạm 32×32. (§6.3g)
-- **must** — Disabled đã có chữ giữ object-primary; icon magnifier xuống object-disabled. (§6.3g)
-- **must** — Loading: .loading 16 thay chỗ nút xoá, viền như Typing. (§6.3g)
-- **do** — Cancel=true (nút Huỷ TextButtonNeutral Ghost Small) chỉ dùng ở màn tìm kiếm riêng trên mobile; bấm Huỷ xoá chữ, bỏ focus, đóng panel. (§6.3g)
-- **do** — Panel gợi ý / lịch sử là Menu Platform=Panel neo dưới ô cách 4; rỗng + focus → lịch sử, đang gõ → gợi ý, không có gì → không mở panel. (§6.3g)
-- **do** — Hàng “Tìm gần đây” có IconButtonNeutral Ghost Small xmark cuối hàng để xoá từng mục; panel vẫn mở, focus về ô. (§6.3g)
-- **dont** — Không có cỡ nhỏ riêng — density Compact đã thu ô. (§6.3g)
+- **dont** — No Error — "no results" belongs to the results screen, not the field. (§6.3g)
+- **must** — Fixed 24 magnifier icon on the left; the 16 circle-xmark clear button only shows when Filled, 32×32 touch area. (§6.3g)
+- **must** — Disabled with text keeps object-primary; the magnifier icon drops to object-disabled. (§6.3g)
+- **must** — Loading: a 16 .loading replaces the clear button, border as in Typing. (§6.3g)
+- **do** — Cancel=true (a Huỷ button, TextButtonNeutral Ghost Small) only on a dedicated mobile search screen; pressing Huỷ clears text, blurs and closes the panel. (§6.3g)
+- **do** — The suggestion / history panel is a Menu Platform=Panel anchored 4 below the field; empty + focus → history, typing → suggestions, nothing → no panel. (§6.3g)
+- **do** — "Tìm gần đây" rows end with an IconButtonNeutral Ghost Small xmark to remove each item; the panel stays open, focus returns to the field. (§6.3g)
+- **dont** — No separate small size — Compact density already shrinks the field. (§6.3g)
 
 ### DateInput
 
 Prop: `Value` (Empty · Filled), `State` (Default · Hover · [No state]), `Error` (False · True), `Disabled` (False · True)
 
-- **dont** — Đừng tự ghép TextInput với icon lịch — dùng DateInput. (§6.3c)
-- **must** — Ô không nhận gõ tay: chạm mở lịch của hệ điều hành, không con trỏ, không bàn phím. (§6.3c)
-- **must** — Giá trị hiển thị DD/MM/YYYY, style body 400. (§6.3c)
-- **dont** — Icon calendar-days 24 luôn object-secondary — đừng tô object-interactive, đừng bọc thành Icon button; không thay bằng icon calendar. (§6.3c)
-- **must** — Error: viền border-negative, Label object-negative, dòng lỗi chữ không icon. (§6.3c)
+- **dont** — Don't combine a TextInput with a calendar icon yourself — use DateInput. (§6.3c)
+- **must** — The field takes no typing: tapping opens the OS date picker, no caret, no keyboard. (§6.3c)
+- **must** — Value shown as DD/MM/YYYY, body 400 style. (§6.3c)
+- **dont** — The 24 calendar-days icon is always object-secondary — don't color it object-interactive, don't wrap it in an Icon button; don't swap it for the calendar icon. (§6.3c)
+- **must** — Error: border-negative border, Label object-negative, text-only error line. (§6.3c)
 
 ### Dropdown
 
 Prop: `Value` (Empty · Filled), `State` (Default · Hover · [No state]), `Error` (False · True), `Disabled` (False · True)
 
-- **must** — Giá trị đã chọn dùng label 600; gợi ý rỗng “Bấm để chọn” body 400 object-secondary. (§6.4)
-- **must** — Icon chevron-down 16 object-secondary ở mọi state. (§6.4)
-- **dont** — Không có Focus/Typing — ô không nhận gõ. (§6.4)
-- **do** — Danh sách option bung ra dùng Menu (§6.21). (§6.4)
-- **must** — Error: viền border-negative, Label object-negative, dòng lỗi chữ không icon. (§6.3)
+- **must** — The selected value uses label 600; the empty hint "Bấm để chọn" is body 400 object-secondary. (§6.4)
+- **must** — The 16 chevron-down icon is object-secondary in every state. (§6.4)
+- **dont** — No Focus/Typing — the field takes no typing. (§6.4)
+- **do** — The option list uses Menu (§6.21). (§6.4)
+- **must** — Error: border-negative border, Label object-negative, text-only error line. (§6.3)
 
 ### Menu
 
 Prop: `Platform` (Panel · Sheet)
 
-- **do** — Là panel option của Dropdown, Chip Dropdown và gợi ý SearchInput; Platform=Panel cho desktop, Sheet cho mobile. (§6.21)
-- **must** — Hàng đã chọn (Single): nền tint background-accent-subtle, chữ object-interactive, state layer background-interactive 5/10. (§6.21)
-- **must** — Type=Multiple: Checkbox đầu hàng, không tint nền, chữ object-primary; không đóng khi chọn, bật Footer “Bỏ chọn” + “Áp dụng”. (§6.21)
-- **do** — Bật Search (SearchInput không nhãn, dính trên) khi > 8 option; không còn option → “Không tìm thấy “{từ khoá}””. (§6.21)
-- **do** — .MenuSection: title-xs object-secondary IN HOA; .MenuDivider 1px border-muted, nhóm đầu không cần vạch phía trên. (§6.21)
-- **must** — Panel neo dưới phần tử cách 4; thiếu chỗ thì lật lên; cao tối đa 320 rồi cuộn trong panel (tìm nhanh dính trên, footer dính dưới). (§6.21)
-- **must** — Prefix icon chỉ có ở Type=Single. (§6.21)
-- **do** — Đóng khi chọn xong (Single), bấm ra ngoài, Esc; Multiple chỉ áp dụng khi bấm “Áp dụng”. (§6.21)
-- **do** — Option cần giải thích thêm → Description caption object-secondary dưới tên, tối đa 2 dòng; icon / checkbox căn trên. (§6.21)
-- **must** — “Chọn tất cả” (Multiple, từ 4 option): hàng đầu + MenuDivider; Checked khi chọn hết, Indeterminate khi một phần; đang tìm nhanh chỉ tác động option đang hiện. (§6.21)
+- **do** — The option panel of Dropdown, Chip Dropdown and SearchInput suggestions; Platform=Panel on desktop, Sheet on mobile. (§6.21)
+- **must** — Selected row (Single): background-accent-subtle tint, object-interactive text, state layer background-interactive 5/10. (§6.21)
+- **must** — Type=Multiple: Checkbox at the start of the row, no background tint, object-primary text; doesn't close on select, turns on the "Bỏ chọn" + "Áp dụng" Footer. (§6.21)
+- **do** — Turn on Search (unlabeled SearchInput, sticky on top) when > 8 options; no options left → "Không tìm thấy "{từ khoá}"". (§6.21)
+- **do** — .MenuSection: title-xs object-secondary UPPERCASE; .MenuDivider 1px border-muted, the first group needs no line above. (§6.21)
+- **must** — Panel anchored 4 below the element; flips up when there is no room; max height 320, then scrolls inside the panel (quick search sticky on top, footer sticky at the bottom). (§6.21)
+- **must** — Prefix icons only in Type=Single. (§6.21)
+- **do** — Closes on selection (Single), outside click, Esc; Multiple only applies on "Áp dụng". (§6.21)
+- **do** — Options needing more explanation → a Description caption object-secondary under the name, max 2 lines; icon / checkbox top-aligned. (§6.21)
+- **must** — "Chọn tất cả" (Multiple, from 4 options): first row + MenuDivider; Checked when all are selected, Indeterminate when some; while quick-searching it only affects visible options. (§6.21)
 
 ### Checkbox
 
 Prop: `Value` (Unchecked · Checked · Indeterminate), `State` (Default · Hover · Pressed · [No state] · Error), `Disabled` (False · True)
 
-- **must** — Checked là mảng màu đặc background-interactive + icon check fill 20 object-on-interactive. (§6.3f)
-- **must** — Indeterminate là vạch 16×2 bo tròn — không phải dấu trừ của font hay icon minus; bấm vào chuyển sang Checked. (§6.3f)
-- **do** — Indeterminate dùng cho ô “chọn tất cả” khi danh sách mới tick một phần. (§6.3f)
-- **do** — Error khi ô bắt buộc chưa tick mà người dùng đã bấm tiếp tục (vd. đồng ý Điều khoản). (§6.3f)
-- **dont** — Không báo lỗi checkbox bằng Toast — báo tại ô kèm dòng chữ object-negative dưới hàng. (§6.3f)
-- **must** — Viền 2px dựng inside (box-shadow inset), state layer phủ tràn viền. (§6.1)
+- **must** — Checked is a solid background-interactive block + a 20 check fill icon in object-on-interactive. (§6.3f)
+- **must** — Indeterminate is a rounded 16×2 bar — not a font minus or a minus icon; pressing it goes to Checked. (§6.3f)
+- **do** — Indeterminate is for a "select all" box when the list is partly ticked. (§6.3f)
+- **do** — Error when a required box is unticked and the user pressed continue (e.g. agreeing to the Terms). (§6.3f)
+- **dont** — Never report a checkbox error with a Toast — report it at the box with an object-negative text line under the row. (§6.3f)
+- **must** — The 2px border is built inside (inset box-shadow); the state layer covers the border too. (§6.1)
 
 ### CheckboxInput
 
-- **must** — Vùng chạm là cả hàng, không riêng ô tick. (§6.3f)
-- **must** — Ô tick + chữ gap 12, canh mép trên (items-start), text wrapper đệm trên 4. (§6.3f)
-- **do** — Chữ là property Label (TEXT), override trên instance. (§6.3f)
+- **must** — The touch area is the whole row, not just the box. (§6.3f)
+- **must** — Box + text gap 12, top-aligned (items-start), text wrapper padded 4 on top. (§6.3f)
+- **do** — The text is the Label property (TEXT), overridden on the instance. (§6.3f)
 
 ### Radio
 
 Prop: `Checked` (False · True), `State` (Default · Hover · Pressed · [No state] · Error), `Disabled` (False · True)
 
-- **do** — Chọn một trong nhiều trong form. (§6.3d)
-- **must** — Vòng tròn 32, đã chọn vẫn nền trắng + viền border-interactive + chấm 20 object-interactive. (§6.3d)
-- **do** — Error khi nhóm radio bắt buộc chưa chọn hoặc lựa chọn không hợp lệ. (§6.3d)
-- **must** — Disabled không có hover/pressed. (§6.3d)
+- **do** — Pick one of many in a form. (§6.3d)
+- **must** — 32 circle; when selected it stays white with a border-interactive border + a 20 object-interactive dot. (§6.3d)
+- **do** — Error when a required radio group has no selection or an invalid one. (§6.3d)
+- **must** — Disabled has no hover/pressed. (§6.3d)
 
 ### RadioInput
 
-- **must** — Vùng chạm là cả hàng, không riêng vòng tròn 32. (§6.3d)
-- **must** — Canh mép trên (items-start), gap 12, cụm chữ đệm trên 4 — không canh giữa. (§6.3d)
-- **must** — Danh sách: vạch nét đứt 6/6 border-muted giữa hai hàng, hàng cuối không kẻ; dựng bằng gradient lặp, không dùng border dashed. (§6.3d)
+- **must** — The touch area is the whole row, not just the 32 circle. (§6.3d)
+- **must** — Top-aligned (items-start), gap 12, text block padded 4 on top — not centered. (§6.3d)
+- **must** — Lists: a 6/6 dashed border-muted line between rows, none after the last; built with a repeating gradient, not a dashed border. (§6.3d)
 
 ### Switch
 
 Prop: `Selected` (False · True), `State` (Default · Hover · Focus · Pressed · [No state]), `Disabled` (False · True)
 
-- **do** — Bật/tắt một thiết lập có hiệu lực ngay — khác Checkbox (chọn rồi bấm xác nhận). (§6.17)
-- **must** — Núm đổi cả vị trí lẫn kích thước (16 → 28 có check fill) — đừng chỉ trượt một núm cùng cỡ. (§6.17)
-- **must** — Nửa tắt state layer 5/10, nửa bật 20/40; dựng bằng currentColor. (§6.17)
-- **do** — Cần nhãn thì màn tự dựng hàng và ghi rõ là phần tự chế. (§6.17)
-- **dont** — Không có cỡ nhỏ riêng (dùng Compact) và không có chữ On/Off trong rãnh. (§6.17)
+- **do** — Toggles a setting that takes effect immediately — unlike Checkbox (select, then confirm). (§6.17)
+- **must** — The knob changes both position and size (16 → 28 with a check fill) — don't just slide a same-size knob. (§6.17)
+- **must** — Off half uses state layer 5/10, on half 20/40; built with currentColor. (§6.17)
+- **do** — A switch with a label is a row: use ListItem with a Trailing Switch (§6.32), don't build the row yourself. (§6.17)
+- **dont** — No separate small size (use Compact) and no On/Off text in the track. (§6.17)
 
 ### Chip
 
 Prop: `Type` (Select · Dropdown · Input), `Selected` (False · True), `State` (Default · Hover · Pressed · Disabled)
 
-- **do** — Nhãn bấm được giữ trạng thái chọn; dùng để lọc (thẻ y hệt chỉ ít đi). (§6.18)
-- **must** — Hình học chép TextButtonNeutral Small; chữ style label. (§6.18)
-- **must** — Đã chọn: nền background-interactive-muted, viền border-interactive, chữ object-interactive. (§6.18)
-- **dont** — Đừng dùng background-emphasized làm nền chip đã chọn — trùng background-disabled. (§6.18)
-- **must** — Type=Select đã chọn có icon check fill 16 trước chữ — không chỉ dựa vào màu. (§6.18)
-- **must** — Type=Dropdown có chevron-down 16 cùng màu chữ, không icon check; khi mở chip Selected=True và chevron-up. (§6.18)
-- **do** — Panel bung ra là Menu: lọc một giá trị → Single, chọn xong đóng; lọc nhiều → Multiple + footer, nhãn “{Tên} · n”. (§6.18)
-- **must** — Prefix icon 16 cùng màu chữ, gap 8; Type=Select đã chọn thì check thay chỗ icon — chip chỉ có một icon đầu. (§6.18)
-- **must** — Type=Input: màu như chưa chọn, xmark 16 trong ô tròn 24 cuối chip là nút gỡ duy nhất (aria-label “Gỡ {nhãn}”); thân chip không bấm được. (§6.18)
-- **do** — Type=Input cho giá trị đã nhập / bộ lọc đang áp dụng; gỡ xong focus sang chip kế tiếp. (§6.18)
-- **dont** — Không có cỡ khác 32 — Compact dùng 24. (§6.18)
+- **do** — A pressable label that holds a selected state; used for filtering (identical cards, just fewer). (§6.18)
+- **must** — Geometry copies TextButtonNeutral Small; text uses the label style. (§6.18)
+- **must** — Selected: background-interactive-muted background, border-interactive border, object-interactive text. (§6.18)
+- **dont** — Don't use background-emphasized as the selected chip background — it equals background-disabled. (§6.18)
+- **must** — Selected Type=Select has a 16 check fill icon before the text — never rely on color alone. (§6.18)
+- **must** — Type=Dropdown has a 16 chevron-down in the text color, no check icon; when open the chip is Selected=True with chevron-up. (§6.18)
+- **do** — The panel that opens is a Menu: single-value filter → Single, closes on select; multi-value filter → Multiple + footer, label "{Tên} · n". (§6.18)
+- **must** — 16 prefix icon in the text color, gap 8; selected Type=Select puts the check in its place — a chip has only one leading icon. (§6.18)
+- **must** — Type=Input: unselected colors, a 16 xmark in a 24 circle at the end is the only remove button (aria-label "Gỡ {nhãn}"); the chip body is not pressable. (§6.18)
+- **do** — Type=Input for entered values / applied filters; after removal focus moves to the next chip. (§6.18)
+- **dont** — No size other than 32 — Compact uses 24. (§6.18)
 
 ### SegmentedControl
 
-- **do** — Chọn một-trong-nhiều kiểu tab pill khi cùng nội dung chỉ đổi cách xem. (§6.20)
-- **must** — Item đang chọn đậm lên bằng mode Active (.uu-is-active), không override weight. (§6.13)
-- **must** — State layer item dùng fill object-primary bậc 5/10 ở cả hai giá trị Active. (§6.13)
-- **dont** — Item HUG — đừng chia đều bề ngang trừ khi màn yêu cầu, đừng hardcode 204. (§6.13)
-- **must** — Vỏ nền background-emphasized, item đang chọn nền background-surface + elevation-low. (§6.13)
+- **do** — Pick one of many as pill tabs when the same content only changes its view. (§6.20)
+- **must** — The selected item gets bolder via the Active mode (.uu-is-active), no weight override. (§6.13)
+- **must** — Item state layer uses an object-primary fill at 5/10 for both Active values. (§6.13)
+- **dont** — Items HUG — don't split the width equally unless the screen requires it, don't hardcode 204. (§6.13)
+- **must** — Shell background-emphasized; the selected item has background-surface + elevation-low. (§6.13)
 
 ### NavigationBar
 
-- **must** — Không có nền riêng — trong suốt, nằm trên nền màn. (§6.5)
-- **must** — Back là IconButtonNeutral Solid Inverted=True Base với chevron-left. (§6.5)
-- **do** — Tắt .Mini App Control bằng prop Mini app khi màn không chạy trong mini app. (§6.5)
-- **dont** — Thanh kính mờ là lựa chọn của sản phẩm, component không tự bật. (§2.4)
-- **do** — Trên desktop dùng Breadcrumb; không dùng Breadcrumb thay NavigationBar trên app. (§6.25)
+- **must** — No background of its own — transparent, sitting on the screen background. (§6.5)
+- **must** — Back is IconButtonNeutral Solid Inverted=True Base with chevron-left. (§6.5)
+- **do** — Turn off .Mini App Control with the Mini app prop when the screen doesn't run in a mini app. (§6.5)
+- **dont** — A frosted-glass bar is a product choice; the component never turns it on itself. (§2.4)
+- **do** — Use Breadcrumb on desktop; never use Breadcrumb instead of NavigationBar in an app. (§6.25)
 
 ### BottomBar
 
 Prop: `Active` (1 · 2 · 3 · 4 · 5), `Compact` (False · True)
 
-- **do** — Điều hướng giữa các màn chính ngang hàng; bấm mục là chuyển màn, không lọc nội dung. (§6.22)
-- **must** — Có 2 đến 5 mục. (§6.22)
-- **must** — Mục đang chọn thuộc họ interactive (không accent), icon outline → fill. (§6.22)
-- **must** — Badge là NotificationBadge Count neo góc trên phải icon; chỉ ở mục không Active. (§6.22)
-- **do** — Nút hành động riêng (FooterItemSpecial) cho một hành động chính, không phải đích điều hướng; mặc định Emphasized, Subtle khi màn đã có nút Solid. (§6.22)
-- **must** — Có nút hành động thì Compact=True tối đa 4 mục. (§6.22)
-- **dont** — Thanh kính mờ không phải thuộc tính của BottomBar — component không tự bật. (§2.4)
+- **do** — Navigates between peer main screens; pressing an item changes screen, it doesn't filter content. (§6.22)
+- **must** — 2 to 5 items. (§6.22)
+- **must** — The selected item is in the interactive family (not accent), icon outline → fill. (§6.22)
+- **must** — The badge is a NotificationBadge Count anchored to the icon's top right; only on non-Active items. (§6.22)
+- **do** — The standalone action button (FooterItemSpecial) is for one main action, not a navigation destination; Emphasized by default, Subtle when the screen already has a Solid button. (§6.22)
+- **must** — With an action button, Compact=True and at most 4 items. (§6.22)
+- **dont** — A frosted-glass bar is not a BottomBar property — the component never turns it on itself. (§2.4)
 - **chưa có** — item `Hover` / `Pressed` / `Disabled`; bar position on screen (distance from the bottom, horizontal margins, safe area); shadow or border for the shell when the screen background is also `background-surface`; labels longer than the item width; more than 5 items
 
 ### TablePagination
 
-- **do** — Thanh dưới bảng có số trang bấm được — khác Pagination (gạch chỉ báo carousel). (§6.24)
-- **must** — Trang đang chọn: viền 2px border-interactive + aria-current="page". (§6.24)
-- **must** — Nút lùi ở trang đầu / tiến ở trang cuối là Disabled. (§6.24)
-- **must** — ≤ 7 trang hiện đủ; quá 7 giữ trang đầu, cuối, trang đang chọn ± 1, khoảng trống thành một ô “…”. (§6.24)
-- **dont** — Không bao giờ “…” thay cho đúng một số trang. (§6.24)
-- **must** — Ô Ellipsis không bấm được, không state layer, aria-hidden. (§6.24)
-- **dont** — Không có ô nhập số trang để nhảy — rút gọn “…” là đủ. (§6.24)
+- **do** — The bar under a table with pressable page numbers — unlike Pagination (carousel indicator bars). (§6.24)
+- **must** — Current page: 2px border-interactive border + aria-current="page". (§6.24)
+- **must** — Back on the first page / forward on the last page are Disabled. (§6.24)
+- **must** — ≤ 7 pages show all; more than 7 keeps the first, the last, the current ± 1, and gaps become one "…" cell. (§6.24)
+- **dont** — Never use "…" in place of exactly one page number. (§6.24)
+- **must** — The Ellipsis cell is not pressable, has no state layer, aria-hidden. (§6.24)
+- **dont** — No page-number input to jump — the "…" shortening is enough. (§6.24)
 - **chưa có** — pagination without a known total row count
 
 ### Breadcrumb
 
-- **do** — Đường dẫn vị trí trong cây trang trên desktop. (§6.25)
-- **must** — Mục cuối luôn là trang hiện tại: object-primary, không phải link, aria-current="page", không Hover. (§6.25)
-- **must** — Ngăn cách “/” object-disabled, aria-hidden. (§6.25)
-- **dont** — Không dùng Breadcrumb thay NavigationBar trên app. (§6.25)
-- **must** — Quá 4 mục: giữ mục đầu và 2 mục cuối, các mục giữa gom vào một mục Type=Overflow “…” mở Menu. (§6.25)
-- **dont** — Không có icon trước mục đầu. (§6.25)
+- **do** — The location path in the page tree on desktop. (§6.25)
+- **must** — The last item is always the current page: object-primary, not a link, aria-current="page", no Hover. (§6.25)
+- **must** — The "/" separator is object-disabled, aria-hidden. (§6.25)
+- **dont** — Never use Breadcrumb instead of NavigationBar in an app. (§6.25)
+- **must** — More than 4 items: keep the first and the last 2; the middle items collapse into one Type=Overflow "…" item that opens a Menu. (§6.25)
+- **dont** — No icon before the first item. (§6.25)
 
 ### SideNav
 
 Prop: `Collapsed` (False · True)
 
-- **do** — Thanh điều hướng dọc của web app / portal — tương đương BottomBar trên app. (§6.27)
-- **must** — Một mục Active mỗi lúc: nền background-interactive-muted, icon fill object-interactive, aria-current="page". (§6.27)
-- **must** — Collapsed: rộng 73, ẩn nhãn / chevron / tiêu đề nhóm / mục cấp 2; nhãn chuyển thành Tooltip. (§6.27)
-- **do** — Ẩn/hiện nhãn qua collection layout (data-layout="collapsed" hoặc prop collapsed), không tạo collection mới. (§4.2)
-- **must** — Mục Level=2 không icon, thụt 24 để nhãn thẳng hàng nhãn cấp 1. (§6.27)
-- **must** — Chevron-down xoay 180° khi nhóm mở (không đổi icon); mục có aria-expanded. (§6.27)
-- **do** — Badge trên mục: NotificationBadge Count cuối mục; khi thu gọn thành Dot ở góc trên phải icon. (§6.27)
-- **do** — Nút thu / mở: IconButtonNeutral Ghost Small sidebar-left đầu thanh, aria-expanded, nhãn “Thu gọn / Mở rộng thanh điều hướng”. (§6.27)
-- **dont** — Không có mục cấp 3 — quá 2 cấp thì tách trang. (§6.27)
+- **do** — The vertical navigation bar of a web app / portal — the equivalent of BottomBar in an app. (§6.27)
+- **must** — One Active item at a time: background-interactive-muted background, object-interactive fill icon, aria-current="page". (§6.27)
+- **must** — Collapsed: 73 wide, hides labels / chevrons / group titles / level-2 items; labels become Tooltips. (§6.27)
+- **do** — Show/hide labels via the layout collection (data-layout="collapsed" or the collapsed prop), don't create a new collection. (§4.2)
+- **must** — Level=2 items have no icon, indented 24 so their labels align with level-1 labels. (§6.27)
+- **must** — Chevron-down rotates 180° when the group is open (same icon); the item has aria-expanded. (§6.27)
+- **do** — Item badge: a NotificationBadge Count at the end of the item; collapsed it becomes a Dot at the icon's top right. (§6.27)
+- **do** — Collapse / expand button: IconButtonNeutral Ghost Small sidebar-left at the top of the bar, aria-expanded, label "Thu gọn / Mở rộng thanh điều hướng". (§6.27)
+- **dont** — No level-3 items — beyond 2 levels, split into pages. (§6.27)
 - **chưa có** — an account area at the bottom of the bar
 
 ### Tab
 
 Prop: `State` (Default · Active · Hover · Pressed · Disabled)
 
-- **do** — Chuyển giữa các vùng nội dung khác nhau (bố cục bên dưới đổi), không để lọc danh sách. (§6.20)
-- **must** — Tab Active: chữ object-interactive + gạch 32×4 border-interactive cố định 32, không giãn theo nhãn. (§6.20)
-- **dont** — Đừng lấy object-accent cho chữ tab — tab thuộc họ interactive. (§6.20)
-- **must** — Hover/Pressed chỉ có ở tab không Active; Disabled không có state layer. (§6.20)
-- **dont** — Không vỏ, không nền, không viền riêng trên Tab. (§6.20)
-- **do** — Icon 16 trước chữ (gap 8) cùng màu chữ, Active dùng fill; NotificationBadge Dot sau chữ (gap 4) báo có mới. (§6.20)
-- **must** — Badge chỉ là thông tin phụ — nhãn tab vẫn tự đủ nghĩa; web thêm chữ ẩn “có mới”. (§6.20)
+- **do** — Switches between different content areas (the layout below changes), not for filtering a list. (§6.20)
+- **must** — Active tab: object-interactive text + a 32×4 border-interactive bar fixed at 32, not stretched to the label. (§6.20)
+- **dont** — Don't use object-accent for tab text — tabs belong to the interactive family. (§6.20)
+- **must** — Hover/Pressed only on non-Active tabs; Disabled has no state layer. (§6.20)
+- **dont** — No shell, background or border of its own on Tab. (§6.20)
+- **do** — 16 icon before the text (gap 8) in the text color, fill when Active; a NotificationBadge Dot after the text (gap 4) signals something new. (§6.20)
+- **must** — The badge is only secondary info — the tab label still stands on its own; on the web add hidden text "có mới". (§6.20)
 
 ### TabBar
 
 Prop: `Layout` (Fixed · Scrollable)
 
-- **do** — Fixed cho 2–4 tab nhãn ngắn (chia đều); Scrollable cho ≥ 5 tab hoặc nhãn dài. (§6.20)
-- **must** — Viền dưới 1px border-muted chạy suốt, gạch Active đè lên viền. (§6.20)
-- **must** — Web: role="tablist", mũi tên trái/phải chuyển tab. (§6.20)
-- **must** — Scrollable: tab Active tự cuộn vào tầm nhìn. (§6.20)
-- **dont** — Không có TabBar trên nền tối. (§6.20)
+- **do** — Fixed for 2–4 short-label tabs (equal widths); Scrollable for ≥ 5 tabs or long labels. (§6.20)
+- **must** — A 1px border-muted bottom border runs the full width; the Active bar sits over it. (§6.20)
+- **must** — Web: role="tablist", left/right arrows switch tabs. (§6.20)
+- **must** — Scrollable: the Active tab scrolls into view automatically. (§6.20)
+- **dont** — No TabBar on dark backgrounds. (§6.20)
 
 ### Pagination
 
 Prop: `Position` (Begin · Middle · End)
 
-- **do** — Hàng gạch chỉ vị trí trong băng chuyền — không phải chấm tròn. (§6.10b)
-- **must** — Chỉ ba vị trí Begin/Middle/End với đúng năm gạch, kể cả khi có hơn 5 trang. (§6.10b)
-- **must** — Bề rộng là tín hiệu chính (24 vs 16), màu chỉ phụ. (§6.10b)
-- **dont** — Gạch không active dùng overlay, không dùng màu nền thương hiệu; 🔒Base/Slick không dùng riêng. (§6.10b)
+- **do** — A row of bars showing the position in a carousel — not round dots. (§6.10b)
+- **must** — Only three positions, Begin/Middle/End, with exactly five bars, even with more than 5 pages. (§6.10b)
+- **must** — Width is the main signal (24 vs 16), color only secondary. (§6.10b)
+- **dont** — Inactive bars use overlay, not a brand background color; 🔒Base/Slick is never used on its own. (§6.10b)
 
 ### Toast
 
 Prop: `Type` (Neutral · Negative · Positive · Warning)
 
-- **do** — Báo kết quả việc người dùng vừa làm, ở đáy, có Type. (§6.31)
-- **must** — Độ sáng nền quyết định cả ba phần tử: Warning (nền sáng) → content, nút Action, nút đóng đều Inverted=False; ba type kia Inverted=True. (§6.6)
-- **must** — Content dùng object-on-{status}; style body 400, không phải label. (§6.6)
-- **dont** — Không dùng Toast cho lỗi chặn luồng hay lỗi nhập (sai mã OTP, checkbox bắt buộc) — Toast tự tắt. (§6.3f)
-- **do** — Lỗi sửa được ngay → Dialog / Toast, không phải màn lỗi. (§6.19)
+- **do** — Reports the result of what the user just did, at the bottom, with a Type. (§6.31)
+- **must** — Background lightness decides all three elements: Warning (light background) → content, Action button and close button are all Inverted=False; the other three types Inverted=True. (§6.6)
+- **must** — Content uses object-on-{status}; body 400 style, not label. (§6.6)
+- **dont** — Never use Toast for flow-blocking errors or input errors (wrong OTP, required checkbox) — Toast disappears by itself. (§6.3f)
+- **do** — Errors fixable right away → Dialog / Toast, not an error screen. (§6.19)
 
 ### Badge
 
 Prop: `Tone` (Neutral · Success · Warning · Error)
 
-- **do** — Nhãn trạng thái dạng viên thuốc, không bấm được. (§6.14)
-- **must** — background-{status} chỉ đi với object-on-{status}. (§6.14)
-- **must** — Icon 16 fill luôn hiện trước chữ, theo tone: Neutral circle-info · Success circle-check · Warning circle-warning · Error triangle-warning. (§6.14)
-- **dont** — Không có state (hover/pressed/disabled) — không phải control. (§6.14)
-- **dont** — Không có size khác 24, không có Highlight, không tắt được icon. (§6.14)
+- **do** — A pill-shaped status label, not pressable. (§6.14)
+- **must** — background-{status} only pairs with object-on-{status}. (§6.14)
+- **must** — A 16 fill icon always shows before the text, by tone: Neutral circle-info · Success circle-check · Warning circle-warning · Error triangle-warning. (§6.14)
+- **dont** — No states (hover/pressed/disabled) — not a control. (§6.14)
+- **dont** — No size other than 24, no Highlight, the icon can't be turned off. (§6.14)
 
 ### StatusIndicator
 
 Prop: `Tone` (Neutral · Success · Warning · Error · Highlight), `Container` (None · Filled)
 
-- **must** — Container=None: chấm object-{tone}, chữ luôn object-primary (warning chỉ là chấm). (§6.15)
-- **must** — Chấm nhấp nháy (opacity 1 → 0.3, 1.6s); đứng yên khi người dùng bật giảm chuyển động. (§6.15)
-- **do** — Highlight cho “mục này đáng chú ý” (Mới, Nổi bật, Đề xuất), dùng họ accent. (§6.15)
-- **dont** — Đừng dùng Highlight để báo lỗi (Error) hay “có mới chưa xem” (NotificationBadge). (§6.15)
-- **dont** — Không có state — không phải control. (§6.15)
+- **must** — Container=None: object-{tone} dot, text always object-primary (warning is only the dot). (§6.15)
+- **must** — The dot pulses (opacity 1 → 0.3, 1.6s); it stays still when the user enables reduced motion. (§6.15)
+- **do** — Highlight for "this item deserves attention" (Mới, Nổi bật, Đề xuất), uses the accent family. (§6.15)
+- **dont** — Don't use Highlight for errors (Error) or "new and unseen" (NotificationBadge). (§6.15)
+- **dont** — No states — not a control. (§6.15)
 
 ### CardPushNotification
 
-- **do** — Báo chuyện từ bên ngoài (đơn đổi trạng thái, quà, tin nhắn), trượt từ đỉnh; khác Toast báo kết quả thao tác. (§6.31)
-- **dont** — Không có type, không có nút: bấm cả thẻ để mở, vuốt lên để đóng. (§6.31)
-- **must** — Tự ẩn sau 5 giây, dừng đếm khi đang chạm / hover. (§6.31)
-- **must** — Một thẻ mỗi lúc — thẻ mới thay thẻ cũ. (§6.31)
+- **do** — Reports events from outside (order status changes, gifts, messages), slides in from the top; unlike Toast, which reports the result of an action. (§6.31)
+- **dont** — No type, no buttons: press the whole card to open, swipe up to dismiss. (§6.31)
+- **must** — Hides itself after 5 seconds, pauses the countdown while touched / hovered. (§6.31)
+- **must** — One card at a time — a new card replaces the old one. (§6.31)
 - **must** — Web: role="status", aria-live="polite". (§6.31)
-- **do** — Title và Content tối đa 2 dòng; ảnh nguồn 48 ẩn được. (§6.31)
-- **must** — Desktop: góc trên phải, cách mép trên và phải 16, rộng 360 (size-90); dừng đếm khi hover. (§6.31)
-- **dont** — Không có nút đóng, thời gian nhận hay xếp chồng thẻ. (§6.31)
+- **do** — Title and Content max 2 lines; the 48 source image can be hidden. (§6.31)
+- **must** — Desktop: top right corner, 16 from the top and right edges, 360 wide (size-90); pauses the countdown on hover. (§6.31)
+- **dont** — No close button, received time or card stacking. (§6.31)
 
 ### NotificationBadge
 
 Prop: `Content` (Count · Dot)
 
-- **do** — Chấm/số báo có mới chưa xem, đặt lên góc icon hoặc tab. (§6.16)
-- **must** — Dùng họ attention — không negative, không warning, không accent. (§6.16)
-- **dont** — Nền attention là rose-600 (chữ trắng 4.70): đừng đổi sang red-600, sẽ trùng màu negative. (§2.3)
-- **dont** — Đừng tự chế thêm variant; màn tự đặt vị trí neo. (§6.16)
+- **do** — A dot/count signaling something new and unseen, placed on the corner of an icon or tab. (§6.16)
+- **must** — Uses the attention family — not negative, not warning, not accent. (§6.16)
+- **dont** — The attention background is rose-600 (white text 4.70): don't change it to red-600, it would collide with negative. (§2.3)
+- **dont** — Don't invent extra variants; the screen positions the anchor. (§6.16)
 
 ### Tooltip
 
 Prop: `Placement` (Bottom · Left · Right · Top)
 
-- **do** — Nhãn ngắn giải thích phần tử khi hover hoặc focus — thường cho IconButton không chữ hay SideNav thu gọn. (§6.30)
-- **dont** — Chỉ chữ thuần — không link / nút bên trong (cần thì dùng Popover). (§6.30)
-- **must** — Hiện khi hover và cả focus bàn phím. (§6.30)
-- **dont** — Không dùng trên màn chạm — không có hover. (§6.30)
-- **must** — Mặc định aria-describedby; khi tooltip là tên của phần tử chỉ có icon → aria-labelledby (relation='label'). (§6.30)
-- **must** — Hover hiện sau 500 ms, focus bàn phím hiện ngay; rời / mất focus / Esc ẩn ngay, không mờ dần. (§6.30)
-- **dont** — Không có tooltip nhiều dòng có tiêu đề — dùng Popover. (§6.30)
+- **do** — A short label explaining an element on hover or focus — usually for text-less IconButtons or a collapsed SideNav. (§6.30)
+- **dont** — Plain text only — no links / buttons inside (use Popover for that). (§6.30)
+- **must** — Shows on hover and on keyboard focus. (§6.30)
+- **dont** — Not used on touch screens — there is no hover. (§6.30)
+- **must** — aria-describedby by default; when the tooltip is the name of an icon-only element → aria-labelledby (relation='label'). (§6.30)
+- **must** — Hover shows after 500 ms, keyboard focus shows immediately; leaving / blur / Esc hides immediately, no fade. (§6.30)
+- **dont** — No multi-line tooltips with titles — use Popover. (§6.30)
 
 ### TableHeaderCell
 
 Prop: `Align` (Left · Right), `Sort` (Off · Unsorted · Ascending · Descending), `State` (Default · Hover · Pressed), `Type` (Default · Checkbox)
 
-- **must** — Cột số Align=Right: icon sắp xếp đứng trước nhãn, dồn phải. (§6.23)
-- **must** — Hover/Pressed chỉ ở cột sắp được (Sort≠Off); Sort=Off không icon, không state. (§6.23)
-- **must** — Nhãn object-secondary; object-primary khi Ascending / Descending. (§6.23)
-- **must** — Chiều cao và padding qua biến density (table/header-height, table/cell-padding-x). (§6.23)
-- **must** — Cột chọn hàng: TableHeaderCell Type=Checkbox rộng 64 — Checked khi chọn hết trang đang xem, Indeterminate khi một phần. (§6.23)
+- **must** — Numeric columns Align=Right: the sort icon goes before the label, pushed right. (§6.23)
+- **must** — Hover/Pressed only on sortable columns (Sort≠Off); Sort=Off has no icon, no states. (§6.23)
+- **must** — Label object-secondary; object-primary when Ascending / Descending. (§6.23)
+- **must** — Height and padding via density variables (table/header-height, table/cell-padding-x). (§6.23)
+- **must** — Row-selection column: TableHeaderCell Type=Checkbox, 64 wide — Checked when the whole visible page is selected, Indeterminate when some. (§6.23)
 - **chưa có** — sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them
 
 ### TableCell
 
 Prop: `Type` (Text · Number · Secondary · Actions · Checkbox · Status), `State` (Default · Hover · Selected)
 
-- **must** — Hover / Selected là trạng thái của cả hàng — mọi ô trong hàng cùng State. (§6.23)
-- **must** — Cột số căn phải cả tiêu đề lẫn ô, tabular-nums. (§6.23)
-- **dont** — Hành động theo dòng không bao giờ Solid; hai hành động trở lên → một Ghost Small, còn lại vào menu “⋯”. (§6.23)
-- **dont** — Bảng không viền ngoài, không kẻ dọc — chỉ viền dưới mỗi ô. (§6.23)
-- **do** — Bảng dùng cho desktop / dashboard (density Compact); Selected nền background-interactive-muted. (§6.23)
-- **do** — Bảng rỗng dùng EmptySection đặt trong thân bảng. (§6.19)
-- **do** — Cột trạng thái dùng TableCell Type=Status chứa StatusIndicator, không tự đặt indicator vào ô Text. (§6.23)
+- **must** — Hover / Selected are states of the whole row — every cell in a row shares the State. (§6.23)
+- **must** — Numeric columns right-align both header and cells, tabular-nums. (§6.23)
+- **dont** — Per-row actions are never Solid; two or more actions → one Ghost Small, the rest in the "⋯" menu. (§6.23)
+- **dont** — Tables have no outer border, no vertical lines — only a bottom border on each cell. (§6.23)
+- **do** — Tables are for desktop / dashboards (Compact density); Selected uses background-interactive-muted. (§6.23)
+- **do** — An empty table uses EmptySection inside the table body. (§6.19)
+- **do** — Status columns use TableCell Type=Status containing a StatusIndicator; don't put an indicator in a Text cell yourself. (§6.23)
 - **chưa có** — sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them
 
 ### KPICard
 
 Prop: `Trend` (Up · Down · [No trend]), `Polarity` (Normal · Inverse)
 
-- **do** — Thẻ một con số chính trên dashboard. (§6.26)
-- **must** — Polarity=Normal: Up object-positive, Down object-negative (màu theo chiều số). (§6.26)
-- **do** — Chỉ số tăng là xấu (chi phí, tỉ lệ huỷ) → Polarity=Inverse: Up tô negative, Down tô positive; icon vẫn theo chiều số. (§6.26)
-- **must** — Value heading-base tabular-nums; Trend=[No trend] không có Delta. (§6.26)
-- **must** — Thẻ bấm được (Interactive): chevron-right 16 cuối hàng Label, state layer 5/10 phủ cả thẻ; cả thẻ là một link, không nút khác bên trong. (§6.26)
+- **do** — A card with one main number on a dashboard. (§6.26)
+- **must** — Polarity=Normal: Up object-positive, Down object-negative (color follows the number's direction). (§6.26)
+- **do** — Metrics where up is bad (costs, cancellation rate) → Polarity=Inverse: Up colored negative, Down positive; the icon still follows the direction. (§6.26)
+- **must** — Value heading-base tabular-nums; Trend=[No trend] has no Delta. (§6.26)
+- **must** — Pressable card (Interactive): a 16 chevron-right at the end of the Label row, state layer 5/10 over the whole card; the whole card is one link, no other buttons inside. (§6.26)
 - **chưa có** — a small chart (sparkline) in the card — deferred
 
 ### CardSheet
 
 Prop: `Navigation` (Close · Back), `Height` (Fit · Full)
 
-- **must** — Back và Close loại trừ nhau: sheet gốc Navigation=Close, sheet con Navigation=Back (không có nút đóng). (§6.8)
-- **do** — Code: truyền onBack là Navigation=Back; không truyền là Close. (§6.8)
-- **must** — Nhóm nút là ButtonGroup (§6.9), không frame tự dựng; nút phụ và hướng xếp chỉnh trên instance ButtonGroup. (§6.8)
-- **must** — Bo cả bốn góc radius 24 — sheet nổi cách mép 12. (§6.8)
-- **do** — Có tiêu đề qua prop Header; CTA ẩn/hiện toàn bộ nhóm nút. (§6.10)
-- **do** — Sheet kéo được: Handle 32×4 rounded-circle nền border ở đỉnh; hai nấc Height=Fit / Full. (§6.8)
-- **must** — Kéo xuống ở Fit quá 1/3 → đóng; ở Full → về Fit; không có Handle thì không kéo được. (§6.8)
+- **must** — Back and Close are mutually exclusive: the root sheet is Navigation=Close, a child sheet Navigation=Back (no close button). (§6.8)
+- **do** — Code: passing onBack means Navigation=Back; not passing it means Close. (§6.8)
+- **must** — The button group is ButtonGroup (§6.9), not a hand-built frame; the secondary button and direction are set on the ButtonGroup instance. (§6.8)
+- **must** — All four corners radius 24 — the sheet floats 12 from the edges. (§6.8)
+- **do** — Title via the Header prop; CTA shows/hides the whole button group. (§6.10)
+- **do** — Draggable sheet: a 32×4 rounded-circle Handle with border background at the top; two stops Height=Fit / Full. (§6.8)
+- **must** — Dragging down from Fit past 1/3 → closes; from Full → back to Fit; without a Handle it can't be dragged. (§6.8)
 
 ### CardDialog
 
 Prop: `Banner` (False · True)
 
-- **must** — Không có tiêu đề — mọi nội dung (kể cả tiêu đề) nằm trong Slot; header chỉ chứa nút đóng căn phải. (§6.10)
-- **must** — Banner=True: ảnh tỉ lệ 16:9 duy nhất, là nội dung nên cần alt. (§6.10)
-- **must** — Nút đóng đè lên ảnh dùng IconButtonNeutral Solid Small — nút viền sẽ chìm. (§6.10)
-- **must** — Nhóm nút là ButtonGroup (§6.9). (§6.10)
-- **dont** — Dialog không xếp tầng — không có nút quay lại. (§6.10)
+- **must** — No title — all content (including the title) goes in the Slot; the header only holds a right-aligned close button. (§6.10)
+- **must** — Banner=True: a single 16:9 image; it is content, so it needs alt. (§6.10)
+- **must** — The close button over the image uses IconButtonNeutral Solid Small — an outlined button would disappear. (§6.10)
+- **must** — The button group is ButtonGroup (§6.9). (§6.10)
+- **dont** — Dialogs don't stack — no back button. (§6.10)
 
 ### SideSheet
 
 Prop: `Type` (Standard · Modal), `Width` (Base · Wide)
 
-- **do** — Tấm trượt từ mép phải màn desktop để xem / sửa chi tiết mà không rời trang. (§6.28)
-- **do** — Standard nằm cạnh nội dung, viền trái, không scrim; Modal có elevation-high, bo hai góc trái, scrim như Sheet. (§6.28)
-- **must** — Footer: TextButtonNeutral Outline Base + TextButtonAccent Solid Base, dồn phải, gap 12. (§6.28)
-- **dont** — Không dùng SideSheet trên app — dùng Sheet. (§6.28)
-- **do** — Width=Wide (480) cho form dài / nhiều cột; mặc định Base 384. (§6.28)
-- **dont** — Không có side sheet bên trái, không kéo đổi bề rộng. (§6.28)
+- **do** — A panel sliding in from the right edge of a desktop screen to view / edit details without leaving the page. (§6.28)
+- **do** — Standard sits beside the content with a left border, no scrim; Modal has elevation-high, two rounded left corners, a scrim like Sheet. (§6.28)
+- **must** — Footer: TextButtonNeutral Outline Base + TextButtonAccent Solid Base, right-aligned, gap 12. (§6.28)
+- **dont** — Never use SideSheet in apps — use Sheet. (§6.28)
+- **do** — Width=Wide (480) for long / multi-column forms; default Base 384. (§6.28)
+- **dont** — No left side sheet, no drag-to-resize. (§6.28)
 
 ### Popover
 
-- **do** — Khung nổi neo vào phần tử, chứa nội dung tương tác (form ngắn, xác nhận nhỏ). (§6.29)
-- **must** — Mở bằng bấm; đóng bằng nút đóng / Esc / bấm ra ngoài. (§6.29)
-- **must** — Footer dồn phải gap 8: TextButtonNeutral Ghost Small + TextButtonAccent Solid Small. (§6.29)
-- **dont** — Không dùng Popover cho danh sách lựa chọn (đó là Menu) hay chữ giải thích khi hover (đó là Tooltip). (§6.29)
-- **must** — Neo dưới phần tử, canh trái; thiếu chỗ thì lật lên, sát mép phải thì canh phải. (§6.29)
-- **dont** — Không có mũi tên — Popover tách lớp bằng elevation. (§6.29)
+- **do** — A floating frame anchored to an element, holding interactive content (short forms, small confirmations). (§6.29)
+- **must** — Opens on press; closes with the close button / Esc / outside click. (§6.29)
+- **must** — Footer right-aligned, gap 8: TextButtonNeutral Ghost Small + TextButtonAccent Solid Small. (§6.29)
+- **dont** — Don't use Popover for option lists (that is Menu) or hover explanations (that is Tooltip). (§6.29)
+- **must** — Anchored below the element, left-aligned; flips up when there is no room, right-aligns near the right edge. (§6.29)
+- **dont** — No arrow — Popover separates by elevation. (§6.29)
 
 ### EmptySection
 
-- **do** — Một khối trong màn chưa có dữ liệu (danh sách rỗng, bảng rỗng), kể cả trong thân bảng. (§6.19)
-- **must** — Một nút, ẩn được bằng Action. (§6.19)
-- **must** — Title heading-sm (nhỏ hơn màn), căn giữa; ảnh tròn 128 nền background-accent-muted, cần alt. (§6.19)
+- **do** — A block inside a screen with no data yet (empty list, empty table), including inside a table body. (§6.19)
+- **must** — One button, can be hidden with Action. (§6.19)
+- **must** — Title heading-sm (smaller than the screen), centered; 128 round image with background-accent-muted, needs alt. (§6.19)
 
 ### ErrorSection
 
-- **do** — Lỗi chỉ ở một khối, phần còn lại của màn vẫn dùng được. (§6.19)
-- **must** — Một nút thử lại. (§6.19)
-- **must** — Title heading-sm căn giữa; ảnh tròn 128 nền background-accent-muted, cần alt. (§6.19)
+- **do** — The error is only in one block; the rest of the screen still works. (§6.19)
+- **must** — One retry button. (§6.19)
+- **must** — Title heading-sm centered; 128 round image with background-accent-muted, needs alt. (§6.19)
 
 ### ListItem
 
@@ -572,39 +572,39 @@ Prop: `State` (Default · Hover · Pressed · Disabled)
 
 ### Sheet
 
-- **must** — Là template màn hình, không phải component sản phẩm — khi code dựng lại scrim + wrapper, bỏ home indicator. (§6.8)
-- **must** — Scrim overlay (đen 10%) + overlay-blur 16; đừng nhân thêm opacity lên fill. (§6.8)
-- **must** — Wrapper padding 0/12/12/12: sheet thụt 12 mỗi bên và nổi cách đáy 12. (§6.8)
-- **do** — Trên app dùng Sheet, không dùng SideSheet. (§6.28)
+- **must** — A screen template, not a product component — in code rebuild the scrim + wrapper, drop the home indicator. (§6.8)
+- **must** — Scrim overlay (black 10%) + overlay-blur 16; don't multiply extra opacity onto the fill. (§6.8)
+- **must** — Wrapper padding 0/12/12/12: the sheet is inset 12 on each side and floats 12 above the bottom. (§6.8)
+- **do** — Use Sheet in apps, not SideSheet. (§6.28)
 
 ### Dialog
 
-- **must** — Là template màn hình — khi code dựng theo CardDialog và tự làm scrim. (§6.10)
-- **must** — Panel căn giữa theo chiều dọc (khác Bottom sheet sát đáy). (§6.10)
-- **must** — Scrim overlay + overlay-blur 16, panel thụt 12 mỗi bên; đừng nhân thêm opacity lên fill. (§6.10)
-- **do** — Xác nhận hành động phá huỷ bằng Dialog có TextButtonDanger Solid. (§6.1)
+- **must** — A screen template — in code build it from CardDialog and add the scrim yourself. (§6.10)
+- **must** — The panel is vertically centered (unlike Bottom sheet, which hugs the bottom). (§6.10)
+- **must** — Scrim overlay + overlay-blur 16, panel inset 12 on each side; don't multiply extra opacity onto the fill. (§6.10)
+- **do** — Confirm destructive actions with a Dialog containing a Solid TextButtonDanger. (§6.1)
 
 ### ResultScreen
 
-- **do** — Việc đã xong, người dùng phải sang chỗ khác. (§6.19)
-- **must** — Footer là ButtonGroup dọc — nút chính trên, lối đi phụ dưới. (§6.19)
+- **do** — The task is done; the user has to go somewhere else. (§6.19)
+- **must** — The footer is a vertical ButtonGroup — primary on top, secondary path below. (§6.19)
 - **must** — NavigationBar Back action=false. (§6.19)
-- **do** — Có component code ResultScreen / UuResultScreen (Body + Footer; NavigationBar do màn đặt); ảnh ô vuông không nền, cần alt. (§6.19)
+- **do** — Has a code component ResultScreen / UuResultScreen (Body + Footer; the screen places the NavigationBar); a square image with no background, needs alt. (§6.19)
 
 ### ErrorScreen
 
-- **do** — Lỗi chặn cả chức năng cốt lõi, không tự khắc phục được; lỗi một khối dùng ErrorSection, lỗi sửa được ngay dùng Dialog / Toast. (§6.19)
-- **must** — Đúng một nút: thử lại. (§6.19)
+- **do** — An error blocking the whole core function that can't fix itself; a single-block error uses ErrorSection, errors fixable right away use Dialog / Toast. (§6.19)
+- **must** — Exactly one button: retry. (§6.19)
 - **must** — NavigationBar Back action=false. (§6.19)
-- **must** — Ảnh minh hoạ ô tròn 128 nền background-accent-muted, cần alt. (§6.19)
-- **do** — Có component code ErrorScreen / UuErrorScreen nhận đúng một nút thử lại. (§6.19)
+- **must** — Illustration in a 128 circle with background-accent-muted, needs alt. (§6.19)
+- **do** — Has a code component ErrorScreen / UuErrorScreen taking exactly one retry button. (§6.19)
 
 ### EmptyScreen
 
-- **do** — Cả màn chưa có dữ liệu. (§6.19)
-- **must** — Một nút hành động (tạo mới, khám phá), ẩn được bằng Action. (§6.19)
-- **must** — Có nút back (Back action=true) — màn rỗng vẫn là màn bình thường. (§6.19)
-- **must** — Ảnh minh hoạ ô tròn 128 nền background-accent-muted, cần alt. (§6.19)
+- **do** — The whole screen has no data yet. (§6.19)
+- **must** — One action button (create, explore), can be hidden with Action. (§6.19)
+- **must** — Has a back button (Back action=true) — an empty screen is still a normal screen. (§6.19)
+- **must** — Illustration in a 128 circle with background-accent-muted, needs alt. (§6.19)
 
 ## Dễ nhầm
 
