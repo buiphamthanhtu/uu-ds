@@ -1,28 +1,28 @@
-# UU DS — bản đồ hệ thống (ontology, tóm tắt)
+# UU DS — system map (ontology, summary)
 
-Bản đầy đủ: `ontology.json` (848 node · 2049 quan hệ). Sinh tự động — 2026-11-13.
+Full version: `ontology.json` (848 nodes · 2049 relations). Generated — 2026-11-18.
 
-## Quan hệ
+## Relations
 
-- `isA` — thuộc loại khái niệm
-- `aliasOf` — token trỏ vào token khác (ghi chú: brand / density)
-- `variesBy` — giá trị đổi theo trục mode
-- `hasMode` — trục có mode
-- `belongsToFamily` — token thuộc họ vai trò màu
-- `usesToken` — component đọc token (từ CSS thật của thư mục component)
-- `uses` — component dùng cơ chế / khái niệm
-- `composedOf` — component dựng từ component khác (từ import thật)
-- `chosenWhen` — component là đáp án của cây quyết định (ghi chú: đường câu hỏi)
-- `confusedWith` — hai component dễ nhầm (ghi chú: cách phân biệt)
-- `distinctFrom` — hai họ vai trò không dùng thay nhau
-- `fillIs` — state layer tô bằng
-- `hasProps` — component có prop variant (xem thuộc tính props của node: tên prop → giá trị hợp lệ)
-- `hasRule` — component / toàn hệ thống có quy tắc (node Rule: kind must / do / dont, text, source)
-- `hasNotYet` — component có phần chưa chốt (thuộc tính notYet của node) — gặp thì hỏi
+- `isA` — is a kind of concept
+- `aliasOf` — token points to another token (note: brand / density)
+- `variesBy` — value changes along a mode axis
+- `hasMode` — axis has a mode
+- `belongsToFamily` — token belongs to a color role family
+- `usesToken` — component reads a token (from the real CSS of the component folder)
+- `uses` — component uses a mechanism / concept
+- `composedOf` — component is built from another component (from real imports)
+- `chosenWhen` — component is an answer of a decision tree (note: the question path)
+- `confusedWith` — two easily confused components (note: how to tell them apart)
+- `distinctFrom` — two role families that never substitute for each other
+- `fillIs` — state layer is painted with
+- `hasProps` — component has variant props (see the node's props: prop name → valid values)
+- `hasRule` — component / whole system has a rule (Rule node: kind must / do / dont, text, source)
+- `hasNotYet` — component has undecided parts (the node's notYet) — ask when you meet them
 
 ## Component
 
-| Component | Variant | Spec | Dựng từ | Token đọc | Web · Flutter · Figma |
+| Component | Variants | Spec | Built from | Tokens read | Web · Flutter · Figma |
 |---|---|---|---|---|---|
 | `TextButtonAccent` | 90 | §6.1 | — | gap-2, rounded-4xl, text-label-font-weight, text-label-font-size, text-label-line-height, control-height-large, control-padding-y-large, control-padding-x-large +31 | TextButtonAccent · UuTextButton · Figma ✓ |
 | `TextButtonNeutral` | 105 | §6.1 | — | gap-2, rounded-4xl, text-label-font-weight, text-label-font-size, text-label-line-height, control-height-large, control-padding-y-large, control-padding-x-large +31 | TextButtonNeutral · UuTextButton · Figma ✓ |
@@ -77,7 +77,7 @@ Bản đầy đủ: `ontology.json` (848 node · 2049 quan hệ). Sinh tự đ�
 | `ErrorScreen` | 1 | §6.19 | ButtonGroup, NavigationBar | gap-3, rounded-circle, background-accent-muted, object-primary, text-heading-sm-font-size, text-heading-sm-line-height, text-heading-base-font-size, text-heading-base-line-height +3 | ErrorScreen · UuErrorScreen · Figma ✓ |
 | `EmptyScreen` | 1 | §6.19 | ButtonGroup, NavigationBar | gap-3, rounded-circle, background-accent-muted, object-primary, text-heading-sm-font-size, text-heading-sm-line-height, text-heading-base-font-size, text-heading-base-line-height +3 | EmptyScreen · UuEmptyScreen · Figma ✓ |
 
-## Quy tắc chung
+## Global rules
 
 - **must** — Only use semantic tokens (background-*, object-*, border-*); never hardcode hex, never create color primitives with built-in alpha. (§0)
 - **dont** — Don't use a background token to color text or vice versa — each token has its own scope (background, text, border, gap, radius). (§1)
@@ -95,7 +95,7 @@ Bản đầy đủ: `ontology.json` (848 node · 2049 quan hệ). Sinh tự đ�
 - **must** — Only use UU icon (or the set attached via DNA); don't swap in Lucide/Phosphor/Font Awesome singles, don't crop the viewBox. On state uses the fill variant, off state uses outline. (§6.11)
 - **do** — Only build components listed in section 5; anything missing is not decided — ask, don't guess. (§0)
 
-## Quy tắc và phần chưa chốt theo component
+## Rules and undecided parts per component
 
 ### TextButtonAccent
 
@@ -346,7 +346,7 @@ Prop: `Active` (1 · 2 · 3 · 4 · 5), `Compact` (False · True)
 - **do** — The standalone action button (FooterItemSpecial) is for one main action, not a navigation destination; Emphasized by default, Subtle when the screen already has a Solid button. (§6.22)
 - **must** — With an action button, Compact=True and at most 4 items. (§6.22)
 - **dont** — A frosted-glass bar is not a BottomBar property — the component never turns it on itself. (§2.4)
-- **chưa có** — item `Hover` / `Pressed` / `Disabled`; bar position on screen (distance from the bottom, horizontal margins, safe area); shadow or border for the shell when the screen background is also `background-surface`; labels longer than the item width; more than 5 items
+- **not yet** — item `Hover` / `Pressed` / `Disabled`; bar position on screen (distance from the bottom, horizontal margins, safe area); shadow or border for the shell when the screen background is also `background-surface`; labels longer than the item width; more than 5 items
 
 ### TablePagination
 
@@ -357,7 +357,7 @@ Prop: `Active` (1 · 2 · 3 · 4 · 5), `Compact` (False · True)
 - **dont** — Never use "…" in place of exactly one page number. (§6.24)
 - **must** — The Ellipsis cell is not pressable, has no state layer, aria-hidden. (§6.24)
 - **dont** — No page-number input to jump — the "…" shortening is enough. (§6.24)
-- **chưa có** — pagination without a known total row count
+- **not yet** — pagination without a known total row count
 
 ### Breadcrumb
 
@@ -381,7 +381,7 @@ Prop: `Collapsed` (False · True)
 - **do** — Item badge: a NotificationBadge Count at the end of the item; collapsed it becomes a Dot at the icon's top right. (§6.27)
 - **do** — Collapse / expand button: IconButtonNeutral Ghost Small sidebar-left at the top of the bar, aria-expanded, label "Thu gọn / Mở rộng thanh điều hướng". (§6.27)
 - **dont** — No level-3 items — beyond 2 levels, split into pages. (§6.27)
-- **chưa có** — an account area at the bottom of the bar
+- **not yet** — an account area at the bottom of the bar
 
 ### Tab
 
@@ -485,7 +485,7 @@ Prop: `Align` (Left · Right), `Sort` (Off · Unsorted · Ascending · Descendin
 - **must** — Label object-secondary; object-primary when Ascending / Descending. (§6.23)
 - **must** — Height and padding via density variables (table/header-height, table/cell-padding-x). (§6.23)
 - **must** — Row-selection column: TableHeaderCell Type=Checkbox, 64 wide — Checked when the whole visible page is selected, Indeterminate when some. (§6.23)
-- **chưa có** — sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them
+- **not yet** — sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them
 
 ### TableCell
 
@@ -498,7 +498,7 @@ Prop: `Type` (Text · Number · Secondary · Actions · Checkbox · Status), `St
 - **do** — Tables are for desktop / dashboards (Compact density); Selected uses background-interactive-muted. (§6.23)
 - **do** — An empty table uses EmptySection inside the table body. (§6.19)
 - **do** — Status columns use TableCell Type=Status containing a StatusIndicator; don't put an indicator in a Text cell yourself. (§6.23)
-- **chưa có** — sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them
+- **not yet** — sticky columns on horizontal scroll, expandable rows, inline cell editing, drag-to-reorder columns, empty / loading rows, a third density. Sticky columns, expandable rows, inline editing and column dragging are deferred — only when an admin screen needs them
 
 ### KPICard
 
@@ -509,7 +509,7 @@ Prop: `Trend` (Up · Down · [No trend]), `Polarity` (Normal · Inverse)
 - **do** — Metrics where up is bad (costs, cancellation rate) → Polarity=Inverse: Up colored negative, Down positive; the icon still follows the direction. (§6.26)
 - **must** — Value heading-base tabular-nums; Trend=[No trend] has no Delta. (§6.26)
 - **must** — Pressable card (Interactive): a 16 chevron-right at the end of the Label row, state layer 5/10 over the whole card; the whole card is one link, no other buttons inside. (§6.26)
-- **chưa có** — a small chart (sparkline) in the card — deferred
+- **not yet** — a small chart (sparkline) in the card — deferred
 
 ### CardSheet
 
@@ -606,52 +606,52 @@ Prop: `State` (Default · Hover · Pressed · Disabled)
 - **must** — Has a back button (Back action=true) — an empty screen is still a normal screen. (§6.19)
 - **must** — Illustration in a 128 circle with background-accent-muted, needs alt. (§6.19)
 
-## Dễ nhầm
+## Easily confused
 
-- `Switch` ≠ `Checkbox` — Switch có hiệu lực ngay khi bấm; Checkbox chỉ ghi lựa chọn, phải có nút xác nhận.
-- `Tab` ≠ `Chip` — Tab đổi vùng nội dung (bố cục khác); Chip lọc thu hẹp cùng một danh sách.
-- `Tab` ≠ `SegmentedControl` — SegmentedControl đổi cách xem cùng nội dung, 2–4 lựa chọn ngắn; Tab đổi sang nội dung khác.
-- `Toast` ≠ `CardPushNotification` — Toast báo kết quả việc người dùng vừa làm, ở đáy, có type; Push báo chuyện từ bên ngoài, ở đỉnh, không type.
-- `Pagination` ≠ `TablePagination` — Pagination là gạch chỉ vị trí băng chuyền; TablePagination có số trang bấm được dưới bảng.
-- `Tooltip` ≠ `Popover` — Tooltip mở bằng hover / focus, chỉ chữ; Popover mở bằng bấm, có nút, form ngắn.
-- `Popover` ≠ `Menu` — Menu là danh sách lựa chọn; Popover chứa nội dung tương tác bất kỳ.
-- `CardSheet` ≠ `CardDialog` — Sheet sát đáy, có tiêu đề Header, có Back; Dialog căn giữa, không tiêu đề riêng, không xếp tầng.
-- `CardSheet` ≠ `SideSheet` — CardSheet / Sheet cho app (mobile); SideSheet cho desktop, trượt từ mép phải.
-- `TextButtonDanger` ≠ `TextButtonNeutral` — Danger chỉ cho hành động không hoàn tác được; đăng xuất, bỏ qua làm lại được → Neutral.
-- `TextButtonAccent` ≠ `TextButtonNeutral` — Accent cho hành động chính của màn; Neutral cho hành động phụ, trung tính.
-- `Badge` ≠ `StatusIndicator` — Badge là nhãn có nền đặc 24; StatusIndicator là chấm + chữ trạng thái, có Container None / Filled.
-- `NotificationBadge` ≠ `StatusIndicator` — NotificationBadge (họ attention) báo có mới chưa xem; StatusIndicator Highlight (họ accent) là mục đáng chú ý.
-- `ErrorScreen` ≠ `ErrorSection` — ErrorScreen khi lỗi chặn cả chức năng cốt lõi; ErrorSection khi lỗi chỉ ở một khối.
-- `EmptyScreen` ≠ `EmptySection` — EmptyScreen khi cả màn chưa có dữ liệu; EmptySection cho một khối / bảng rỗng.
-- `Dropdown` ≠ `Chip` — Dropdown là ô chọn trong form; Chip Type=Dropdown là bộ lọc nằm ngang, hiện giá trị đang chọn.
+- `Switch` ≠ `Checkbox` — Switch takes effect on press; Checkbox only records a choice and needs a confirm button.
+- `Tab` ≠ `Chip` — Tab switches content areas (different layout); Chip filters the same list down.
+- `Tab` ≠ `SegmentedControl` — SegmentedControl changes how the same content is viewed, 2–4 short options; Tab switches to different content.
+- `Toast` ≠ `CardPushNotification` — Toast reports the result of what the user just did, at the bottom, with a type; Push reports outside events, at the top, no type.
+- `Pagination` ≠ `TablePagination` — Pagination is the carousel position bars; TablePagination has pressable page numbers under a table.
+- `Tooltip` ≠ `Popover` — Tooltip opens on hover / focus, text only; Popover opens on press, with buttons or a short form.
+- `Popover` ≠ `Menu` — Menu is a list of options; Popover holds any interactive content.
+- `CardSheet` ≠ `CardDialog` — Sheet hugs the bottom, has a Header title and Back; Dialog is centered, no separate title, never stacks.
+- `CardSheet` ≠ `SideSheet` — CardSheet / Sheet for apps (mobile); SideSheet for desktop, sliding in from the right edge.
+- `TextButtonDanger` ≠ `TextButtonNeutral` — Danger only for irreversible actions; sign out and skip are reversible → Neutral.
+- `TextButtonAccent` ≠ `TextButtonNeutral` — Accent for the main action of the screen; Neutral for secondary, neutral actions.
+- `Badge` ≠ `StatusIndicator` — Badge is a 24 label with a solid background; StatusIndicator is a status dot + text, with Container None / Filled.
+- `NotificationBadge` ≠ `StatusIndicator` — NotificationBadge (attention family) signals something new and unseen; StatusIndicator Highlight (accent family) marks an item worth attention.
+- `ErrorScreen` ≠ `ErrorSection` — ErrorScreen when the error blocks the whole core function; ErrorSection when it is only one block.
+- `EmptyScreen` ≠ `EmptySection` — EmptyScreen when the whole screen has no data yet; EmptySection for one empty block / table.
+- `Dropdown` ≠ `Chip` — Dropdown is a picker field in a form; Chip Type=Dropdown is a horizontal filter showing the selected value.
 
-## Chọn khi nào (từ cây quyết định)
+## When to choose (from decision trees)
 
-- **Switch** (Chọn một): Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Có → Bấm vào là có hiệu lực ngay? — Có hiệu lực ngay ⇒ Bật thông báo, bật vân tay, tiết kiệm pin.
-- **Checkbox** (Chọn một): Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Có → Bấm vào là có hiệu lực ngay? — Phải bấm nút xác nhận ⇒ Đồng ý điều khoản, ghi nhớ đăng nhập — phải bấm nút mới ăn.
-- **Chip** (Chọn một): Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Có → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Chip hiện giá trị đang chọn, bấm vào mới bung danh sách. Hợp với thanh lọc nằm ngang.
-- **Dropdown** (Chọn một): Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Có → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Ô chọn cao 48 cùng khổ với các field khác trong form.
-- **Radio** (Chọn một): Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Có ⇒ Giới tính, nhóm máu, quốc tịch. Danh sách dọc, đọc kỹ từng dòng.
-- **Chip** (Chọn một): Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Kiểu dáng xe, hộp số, khoảng giá — các giá trị ngắn xếp thành lưới.
-- **Radio** (Chọn một): Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Giá trị dài thì phải xuống dòng; chip xuống dòng là vỡ lưới.
-- **Checkbox** (Chọn nhiều): Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Có ⇒ Dị ứng thuốc, quốc tịch, giấy tờ đã có.
-- **Chip** (Chọn nhiều): Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Dịch vụ khách sạn, tiện ích, thẻ phân loại — xếp lưới, xuống dòng được.
-- **Checkbox** (Chọn nhiều): Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Giá trị dài thì mỗi dòng một mục, chữ xuống dòng vẫn thẳng hàng.
+- **Switch** (Chọn một): Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Có → Bấm vào là có hiệu lực ngay? — Có hiệu lực ngay ⇒ Bật thông báo, bật vân tay, tiết kiệm pin.
+- **Checkbox** (Chọn một): Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Có → Bấm vào là có hiệu lực ngay? — Phải bấm nút xác nhận ⇒ Đồng ý điều khoản, ghi nhớ đăng nhập: phải bấm nút mới có hiệu lực.
+- **Chip** (Chọn một): Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Có → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Chip hiện giá trị đang chọn, bấm vào mới bung danh sách. Hợp với thanh lọc nằm ngang.
+- **Dropdown** (Chọn một): Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Có → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Ô chọn cao 48 cùng khổ với các field khác trong form.
+- **Radio** (Chọn một): Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Có ⇒ Giới tính, nhóm máu, quốc tịch. Danh sách dọc, đọc kỹ từng dòng.
+- **Chip** (Chọn một): Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Kiểu dáng xe, hộp số, khoảng giá: giá trị ngắn, xếp thành lưới.
+- **Radio** (Chọn một): Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Giá trị dài thì phải xuống dòng; chip xuống dòng là vỡ lưới.
+- **Checkbox** (Chọn nhiều): Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Có ⇒ Dị ứng thuốc, quốc tịch, giấy tờ đã có.
+- **Chip** (Chọn nhiều): Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Dịch vụ khách sạn, tiện ích, thẻ phân loại: xếp lưới, xuống dòng được.
+- **Checkbox** (Chọn nhiều): Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Giá trị dài thì mỗi dòng một mục, chữ xuống dòng vẫn thẳng hàng.
 - **Tab** (Phân loại nội dung): Dải này dùng để lọc các mục trong cùng một danh sách? — Có → Các mục loại trừ nhau hoàn toàn, và bố cục thẻ đổi theo mục? — Có ⇒ Còn hiệu lực / Hết hiệu lực: hai tập rời nhau, và voucher hết hạn không còn nút Xem mã.
 - **Chip** (Phân loại nội dung): Dải này dùng để lọc các mục trong cùng một danh sách? — Có → Các mục loại trừ nhau hoàn toàn, và bố cục thẻ đổi theo mục? — Không ⇒ Bên dưới vẫn là danh sách đó, cùng kiểu thẻ, chỉ ít mục đi. Voucher: Tất cả · Khả dụng · Đã dùng.
 - **SegmentedControl** (Phân loại nội dung): Dải này dùng để lọc các mục trong cùng một danh sách? — Không → Bên dưới vẫn là cùng một nội dung, chỉ đổi cách xem hoặc phạm vi? — Có ⇒ Danh sách ↔ Bản đồ, Tuần ↔ Tháng ↔ Năm. 2–4 mục cố định, chia đều bề ngang.
 - **Tab** (Phân loại nội dung): Dải này dùng để lọc các mục trong cùng một danh sách? — Không → Bên dưới vẫn là cùng một nội dung, chỉ đổi cách xem hoặc phạm vi? — Không ⇒ Mỗi mục là một vùng nội dung khác hẳn. Khách sạn: Mô tả · Hình ảnh · Chính sách.
 - **Sang cây Phản hồi lỗi** (Phản hồi): Đây là thông điệp báo lỗi? — Có ⇒ Lỗi có cây riêng vì tiêu chí là "ai sửa được", không phải "cần bao nhiêu chú ý".
-- **ResultScreen** (Phản hồi): Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Có ⇒ Màn kết quả toàn trang — Đặt phòng xong, thanh toán xong — màn riêng, có chi tiết và hai lối đi tiếp.
-- **Dialog** (Phản hồi): Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Không → Nội dung có gọn không — một tiêu đề, một đoạn mô tả, tối đa một hình? — Có ⇒ Tạo yêu cầu thành công, đang xử lý, dự kiến có kết quả ngày…
-- **Sheet** (Phản hồi): Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Không → Nội dung có gọn không — một tiêu đề, một đoạn mô tả, tối đa một hình? — Không ⇒ Có bảng chi tiết, danh sách, nhiều dòng thông tin — sheet cuộn được, dialog thì không.
+- **ResultScreen** (Phản hồi): Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Có ⇒ Màn kết quả toàn trang — Đặt phòng xong, thanh toán xong: màn riêng, có chi tiết và hai lối đi tiếp.
+- **Dialog** (Phản hồi): Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Không → Nội dung có gọn không: một tiêu đề, một đoạn mô tả, tối đa một hình? — Có ⇒ Tạo yêu cầu thành công, đang xử lý, dự kiến có kết quả ngày…
+- **Sheet** (Phản hồi): Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Không → Nội dung có gọn không: một tiêu đề, một đoạn mô tả, tối đa một hình? — Không ⇒ Có bảng chi tiết, danh sách, nhiều dòng thông tin: sheet cuộn được, dialog thì không.
 - **Toast** (Phản hồi): Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Đọc lướt là đủ ⇒ Đã thêm vào yêu thích, đã sao chép, đã lưu nháp. Tự tắt, không chặn thao tác.
-- **TextInput** (Phản hồi lỗi): Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Có → Lỗi gắn được vào đúng một ô không? — Có ⇒ Dòng lỗi tại ô — Sai định dạng email, mật khẩu chưa đủ ký tự, ngày trả trước ngày nhận. Ô tick bắt buộc cũng vào đây — Checkbox có State=Error.
+- **TextInput** (Phản hồi lỗi): Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Có → Lỗi gắn được vào đúng một ô không? — Có ⇒ Dòng lỗi tại ô — Sai định dạng email, mật khẩu chưa đủ ký tự, ngày trả trước ngày nhận. Ô tick bắt buộc cũng vào đây, vì Checkbox có State=Error.
 - **Toast** (Phản hồi lỗi): Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Có → Lỗi gắn được vào đúng một ô không? — Không ⇒ Lỗi thuộc cả biểu mẫu chứ không thuộc ô nào: đơn không đủ điều kiện giao, giỏ hàng vượt hạn mức.
-- **Dialog** (Phản hồi lỗi): Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Không → Phần còn lại của ứng dụng vẫn dùng được? — Có ⇒ Số dư ví không đủ, quá số lần gửi OTP — phải rời màn này mới xử lý được.
-- **ErrorScreen** (Phản hồi lỗi): Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Không → Phần còn lại của ứng dụng vẫn dùng được? — Không ⇒ Màn lỗi toàn trang — Hệ thống gián đoạn, mất kết nối máy chủ — chức năng cốt lõi không chạy được.
+- **Dialog** (Phản hồi lỗi): Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Không → Phần còn lại của ứng dụng vẫn dùng được? — Có ⇒ Số dư ví không đủ, quá số lần gửi OTP: phải rời màn này mới xử lý được.
+- **ErrorScreen** (Phản hồi lỗi): Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Không → Phần còn lại của ứng dụng vẫn dùng được? — Không ⇒ Màn lỗi toàn trang — Hệ thống gián đoạn, mất kết nối máy chủ: chức năng cốt lõi không chạy được.
 - **Toast** (Phản hồi lỗi): Lỗi có chặn người dùng đi tiếp không? — Vẫn đi tiếp được ⇒ Tải thêm mục thất bại, mất kết nối tạm thời, đồng bộ nền lỗi. Kèm nút Thử lại nếu thử lại được.
 - **Chỉ đánh dấu các trường KHÔNG bắt buộc** (Trường bắt buộc): Quá nửa số trường là bắt buộc? — Có ⇒ Nhãn thêm hậu tố ∙ Không bắt buộc. Các trường còn lại để trơn.
 - **Chỉ đánh dấu các trường BẮT BUỘC** (Trường bắt buộc): Quá nửa số trường là bắt buộc? — Không ⇒ Nhãn thêm hậu tố ∙ Bắt buộc. Các trường còn lại để trơn.
 - **Xác thực theo thời gian thực** (Xác thực dữ liệu): Kiểm được ngay trên máy, không cần gọi máy chủ? — Có ⇒ Định dạng email, độ dài mật khẩu, số ký tự, khoảng ngày.
-- **Xác thực khi gửi biểu mẫu** (Xác thực dữ liệu): Kiểm được ngay trên máy, không cần gọi máy chủ? — Không ⇒ Trùng tài khoản, mã giảm giá còn hiệu lực, số dư đủ hay không — phải hỏi máy chủ.
+- **Xác thực khi gửi biểu mẫu** (Xác thực dữ liệu): Kiểm được ngay trên máy, không cần gọi máy chủ? — Không ⇒ Trùng tài khoản, mã giảm giá còn hiệu lực, số dư đủ hay không: phải hỏi máy chủ.

@@ -1,9 +1,9 @@
 /* UU DS design tokens */
-/* Đơn vị (web): size / gap / radius / font-size / line-height xuất rem (1rem = 16px ở cỡ chữ mặc định)
-   để giao diện co theo cỡ chữ người dùng chọn trong trình duyệt. Giữ px: size-px (nét 1px), rounded-circle,
-   bóng đổ, độ dày viền. App (Flutter) dùng cùng giá trị ở dạng logical px — xem tokens.json. */
-/* UU DS — hai brand mode: Default (:root) và UU ([data-theme="uu"], cam + vàng theo nhận diện Ú Ù). Brand khác: thêm một khối
-   [data-theme="<tên>"] ghi đè đúng 22 token thương hiệu (spec 2.5). */
+/* Units (web): size / gap / radius / font-size / line-height are emitted in rem (1rem = 16px at the default font size)
+   so the UI scales with the font size the user picks in the browser. Kept in px: size-px (1px stroke), rounded-circle,
+   shadows, border widths. Apps (Flutter) use the same values as logical px — see tokens.json. */
+/* UU DS — two brand modes: Default (:root) and UU ([data-theme="uu"], orange + yellow of the Ú Ù identity). Another brand: add a
+   [data-theme="<name>"] block overriding exactly the 22 brand tokens (spec 2.5). */
 
 :root {
   /* ---- primitive: color ---- */
@@ -313,7 +313,7 @@
   --opacity-95: 0.95;
 
   /* ---- typography ---- */
-  /* Font hệ thống của thiết bị. SF Pro là font hệ thống của iOS, không phải font của UU DS — đừng nhúng. */
+  /* The device's system font. SF Pro is iOS's system font, not a UU DS font — never embed it. */
   --font-family-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                       "Noto Sans", system-ui, sans-serif;
   --font-family-display: "Bungee", Impact, sans-serif;
@@ -343,13 +343,13 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* ---- blur: primitive (px — độ nhoè không co theo cỡ chữ) ---- */
+  /* ---- blur: primitive (px — blur does not scale with font size) ---- */
   --blur-0: 0px;
   --blur-sm: 4px;
   --blur-base: 8px;
   --blur-lg: 16px;
 
-  /* ---- effect: blur theo vai trò (spec 2.4) — component chỉ đọc nhóm này ---- */
+  /* ---- effect: blur by role (spec 2.4) — components only read this group ---- */
   --overlay-blur: var(--blur-lg);
   --surface-blur-start: var(--blur-0);
   --surface-blur-end: var(--blur-lg);
@@ -358,10 +358,10 @@
   --elevation-low: 0px 2px 8px rgba(0, 0, 0, 0.10);
   --elevation-medium: 0px 4px 12px rgba(0, 0, 0, 0.10);
   --elevation-high: 0px 8px 24px rgba(0, 0, 0, 0.10);
-  --elevation-none: 0 0 0 0 transparent; /* mức sát mặt của control (spec 4.3): mặc định không bóng; DNA đổi thành bóng cứng nếu cần */
+  --elevation-none: 0 0 0 0 transparent; /* resting level of controls (spec 4.3): no shadow by default; DNA may turn it into a hard shadow */
 
-  /* ---- viền ngoài (spec 4.3) — mặc định 0; DNA của sản phẩm bật. Vẽ BÊN NGOÀI viền trong bằng box-shadow spread:
-     không chiếm chỗ, không che viền trạng thái. Áp cho control và thẻ (CardSheet, CardDialog, KPICard). ---- */
+  /* ---- outer border (spec 4.3) — 0 by default; the product's DNA turns it on. Drawn OUTSIDE the inner border with box-shadow spread:
+     takes no space, never hides the state border. Applies to controls and cards (CardSheet, CardDialog, KPICard). ---- */
   --border-outer-width: 0px;
   --border-outer: var(--object-primary);
 
@@ -407,13 +407,13 @@
   --object-on-negative: var(--color-white);
   --object-attention: var(--color-rose-600);
   --object-on-attention: var(--color-white);
-  --object-warning: var(--color-yellow-500); /* 1.92:1 trên trắng — chỉ dùng cho chấm/icon đi kèm chữ */
+  --object-warning: var(--color-yellow-500); /* 1.92:1 on white — only for dots/icons next to text */
   --object-on-warning: var(--color-black);
   --border: var(--color-slate-300);
   --border-muted: var(--color-slate-200);
   --border-emphasized: var(--color-slate-500);
-  /* Thang viền theo MÀU THƯƠNG HIỆU, song song với thang xám ở trên.
-     Thang xám (border / -muted / -emphasized) KHÔNG đổi theo brand. */
+  /* Border scale in the BRAND COLOR, parallel to the gray scale above.
+     The gray scale (border / -muted / -emphasized) does NOT change with brand. */
   --border-subtle: var(--color-blue-200);
   --border-medium: var(--color-blue-300);
   --border-inverted: var(--color-slate-600);
@@ -421,7 +421,7 @@
   --border-interactive: var(--color-indigo-500);
   --border-interactive-inverted: var(--color-indigo-700);
   --border-highlight: var(--color-white);
-  --border-negative: var(--color-red-600); /* viền ô nhập ở state Error */
+  --border-negative: var(--color-red-600); /* input border in the Error state */
 
   /* ---- semantic: alpha tokens ---- */
   /* Alpha lives on the token itself, not on a separate primitive. */
@@ -430,7 +430,7 @@
   --background-transparent: color-mix(in srgb, var(--color-white) 0%, transparent);
 }
 
-/* ---- brand mode Default, khai lại cho vùng con: <div data-theme="default"> bên trong trang đang ở brand khác ---- */
+/* ---- brand mode Default, redeclared for a sub-region: <div data-theme="default"> inside a page on another brand ---- */
 [data-theme="default"] {
   --object-secondary: var(--color-slate-600);
   --border: var(--color-slate-300);
@@ -457,9 +457,9 @@
   --border-medium: var(--color-blue-300);
 }
 
-/* ---- brand mode UU (spec 2.5): cam + vàng theo nhận diện Ú Ù — chỉ 22 token thương hiệu ----
-   Nền nút orange-500 (chủ DS chốt 2026-10-18): chữ trắng chỉ 2.80 → chữ trên nút ĐEN (7.49) qua object-on-interactive.
-   Chữ / link màu cam vẫn orange-700 (5.18 trên trắng); orange-500 trên trắng chỉ 2.80. */
+/* ---- brand mode UU (spec 2.5): orange + yellow of the Ú Ù identity — only the 22 brand tokens ----
+   Button fill orange-500 (decided by the DS owner 2026-10-18): white text is only 2.80 → text on buttons is BLACK (7.49) via object-on-interactive.
+   Orange text / links stay orange-700 (5.18 on white); orange-500 on white is only 2.80. */
 [data-theme="uu"] {
   --object-secondary: var(--color-neutral-600);
   --background-muted: var(--color-neutral-50);
@@ -498,10 +498,10 @@
 }
 
 /* ---- density (spec §4.1) ----
-   Touch = mặc định, đúng kích thước gốc (app mobile, mini app). Compact = desktop / dashboard: bật bằng
-   data-density="compact" trên <html> hoặc một vùng. Độc lập với brand. Chỉ đổi kích thước và độ đậm chữ
-   label; màu, state layer, gap giữa các khối, icon giữ nguyên. Component đọc các biến này, không đọc
-   thẳng size-* / font-size-* cho phần có density. */
+   Touch = default, original sizes (mobile apps, mini apps). Compact = desktop / dashboard: turn on with
+   data-density="compact" on <html> or a region. Independent of brand. Only changes sizes and the label
+   font weight; colors, state layer, gaps between blocks and icons stay the same. Components read these variables, never
+   size-* / font-size-* directly for density-dependent parts. */
 :root, [data-density="touch"] {
   --text-heading-lg-font-size: var(--font-size-2xl);
   --text-heading-lg-line-height: var(--font-height-2xl);
@@ -617,8 +617,8 @@
   --list-padding-y: var(--gap-2);
   --sidenav-width: var(--size-60);
 }
-/* Mode chữ Active (Toggle bật, Segment đang chọn): label đậm hơn một bậc — Touch 700 · Compact 600.
-   Khai báo lại tại phần tử Active để var() lấy bậc weight đã dịch của mode đó. */
+/* Active text mode (Toggle on, selected Segment): label one weight step bolder — Touch 700 · Compact 600.
+   Redeclared on the Active element so var() picks up that mode's shifted weight step. */
 [data-typography="active"], .uu-is-active { --text-label-font-weight: var(--font-weight-semibold); }
 [data-density="compact"] [data-typography="active"], [data-density="compact"] .uu-is-active,
 [data-density="compact"][data-typography="active"], [data-density="compact"].uu-is-active { --text-label-font-weight: var(--font-weight-medium); }
@@ -626,7 +626,7 @@
 /* ---- text styles ---- */
 .text-display-lg {
   font-family: var(--font-family-display);
-  font-synthesis: none; /* Bungee chỉ có Regular — không làm đậm giả */
+  font-synthesis: none; /* Bungee only has Regular — no faux bold */
   font-size: var(--font-size-5xl);
   line-height: var(--font-height-5xl);
   font-weight: var(--font-weight-bold);
@@ -720,16 +720,16 @@
   letter-spacing: 0;
 }
 
-/* Paragraph spacing (Figma paragraphSpacing): khoảng cách giữa hai đoạn liền nhau trong cùng khối chữ.
-   body / label 16 (font-height-xs) · caption 8 (font-height-2xs). Style khác = 0. */
+/* Paragraph spacing (Figma paragraphSpacing): space between two consecutive paragraphs in the same text block.
+   body / label 16 (font-height-xs) · caption 8 (font-height-2xs). Other styles = 0. */
 :where(.text-body, .text-label) > p + p { margin-block-start: var(--font-height-xs); }
 :where(.text-caption) > p + p { margin-block-start: var(--font-height-2xs); }
 
 
 /* =========================================================================
-   STATE LAYER — cơ chế hover/pressed của UU DS.
-   Hover/Pressed KHÔNG đổi background, color, hay font-weight. Chúng chỉ phủ
-   một lớp full-bleed màu = màu object của variant (CSS: currentColor).
+   STATE LAYER — UU DS's hover/pressed mechanism.
+   Hover/Pressed do NOT change background, color or font-weight. They only cover
+   the element with a full-bleed layer in the variant's object color (CSS: currentColor).
    ========================================================================= */
 
 .uu-interactive { position: relative; isolation: isolate; }
@@ -744,22 +744,22 @@
   transition: opacity 120ms ease;
 }
 
-/* Nền đặc / tối: Solid Accent, Solid Neutral, mọi Inverted=True của Neutral,
-   và Toggle button khi Active=True */
+/* Solid / dark backgrounds: Solid Accent, Solid Neutral, every Neutral Inverted=True,
+   and Toggle button when Active=True */
 .uu-on-dark:hover::after   { opacity: var(--opacity-20); }
 .uu-on-dark:active::after  { opacity: var(--opacity-40); }
 
-/* Nền sáng / trong suốt: Outline, Ghost, mọi Solid Inverted=True,
-   và Toggle button khi Active=False */
+/* Light / transparent backgrounds: Outline, Ghost, every Solid Inverted=True,
+   and Toggle button when Active=False */
 .uu-on-light:hover::after  { opacity: var(--opacity-5); }
 .uu-on-light:active::after { opacity: var(--opacity-10); }
 
-/* Disabled và Loading không có state layer */
+/* Disabled and Loading have no state layer */
 .uu-interactive[disabled]::after,
 .uu-interactive[aria-disabled="true"]::after,
 .uu-interactive[data-state="loading"]::after { opacity: 0; }
 
-/* --- Button sizing (mục 6.1 / 6.2) --- */
+/* --- Button sizing (section 6.1 / 6.2) --- */
 .uu-btn {
   display: inline-flex; align-items: center; justify-content: center;
   gap: var(--gap-2);
@@ -781,19 +781,19 @@
 .uu-iconbtn--sm   { width: var(--control-height-small); height: var(--control-height-small); padding: 0; }
 /* icon: --control-icon-large / -base / -small (Touch 24 / 24 / 16 · Compact 16) */
 
-/* --- Toggle button (mục 6.7) --- */
-/* Active=True: đổi nền, đổi icon sang biến thể fill, và chữ đậm thêm 1 bậc
-   qua typography mode "Active". Không border, không shadow.
-   Hug width — đừng hardcode width. Với font hệ thống, bề rộng chữ còn khác
-   nhau giữa iOS, Roboto và các bộ font OEM của Android. */
+/* --- Toggle button (section 6.7) --- */
+/* Active=True: background changes, the icon switches to the fill variant, and text gets one weight step bolder
+   via the "Active" typography mode. No border, no shadow.
+   Hug width — never hardcode width. With system fonts, text width also differs
+   between iOS, Roboto and Android OEM fonts. */
 .uu-toggle { background: var(--background-surface); color: var(--object-primary); }
 .uu-toggle[aria-pressed="true"] {
   background: var(--background-interactive);
   color: var(--object-on-interactive);
 }
-/* Chữ đậm thêm một bậc khi bật: thêm class .uu-is-active (mode chữ Active, xem khối density). */
+/* Text one weight step bolder when on: add the .uu-is-active class (Active text mode, see the density block). */
 
-/* --- Field (mục 6.3 / 6.4) --- */
+/* --- Field (section 6.3 / 6.4) --- */
 .uu-field {
   display: flex; align-items: center; gap: var(--gap-2);
   height: var(--field-height); padding: 0 var(--field-padding-x);
@@ -804,10 +804,10 @@
 .uu-field:focus-within { border-color: var(--border-emphasized); }
 .uu-field[data-disabled] { background: var(--background-disabled); }
 
-/* --- Ô "chọn": Dropdown (mục 6.4) và DateInput (mục 6.3c) --- */
-/* Gợi ý rỗng: body 400 object-secondary. Giá trị đã chọn: label 600 object-primary.
-   Icon mép phải luôn object-secondary (chevron-down 16 · calendar-days 24) — không phải
-   object-interactive, không bọc thành Icon button. Text FILL để icon bám mép phải. */
+/* --- "Picker" fields: Dropdown (section 6.4) and DateInput (section 6.3c) --- */
+/* Empty hint: body 400 object-secondary. Selected value: label 600 object-primary.
+   The right-edge icon is always object-secondary (chevron-down 16 · calendar-days 24) — not
+   object-interactive, never wrapped in an Icon button. Text FILLs so the icon sticks to the right edge. */
 .uu-field__hint,
 .uu-field__value { flex: 1 1 0; min-width: 1px;
                     font-size: var(--text-body-font-size); line-height: var(--text-body-line-height); }
@@ -815,10 +815,10 @@
 .uu-field__value { color: var(--object-primary);   font-weight: var(--text-label-font-weight); }
 .uu-field__icon  { flex: 0 0 auto; color: var(--object-secondary); }
 
-/* --- Segmented control (mục 6.13) --- */
-/* Vỏ: background-emphasized, radius 16, padding 4, gap 2.
-   Item chọn: nền surface, radius 12, elevation-low, chữ 700 qua mode Active.
-   Item thường: trong suốt, chữ object-secondary 600. Item HUG — đừng chia đều. */
+/* --- Segmented control (section 6.13) --- */
+/* Shell: background-emphasized, radius 16, padding 4, gap 2.
+   Selected item: surface background, radius 12, elevation-low, text 700 via the Active mode.
+   Other items: transparent, text object-secondary 600. Items HUG — don't split the width equally. */
 .uu-segmented { display: inline-flex; align-items: center; gap: var(--gap-0-5);
                  padding: var(--gap-1); border-radius: var(--radius-lg);
                  background: var(--background-emphasized); }
@@ -829,28 +829,28 @@
                  line-height: var(--text-label-line-height); font-weight: var(--text-label-font-weight); }
 .uu-segment[aria-selected="true"] { background: var(--background-surface); color: var(--object-primary);
                  border-radius: var(--radius-base); box-shadow: var(--elevation-low); }
-/* Item chọn thêm class .uu-is-active để chữ đậm thêm một bậc (mode chữ Active). */
+/* The selected item adds the .uu-is-active class so its text gets one weight step bolder (Active text mode). */
 
-/* --- Checkbox / Radio (mục 6.3f / 6.3d) --- */
+/* --- Checkbox / Radio (section 6.3f / 6.3d) --- */
 .uu-checkbox { width: var(--selection-size); height: var(--selection-size); border-radius: var(--selection-radius);
                 background: var(--background-surface); border: 2px solid var(--border-muted);
                 display: inline-flex; align-items: center; justify-content: center; }
 .uu-checkbox[aria-checked="true"] { background: var(--background-interactive); border: 0;
-                color: var(--object-on-interactive); } /* icon `check` fill 20 dùng currentColor */
+                color: var(--object-on-interactive); } /* the 20 `check` fill icon uses currentColor */
 .uu-radio    { width: var(--selection-size); height: var(--selection-size); border-radius: var(--rounded-circle);
                 background: var(--background-surface); border: 2px solid var(--border);
                 display: inline-flex; align-items: center; justify-content: center; }
 .uu-radio[aria-checked="true"] { border-color: var(--border-interactive); color: var(--object-interactive); }
 .uu-radio[aria-checked="true"]::before { content: ""; width: var(--selection-radio-dot); height: var(--selection-radio-dot);
                 border-radius: inherit; background: currentColor; }
-/* State layer: ô/vòng TRỐNG đi bậc nền sáng 5/10; ô ĐÃ CHỌN đi bậc nền đặc
-   20/40 — Checkbox dùng object-on-interactive, Radio dùng object-interactive. */
+/* State layer: EMPTY box/circle uses the light-background step 5/10; a CHECKED box uses the solid step
+   20/40 — Checkbox uses object-on-interactive, Radio uses object-interactive. */
 
-/* ---- thanh kính mờ — blur dần (progressive, spec 2.4) ----
-   Lớp tiện ích, sản phẩm tự gắn khi UI có thanh mờ; component Header / BottomBar không tự bật.
-   .uu-surface-blur--top: header — mạnh nhất ở mép trên (surface-blur-end), về 0 ở mép dưới.
-   .uu-surface-blur--bottom: bottom bar — ngược lại. Dựng bằng 4 lớp backdrop-filter, mỗi lớp một bậc,
-   giới hạn bằng mask gradient; giá trị lấy từ token nên đổi thang là đổi theo. */
+/* ---- frosted bar — progressive blur (spec 2.4) ----
+   Utility class the product adds itself when the UI has a frosted bar; Header / BottomBar components never turn it on.
+   .uu-surface-blur--top: header — strongest at the top edge (surface-blur-end), down to 0 at the bottom edge.
+   .uu-surface-blur--bottom: bottom bar — the reverse. Built from 4 backdrop-filter layers, one step each,
+   bounded by a mask gradient; values come from tokens, so changing the scale follows through. */
 .uu-surface-blur--top, .uu-surface-blur--bottom { position: relative; isolation: isolate; }
 .uu-surface-blur--top::before, .uu-surface-blur--top::after,
 .uu-surface-blur--bottom::before, .uu-surface-blur--bottom::after {
