@@ -4,33 +4,33 @@
   "name": "schema:name",
   "definition": "schema:description"
  },
- "name": "ÚÙ Design system — bản đồ hệ thống (ontology)",
- "description": "Bản đồ tri thức cho AI: khái niệm, token, component, mode và quan hệ giữa chúng. Sinh tự động từ tokens.json, spec §5, CSS / TSX thật và các cây quyết định; cặp dễ nhầm viết tay.",
- "generatedAt": "2026-11-13",
+ "name": "ÚÙ Design system — system map (ontology)",
+ "description": "Knowledge map for AI: concepts, tokens, components, modes and the relations between them. Generated from tokens.json, the spec (§5 + components/*.md), real CSS / TSX and the decision trees; confused pairs are hand-written.",
+ "generatedAt": "2026-11-18",
  "howToUse": [
-  "Tìm component: nodes có type Component; xem edges usesToken / composedOf / confusedWith / chosenWhen của nó.",
-  "Tìm token cho một vai: lọc Token layer=semantic theo role (background/object/border/overlay) và family.",
-  "Đổi brand / density / layout: Token có edge variesBy; giá trị từng mode ở ghi chú của aliasOf.",
-  "Quy tắc của component: edges hasRule → node Rule (kind must / do / dont). Quy tắc chung: hasRule từ concept:component.",
-  "Cấu trúc: thuộc tính props của node component (prop → giá trị). Phần chưa có: thuộc tính notYet.",
-  "Không có trong nodes, hoặc nằm trong notYet = chưa chốt trong UU DS → dừng và hỏi."
+  "Find a component: nodes of type Component; look at its usesToken / composedOf / confusedWith / chosenWhen edges.",
+  "Find a token for a role: filter Token layer=semantic by role (background/object/border/overlay) and family.",
+  "Switch brand / density / layout: tokens with a variesBy edge; per-mode values are in the aliasOf notes.",
+  "Component rules: hasRule edges → Rule nodes (kind must / do / dont). Global rules: hasRule from concept:component.",
+  "Structure: the props of a component node (prop → values). Missing parts: the notYet property.",
+  "Not in nodes, or listed in notYet = not decided in UU DS → stop and ask."
  ],
  "relations": {
-  "isA": "thuộc loại khái niệm",
-  "aliasOf": "token trỏ vào token khác (ghi chú: brand / density)",
-  "variesBy": "giá trị đổi theo trục mode",
-  "hasMode": "trục có mode",
-  "belongsToFamily": "token thuộc họ vai trò màu",
-  "usesToken": "component đọc token (từ CSS thật của thư mục component)",
-  "uses": "component dùng cơ chế / khái niệm",
-  "composedOf": "component dựng từ component khác (từ import thật)",
-  "chosenWhen": "component là đáp án của cây quyết định (ghi chú: đường câu hỏi)",
-  "confusedWith": "hai component dễ nhầm (ghi chú: cách phân biệt)",
-  "distinctFrom": "hai họ vai trò không dùng thay nhau",
-  "fillIs": "state layer tô bằng",
-  "hasProps": "component có prop variant (xem thuộc tính props của node: tên prop → giá trị hợp lệ)",
-  "hasRule": "component / toàn hệ thống có quy tắc (node Rule: kind must / do / dont, text, source)",
-  "hasNotYet": "component có phần chưa chốt (thuộc tính notYet của node) — gặp thì hỏi"
+  "isA": "is a kind of concept",
+  "aliasOf": "token points to another token (note: brand / density)",
+  "variesBy": "value changes along a mode axis",
+  "hasMode": "axis has a mode",
+  "belongsToFamily": "token belongs to a color role family",
+  "usesToken": "component reads a token (from the real CSS of the component folder)",
+  "uses": "component uses a mechanism / concept",
+  "composedOf": "component is built from another component (from real imports)",
+  "chosenWhen": "component is an answer of a decision tree (note: the question path)",
+  "confusedWith": "two easily confused components (note: how to tell them apart)",
+  "distinctFrom": "two role families that never substitute for each other",
+  "fillIs": "state layer is painted with",
+  "hasProps": "component has variant props (see the node's props: prop name → valid values)",
+  "hasRule": "component / whole system has a rule (Rule node: kind must / do / dont, text, source)",
+  "hasNotYet": "component has undecided parts (the node's notYet) — ask when you meet them"
  },
  "stats": {
   "Concept": 15,
@@ -50,74 +50,74 @@
    "id": "concept:primitive",
    "type": "Concept",
    "name": "Primitive token",
-   "definition": "Một bậc trên thang (màu, cỡ, khoảng cách, blur). Chỉ dùng để định nghĩa token semantic; component không đọc thẳng."
+   "definition": "One step on a scale (color, size, spacing, blur). Only used to define semantic tokens; components never read it directly."
   },
   {
    "id": "concept:semantic",
    "type": "Concept",
    "name": "Semantic token",
-   "definition": "Một vai trò ({vai-trò}-{biến-thể}). Component chỉ đọc tầng này."
+   "definition": "A role ({role}-{variant}). Components only read this tier."
   },
   {
    "id": "concept:brand-mode",
    "type": "Concept",
    "name": "Brand mode",
-   "definition": "Bộ giá trị của 22 token thương hiệu. Bật bằng data-theme; component không biết brand."
+   "definition": "A set of values for the 22 brand tokens. Turned on with data-theme; components do not know the brand."
   },
   {
    "id": "concept:density",
    "type": "Concept",
    "name": "Density",
-   "definition": "Trục kích thước Touch / Compact. Đổi chiều cao control, field, chữ; không đổi màu."
+   "definition": "The Touch / Compact size axis. Changes control, field and text heights; never colors."
   },
   {
    "id": "concept:layout",
    "type": "Concept",
    "name": "Layout",
-   "definition": "Trục hiện / ẩn Expanded / Collapsed (show-label, show-section-title, show-nested)."
+   "definition": "The Expanded / Collapsed show / hide axis (show-label, show-section-title, show-nested)."
   },
   {
    "id": "concept:state-layer",
    "type": "Concept",
    "name": "State layer",
-   "definition": "Lớp ::after tô bằng màu object của variant; hover/pressed 5/10 trên nền sáng, 20/40 trên nền đặc. Không đổi nền / chữ."
+   "definition": "An ::after layer painted with the variant's object color; hover/pressed 5/10 on light backgrounds, 20/40 on solid ones. Never changes background / text."
   },
   {
    "id": "concept:object-color",
    "type": "Concept",
-   "name": "Màu object của variant",
-   "definition": "Token object-* mà variant dùng cho chữ / icon. CSS: currentColor. Là fill của state layer."
+   "name": "Variant object color",
+   "definition": "The object-* token a variant uses for text / icons. CSS: currentColor. It is the state layer fill."
   },
   {
    "id": "concept:text-style",
    "type": "Concept",
    "name": "Text style",
-   "definition": "13 style (display-*, heading-*, title-*, body, label, caption). Đọc qua biến density."
+   "definition": "13 styles (display-*, heading-*, title-*, body, label, caption). Read through density variables."
   },
   {
    "id": "concept:component",
    "type": "Concept",
    "name": "Component",
-   "definition": "Thành phần đã chốt ở spec §5. Không có trong danh sách = chưa chốt → hỏi."
+   "definition": "A decided building block in spec §5. Not in the list = not decided → ask."
   },
   {
    "id": "concept:template",
    "type": "Concept",
-   "name": "Template màn",
-   "definition": "Bố cục màn để tham chiếu (Sheet, Dialog, ResultScreen…), không phải component để import."
+   "name": "Screen template",
+   "definition": "A screen layout for reference (Sheet, Dialog, ResultScreen…), not a component to import."
   },
   {
    "id": "concept:role-family",
    "type": "Concept",
-   "name": "Họ vai trò màu",
-   "definition": "interactive (bấm được), accent (nhấn nội dung), neutral, status (positive / negative / warning / attention)."
+   "name": "Color role family",
+   "definition": "interactive (pressable), accent (content emphasis), neutral, status (positive / negative / warning / attention)."
   },
   {
    "id": "mode:brand/default",
    "type": "Mode",
    "axis": "brand",
    "name": "Default",
-   "activate": ":root (mặc định) hoặc data-theme=\"default\""
+   "activate": ":root (default) or data-theme=\"default\""
   },
   {
    "id": "mode:brand/uu",
@@ -131,7 +131,7 @@
    "type": "Mode",
    "axis": "density",
    "name": "Touch",
-   "activate": "mặc định"
+   "activate": "default"
   },
   {
    "id": "mode:density/compact",
@@ -145,7 +145,7 @@
    "type": "Mode",
    "axis": "layout",
    "name": "Expanded",
-   "activate": "mặc định"
+   "activate": "default"
   },
   {
    "id": "mode:layout/collapsed",
@@ -3517,7 +3517,7 @@
    "layer": "semantic",
    "group": "effect",
    "css": "--overlay-blur",
-   "definition": "Nhoè đều nền phía sau sheet / dialog / side sheet modal; luôn đi cặp màu overlay."
+   "definition": "Uniform background blur behind sheet / dialog / modal side sheet; always paired with the overlay color."
   },
   {
    "id": "token:surface-blur-start",
@@ -3525,7 +3525,7 @@
    "layer": "semantic",
    "group": "effect",
    "css": "--surface-blur-start",
-   "definition": "Blur dần của thanh kính mờ — mép phía nội dung."
+   "definition": "Progressive blur of a frosted bar — the edge facing the content."
   },
   {
    "id": "token:surface-blur-end",
@@ -3533,7 +3533,7 @@
    "layer": "semantic",
    "group": "effect",
    "css": "--surface-blur-end",
-   "definition": "Blur dần của thanh kính mờ — mép sát cạnh màn."
+   "definition": "Progressive blur of a frosted bar — the edge at the screen border."
   },
   {
    "id": "textstyle:display-lg",
@@ -3699,21 +3699,21 @@
    "type": "Token",
    "layer": "layout",
    "figma": "layout/show-label",
-   "note": "BOOLEAN — web dùng data-layout / prop, không có CSS var"
+   "note": "BOOLEAN — web uses data-layout / a prop, no CSS var"
   },
   {
    "id": "token:layout-show-section-title",
    "type": "Token",
    "layer": "layout",
    "figma": "layout/show-section-title",
-   "note": "BOOLEAN — web dùng data-layout / prop, không có CSS var"
+   "note": "BOOLEAN — web uses data-layout / a prop, no CSS var"
   },
   {
    "id": "token:layout-show-nested",
    "type": "Token",
    "layer": "layout",
    "figma": "layout/show-nested",
-   "note": "BOOLEAN — web dùng data-layout / prop, không có CSS var"
+   "note": "BOOLEAN — web uses data-layout / a prop, no CSS var"
   },
   {
    "id": "component:TextButtonAccent",
@@ -4411,7 +4411,7 @@
    "name": "BottomBar",
    "variants": "10 (+ `base/FooterItem` 2 · `base/FooterItemSpecial` 4)",
    "spec": "§6.22",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "BottomBar",
@@ -4463,7 +4463,7 @@
    "name": "TablePagination",
    "variants": "1 (+ `.PageItem` 4)",
    "spec": "§6.24",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "TablePagination",
@@ -5047,7 +5047,7 @@
    "name": "ListItem",
    "variants": "4",
    "spec": "§6.32",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "ListItem",
@@ -5085,7 +5085,7 @@
    "id": "component:.label",
    "type": "InternalComponent",
    "name": ".label",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": ".label"
    }
@@ -5094,7 +5094,7 @@
    "id": "component:.suffix",
    "type": "InternalComponent",
    "name": ".suffix",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": ".suffix"
    },
@@ -5110,7 +5110,7 @@
    "id": "component:base/prefix",
    "type": "InternalComponent",
    "name": "base/prefix",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": "base/prefix"
    },
@@ -5126,7 +5126,7 @@
    "id": "component:base/suffix",
    "type": "InternalComponent",
    "name": "base/suffix",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": "base/suffix"
    },
@@ -5141,7 +5141,7 @@
    "id": "component:.Segment item",
    "type": "InternalComponent",
    "name": ".Segment item",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": ".Segment item"
    },
@@ -5163,7 +5163,7 @@
    "id": "component:.MenuItem",
    "type": "InternalComponent",
    "name": ".MenuItem",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "MenuItem",
@@ -5198,7 +5198,7 @@
    "id": "component:.MenuSection",
    "type": "InternalComponent",
    "name": ".MenuSection",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "MenuSection",
@@ -5212,7 +5212,7 @@
    "id": "component:.MenuDivider",
    "type": "InternalComponent",
    "name": ".MenuDivider",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "MenuDivider",
@@ -5226,7 +5226,7 @@
    "id": "component:base/FooterItem",
    "type": "InternalComponent",
    "name": "base/FooterItem",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": "base/FooterItem"
    },
@@ -5242,7 +5242,7 @@
    "id": "component:base/FooterItemSpecial",
    "type": "InternalComponent",
    "name": "base/FooterItemSpecial",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": "base/FooterItemSpecial"
    },
@@ -5262,7 +5262,7 @@
    "id": "component:.PageItem",
    "type": "InternalComponent",
    "name": ".PageItem",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "PageItem",
@@ -5284,7 +5284,7 @@
    "id": "component:.BreadcrumbItem",
    "type": "InternalComponent",
    "name": ".BreadcrumbItem",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "BreadcrumbItem",
@@ -5313,7 +5313,7 @@
    "id": "component:.SideNavItem",
    "type": "InternalComponent",
    "name": ".SideNavItem",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "SideNavItem",
@@ -5343,7 +5343,7 @@
    "id": "component:.SideNavSection",
    "type": "InternalComponent",
    "name": ".SideNavSection",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "SideNavSection",
@@ -5357,7 +5357,7 @@
    "id": "component:.base/input-default",
    "type": "InternalComponent",
    "name": ".base/input-default",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": ".base/input-default"
    },
@@ -5387,7 +5387,7 @@
    "id": "component:.base/input-masked",
    "type": "InternalComponent",
    "name": ".base/input-masked",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": ".base/input-masked"
    },
@@ -5417,7 +5417,7 @@
    "id": "component:.ListIconContainer",
    "type": "InternalComponent",
    "name": ".ListIconContainer",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "ListIconContainer",
@@ -5431,7 +5431,7 @@
    "id": "component:.ListAvatar",
    "type": "InternalComponent",
    "name": ".ListAvatar",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "ListAvatar",
@@ -5445,7 +5445,7 @@
    "id": "component:.ListValue",
    "type": "InternalComponent",
    "name": ".ListValue",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "web": {
      "export": "ListValue",
@@ -5459,7 +5459,7 @@
    "id": "component:.Mini App Control",
    "type": "InternalComponent",
    "name": ".Mini App Control",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": ".Mini App Control"
    },
@@ -5483,7 +5483,7 @@
    "id": "component:.loading",
    "type": "InternalComponent",
    "name": ".loading",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": ".loading"
    }
@@ -5492,7 +5492,7 @@
    "id": "component:Icon",
    "type": "InternalComponent",
    "name": "Icon",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "flutter": "UuIcon",
     "figma": "Icon"
@@ -5502,7 +5502,7 @@
    "id": "component:🔒Base/Slick",
    "type": "InternalComponent",
    "name": "🔒Base/Slick",
-   "note": "nội bộ — chỉ xuất hiện bên trong component khác",
+   "note": "internal — only appears inside other components",
    "platforms": {
     "figma": "🔒Base/Slick"
    },
@@ -5521,26 +5521,26 @@
   {
    "id": "concept:variant-prop",
    "type": "Concept",
-   "name": "Prop variant",
-   "definition": "Trục variant của component trong Figma (vd. Type, State, Selected) và các giá trị hợp lệ. Code đặt tên prop camelCase theo đúng tên này."
+   "name": "Variant prop",
+   "definition": "A component variant axis in Figma (e.g. Type, State, Selected) and its valid values. Code names the prop in camelCase after it."
   },
   {
    "id": "concept:rule",
    "type": "Concept",
-   "name": "Quy tắc",
-   "definition": "must = bắt buộc · do = nên dùng thế này · dont = không được. Mỗi quy tắc dẫn về mục spec."
+   "name": "Rule",
+   "definition": "must = required · do = recommended way · dont = not allowed. Each rule cites its spec section."
   },
   {
    "id": "concept:not-yet",
    "type": "Concept",
-   "name": "Chưa chốt",
-   "definition": "Thứ component CHƯA có trong UU DS — gặp thì dừng và hỏi, không tự dựng."
+   "name": "Not decided",
+   "definition": "Something a component does NOT have yet in UU DS — stop and ask, never build it yourself."
   },
   {
    "id": "concept:icon",
    "type": "Concept",
    "name": "UU icon",
-   "definition": "Bộ icon UU (bản công khai: icon component dùng cố định + texture giữ chỗ) qua <Icon name variant size />. variant fill = trạng thái bật."
+   "definition": "The UU icon set (public edition: icons components use internally + the texture placeholder) via <Icon name variant size />. Variant fill = on state."
   },
   {
    "id": "decision:chon-mot",
@@ -5574,7 +5574,7 @@
    "id": "answer:Sang cây Phản hồi lỗi",
    "type": "Answer",
    "name": "Sang cây Phản hồi lỗi",
-   "note": "đáp án cây quyết định chưa khớp đúng một component (cách dùng / biến thể)"
+   "note": "decision-tree answer that does not map to exactly one component (a usage / variant)"
   },
   {
    "id": "decision:phan-hoi-loi",
@@ -5594,13 +5594,13 @@
    "id": "answer:Chỉ đánh dấu các trường KHÔNG bắt buộc",
    "type": "Answer",
    "name": "Chỉ đánh dấu các trường KHÔNG bắt buộc",
-   "note": "đáp án cây quyết định chưa khớp đúng một component (cách dùng / biến thể)"
+   "note": "decision-tree answer that does not map to exactly one component (a usage / variant)"
   },
   {
    "id": "answer:Chỉ đánh dấu các trường BẮT BUỘC",
    "type": "Answer",
    "name": "Chỉ đánh dấu các trường BẮT BUỘC",
-   "note": "đáp án cây quyết định chưa khớp đúng một component (cách dùng / biến thể)"
+   "note": "decision-tree answer that does not map to exactly one component (a usage / variant)"
   },
   {
    "id": "decision:xac-thuc",
@@ -5613,13 +5613,13 @@
    "id": "answer:Xác thực theo thời gian thực",
    "type": "Answer",
    "name": "Xác thực theo thời gian thực",
-   "note": "đáp án cây quyết định chưa khớp đúng một component (cách dùng / biến thể)"
+   "note": "decision-tree answer that does not map to exactly one component (a usage / variant)"
   },
   {
    "id": "answer:Xác thực khi gửi biểu mẫu",
    "type": "Answer",
    "name": "Xác thực khi gửi biểu mẫu",
-   "note": "đáp án cây quyết định chưa khớp đúng một component (cách dùng / biến thể)"
+   "note": "decision-tree answer that does not map to exactly one component (a usage / variant)"
   },
   {
    "id": "rule:global/1",
@@ -16657,61 +16657,61 @@
    "component:Switch",
    "chosenWhen",
    "decision:chon-mot",
-   "Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Có → Bấm vào là có hiệu lực ngay? — Có hiệu lực ngay ⇒ Bật thông báo, bật vân tay, tiết kiệm pin."
+   "Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Có → Bấm vào là có hiệu lực ngay? — Có hiệu lực ngay ⇒ Bật thông báo, bật vân tay, tiết kiệm pin."
   ],
   [
    "component:Checkbox",
    "chosenWhen",
    "decision:chon-mot",
-   "Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Có → Bấm vào là có hiệu lực ngay? — Phải bấm nút xác nhận ⇒ Đồng ý điều khoản, ghi nhớ đăng nhập — phải bấm nút mới ăn."
+   "Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Có → Bấm vào là có hiệu lực ngay? — Phải bấm nút xác nhận ⇒ Đồng ý điều khoản, ghi nhớ đăng nhập: phải bấm nút mới có hiệu lực."
   ],
   [
    "component:Chip",
    "chosenWhen",
    "decision:chon-mot",
-   "Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Có → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Chip hiện giá trị đang chọn, bấm vào mới bung danh sách. Hợp với thanh lọc nằm ngang."
+   "Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Có → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Chip hiện giá trị đang chọn, bấm vào mới bung danh sách. Hợp với thanh lọc nằm ngang."
   ],
   [
    "component:Dropdown",
    "chosenWhen",
    "decision:chon-mot",
-   "Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Có → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Ô chọn cao 48 cùng khổ với các field khác trong form."
+   "Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Có → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Ô chọn cao 48 cùng khổ với các field khác trong form."
   ],
   [
    "component:Radio",
    "chosenWhen",
    "decision:chon-mot",
-   "Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Có ⇒ Giới tính, nhóm máu, quốc tịch. Danh sách dọc, đọc kỹ từng dòng."
+   "Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Có ⇒ Giới tính, nhóm máu, quốc tịch. Danh sách dọc, đọc kỹ từng dòng."
   ],
   [
    "component:Chip",
    "chosenWhen",
    "decision:chon-mot",
-   "Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Kiểu dáng xe, hộp số, khoảng giá — các giá trị ngắn xếp thành lưới."
+   "Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Kiểu dáng xe, hộp số, khoảng giá: giá trị ngắn, xếp thành lưới."
   ],
   [
    "component:Radio",
    "chosenWhen",
    "decision:chon-mot",
-   "Đây là tuỳ chọn bật/tắt — chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Giá trị dài thì phải xuống dòng; chip xuống dòng là vỡ lưới."
+   "Đây là tuỳ chọn bật/tắt, chỉ có hai đầu Bật & Tắt hoặc Có & Không? — Không → Chỗ trên màn có chật không? (nhiều tuỳ chọn, hoặc tuỳ chọn nằm trong một form dài) — Không → Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Giá trị dài thì phải xuống dòng; chip xuống dòng là vỡ lưới."
   ],
   [
    "component:Checkbox",
    "chosenWhen",
    "decision:chon-nhieu",
-   "Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Có ⇒ Dị ứng thuốc, quốc tịch, giấy tờ đã có."
+   "Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Có ⇒ Dị ứng thuốc, quốc tịch, giấy tờ đã có."
   ],
   [
    "component:Chip",
    "chosenWhen",
    "decision:chon-nhieu",
-   "Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Dịch vụ khách sạn, tiện ích, thẻ phân loại — xếp lưới, xuống dòng được."
+   "Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Có ⇒ Dịch vụ khách sạn, tiện ích, thẻ phân loại: xếp lưới, xuống dòng được."
   ],
   [
    "component:Checkbox",
    "chosenWhen",
    "decision:chon-nhieu",
-   "Tuỳ chọn là thông tin định danh — pháp lý, y tế, nhân thân? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Giá trị dài thì mỗi dòng một mục, chữ xuống dòng vẫn thẳng hàng."
+   "Tuỳ chọn là thông tin định danh (pháp lý, y tế, nhân thân)? — Không → Giá trị có đủ ngắn để không xuống dòng ở khổ 390? — Không ⇒ Giá trị dài thì mỗi dòng một mục, chữ xuống dòng vẫn thẳng hàng."
   ],
   [
    "component:Tab",
@@ -16747,19 +16747,19 @@
    "component:ResultScreen",
    "chosenWhen",
    "decision:phan-hoi",
-   "Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Có ⇒ Màn kết quả toàn trang — Đặt phòng xong, thanh toán xong — màn riêng, có chi tiết và hai lối đi tiếp."
+   "Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Có ⇒ Màn kết quả toàn trang — Đặt phòng xong, thanh toán xong: màn riêng, có chi tiết và hai lối đi tiếp."
   ],
   [
    "component:Dialog",
    "chosenWhen",
    "decision:phan-hoi",
-   "Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Không → Nội dung có gọn không — một tiêu đề, một đoạn mô tả, tối đa một hình? — Có ⇒ Tạo yêu cầu thành công, đang xử lý, dự kiến có kết quả ngày…"
+   "Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Không → Nội dung có gọn không: một tiêu đề, một đoạn mô tả, tối đa một hình? — Có ⇒ Tạo yêu cầu thành công, đang xử lý, dự kiến có kết quả ngày…"
   ],
   [
    "component:Sheet",
    "chosenWhen",
    "decision:phan-hoi",
-   "Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Không → Nội dung có gọn không — một tiêu đề, một đoạn mô tả, tối đa một hình? — Không ⇒ Có bảng chi tiết, danh sách, nhiều dòng thông tin — sheet cuộn được, dialog thì không."
+   "Đây là thông điệp báo lỗi? — Không → Thông điệp có cần người dùng dừng lại để đọc? — Cần dừng lại → Sau khi đọc, người dùng phải sang một trang khác? — Không → Nội dung có gọn không: một tiêu đề, một đoạn mô tả, tối đa một hình? — Không ⇒ Có bảng chi tiết, danh sách, nhiều dòng thông tin: sheet cuộn được, dialog thì không."
   ],
   [
    "component:Toast",
@@ -16771,7 +16771,7 @@
    "component:TextInput",
    "chosenWhen",
    "decision:phan-hoi-loi",
-   "Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Có → Lỗi gắn được vào đúng một ô không? — Có ⇒ Dòng lỗi tại ô — Sai định dạng email, mật khẩu chưa đủ ký tự, ngày trả trước ngày nhận. Ô tick bắt buộc cũng vào đây — Checkbox có State=Error."
+   "Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Có → Lỗi gắn được vào đúng một ô không? — Có ⇒ Dòng lỗi tại ô — Sai định dạng email, mật khẩu chưa đủ ký tự, ngày trả trước ngày nhận. Ô tick bắt buộc cũng vào đây, vì Checkbox có State=Error."
   ],
   [
    "component:Toast",
@@ -16783,13 +16783,13 @@
    "component:Dialog",
    "chosenWhen",
    "decision:phan-hoi-loi",
-   "Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Không → Phần còn lại của ứng dụng vẫn dùng được? — Có ⇒ Số dư ví không đủ, quá số lần gửi OTP — phải rời màn này mới xử lý được."
+   "Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Không → Phần còn lại của ứng dụng vẫn dùng được? — Có ⇒ Số dư ví không đủ, quá số lần gửi OTP: phải rời màn này mới xử lý được."
   ],
   [
    "component:ErrorScreen",
    "chosenWhen",
    "decision:phan-hoi-loi",
-   "Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Không → Phần còn lại của ứng dụng vẫn dùng được? — Không ⇒ Màn lỗi toàn trang — Hệ thống gián đoạn, mất kết nối máy chủ — chức năng cốt lõi không chạy được."
+   "Lỗi có chặn người dùng đi tiếp không? — Chặn lại → Người dùng tự sửa được ngay trên màn đang đứng? — Không → Phần còn lại của ứng dụng vẫn dùng được? — Không ⇒ Màn lỗi toàn trang — Hệ thống gián đoạn, mất kết nối máy chủ: chức năng cốt lõi không chạy được."
   ],
   [
    "component:Toast",
@@ -16819,7 +16819,7 @@
    "answer:Xác thực khi gửi biểu mẫu",
    "chosenWhen",
    "decision:xac-thuc",
-   "Kiểm được ngay trên máy, không cần gọi máy chủ? — Không ⇒ Trùng tài khoản, mã giảm giá còn hiệu lực, số dư đủ hay không — phải hỏi máy chủ."
+   "Kiểm được ngay trên máy, không cần gọi máy chủ? — Không ⇒ Trùng tài khoản, mã giảm giá còn hiệu lực, số dư đủ hay không: phải hỏi máy chủ."
   ],
   [
    "component:BottomBar",
@@ -18420,103 +18420,103 @@
    "component:Switch",
    "confusedWith",
    "component:Checkbox",
-   "Switch có hiệu lực ngay khi bấm; Checkbox chỉ ghi lựa chọn, phải có nút xác nhận."
+   "Switch takes effect on press; Checkbox only records a choice and needs a confirm button."
   ],
   [
    "component:Tab",
    "confusedWith",
    "component:Chip",
-   "Tab đổi vùng nội dung (bố cục khác); Chip lọc thu hẹp cùng một danh sách."
+   "Tab switches content areas (different layout); Chip filters the same list down."
   ],
   [
    "component:Tab",
    "confusedWith",
    "component:SegmentedControl",
-   "SegmentedControl đổi cách xem cùng nội dung, 2–4 lựa chọn ngắn; Tab đổi sang nội dung khác."
+   "SegmentedControl changes how the same content is viewed, 2–4 short options; Tab switches to different content."
   ],
   [
    "component:Toast",
    "confusedWith",
    "component:CardPushNotification",
-   "Toast báo kết quả việc người dùng vừa làm, ở đáy, có type; Push báo chuyện từ bên ngoài, ở đỉnh, không type."
+   "Toast reports the result of what the user just did, at the bottom, with a type; Push reports outside events, at the top, no type."
   ],
   [
    "component:Pagination",
    "confusedWith",
    "component:TablePagination",
-   "Pagination là gạch chỉ vị trí băng chuyền; TablePagination có số trang bấm được dưới bảng."
+   "Pagination is the carousel position bars; TablePagination has pressable page numbers under a table."
   ],
   [
    "component:Tooltip",
    "confusedWith",
    "component:Popover",
-   "Tooltip mở bằng hover / focus, chỉ chữ; Popover mở bằng bấm, có nút, form ngắn."
+   "Tooltip opens on hover / focus, text only; Popover opens on press, with buttons or a short form."
   ],
   [
    "component:Popover",
    "confusedWith",
    "component:Menu",
-   "Menu là danh sách lựa chọn; Popover chứa nội dung tương tác bất kỳ."
+   "Menu is a list of options; Popover holds any interactive content."
   ],
   [
    "component:CardSheet",
    "confusedWith",
    "component:CardDialog",
-   "Sheet sát đáy, có tiêu đề Header, có Back; Dialog căn giữa, không tiêu đề riêng, không xếp tầng."
+   "Sheet hugs the bottom, has a Header title and Back; Dialog is centered, no separate title, never stacks."
   ],
   [
    "component:CardSheet",
    "confusedWith",
    "component:SideSheet",
-   "CardSheet / Sheet cho app (mobile); SideSheet cho desktop, trượt từ mép phải."
+   "CardSheet / Sheet for apps (mobile); SideSheet for desktop, sliding in from the right edge."
   ],
   [
    "component:TextButtonDanger",
    "confusedWith",
    "component:TextButtonNeutral",
-   "Danger chỉ cho hành động không hoàn tác được; đăng xuất, bỏ qua làm lại được → Neutral."
+   "Danger only for irreversible actions; sign out and skip are reversible → Neutral."
   ],
   [
    "component:TextButtonAccent",
    "confusedWith",
    "component:TextButtonNeutral",
-   "Accent cho hành động chính của màn; Neutral cho hành động phụ, trung tính."
+   "Accent for the main action of the screen; Neutral for secondary, neutral actions."
   ],
   [
    "component:Badge",
    "confusedWith",
    "component:StatusIndicator",
-   "Badge là nhãn có nền đặc 24; StatusIndicator là chấm + chữ trạng thái, có Container None / Filled."
+   "Badge is a 24 label with a solid background; StatusIndicator is a status dot + text, with Container None / Filled."
   ],
   [
    "component:NotificationBadge",
    "confusedWith",
    "component:StatusIndicator",
-   "NotificationBadge (họ attention) báo có mới chưa xem; StatusIndicator Highlight (họ accent) là mục đáng chú ý."
+   "NotificationBadge (attention family) signals something new and unseen; StatusIndicator Highlight (accent family) marks an item worth attention."
   ],
   [
    "component:ErrorScreen",
    "confusedWith",
    "component:ErrorSection",
-   "ErrorScreen khi lỗi chặn cả chức năng cốt lõi; ErrorSection khi lỗi chỉ ở một khối."
+   "ErrorScreen when the error blocks the whole core function; ErrorSection when it is only one block."
   ],
   [
    "component:EmptyScreen",
    "confusedWith",
    "component:EmptySection",
-   "EmptyScreen khi cả màn chưa có dữ liệu; EmptySection cho một khối / bảng rỗng."
+   "EmptyScreen when the whole screen has no data yet; EmptySection for one empty block / table."
   ],
   [
    "component:Dropdown",
    "confusedWith",
    "component:Chip",
-   "Dropdown là ô chọn trong form; Chip Type=Dropdown là bộ lọc nằm ngang, hiện giá trị đang chọn."
+   "Dropdown is a picker field in a form; Chip Type=Dropdown is a horizontal filter showing the selected value."
   ],
   [
    "family:interactive",
    "distinctFrom",
    "family:accent",
-   "interactive = thứ bấm được; accent = nhấn nội dung, không bấm được."
+   "interactive = pressable things; accent = content emphasis, not pressable."
   ],
   [
    "concept:state-layer",

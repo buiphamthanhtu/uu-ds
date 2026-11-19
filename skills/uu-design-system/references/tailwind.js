@@ -1,5 +1,5 @@
-// Chỉ dùng nếu dự án chạy Tailwind. Không dùng Tailwind thì bỏ qua file này —
-// tokens.css đã đủ để build.
+// Only use this if the project runs Tailwind. Without Tailwind, skip this file —
+// tokens.css is enough to build.
 // UU DS Tailwind theme — requires uu-ds-tokens.css to be imported.
 // All values resolve through CSS custom properties, so any [data-theme="…"] brand mode just works.
 

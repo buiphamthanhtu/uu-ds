@@ -1,5 +1,5 @@
 {
- "_doc": "Bộ UU icon — bản công khai: icon component dùng cố định + texture (giữ chỗ). name → category và style có sẵn (outline / fill). Tên gần giống KHÔNG phải cùng icon. Không có ở đây → dừng và hỏi.",
+ "_doc": "The UU icon set — public edition: icons components use internally + texture (placeholder). name → category and available styles (outline / fill). A similar name is NOT the same icon. Not here → stop and ask.",
  "icons": {
   "arrow-down": {
    "category": "arrows",

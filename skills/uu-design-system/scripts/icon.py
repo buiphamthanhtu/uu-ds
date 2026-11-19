@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Lấy SVG của UU icon từ bundle trong skill.
+"""Get UU icon SVGs from the bundles in the skill.
 
-  python3 scripts/icon.py magnifier            # SVG kiểu outline
-  python3 scripts/icon.py magnifier fill       # SVG kiểu fill
-  python3 scripts/icon.py --search cart        # tìm tên chứa "cart"
-  python3 scripts/icon.py --public             # tên được phép dùng ở chỗ công khai
-  python3 scripts/icon.py --out ./icons house gift bell   # ghi <name>.svg / <name>-fill.svg ra thư mục
+  python3 scripts/icon.py magnifier            # outline SVG
+  python3 scripts/icon.py magnifier fill       # fill SVG
+  python3 scripts/icon.py --search cart        # names containing "cart"
+  python3 scripts/icon.py --public             # names allowed in public places
+  python3 scripts/icon.py --out ./icons house gift bell   # write <name>.svg / <name>-fill.svg to a folder
 
-SVG: viewBox 0 0 18 18, không width/height, màu currentColor.
+SVG: viewBox 0 0 18 18, no width/height, color currentColor.
 """
 import json, os, sys
 
@@ -19,13 +19,13 @@ _cache = {}
 def svg(name, style='outline'):
     meta = INDEX.get(name)
     if not meta:
-        raise SystemExit(f'"{name}" không có trong UU icon — tên gần giống không phải cùng icon. Thử --search.')
+        raise SystemExit(f'"{name}" is not in UU icon — a similar name is not the same icon. Try --search.')
     cat = meta['category']
     if cat not in _cache:
         _cache[cat] = json.load(open(os.path.join(ROOT, 'assets', 'icons', f'{cat}.json')))['icons']
     s = _cache[cat].get(name, {}).get(style)
     if not s:
-        raise SystemExit(f'"{name}" không có kiểu {style}.')
+        raise SystemExit(f'"{name}" has no {style} style.')
     return s
 
 
