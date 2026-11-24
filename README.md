@@ -1,16 +1,16 @@
 # uu-ds-native
 
-UU Design system cho React Native / Expo. Cùng nguồn với bản web và Flutter: token sinh từ `docs/tokens.json`, component theo `docs/design-system.md`, UU icon công khai từ `src/icons/svg`.
+UU Design system for React Native / Expo. It shares one source with the web and Flutter versions: tokens are generated from `docs/tokens.json`, components follow `docs/design-system.md`, and the public UU icons come from `src/icons/svg`.
 
-Phạm vi bằng bản Flutter `packages/flutter/uu_ds_flutter`. Tên component cùng tên bản Flutter (`UuTextButton`…), prop cùng tên bản web (`tone`, `type`, `inverted`, `size`, `state`, `error`, `disabled`).
+The scope matches the Flutter package `packages/flutter/uu_ds_flutter`. Component names match Flutter (`UuTextButton`…), and prop names match the web version (`tone`, `type`, `inverted`, `size`, `state`, `error`, `disabled`).
 
-## Cài
+## Install
 
-Gói dùng thẳng mã nguồn TypeScript (không build). Yêu cầu: React 19, React Native ≥ 0.76 (Expo SDK ≥ 52), `react-native-svg`, `react-native-safe-area-context`.
+The package is used as TypeScript source, with no build step. Requires React 19, React Native ≥ 0.76 (Expo SDK ≥ 52), `react-native-svg` and `react-native-safe-area-context`.
 
 ```bash
 npx expo install react-native-svg react-native-safe-area-context
-npm i "github:buiphamthanhtu/uu-ds#native-v1.0.0"   # repo công khai, nhánh native
+npm i "github:buiphamthanhtu/uu-ds#native-v1.0.1"   # public repo, native branch
 ```
 
 ```tsx
@@ -22,111 +22,112 @@ export default function App() {
     <SafeAreaProvider>
       <UuProvider brand="default" density="touch">
         <Home />
-        <UuFeedbackHost />{/* con cuối của view phủ toàn màn: Toast, Push, panel gợi ý SearchInput */}
+        <UuFeedbackHost />{/* last child of the full-screen view: Toast, Push, SearchInput suggestion panel */}
       </UuProvider>
     </SafeAreaProvider>
   );
 }
 ```
 
-Desktop / tablet / web: `density="compact"`. Thu gọn chỉ còn icon: `layout="collapsed"`. Đổi một vùng: bọc vùng đó trong `<UuProvider density="compact">`, vùng con kế thừa phần không truyền.
+Desktop, tablet or web: `density="compact"`. Icons only: `layout="collapsed"`. To change one region, wrap it in `<UuProvider density="compact">`; anything you don't pass is inherited from the parent.
 
-## Token
+## Tokens
 
-| Lấy ở đâu | Nội dung |
+| Where | What |
 |---|---|
-| `useUu().colors` | 57 token semantic của brand hiện tại — component **chỉ** đọc màu ở đây |
-| `useUu().sizes` · `useUu().text` | kích thước control và text style theo density — không gõ cứng 56 / 48 / 32 |
-| `tokens.gap` · `tokens.size` · `tokens.radius` · `tokens.opacity` · `tokens.elevation` | thang khoảng cách, kích thước, bo góc, opacity, bóng (`boxShadow`) |
-| `tokens.primitiveColors` | primitive — chỉ để định nghĩa semantic, không dùng trong component |
+| `useUu().colors` | the 57 semantic tokens of the current brand. Components read colors **only** from here |
+| `useUu().sizes` · `useUu().text` | control sizes and text styles for the current density. Don't hard-code 56 / 48 / 32 |
+| `tokens.gap` · `tokens.size` · `tokens.radius` · `tokens.opacity` · `tokens.elevation` | scales for spacing, size, radius, opacity and shadow (`boxShadow`) |
+| `tokens.primitiveColors` | primitives. Only for defining semantic tokens, never used in components |
 
-Sinh lại khi `tokens.json` đổi: `npm run tokens:rn` ở gốc repo → `src/tokens.g.ts`. Icon: `npm run rn:icons` → `src/icons.g.ts` (chỉ icon công khai; tên sai TypeScript báo lỗi).
+When `tokens.json` changes, regenerate: `npm run tokens:rn` at the repo root → `src/tokens.g.ts`. Icons: `npm run rn:icons` → `src/icons.g.ts` (public icons only; TypeScript flags a wrong name).
 
 ## Product DNA (spec 4.3)
 
-Style riêng của sản phẩm khai một lần ở `UuProvider`, component không đổi dòng nào. Vùng con kế thừa DNA của vùng cha.
+Declare the product's own style once on `UuProvider`; no component code changes. A child region inherits the DNA of its parent.
 
 ```tsx
 <UuProvider
   dna={{
-    colors: { backgroundInteractive: '#…' },            // 23 token thương hiệu
-    radius: { xl4: 12, lg: 8 },                        // nút / chip · thẻ, ô nhập
+    colors: { backgroundInteractive: '#…' },            // the 22 brand tokens
+    radius: { xl4: 12, lg: 8 },                        // buttons / chips · cards, fields
     elevation: {
-      medium: '4px 4px 0px 0px #111',                  // blur 0 = bóng cứng
-      none: '2px 2px 0px 2px #111',                    // bóng control; spread = độ dày viền, không thì bị viền che
+      medium: '4px 4px 0px 0px #111',                  // blur 0 = hard shadow
+      none: '2px 2px 0px 2px #111',                    // control shadow; spread = border width, or the border covers it
     },
     fontFamily: {
       display: 'Baloo2_700Bold',
       body: { '400': 'Inter_400Regular', '500': 'Inter_500Medium', '600': 'Inter_600SemiBold', '700': 'Inter_700Bold' },
     },
-    borderOuter: { width: 2, color: '#111' },          // viền ngoài control + thẻ, mặc định không có
+    borderOuter: { width: 2, color: '#111' },          // outer border on controls and cards, off by default
   }}
-  icons={myIcons}                                      // bộ icon riêng, xem dưới
+  icons={myIcons}                                      // custom icon set, see below
 >
 ```
 
-- **Font**: chỉ đổi họ font; cỡ, line-height, độ đậm giữ thang. `body` là một tên, hoặc map theo độ đậm khi font
-  nạp riêng từng weight (`expo-font`) — Android cần map này. App tự nạp font. `useUu().fontDisplay` cho style display.
-- **Viền + bóng control** (nút, chip, checkbox, radio, switch, ô nhập, ô OTP): vẽ bên ngoài, không chiếm chỗ —
-  chiều cao, vùng chạm giữ nguyên, viền trạng thái (focus, lỗi, đang chọn) vẫn thấy. Cần RN ≥ 0.76 (`boxShadow`).
-  Để khe giữa các control lớn hơn viền + độ lệch bóng.
-  Viền và bóng nằm ngoài khung control nên khung cha có `overflow: 'hidden'` (vd. hàng bấm được bọc `Pressable` có bo góc)
-  sẽ cắt mất — chừa padding cho khung cha hoặc bỏ `overflow: 'hidden'` ở đó.
-- **Không đổi được** (phần khoá): state layer, chiều cao control, density, `rounded-circle`, token status.
+- **Font**: only the font family changes; size, line height and weight stay on the scale. `body` is one name, or a map by
+  weight when each weight is loaded separately (`expo-font`). Android needs this map. The app loads its own fonts.
+  `useUu().fontDisplay` gives the display style.
+- **Control border and shadow** (buttons, chips, checkboxes, radios, switches, fields, OTP cells): drawn outside, taking no
+  space. Height and touch area stay the same, and state borders (focus, error, selected) stay visible. Needs RN ≥ 0.76 (`boxShadow`).
+  Keep the gap between controls larger than the border plus the shadow offset.
+  The border and shadow sit outside the control's frame, so a parent with `overflow: 'hidden'` (for example a rounded
+  `Pressable` row) clips them. Give the parent padding, or remove `overflow: 'hidden'` there.
+- **Locked** (can't change): state layer, control height, density, `rounded-circle`, status tokens.
 
-## Bộ icon riêng
+## Custom icon set
 
-UU icon trong gói chỉ đủ cho component (kèm `texture` làm icon giữ chỗ). Sản phẩm cần icon thì tự mua
-license Nucleo hoặc dùng bộ khác: đăng ký tên → SVG (`currentColor`), tên trùng
-ghi đè icon mặc định, tên khác vẫn lấy bộ mặc định (icon nội bộ của component như `chevron-down` vẫn chạy).
+The UU icons in the package only cover what components need (plus `texture` as a placeholder). If the product needs icons,
+buy a Nucleo license or use another set. Register name → SVG (`currentColor`). A matching name overrides the default icon;
+other names still come from the default set, so components' own icons such as `chevron-down` keep working.
 
 ```tsx
-// icons.ts của app
+// the app's icons.ts
 export const myIcons = { paw: { outline: '<svg …>', fill: '<svg …>' } };
-declare module 'uu-ds-native' { interface UuIconRegistry { paw: true } } // để TypeScript nhận tên
+declare module 'uu-ds-native' { interface UuIconRegistry { paw: true } } // so TypeScript accepts the name
 
 <UuProvider icons={myIcons}>…<UuIcon name="paw" color={c.objectPrimary} /></UuProvider>
 ```
 
-Một sản phẩm dùng một bộ, không trộn từng icon của hai bộ. Giấy phép bộ app tự gắn thuộc về app (UU icon ngoài
-bản công khai cần license Nucleo riêng — `src/icons/NOTICE.md` của repo UU DS).
+A product uses one set; don't mix single icons from two sets. The license of a set the app adds belongs to the app (UU icons
+beyond the public edition need a separate Nucleo license; see `src/icons/NOTICE.md` in the UU DS repo).
 
-## Component
+## Components
 
 | Web (React) | React Native |
 |---|---|
 | `TextButtonAccent` / `TextButtonNeutral` · `TextButtonDanger` | `UuTextButton tone="accent" \| "neutral"` · `UuTextButtonDanger` |
 | `IconButtonAccent` / `IconButtonNeutral` · `ToggleButton` | `UuIconButton` · `UuToggleButton` |
 | `TextInput` · `TextArea` · `OTPInput` · `SearchInput` | `UuTextInput` · `UuTextArea` · `UuOTPInput` · `UuSearchInput` |
-| `DateInput` · `Dropdown` | `UuDateInput` (mở picker của app qua `onOpen`) · `UuDropdown` |
+| `DateInput` · `Dropdown` | `UuDateInput` (opens the app's picker through `onOpen`) · `UuDropdown` |
 | `Checkbox` · `Radio` · `Switch` · `Chip` | `UuCheckbox` · `UuRadio` · `UuSwitch` · `UuChip` |
 | `ListItem` · `ListGroup` (+ `ListIconContainer`, `ListAvatar`, `ListValue`) | `UuListItem` (`selection` checkbox / radio / switch, `trailing="chevron"`, `action`) · `UuListGroup` |
 | `CheckboxInput` · `RadioInput` · `RadioList` | `UuCheckboxInput` · `UuRadioInput` · `UuRadioList` |
-| `Menu` · `MenuItem` · `MenuSection` · `MenuDivider` | `UuMenu` (`options` hoặc `groups` có tiêu đề nhóm) · `UuMenuItem` · `UuMenuSection` · `UuMenuDivider` (+ `UuMenuPanel`, `UuMenuAnchor`) |
+| `Menu` · `MenuItem` · `MenuSection` · `MenuDivider` | `UuMenu` (`options`, or `groups` with group titles) · `UuMenuItem` · `UuMenuSection` · `UuMenuDivider` (+ `UuMenuPanel`, `UuMenuAnchor`) |
 | `NavigationBar` · `BottomBar` · `Pagination` · `SegmentedControl` | `UuNavigationBar` · `UuBottomBar` · `UuPagination` · `UuSegmentedControl` |
 | `Tab` · `TabBar` · `Breadcrumb` · `SideNav` | `UuTab` · `UuTabBar` · `UuBreadcrumb` · `UuSideNav` / `UuSideNavItem` / `UuSideNavSection` |
 | `Toast` · `ButtonGroup` | `UuToast` / `showUuToast` · `UuButtonGroup` |
 | `CardSheet` / `BottomSheet` · `CardDialog` / `Dialog` | `UuCardSheet` / `UuBottomSheet visible` · `UuCardDialog` / `UuDialog visible` |
 | `Badge` · `StatusIndicator` · `NotificationBadge` | `UuBadge` · `UuStatusIndicator` · `UuNotificationBadge` |
-| `EmptyScreen` · `EmptySection` · `ErrorSection` · `ResultScreen` · `ErrorScreen` | cùng tên, tiền tố `Uu` |
+| `EmptyScreen` · `EmptySection` · `ErrorSection` · `ResultScreen` · `ErrorScreen` | same names, with the `Uu` prefix |
 | `CardPushNotification` | `UuCardPushNotification` / `showUuPushNotification` |
 | `SideSheet` · `Popover` · `Tooltip` | `UuSideSheet` / `UuSideSheetModal` · `UuPopover` / `UuPopoverAnchor` · `UuTooltip` |
-| `Table` · `TableRow` · `TableHeaderCell` · `TableCell` · `TablePagination` · `KPICard` | cùng tên, tiền tố `Uu` |
+| `Table` · `TableRow` · `TableHeaderCell` · `TableCell` · `TablePagination` · `KPICard` | same names, with the `Uu` prefix |
 | `Spinner` · `Icon` | `UuSpinner` · `UuIcon` |
 
-Khác bản Flutter do nền tảng:
+Differences from Flutter, because of the platform:
 
-- Sheet, Dialog, SideSheet là component có `visible` (kiểu `Modal` của RN), không phải hàm `show…`. Toast và Push vẫn gọi bằng hàm, cần `<UuFeedbackHost />`. Toast tự nổi trên `UuBottomBar` và trên bàn phím (cách 12) — app không truyền chiều cao thanh.
-- Panel `Menu` neo bằng `Modal` trong suốt + `measureInWindow`; bấm ra ngoài hoặc nút Back Android thì đóng. Bàn phím đang mở thì mép trên bàn phím là đáy — thiếu chỗ thì panel lật lên.
-- Ô nhập gần đáy màn: app tự giữ ô trên bàn phím — Android (edge-to-edge) bọc `KeyboardAvoidingView behavior="padding"`, iOS dùng `ScrollView automaticallyAdjustKeyboardInsets`. Xem `example/App.tsx`.
-- `DateInput` không kèm date picker — app tự mở picker (vd. `@react-native-community/datetimepicker`) trong `onOpen` rồi đặt `value`.
-- Scrim chỉ có màu `overlay`; blur 16 cần `expo-blur`, app tự bọc nếu muốn.
-- Tooltip chỉ hiện khi có con trỏ (web, iPad có chuột). Trên màn chạm, nhãn phải tự đủ nghĩa.
-- Chấm của `StatusIndicator` nhấp nháy 1.6 s, đứng yên khi bật "Giảm chuyển động".
+- Sheet, Dialog and SideSheet are components with `visible` (like RN's `Modal`), not `show…` functions. Toast and Push are still called as functions and need `<UuFeedbackHost />`. Toast sits above `UuBottomBar` and above the keyboard (12 apart) on its own; the app doesn't pass the bar height.
+- The `Menu` panel is anchored with a transparent `Modal` + `measureInWindow`. A tap outside or the Android Back button closes it. While the keyboard is open, its top edge counts as the bottom of the screen; if there isn't room, the panel flips up.
+- Fields near the bottom of the screen: the app keeps them above the keyboard. On Android (edge-to-edge), wrap in `KeyboardAvoidingView behavior="padding"`; on iOS, use `ScrollView automaticallyAdjustKeyboardInsets`. See `example/App.tsx`.
+- `DateInput` ships without a date picker. The app opens its own picker (for example `@react-native-community/datetimepicker`) in `onOpen`, then sets `value`.
+- The scrim is the `overlay` color only. The 16 blur needs `expo-blur`; the app wraps it if wanted.
+- Tooltip only shows with a pointer (web, iPad with a mouse). On touch screens, labels must make sense on their own.
+- The `StatusIndicator` dot blinks every 1.6 s and stays still when Reduce Motion is on.
 
 ## State layer
 
-`UuPressable surface="onDark" | "onLight"` phủ lớp màu object của variant, opacity 5/10 (nền sáng) hoặc 20/40 (nền tối) khi hover / pressed. Không ripple Android, không đổi nền, chữ, font-weight. Disabled và Loading không có lớp.
+`UuPressable surface="onDark" | "onLight"` lays the variant's object color over the control on hover and press, at opacity 5/10 (light backgrounds) or 20/40 (dark backgrounds). No Android ripple; background, text and font weight never change. Disabled and Loading have no layer.
 
 ```tsx
 const { colors: c } = useUu();
@@ -137,9 +138,9 @@ const { colors: c } = useUu();
 <UuBottomSheet visible={open} header="Xoá tài khoản" onClose={close} cta={<UuButtonGroup tone="danger" primary={{ label: 'Xoá', onPress: remove }} />}>…</UuBottomSheet>
 ```
 
-## App mẫu
+## Example app
 
-`packages/react-native/example` — app Expo trưng bày đủ nhóm component, đổi brand / density tại chỗ:
+`packages/react-native/example`: an Expo app that shows every component group, with brand and density switches:
 
 ```bash
 cd packages/react-native/example && npm install && npx expo start
