@@ -1,6 +1,6 @@
 ### 6.30 Tooltip (`Tooltip`)
 
-A short label explaining an element on hover or focus — usually a text-less `IconButton` or a
+A short label explaining an element on hover or focus, for example a text-less `IconButton` or a
 collapsed `SideNav` item. **Props**: `Text` (TEXT) · `Placement` (`Top` · `Bottom` · `Left` · `Right`). **4 variants.**
 
 | Part | Value |

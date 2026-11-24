@@ -7,7 +7,7 @@ Three screen templates. In the design they belong to the same family as `Sheet` 
 | Template | Content | Footer |
 |---|---|---|
 | `ResultScreen` | The task is done; the user must move elsewhere | Vertical `ButtonGroup` — primary on top, secondary path below |
-| `ErrorScreen` | An error blocks the core function and cannot be fixed by the user | **One** button only: retry |
+| `ErrorScreen` | An error blocks the core function and the user cannot fix it | **One** button only: retry |
 | `EmptyScreen` | The whole screen has no data yet | **One** action button (create, explore), hideable via `Action` |
 
 All three **have code components** for building screens quickly — web `ResultScreen` · `ErrorScreen` · `EmptyScreen`, Flutter

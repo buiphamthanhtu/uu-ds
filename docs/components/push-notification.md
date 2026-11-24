@@ -1,7 +1,7 @@
 ### 6.31 In-app push notification (`CardPushNotification`)
 
 A card sliding down from the top of the screen, reporting **something from outside** (order status changed, new gift, message). It mimics
-the OS push style but is drawn by the **app** — real iOS/Android pushes are drawn by the OS and are not part of the DS.
+the OS push style, but the **app** draws it. The OS draws real iOS/Android pushes, and they are not part of the DS.
 **Props**: `Title` · `Content` (TEXT) · `Image` (BOOLEAN). 1 variant.
 
 ```
