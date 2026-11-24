@@ -255,7 +255,7 @@ The first seven rows depend on brand colors — the numbers above are the **Defa
 
 `attention` is **rose-600** (changed from red-500 on 2026-11-09, P35): white text passes **4.70**, so the 11px count in `NotificationBadge` `Count` passes AA. Not red-600 because that is the `negative` color; rose keeps white text and separates the hue from errors.
 
-`object-secondary` is step **600** (Default slate-600 · UU neutral-600; changed from 500 on 2026-11-09, P35): secondary text is ≥ 5.3 on every light background components use (`muted` · `subtle` · `emphasized` · `accent-muted` · `accent-subtle` · `accent-medium`), so secondary text on those backgrounds needs no workaround.
+`object-secondary` is step **600** (Default slate-600 · UU neutral-600; changed from 500 on 2026-11-09, P35). Secondary text reaches ≥ 5.3 on every light background components use (`muted` · `subtle` · `emphasized` · `accent-muted` · `accent-subtle` · `accent-medium`), so it needs no workaround on those backgrounds.
 
 Never let color be the **only signal** where it matters — add text or an icon so color-blind users still understand.
 
@@ -271,7 +271,7 @@ Three tokens do not point straight at a primitive; they **add alpha at the seman
 
 **Which one.** `overlay` SEPARATES LAYERS — a dialog or bottom sheet floats over the screen and
 the screen stays readable; it always comes with a background blur, the blur is what pushes the background back,
-the 10% black only dims it slightly. `overlay-strong` DARKENS a media layer — camera
+the 10% black on its own only adds a light dim. `overlay-strong` DARKENS a media layer — camera
 feed, image, video — so what sits on it is readable; use it alone, no blur, because
 blurring the camera leaves the user nothing to aim at.
 Don't use `overlay` for the second case: 10% is too light and the viewfinder sinks into the scene.
@@ -376,7 +376,7 @@ In `tokens.json` add a key next to `semantic.color.default` / `semantic.color.uu
 | `font-family-display` | `Bungee` | `display-*` styles only |
 
 > **`font-family-body` is the device's system font, not a UU DS font.**
-> The design file needs a real font name to render, so it usually says `SF Pro` — the iOS system font. In real life the app uses the device's own system font: SF Pro on iOS, Roboto or the vendor's own font on Android (Samsung, Xiaomi, Oppo all replace it, and users can change it too).
+> The design file needs a real font name to render, so it says `SF Pro`, the iOS system font. In real life the app uses the device's own system font: SF Pro on iOS, Roboto or the vendor's own font on Android (Samsung, Xiaomi, Oppo all replace it, and users can change it too).
 >
 > **Don't embed, self-host or download SF Pro.** Besides not existing on Android, Apple's system fonts are licensed only within the Apple ecosystem.
 
@@ -684,7 +684,7 @@ offset by the same amount hides entirely behind the border. 2px border + 2px har
   The shadow is drawn under the outer border.
 - **Cards** take the outer border: `CardSheet`, `CardDialog`, `KPICard`. A card's shadow stays its own `elevation-*`, spread =
   `border-outer-width`. Not applied to `SideSheet`, navigation bars, `Toast`, `Popover`, `Tooltip`.
-- **With the outer border on, drop the inner border in the resting state**: when `border-outer-width` > 0, controls that normally have an inner border
+- **With the outer border on, drop the inner border in the resting state**: when `border-outer-width` > 0, controls that have an inner border by default
   (unselected `Chip`, unchecked `Checkbox`, unselected `Radio`, off `Switch`, `Outline` button, input frames, `OTPInput` cells)
   don't draw the inner border at rest; the outer border takes its place. **State** borders stay: focus / typing
   (`border-emphasized`), Hover / Pressed of controls that change border on interaction (`border-emphasized`), Error (`border-negative`), selected / checked (`border-interactive`),

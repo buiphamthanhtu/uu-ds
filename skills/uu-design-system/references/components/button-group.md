@@ -11,6 +11,6 @@ Shared component set for a primary/secondary button pair. Used by both Dialog an
 
 Buttons are `Text button - Accent` size `Large` (56). `min-width` 56.
 
-**`Tone=Danger`** — the button group of a dialog / sheet **confirming a destructive action** (delete, cancel order): the primary button becomes **`TextButtonDanger` Solid** Large; the secondary stays (`TextButtonAccent` Outline, usually "Huỷ" / "Giữ lại"). Order and geometry unchanged. Web: `<ButtonGroup tone="danger">`; Flutter: `UuButtonGroup(tone: UuButtonGroupTone.danger)`. Use it instead of arranging two buttons yourself.
+**`Tone=Danger`** — the button group of a dialog / sheet **confirming a destructive action** (delete, cancel order): the primary button becomes **`TextButtonDanger` Solid** Large; the secondary stays (`TextButtonAccent` Outline, for example "Huỷ" or "Giữ lại"). Order and geometry unchanged. Web: `<ButtonGroup tone="danger">`; Flutter: `UuButtonGroup(tone: UuButtonGroupTone.danger)`. Use it instead of arranging two buttons yourself.
 
 Note the order flips between layouts: horizontal puts the primary on the **right**, vertical puts it on **top**. Both place the primary where the thumb reaches most easily.

@@ -6,7 +6,7 @@ Checkbox `Checkbox` and row `CheckboxInput` (box + text).
 `Disabled` (False/True). **15 variants**.
 
 `CheckboxInput` also exposes its text as the `Label` property (TEXT) — override it directly
-on the instance, no need to dig into a node.
+on the instance; don't select a node inside it.
 
 **Box**: 32 × 32 · radius **12** (`radius-base`) — a rounded square, unlike Radio's circle.
 
@@ -29,7 +29,7 @@ on the instance, no need to dig into a node.
 | Indeterminate | **Error** | **`background-negative`** | — | 16 × 2 bar · `object-on-negative` | — |
 
 > **When to use `Error`.** When a **required** box is unchecked and the user has pressed the continue
-> button — typically "Tôi đồng ý với Điều khoản". Report it right at the box with one line of `sm`
+> button, for example "Tôi đồng ý với Điều khoản". Report it right at the box with one line of `sm`
 > `object-negative` text under the row; **don't** use a Toast, because Toasts dismiss themselves while a blocking error
 > must stay. `Error` is on the `State` axis, so the design only has Error × Default; hover and
 > pressed on an erroring box still follow the general state-layer rule in 6.0.

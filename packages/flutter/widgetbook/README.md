@@ -1,38 +1,38 @@
 # uu_ds_widgetbook
 
-Widgetbook của `uu_ds_flutter`: xem widget Flutter thật của UU DS, chỉnh thuộc tính bằng knob. Storybook chỉ hiển thị bản React,
-nên dev Flutter xem widget ở đây.
+Widgetbook for `uu_ds_flutter`: see the real UU DS Flutter widgets and change their properties with knobs. Storybook only shows the React version,
+so Flutter developers look at widgets here.
 
-Bản trên web: https://uucreative.co/uu-ds/widgetbook/ (đi cùng `npm run deploy:site`).
+Web version: https://uucreative.co/uu-ds/widgetbook/ (deployed with `npm run deploy:site`).
 
-## Chạy
+## Run
 
 ```bash
 cd packages/flutter/widgetbook
 flutter pub get
-flutter run -d chrome        # hoặc -d macos, hoặc một simulator
+flutter run -d chrome        # or -d macos, or a simulator
 ```
 
-## Build web
+## Build for the web
 
 ```bash
 flutter build web --release --base-href /widgetbook/
 ```
 
-Kết quả nằm trong `build/web/`. Đổi `--base-href` theo đường dẫn sẽ đặt bản build trên site. `npm run deploy:site` tự build với
-`--base-href /uu-ds/widgetbook/` và đặt cạnh Storybook; `SKIP_WIDGETBOOK=1` để bỏ qua bước này.
+The output goes to `build/web/`. Set `--base-href` to the path where the build will live on the site. `npm run deploy:site` builds with
+`--base-href /uu-ds/widgetbook/` and places it next to Storybook; set `SKIP_WIDGETBOOK=1` to skip this step.
 
-## Thanh addon
+## Addon bar
 
-- **UU DS**: chọn riêng từng trục.
-  - `brand`: Default hoặc UU.
-  - `density`: touch hoặc compact.
-  - `layout`: expanded hoặc collapsed.
-  - `dna`: DNA mẫu. "Viền ngoài + bóng cứng" bật `borderOuterWidth: 2` và `elevationNone`, để xem viền ngoài (spec 4.3) trên control và thẻ.
-- **Viewport**: khung iPhone hoặc Android.
+- **UU DS**: pick each axis on its own.
+  - `brand`: Default or UU.
+  - `density`: touch or compact.
+  - `layout`: expanded or collapsed.
+  - `dna`: sample DNA. "Viền ngoài + bóng cứng" turns on `borderOuterWidth: 2` and `elevationNone`, to show the outer border (spec 4.3) on controls and cards.
+- **Viewport**: an iPhone or Android frame.
 
-## Thêm use case
+## Add a use case
 
-Mỗi component trong bảng Web ↔ Flutter (trang Phát triển / Flutter) là một `WidgetbookComponent` trong `lib/main.dart`, đặt trong
-nhóm chức năng giống sidebar Storybook. Mỗi component có use case `Playground` với knob theo thuộc tính trong spec, và một use case
-ma trận hoặc state khi component có nhiều variant. Icon minh hoạ dùng `texture`.
+Each component in the Web ↔ Flutter table (Storybook page Phát triển / Flutter) is a `WidgetbookComponent` in `lib/main.dart`, placed in
+the same functional group as the Storybook sidebar. Each component has a `Playground` use case with knobs for the properties in the spec,
+plus a matrix or state use case when the component has many variants. Example icons use `texture`.

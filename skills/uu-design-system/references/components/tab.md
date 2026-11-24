@@ -34,7 +34,7 @@ Hover / Pressed only exist on **non-Active** tabs — pressing the selected tab 
 Both: HORIZONTAL · gap 0 · no background · **a full-width 1px `border-muted` bottom border**; the Active bar (4px) overlaps
 the border. Web: `role="tablist"`, left/right arrows switch tabs.
 
-**Icon and badge** (optional): the tab content is a centered HORIZONTAL row — a **16** icon before the text (gap **8**), **in the text color** per state (`object-secondary` / `object-interactive` when Active / `object-disabled`; Active uses the `fill` style, others `outline`); a `NotificationBadge` **Dot** after the text (gap **4**) signals unseen new content. Tab height stays 48. The badge is secondary information — the tab label must carry the meaning; on the web add hidden "có mới" text for screen readers.
+**Icon and badge** (optional): the tab content is a centered HORIZONTAL row — a **16** icon before the text (gap **8**), **in the text color** per state (`object-secondary` / `object-interactive` when Active / `object-disabled`; Active uses the `fill` style, others `outline`). A `NotificationBadge` **Dot** after the text (gap **4**) signals unseen new content. Tab height stays 48. The badge is secondary information: the tab label must carry the meaning. On the web, add hidden "có mới" text for screen readers.
 
 **No `TabBar` on dark backgrounds.**
 

@@ -1,6 +1,6 @@
 name: uu_ds_flutter
 description: UU Design system cho Flutter. Token (sinh từ docs/tokens.json), widget theo spec, icon UU icon.
-version: 1.0.0
+version: 1.0.1
 publish_to: none
 
 environment:

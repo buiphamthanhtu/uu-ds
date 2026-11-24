@@ -35,6 +35,6 @@ Three easy mistakes:
   sets `explicitVariableModes typography=Active` at the item level, the same mechanism as Toggle button
   (3, 6.7). In CSS put `.uu-is-active` on the selected item.
 - The item state layer uses an **`object-primary`** fill for both `Active` values, steps 5/10
-  (light background) — not the item's object color as on buttons, because item text is usually `object-secondary`.
+  (light background) — not the item's object color as on buttons, because inactive item text is `object-secondary`.
 - Shell 48 = 40 + 4×2, items HUG so the bar shrinks to its text; don't split the width evenly unless the screen
   requires it, and don't hardcode 204.

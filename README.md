@@ -1,57 +1,57 @@
-# ÚÙ Design system — gói cài đặt
+# ÚÙ Design system: packages
 
-Gói web (React), React Native / Expo và Flutter của **UU Design system** (UU DS). Tài liệu, spec và Storybook: https://uucreative.co/uu-ds/
-File Figma UU Design system (Figma Community): https://www.figma.com/community/file/1701990688423474087/uu-design-system
+Web (React), React Native / Expo and Flutter packages for **UU Design system** (UU DS). Docs, specs and Storybook: https://uucreative.co/uu-ds/
+UU Design system Figma file (Figma Community): https://www.figma.com/community/file/1701990688423474087/uu-design-system
 
-| Gói | Thư mục | Cài |
+| Package | Folder | Install |
 |---|---|---|
-| Web (React, Zalo Mini App) | `packages/web` | nhánh `web` (xem dưới) |
-| React Native / Expo | `packages/react-native/uu-ds-native` | nhánh `native` (xem dưới) |
+| Web (React, Zalo Mini App) | `packages/web` | `web` branch (see below) |
+| React Native / Expo | `packages/react-native/uu-ds-native` | `native` branch (see below) |
 | Flutter | `packages/flutter/uu_ds_flutter` | git + `path` |
 
-Repo này được đồng bộ một chiều từ nguồn của UU DS — đừng gửi sửa trực tiếp vào đây. File `*.g.ts` / `*.g.dart`
-là file sinh, không sửa tay.
+This repo is synced one way from the UU DS source, so don't send changes here. `*.g.ts` and `*.g.dart` files are
+generated; don't edit them by hand.
 
-## Skill cho AI
+## Skill for AI
 
-Thư mục `skills/uu-design-system` là skill của UU DS (spec, token, icon công khai) để AI dựng UI đúng hệ:
+`skills/uu-design-system` is the UU DS skill (specs, tokens, public icons). It lets an AI build UI that follows the system:
 
 ```bash
 npx skills add buiphamthanhtu/uu-ds --skill uu-design-system
 ```
 
-Claude trên web / app: tải https://uucreative.co/uu-ds/uu-design-system.zip rồi thêm ở Settings → Capabilities → Skills.
+Claude on the web or in the app: download https://uucreative.co/uu-ds/uu-design-system.zip, then add it under Settings → Capabilities → Skills.
 
-## Chấm code
+## Code checker
 
-Gói web kèm bộ chấm tất định (không gọi AI). Viết xong thì chạy ở project đã cài `uu-ds`:
+The web package includes a deterministic checker (no AI calls). When the code is written, run it in a project that has `uu-ds` installed:
 
 ```bash
 npx uu-ds-check src
 ```
 
-Sửa đến khi critical = 0; `--strict` để CI dừng khi còn critical. Chỉ chấm code web.
+Fix until critical = 0. Add `--strict` to make CI fail while critical errors remain. It checks web code only.
 
 ## Web
 
 ```bash
-npm i "github:buiphamthanhtu/uu-ds#web-v1.0.0"   # hoặc #web để lấy bản mới nhất
+npm i "github:buiphamthanhtu/uu-ds#web-v1.0.1"   # or #web for the latest version
 ```
 
-Hướng dẫn: `packages/web/README.md` (Vite cần `optimizeDeps.exclude: ['uu-ds']`). Gói kèm `docs/` (spec, token,
-bản đồ hệ thống) và `AGENTS.md` để AI coding agent của app đọc trong `node_modules/uu-ds/`.
+Guide: `packages/web/README.md` (Vite needs `optimizeDeps.exclude: ['uu-ds']`). The package ships `docs/` (specs, tokens,
+system map) and `AGENTS.md`, so the app's AI coding agent can read them in `node_modules/uu-ds/`.
 
 ## React Native / Expo
 
-npm không cài được thư mục con từ git, nên mỗi gói npm nằm ở gốc một nhánh riêng (`web`, `native`):
+npm can't install a subfolder from git, so each npm package sits at the root of its own branch (`web`, `native`):
 
 ```bash
 npx expo install react-native-svg react-native-safe-area-context
-npm i "github:buiphamthanhtu/uu-ds#native-v1.0.0"   # hoặc #native để lấy bản mới nhất
+npm i "github:buiphamthanhtu/uu-ds#native-v1.0.1"   # or #native for the latest version
 ```
 
-Chạy được với EAS Build (gói là mã nguồn TypeScript, không cần build). Hướng dẫn dùng, Product DNA, bộ icon riêng:
-`packages/react-native/uu-ds-native/README.md`. App mẫu: `packages/react-native/example`.
+Works with EAS Build (the package is TypeScript source, with no build step). Usage, Product DNA and custom icon sets:
+`packages/react-native/uu-ds-native/README.md`. Example app: `packages/react-native/example`.
 
 ## Flutter
 
@@ -61,13 +61,13 @@ dependencies:
     git:
       url: https://github.com/buiphamthanhtu/uu-ds.git
       path: packages/flutter/uu_ds_flutter
-      ref: flutter-v1.0.0   # hoặc main để lấy bản mới nhất
+      ref: flutter-v1.0.1   # or main for the latest version
 ```
 
-Hướng dẫn: `packages/flutter/uu_ds_flutter/README.md`. Widgetbook: `packages/flutter/widgetbook`.
+Guide: `packages/flutter/uu_ds_flutter/README.md`. Widgetbook: `packages/flutter/widgetbook`.
 
-## Icon
+## Icons
 
-Gói chỉ kèm 22 UU icon làm ví dụ: icon component dùng cố định và `texture` (icon giữ chỗ). Sản phẩm cần icon thì
-gắn một bộ: miễn phí như Lucide, hoặc mua license Nucleo, rồi đăng ký cả bộ
-(Product DNA, spec 4.3). Giấy phép icon: `NOTICE.md`.
+The packages include only 22 UU icons as examples: the icons components use and `texture` (a placeholder icon). If a
+product needs icons, plug in a full set: a free one such as Lucide, or a licensed Nucleo set, and register the whole set
+(Product DNA, spec 4.3). Icon licenses: `NOTICE.md`.

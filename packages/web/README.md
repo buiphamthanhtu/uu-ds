@@ -1,22 +1,22 @@
-# uu-ds — ÚÙ Design system cho web
+# uu-ds: ÚÙ Design system for the web
 
-Component React + CSS thuần, token (`tokens.css`), UU icon công khai. Tài liệu: https://uucreative.co/uu-ds/
+React components with plain CSS, tokens (`tokens.css`) and the public UU icons. Docs: https://uucreative.co/uu-ds/
 
-## Cài
+## Install
 
 ```bash
-npm i "github:buiphamthanhtu/uu-ds#web-v1.0.0"
+npm i "github:buiphamthanhtu/uu-ds#web-v1.0.1"
 ```
 
-Gói là mã nguồn TypeScript, app tự build (Vite, kể cả Zalo Mini App). Khi cài, `prepare` gom SVG thành bundle icon
-(`src/icons/generated/`). Vite phải để gói ngoài pre-bundle vì `Icon` dùng `import.meta.glob`:
+The package is TypeScript source; your app builds it (Vite, including Zalo Mini App). On install, `prepare` bundles the SVGs
+into `src/icons/generated/`. Vite must leave the package out of pre-bundling, because `Icon` uses `import.meta.glob`:
 
 ```ts
 // vite.config.ts
 export default defineConfig({ optimizeDeps: { exclude: ['uu-ds'] } });
 ```
 
-## Dùng
+## Use
 
 ```tsx
 import 'uu-ds/tokens.css';
@@ -26,19 +26,20 @@ import { TextButtonAccent, Icon, IconProvider } from 'uu-ds';
 <TextButtonAccent prefix="texture">Thêm địa chỉ</TextButtonAccent>
 ```
 
-- Brand: `<html data-theme="uu">` (mặc định Default). Density: `data-density="compact"`.
-- Product DNA (spec 4.3): khai trong một khối `[data-theme="<tên>"]` — 22 token thương hiệu, bo góc, elevation,
+- Brand: `<html data-theme="uu">` (Default if not set). Density: `data-density="compact"`.
+- Product DNA (spec 4.3): declare it in one `[data-theme="<name>"]` block: the 22 brand tokens, radius, elevation,
   `--font-family-body` / `--font-family-display`, `--border-outer-width` · `--border-outer` · `--elevation-none`.
-- Bộ icon của sản phẩm (Lucide, Nucleo…): `<IconProvider icons={{ paw: { outline: '<svg…>' } }}>` — tên trùng ghi đè 22 icon mặc định. Ví dụ map Lucide: trang Icon / Hướng dẫn.
+- Your product's icon set (Lucide, Nucleo…): `<IconProvider icons={{ paw: { outline: '<svg…>' } }}>`. A matching name
+  overrides one of the 22 default icons. For a Lucide mapping example, see the Storybook page Icon / Hướng dẫn.
 
-## Chấm code
+## Code checker
 
 ```bash
-npx uu-ds-check src            # báo cáo điểm 0–100 theo 7 chiều và từng lỗi kèm file:dòng
-npx uu-ds-check src --strict   # thoát mã 1 khi còn lỗi critical (dùng cho CI)
+npx uu-ds-check src            # score 0–100 across 7 dimensions, plus every error with file:line
+npx uu-ds-check src --strict   # exits with code 1 while critical errors remain (for CI)
 ```
 
-Bộ chấm tất định, không gọi AI, không cần mạng; nguồn sự thật là gói `uu-ds` đã cài. Chỉ chấm code web
-(tsx/ts/jsx/js/css/html). Miễn trừ có lý do: `/* vibe-allow: <luật> — vì sao */` ngay trên dòng vi phạm.
+The checker is deterministic: no AI calls, no network. Its source of truth is the installed `uu-ds` package. It checks
+web code only (tsx/ts/jsx/js/css/html). To allow an exception, put `/* vibe-allow: <rule> — reason */` on the line above it.
 
-Token thô: `uu-ds/tokens.json`. SVG lẻ: `uu-ds/icons/svg/<tên>.svg`.
+Raw tokens: `uu-ds/tokens.json`. Single SVGs: `uu-ds/icons/svg/<name>.svg`.
